@@ -10,11 +10,12 @@ porttimer.o: ../modbus/port/porttimer.c \
   c:/winavr-20100110/lib/gcc/../../avr/include/avr/fuse.h \
   c:/winavr-20100110/lib/gcc/../../avr/include/avr/lock.h \
   c:/winavr-20100110/lib/gcc/../../avr/include/avr/interrupt.h \
-  ../modbus/port/port.h C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mb.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\port/port.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbport.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbproto.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbport.h
+  ../modbus/port/port.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mb.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\port/port.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbport.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbproto.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbport.h
 
 c:/winavr-20100110/lib/gcc/../../avr/include/avr/io.h:
 
@@ -40,12 +41,12 @@ c:/winavr-20100110/lib/gcc/../../avr/include/avr/interrupt.h:
 
 ../modbus/port/port.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mb.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mb.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\port/port.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\port/port.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbport.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbport.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbproto.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbproto.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbport.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbport.h:

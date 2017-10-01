@@ -25,10 +25,10 @@ digital_in_out_func.o: ../digital_in_out_func/digital_in_out_func.c \
   ../digital_in_out_func/../arch/spi.h \
   ../digital_in_out_func/../modbus_master/modbus-rtu.h \
   ../digital_in_out_func/../modbus_master/..//rs485Chanel/rs485Chanel.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mb.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\port/port.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbport.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbproto.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mb.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\port/port.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbport.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbproto.h \
   ../digital_in_out_func/../digital_in_out_func/digital_in_out_func.h \
   ../digital_in_out_func/digital_in_out_func.h
 
@@ -84,13 +84,13 @@ c:/winavr-20100110/lib/gcc/../../avr/include/avr/interrupt.h:
 
 ../digital_in_out_func/../modbus_master/..//rs485Chanel/rs485Chanel.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mb.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mb.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\port/port.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\port/port.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbport.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbport.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbproto.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbproto.h:
 
 ../digital_in_out_func/../digital_in_out_func/digital_in_out_func.h:
 

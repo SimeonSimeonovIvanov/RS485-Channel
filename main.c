@@ -85,9 +85,6 @@ volatile static uint16_t uiRegHolding[REG_HOLDING_NREGS] = { 0 };
 
 /* ----------------------- Variables ---------------------------------*/
 
-extern volatile uint16_t uiSysRS485SendRequestTimer;
-extern volatile uint16_t uiSysRS485ReciverTimer;
-
 volatile uint8_t isRun = 0;
 volatile uint8_t inPort[32] = { 0 };
 volatile uint8_t outPort[32] = { 0 };
@@ -139,7 +136,7 @@ int main(void)
 
 	arrRS485Chanel[1].lpData = (void*)&stSlaveChanelReadInputsA3;
 	arrRS485Chanel[1].ucEnableRequest = 1;
-	arrRS485Chanel[1].msReadTimeOut = 5;
+	arrRS485Chanel[1].msReadTimeOut = 8;
 
 	arrRS485Chanel[1].rs485SendRequestFunc = mbSendRequestReadInputStatus;
 	arrRS485Chanel[1].rs485GetResponseFunc = mbReceiveRequestReadInputStatus;
@@ -158,7 +155,7 @@ int main(void)
 
 	arrRS485Chanel[2].lpData = (void*)&stSlaveChanelReadInputsA11;
 	arrRS485Chanel[2].ucEnableRequest = 1;
-	arrRS485Chanel[2].msReadTimeOut = 5;
+	arrRS485Chanel[2].msReadTimeOut = 8;
 
 	arrRS485Chanel[2].rs485SendRequestFunc = mbSendRequestReadInputStatus;
 	arrRS485Chanel[2].rs485GetResponseFunc = mbReceiveRequestReadInputStatus;
@@ -177,7 +174,7 @@ int main(void)
 
 	arrRS485Chanel[3].lpData = (void*)&stSlaveChanelWriteCoilsA3;
 	arrRS485Chanel[3].ucEnableRequest = 1;
-	arrRS485Chanel[3].msReadTimeOut = 5;
+	arrRS485Chanel[3].msReadTimeOut = 8;
 
 	arrRS485Chanel[3].rs485SendRequestFunc = mbSendRequestForceMultipleCoils;
 	arrRS485Chanel[3].rs485GetResponseFunc = mbReceiveRequestForceMultipleCoils;		
@@ -196,7 +193,7 @@ int main(void)
 
 	arrRS485Chanel[4].lpData = (void*)&stSlaveChanelWriteCoilsA11;
 	arrRS485Chanel[4].ucEnableRequest = 1;
-	arrRS485Chanel[4].msReadTimeOut = 5;
+	arrRS485Chanel[4].msReadTimeOut = 8;
 
 	arrRS485Chanel[4].rs485SendRequestFunc = mbSendRequestForceMultipleCoils;
 	arrRS485Chanel[4].rs485GetResponseFunc = mbReceiveRequestForceMultipleCoils;		
@@ -215,7 +212,7 @@ int main(void)
 
 	arrRS485Chanel[5].lpData = (void*)&stSlaveChanelPresetRegisterA10;
 	arrRS485Chanel[5].ucEnableRequest = 1;
-	arrRS485Chanel[5].msReadTimeOut = 5;
+	arrRS485Chanel[5].msReadTimeOut = 8;
 
 	arrRS485Chanel[5].rs485SendRequestFunc = mbSendRequestPresetSingleRegister;
 	arrRS485Chanel[5].rs485GetResponseFunc = rs485getResponseNullFunc; // ???
@@ -590,3 +587,4 @@ void initBoard(void)
 	TCCR3B = (1<<WGM32) | (1<<CS31) | (1<<CS30);
 	ETIMSK |= (1<<OCIE3A);
 }
+

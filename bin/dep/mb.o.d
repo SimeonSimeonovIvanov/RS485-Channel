@@ -2,7 +2,7 @@ mb.o: ../modbus/mb.c \
   c:/winavr-20100110/lib/gcc/../../avr/include/stdlib.h \
   c:\winavr-20100110\bin\../lib/gcc/avr/4.3.3/include/stddef.h \
   c:/winavr-20100110/lib/gcc/../../avr/include/string.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\port/port.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\port/port.h \
   c:/winavr-20100110/lib/gcc/../../avr/include/avr/io.h \
   c:/winavr-20100110/lib/gcc/../../avr/include/avr/sfr_defs.h \
   c:/winavr-20100110/lib/gcc/../../avr/include/inttypes.h \
@@ -14,16 +14,16 @@ mb.o: ../modbus/mb.c \
   c:/winavr-20100110/lib/gcc/../../avr/include/avr/fuse.h \
   c:/winavr-20100110/lib/gcc/../../avr/include/avr/lock.h \
   c:/winavr-20100110/lib/gcc/../../avr/include/avr/interrupt.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mb.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbport.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbproto.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbconfig.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbframe.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbproto.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbfunc.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbport.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\rtu/mbrtu.h \
-  C:\Users\Simo\Desktop\v.0.0.0\modbus\ascii/mbascii.h
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mb.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbport.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbproto.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbconfig.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbframe.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbproto.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbfunc.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbport.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\rtu/mbrtu.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\ascii/mbascii.h
 
 c:/winavr-20100110/lib/gcc/../../avr/include/stdlib.h:
 
@@ -31,7 +31,7 @@ c:\winavr-20100110\bin\../lib/gcc/avr/4.3.3/include/stddef.h:
 
 c:/winavr-20100110/lib/gcc/../../avr/include/string.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\port/port.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\port/port.h:
 
 c:/winavr-20100110/lib/gcc/../../avr/include/avr/io.h:
 
@@ -55,22 +55,22 @@ c:/winavr-20100110/lib/gcc/../../avr/include/avr/lock.h:
 
 c:/winavr-20100110/lib/gcc/../../avr/include/avr/interrupt.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mb.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mb.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbport.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbport.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbproto.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbproto.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbconfig.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbconfig.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbframe.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbframe.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbproto.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbproto.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbfunc.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbfunc.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\include/mbport.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbport.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\rtu/mbrtu.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\rtu/mbrtu.h:
 
-C:\Users\Simo\Desktop\v.0.0.0\modbus\ascii/mbascii.h:
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\ascii/mbascii.h:

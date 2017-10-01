@@ -1,0 +1,472 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Messages>
+  <Message id="0" type="0">
+    <Text lng="English">%1</Text>
+    <Text lng="German">%1</Text>
+    <Text lng="French">%1</Text>
+    <Text lng="Spanish">%1</Text>
+    <Text lng="Italian">%1</Text>
+  </Message>
+  <Message id="1" type="1">
+    <Text lng="English">%1</Text>
+    <Text lng="German">%1</Text>
+    <Text lng="French">%1</Text>
+    <Text lng="Spanish">%1</Text>
+    <Text lng="Italian">%1</Text>
+  </Message>
+  <Message id="2" type="1">
+    <Text lng="English">Can't find or read from file '%1'</Text>
+    <Text lng="German">Kann Datei '%1' nicht finden oder lesen</Text>
+    <Text lng="French">Impossible de trouver ou de lire le fichier '%1'</Text>
+    <Text lng="Spanish">No se puede encontrar o leer desde el archivo '%1'</Text>
+    <Text lng="Italian">Impossibile trovare o leggere dal file '%1'</Text>
+  </Message>
+  <Message id="3" type="1">
+    <Text lng="English">Can't read from text number &lt;%1!d!&gt; from file '%2' !</Text>
+    <Text lng="German">Kann ab Text Nummer &lt;%1!d!&gt; in Datei '%2' nicht lesen !</Text>
+    <Text lng="French">Impossible de lire le text numéro &lt;%1!d!&gt; du fichier '%2' !</Text>
+    <Text lng="Spanish">No se puede leer el texto numero &lt;%1!d!&gt; desde el archivo '%2' !</Text>
+    <Text lng="Italian">Impossibile leggere dal numero di testo &lt;%1!d!&gt; dal file '%2' !</Text>
+  </Message>
+  <Message id="4" type="1">
+    <Text lng="English">Project entry screen (%1) not found !</Text>
+    <Text lng="German">Projekt-Startmaske (%1) nicht gefunden !</Text>
+    <Text lng="French">Écran initial (%1) introuvable !</Text>
+    <Text lng="Spanish">Pantalla de entrada al proyecto (%1) no encontrada !</Text>
+    <Text lng="Italian">Schermata di inserimento (%1) del progetto non trovato! !</Text>
+  </Message>
+  <Message id="5" type="1">
+    <Text lng="English">No matching file found (%1) !</Text>
+    <Text lng="German">Keine entsprechende Datei gefunden (%1) !</Text>
+    <Text lng="French">Aucun fichier corresponant trouvé (%1) !</Text>
+    <Text lng="Spanish">No se han econtrado concidencias (%1) !</Text>
+    <Text lng="Italian">Nessun file corrispondente trovato (%1) !</Text>
+  </Message>
+  <Message id="6" type="1">
+    <Text lng="English">No more memory available for function %1 !</Text>
+    <Text lng="German">Kein Speicher für Funktion %1 verfügbar !</Text>
+    <Text lng="French">Plus de mémoire disponible pour la fonction %1 !</Text>
+    <Text lng="Spanish">No hay memoria disponible para la función %1 !</Text>
+    <Text lng="Italian">Niente più memoria disponibile per la funzione %1 !</Text>
+  </Message>
+  <Message id="7" type="1">
+    <Text lng="English">Some texts in textfile '%1' are missing !</Text>
+    <Text lng="German">Es fehlen einige Texte in der Textdatei '%1' !</Text>
+    <Text lng="French">Certains textes du fichier '%1' sont manquants !</Text>
+    <Text lng="Spanish">Faltan algunos textos en el archivo de texto '%1'</Text>
+    <Text lng="Italian">Alcuni testi, nel file di testo '%1', mancano !</Text>
+  </Message>
+  <Message id="8" type="1">
+    <Text lng="English">Accessing '%1' failed with error '%2' !</Text>
+    <Text lng="German">Zugriff auf '%1' fehlgeschlagen mit Fehlermeldung '%2' !</Text>
+    <Text lng="French">L’accès au fichier '%1' a échoué avec l’erreur '%2' !</Text>
+    <Text lng="Spanish">Acceso a '%1' fallido con el error '%2' !</Text>
+    <Text lng="Italian">Accesso file '%1' non riuscito con errore '%2' !</Text>
+  </Message>
+  <Message id="9" type="1">
+    <Text lng="English">The function &lt; %1 &gt; is not supported !</Text>
+    <Text lng="German">Die Funktion &lt; %1 &gt; wird nicht unterstützt !</Text>
+    <Text lng="French">La fonction &lt; %1 &gt; n’est pas supporté !</Text>
+    <Text lng="Spanish">La función &lt; %1 &gt; no es compatible!</Text>
+    <Text lng="Italian">La funzione &lt; %1 &gt; non è supportata !</Text>
+  </Message>
+  <Message id="10" type="1">
+    <Text lng="English">Touch is dirty or defect!</Text>
+    <Text lng="German">Touch ist verschmutzt oder defekt!</Text>
+    <Text lng="French">Écran tactile est sale ou défectueux!</Text>
+    <Text lng="Spanish">Táctil sucio o defectuoso!</Text>
+    <Text lng="Italian">Lo schermo tattile è sporco o difettoso!</Text>
+  </Message>
+  <Message id="11" type="1">
+    <Text lng="English">Can't create or write to file '%1' !</Text>
+    <Text lng="German">Kann Datei '%1' nicht erstellen oder beschreiben !</Text>
+    <Text lng="French">Impossible de créer ou d’écrire le fichier '%1' !</Text>
+    <Text lng="Spanish">No se puede crear o escribir el archivo '%1' !</Text>
+    <Text lng="Italian">Impossibile creare o scrivere nel file '%1' !</Text>
+  </Message>
+  <Message id="12" type="1">
+    <Text lng="English">Header information in file is invalid (%1) !</Text>
+    <Text lng="German">Header-Information in Datei ist fehlerhaft (%1) !</Text>
+    <Text lng="French">L’en-tête du fichier n’est pas valide (%1) !</Text>
+    <Text lng="Spanish">La información en la cabecera del archivo es inválida (%1)!</Text>
+    <Text lng="Italian">Informazione d’intestazione nel file (%1) non è valido !</Text>
+  </Message>
+  <Message id="13" type="1">
+    <Text lng="English">Recipe with id &lt; %1 &gt; not found</Text>
+    <Text lng="German">Rezept mit der ID &lt; %1 &gt; nicht gefunden</Text>
+    <Text lng="French">Recette id &lt; %1 &gt; introuvable</Text>
+    <Text lng="Spanish">Receta con id &lt; %1 &gt; no encontrada</Text>
+    <Text lng="Italian">Ricetta con id &lt; %1 &gt; non trovata</Text>
+  </Message>
+  <Message id="14" type="1">
+    <Text lng="English">Can't save recipe with empty name !</Text>
+    <Text lng="German">Kann Rezept mit leerem Namen nicht speichern !</Text>
+    <Text lng="French">Impossible de sauvegarder une recette avec un nom vide !</Text>
+    <Text lng="Spanish">No se puede guardar la receta con un nombre vacío !</Text>
+    <Text lng="Italian">Impossibile salvare la ricetta senza nome !</Text>
+  </Message>
+  <Message id="15" type="1">
+    <Text lng="English">The recipe name '%1' already exist ! Choose another name.</Text>
+    <Text lng="German">Der Rezeptname '%1' besteht bereits ! Wählen Sie einen anderen Namen.</Text>
+    <Text lng="French">Le nom '%1' existe déjà! Choisissez un autre nom.</Text>
+    <Text lng="Spanish">El nombre de la receta '%1' ya existe! Elija otro nombre.</Text>
+    <Text lng="Italian">Il nome della ricetta '%1' esiste già! Scegli un altro nome.</Text>
+  </Message>
+  <Message id="16" type="1">
+    <Text lng="English">Execution of function %1 has failed (%2) !</Text>
+    <Text lng="German">Ausführung der Funktion %1 ist fehlgeschlagen (%2) !</Text>
+    <Text lng="French">L’exécution de la fonction %1 a échoué (%2) !</Text>
+    <Text lng="Spanish">La ejecución de la función %1 ha fallado (%2) !</Text>
+    <Text lng="Italian">Esecuzione della funzione %1 non riuscita (%2) !</Text>
+  </Message>
+  <Message id="17" type="1">
+    <Text lng="English">Error in script %1 !</Text>
+    <Text lng="German">Fehler in Skript %1 !</Text>
+    <Text lng="French">Erreur dans le script %1 !</Text>
+    <Text lng="Spanish">Error en el script %1 !</Text>
+    <Text lng="Italian">Errore nello script %1 !</Text>
+  </Message>
+  <Message id="18" type="1">
+    <Text lng="English">Can't read from file '%1' - structure mismatch!</Text>
+    <Text lng="German">Datei '%1' kann nicht gelesen werden - Falsche Inhaltsstruktur!</Text>
+    <Text lng="French">Impossible de lire le fichier '%1' – structure incorrecte!</Text>
+    <Text lng="Spanish">No se puede leer desde el archivo '%1'!</Text>
+    <Text lng="Italian">Impossibile leggere dal file '%1' – discrepanza nella struttura!</Text>
+  </Message>
+  <Message id="19" type="1">
+    <Text lng="English">No user authorization for %1 !</Text>
+    <Text lng="German">Keine Zugriffsberechtigung für %1 !</Text>
+    <Text lng="French">Pas de permission pour %1 !</Text>
+    <Text lng="Spanish">No hay autorización de usuario para %1 !</Text>
+    <Text lng="Italian">Nessuna autorizzazione utente, %1 !</Text>
+  </Message>
+  <Message id="20" type="1">
+    <Text lng="English">Communication disturbed: '%1' !</Text>
+    <Text lng="German">Kommunikation gestört: '%1' !</Text>
+    <Text lng="French">Communication perturbée: '%1' !</Text>
+    <Text lng="Spanish">Comunicación perturbada: '%1'!</Text>
+    <Text lng="Italian">Comunicazione disturbata: '%1' !</Text>
+  </Message>
+  <Message id="21" type="1">
+    <Text lng="English">Not enough Diskspace available (%1 kB)</Text>
+    <Text lng="German">Nicht genügend Speicher vorhanden (%1 kB)</Text>
+    <Text lng="French">Pas assez d’espace disque disponible (%1 kB)</Text>
+    <Text lng="Spanish">No hay espacio suficiente en el disco (%1 kB)</Text>
+    <Text lng="Italian">Non c'è abbastanza spazio su disco (%1 kB)</Text>
+  </Message>
+  <Message id="22" type="1">
+    <Text lng="English">Protected or invalid path defined (%1) !</Text>
+    <Text lng="German">Geschützter oder ungültiger Pfad definiert (%1) !</Text>
+    <Text lng="French">Chemin d’accès invalide ou protégé (%1) !</Text>
+    <Text lng="Spanish">El directorio (%1) está protegido o es inválido!</Text>
+    <Text lng="Italian">Percorso protetto o non valido (%1) !</Text>
+  </Message>
+  <Message id="23" type="1">
+    <Text lng="English">Printer not ready !</Text>
+    <Text lng="German">Drucker ist nicht bereit !</Text>
+    <Text lng="French">Imprimante n'est pas prête !</Text>
+    <Text lng="Spanish">La Impresora no está lista !</Text>
+    <Text lng="Italian">Stampante non pronta !</Text>
+  </Message>
+  <Message id="24" type="1">
+    <Text lng="English">Printer busy !</Text>
+    <Text lng="German">Drucker ist beschäftigt !</Text>
+    <Text lng="French">Imprimante est occupée !</Text>
+    <Text lng="Spanish">Impresora ocupada !</Text>
+    <Text lng="Italian">Stampante occupata !</Text>
+  </Message>
+  <Message id="25" type="1">
+    <Text lng="English">Incorrect Galileo registration code (%1) - DEMO mode !</Text>
+    <Text lng="German">Ungültiger Galileo Registrierungscode (%1) - DEMO Mode !</Text>
+    <Text lng="French">Le code d’enregistrement Galileo est incorrecte (%1) – Mode DEMO !</Text>
+    <Text lng="Spanish">Codigo de registro Galileo incorrecto (%1) – modo DEMO !</Text>
+    <Text lng="Italian">Codice di registrazione Galileo errato (%1) - Modalità DEMO !</Text>
+  </Message>
+  <Message id="26" type="1">
+    <Text lng="English">No valid runtime license found - DEMO mode !</Text>
+    <Text lng="German">Keine gültige Runtime Lizenz gefunden - DEMO Mode !</Text>
+    <Text lng="French">Pas de licence pour le logiciel exécutable – Mode DEMO !</Text>
+    <Text lng="Spanish">Licencia de runtime inválida – modo DEMO !</Text>
+    <Text lng="Italian">Nessuna licenza runtime valida trovata - Modalità DEMO !</Text>
+  </Message>
+  <Message id="27" type="1">
+    <Text lng="English">Demo mode has expired! Runtime will shut down.</Text>
+    <Text lng="German">Zeit für DEMO Mode ist abgelaufen! Das Programm wird beendet.</Text>
+    <Text lng="French">Mode demo expire! Le logiciel se ferme.</Text>
+    <Text lng="Spanish">El modo de demostración ha expirado! Runtime se apagará.</Text>
+    <Text lng="Italian">Modalità demo è scaduta! Runtime si spegnerà.</Text>
+  </Message>
+  <Message id="28" type="1">
+    <Text lng="English">Printer &lt; %1 &gt; not detected !</Text>
+    <Text lng="German">Drucker &lt; %1 &gt; nicht gefunden !</Text>
+    <Text lng="French">Imprimante &lt; %1 &gt; introuvable !</Text>
+    <Text lng="Spanish">Impresora &lt; %1 &gt; no detectada !</Text>
+    <Text lng="Italian">Stampante &lt; %1 &gt; non rilevata !</Text>
+  </Message>
+  <Message id="29" type="1">
+    <Text lng="English">%1 (%2)</Text>
+    <Text lng="German">%1 (%2)</Text>
+    <Text lng="French">%1 (%2)</Text>
+    <Text lng="Spanish">%1 (%2)</Text>
+    <Text lng="Italian">%1 (%2)</Text>
+  </Message>
+  <Message id="30" type="1">
+    <Text lng="English">Authentication failed: Username and/or password wrong</Text>
+    <Text lng="German">Authentifizierung fehlgeschlagen: Benutzername und/oder Passwort ungültig</Text>
+    <Text lng="French">Authentification échouée: Nom d’utilisateur ou mot de passe est faux</Text>
+    <Text lng="Spanish">Error de autenticación: nombre de usuario y/o contraseña incorrecta</Text>
+    <Text lng="Italian">Autenticazione non riuscita: Nome utente e/o password errata</Text>
+  </Message>
+  <Message id="31" type="1">
+    <Text lng="English">Username is empty</Text>
+    <Text lng="German">Benutzername ist leer</Text>
+    <Text lng="French">Nom d’utilisateur est vide</Text>
+    <Text lng="Spanish">Nombre de usuario vacío</Text>
+    <Text lng="Italian">Il nome utente è vuoto</Text>
+  </Message>
+  <Message id="32" type="1">
+    <Text lng="English">Password is empty</Text>
+    <Text lng="German">Passwort ist leer</Text>
+    <Text lng="French">Mot de passe est vide</Text>
+    <Text lng="Spanish">La contraseña está vacía</Text>
+    <Text lng="Italian">La password è vuota</Text>
+  </Message>
+  <Message id="33" type="1">
+    <Text lng="English">No group selected</Text>
+    <Text lng="German">Keine Gruppe ausgewählt</Text>
+    <Text lng="French">Aucun groupe selectioné</Text>
+    <Text lng="Spanish">Grupo no seleccionado</Text>
+    <Text lng="Italian">Nessun gruppo selezionato</Text>
+  </Message>
+  <Message id="34" type="1">
+    <Text lng="English">Your password has expired and must be changed</Text>
+    <Text lng="German">Passwort ist abgelaufen und muss geändert werden.</Text>
+    <Text lng="French">Let mot de passe est expiré et doit être changé</Text>
+    <Text lng="Spanish">Su contraseña ha caducado y debe ser cambiada</Text>
+    <Text lng="Italian">La password è scaduta e deve essere cambiata</Text>
+  </Message>
+  <Message id="35" type="1">
+    <Text lng="English">Too many failed login attempts, the account is locked</Text>
+    <Text lng="German">Zu viele ungültige Login-Versuche, das Benutzerkonto wurde gesperrt</Text>
+    <Text lng="French">Trop d'essais de mots de passe infructueux. Le compte est bloqué</Text>
+    <Text lng="Spanish">Demasiados intentos de acceso fallidos, la cuenta está bloqueada</Text>
+    <Text lng="Italian">Troppi tentativi di accesso non riusciti, l'account è bloccato</Text>
+  </Message>
+  <Message id="36" type="1">
+    <Text lng="English">Cannot create user: Number of users has reached the maximum</Text>
+    <Text lng="German">Benutzer kann nicht angelegt werden: Die maximale Anzahl der Benutzer ist erreicht</Text>
+    <Text lng="French">Impossible de créer l’utilisateur. Nombre d’utilisateurs maximal est atteint.</Text>
+    <Text lng="Spanish">No se puede crear el usuario. El número máximo  de usuarios ha sido alcanzado</Text>
+    <Text lng="Italian">Impossibile creare utente: Il numero massimo di utenti è stato raggiunto</Text>
+  </Message>
+  <Message id="37" type="1">
+    <Text lng="English">Group '%1' does not exist</Text>
+    <Text lng="German">Gruppe '%1' existiert nicht</Text>
+    <Text lng="French">Groupe '%1' n’existe pas</Text>
+    <Text lng="Spanish">El grupo '%1' no existe</Text>
+    <Text lng="Italian">Gruppo '%1' non esiste</Text>
+  </Message>
+  <Message id="38" type="1">
+    <Text lng="English">User '%1' does not exist</Text>
+    <Text lng="German">Benutzer '%1' existiert nicht</Text>
+    <Text lng="French">Utilisateur '%1' n’existe pas</Text>
+    <Text lng="Spanish">El usuario '%1' no existe</Text>
+    <Text lng="Italian">Utente '%1' non esiste</Text>
+  </Message>
+  <Message id="39" type="1">
+    <Text lng="English">User '%1' already exists</Text>
+    <Text lng="German">Benutzer '%1' existiert bereits</Text>
+    <Text lng="French">Utilisateur '%1' existe déjà</Text>
+    <Text lng="Spanish">El usuario '%1' ya existe</Text>
+    <Text lng="Italian">Utente '%1' già esistente</Text>
+  </Message>
+  <Message id="40" type="1">
+    <Text lng="English">New Password must differ from current one</Text>
+    <Text lng="German">Das neue Passwort muss sich vom bisherigen unterscheiden</Text>
+    <Text lng="French">Nouveau mot de passe doit être différent du précédent utile</Text>
+    <Text lng="Spanish">La nueva contraseña debe ser diferente de la actual</Text>
+    <Text lng="Italian">Nuova password deve essere diversa da quella attuale</Text>
+  </Message>
+  <Message id="41" type="1">
+    <Text lng="English">New Password already used in history</Text>
+    <Text lng="German">Passwort wurde bereits früher verwendet</Text>
+    <Text lng="French">Nouveau mot de passe déjà utilisé dans l’historique</Text>
+    <Text lng="Spanish">La nueva contraseña ya existe en el historial</Text>
+    <Text lng="Italian">Nuova password è già stata utilizzata</Text>
+  </Message>
+  <Message id="42" type="1">
+    <Text lng="English">Cannot confirm new password: not matching</Text>
+    <Text lng="German">Neues Passwort kann nicht übernommen werden: keine Übereinstimmung</Text>
+    <Text lng="French">Impossible de confirmer le nouveau mot de passe: Pas identique</Text>
+    <Text lng="Spanish">No se puede confirmar la nueva contraseña: no coincide</Text>
+    <Text lng="Italian">Nuova password non confermata: nessuna corrispondenza</Text>
+  </Message>
+  <Message id="43" type="1">
+    <Text lng="English">No active user present. Please login to perform action</Text>
+    <Text lng="German">Kein aktiver Benutzer eingeloggt</Text>
+    <Text lng="French">Aucun utilisateur est active. Connectez-vous pour performer l’action</Text>
+    <Text lng="Spanish">No hay usuario activo presente. Por favor acceda para realizar la acción</Text>
+    <Text lng="Italian">Utente attivo non presente. Effettua l'accesso per eseguire l'azione</Text>
+  </Message>
+  <Message id="44" type="1">
+    <Text lng="English">User '%1' is locked</Text>
+    <Text lng="German">Benutzer '%1' wurde gesperrt</Text>
+    <Text lng="French">Utilisateur '%1' est bloqué</Text>
+    <Text lng="Spanish">El usuario '%1' está bloqueado</Text>
+    <Text lng="Italian">Utente '%1' è bloccato</Text>
+  </Message>
+  <Message id="45" type="1">
+    <Text lng="English">Password is too short. Type at least %1 characters</Text>
+    <Text lng="German">Das Passwort ist zu kurz. Mind. %1 Zeichen sind nötig.</Text>
+    <Text lng="French">Mot de passe trop court. Doit être au minimum %1 charactères</Text>
+    <Text lng="Spanish">La contreseña es demasiado corta. Escriba al menos %1 caracteres</Text>
+    <Text lng="Italian">La password è troppo corta. Digitare almeno %1 caratteri</Text>
+  </Message>
+  <Message id="46" type="1">
+    <Text lng="English">Cannot lock active user</Text>
+    <Text lng="German">Der aktive Benutzer kann nicht gesperrt werden.</Text>
+    <Text lng="French">Impossible de bloquer l’utilisateur active</Text>
+    <Text lng="Spanish">No se puede bloquear el usuario activo</Text>
+    <Text lng="Italian">Impossibile bloccare l’utente attivo</Text>
+  </Message>
+  <Message id="47" type="1">
+    <Text lng="English">Cannot delete active user</Text>
+    <Text lng="German">Der aktive Benutzer kann nicht gelöscht werden</Text>
+    <Text lng="French">Impossible de supprimer l’utilisateur active</Text>
+    <Text lng="Spanish">No se puede eliminar el usuario activo</Text>
+    <Text lng="Italian">Impossibile eliminare l’utente attivo</Text>
+  </Message>
+  <Message id="48" type="1">
+    <Text lng="English">No permission to create user in group '%1'</Text>
+    <Text lng="German">Keine Berechtigung zum Erstellen eines Benutzer in der Gruppe '%1'</Text>
+    <Text lng="French">Pas d’autorisation pour créer un utilisateur dans le groupe '%1'</Text>
+    <Text lng="Spanish">No tiene permiso para crear usuario en el grupo '%1'</Text>
+    <Text lng="Italian">Nessun permesso di creare l’utente nel gruppo '%1'</Text>
+  </Message>
+  <Message id="49" type="1">
+    <Text lng="English">No permission to delete user '%1' in group '%2'</Text>
+    <Text lng="German">Keine Berechtigung zum Löschen des Benutzers '%1' in der Gruppe '%2'</Text>
+    <Text lng="French">Pas d’autorisation pour supprimer l’utilisateur '%1' du groupe '%2'</Text>
+    <Text lng="Spanish">No tiene permiso para eliminar el usuario '%1' en el grupo '%2'</Text>
+    <Text lng="Italian">Nessun permesso di eliminare l'utente '%1' nel gruppo '%2'</Text>
+  </Message>
+  <Message id="50" type="1">
+    <Text lng="English">No permission to change password of user '%1'</Text>
+    <Text lng="German">Keine Berechtigung für das Ändern des Passworts des Benutzers '%1'</Text>
+    <Text lng="French">Pas d’autorisation pour changer le mot de passe de l’utilisateur '%1'</Text>
+    <Text lng="Spanish">No tiene permiso para cambiar la contraseña del usuario '%1'</Text>
+    <Text lng="Italian">Nessuna autorizzazione a cambiare la password dell'utente '%1'</Text>
+  </Message>
+  <Message id="51" type="1">
+    <Text lng="English">No permission to change group of user '%1'</Text>
+    <Text lng="German">Keine Berechtigung für das Ändern der Gruppe des Benutzers '%1'</Text>
+    <Text lng="French">Pas d’autorisation pour changer le groupe de l’utilisateur '%1'</Text>
+    <Text lng="Spanish">No tiene permiso para cambiar el grupo de usuario '%1'</Text>
+    <Text lng="Italian">Nessun permesso a cambiare gruppo per utente '%1'</Text>
+  </Message>
+  <Message id="52" type="1">
+    <Text lng="English">No permission to modify group '%1'</Text>
+    <Text lng="German">Keine Berechtigung für das Ändern der Gruppe '%1'</Text>
+    <Text lng="French">Pas d’autorisation pour modifier le groupe '%1'</Text>
+    <Text lng="Spanish">No tiene permiso para modificar el grupo '%1'</Text>
+    <Text lng="Italian">Nessun permesso di modificare gruppo '%1'</Text>
+  </Message>
+  <Message id="53" type="1">
+    <Text lng="English">No permission to lock user '%1'</Text>
+    <Text lng="German">Keine Berechtigung für das Sperren des Benutzers '%1'</Text>
+    <Text lng="French">Pas d’autorisation pour bloquer l’utilisateur '%1'</Text>
+    <Text lng="Spanish">No tiene permiso para bloquear el usuario '%1'</Text>
+    <Text lng="Italian">Nessun permesso di bloccare l'utente '%1'</Text>
+  </Message>
+  <Message id="54" type="1">
+    <Text lng="English">No permission to unlock user '%1'</Text>
+    <Text lng="German">Keine Berechtigung für das Freischalten des Benutzers '%1'</Text>
+    <Text lng="French">Pas d’autorisation pour débloquer l’utilisateur '%1'</Text>
+    <Text lng="Spanish">No tiene permiso para desbloquear el usuario '%1'</Text>
+    <Text lng="Italian">Nessun permesso di sbloccare l'utente '%1'</Text>
+  </Message>
+  <Message id="55" type="1">
+    <Text lng="English">No permission to create users on this device</Text>
+    <Text lng="German">Keine Berechtigung um Benutzer auf diesem Gerät zu erstellen</Text>
+    <Text lng="French">Pas d’autorisation pour créer des utilisateurs sur cet appareil</Text>
+    <Text lng="Spanish">No tiene permiso para crear usuarios en este dispositivo</Text>
+    <Text lng="Italian">Nessun permesso a creare utenti su questo dispositivo</Text>
+  </Message>
+  <Message id="56" type="1">
+    <Text lng="English">No permission to delete users on this device</Text>
+    <Text lng="German">Keine Berechtigung um Benutzer auf diesem Gerät zu löschen</Text>
+    <Text lng="French">Pas d’autorisation pour supprimer des utilisateurs sur cet appareil</Text>
+    <Text lng="Spanish">No tiene permiso para eliminar usuarios en este dispositivo</Text>
+    <Text lng="Italian">Nessun permesso a eliminare utenti su questo dispositivo</Text>
+  </Message>
+  <Message id="57" type="1">
+    <Text lng="English">No permission to change passwords</Text>
+    <Text lng="German">Keine Berechtigung um Passwörter zu ändern</Text>
+    <Text lng="French">Pas d’autorisation pour changer des mots de passe</Text>
+    <Text lng="Spanish">No tiene permiso para cambiar contraseñas</Text>
+    <Text lng="Italian">Nessun permesso di cambiare le password</Text>
+  </Message>
+  <Message id="58" type="1">
+    <Text lng="English">No permission to change group affiliations</Text>
+    <Text lng="German">Keine Berechtigung um Gruppenzugehörigkeiten zu ändern</Text>
+    <Text lng="French">Pas d’autorisation pour changer des affiliations aux groupes</Text>
+    <Text lng="Spanish">No tiene permiso para cambiar afiliaciones de grupo</Text>
+    <Text lng="Italian">Nessun permesso di cambiare le affiliazioni di gruppo</Text>
+  </Message>
+  <Message id="59" type="1">
+    <Text lng="English">No permission to lock/unlock users</Text>
+    <Text lng="German">Keine Berechtigung um Benutzer zu sperren/freizuschalten</Text>
+    <Text lng="French">Pas d’autorisation pour bloquer/débloquer des utilisateurs</Text>
+    <Text lng="Spanish">No tiene permiso para bloquear/desbloquear usuarios</Text>
+    <Text lng="Italian">Nessun permesso per bloccare / sbloccare gli utenti</Text>
+  </Message>
+  <Message id="60" type="0">
+    <Text lng="English">Successfully created user '%1'</Text>
+    <Text lng="German">Benutzer '%1' erfolgreich erstellt</Text>
+    <Text lng="French">Utilisateur '%1' créé avec succès</Text>
+    <Text lng="Spanish">Usuario '%1' creado con éxito</Text>
+    <Text lng="Italian">Utente '%1' creato con successo</Text>
+  </Message>
+  <Message id="61" type="0">
+    <Text lng="English">Successfully deleted user '%1'</Text>
+    <Text lng="German">Benutzer '%1' erfolgreich gelöscht</Text>
+    <Text lng="French">Utilisateur '%1' supprimé avec succès</Text>
+    <Text lng="Spanish">Usuario '%1' eliminado con éxito</Text>
+    <Text lng="Italian">Utente '%1' eliminato con successo</Text>
+  </Message>
+  <Message id="62" type="0">
+    <Text lng="English">Successfully locked user '%1'</Text>
+    <Text lng="German">Benutzer '%1' erfolgreich gesperrt</Text>
+    <Text lng="French">Utilisateur '%1' bloqué avec succès</Text>
+    <Text lng="Spanish">Usuario '%1' bloqueado con éxito</Text>
+    <Text lng="Italian">Utente '%1' bloccato con successo</Text>
+  </Message>
+  <Message id="63" type="0">
+    <Text lng="English">Successfully unlocked user '%1'</Text>
+    <Text lng="German">Benutzer '%1' erfolgreich freigeschaltet</Text>
+    <Text lng="French">Utilisateur '%1' débloqué avec succès</Text>
+    <Text lng="Spanish">Usuario '%1' desbloqueado con éxito</Text>
+    <Text lng="Italian">Utente '%1' sbloccato con successo</Text>
+  </Message>
+  <Message id="64" type="0">
+    <Text lng="English">Successfully changed password of user '%1'</Text>
+    <Text lng="German">Passwort für Benutzer '%1' erfolgreich geändert</Text>
+    <Text lng="French">Mot de passe pour l’utilisateur '%1' changé avec succès</Text>
+    <Text lng="Spanish">Contraseña de usuario '%1' cambiada con éxito</Text>
+    <Text lng="Italian">Cambiato password dell'utente '%1' con successo</Text>
+  </Message>
+  <Message id="65" type="0">
+    <Text lng="English">Successfully changed group of user '%1'</Text>
+    <Text lng="German">Gruppe des Benutzers '%1' erfolgreich geändert</Text>
+    <Text lng="French">Groupe pour l’utilisateur '%1' changé avec succès</Text>
+    <Text lng="Spanish">Grupo de usuario '%1' cambiada con éxito</Text>
+    <Text lng="Italian">Cambiato gruppo dell’utente '%1' con successo</Text>
+  </Message>
+  <Message id="66" type="0">
+    <Text lng="English">GraphBlock is running. Please stop to perform file loading.</Text>
+    <Text lng="German">Graph-Aufzeichnung läuft. Bitte stoppen um das Laden der Datei auszuführen.</Text>
+    <Text lng="French">GraphBlock est en cours d’exécution. Veuillez l’arrêter pour charger le fichier.</Text>
+    <Text lng="Spanish">GraphBlock se está ejecutando. Por favor, deténgalo para realizar la carga de archivos.</Text>
+    <Text lng="Italian">GraphBlock è in esecuzione. Si prega di interrompere il caricamento del file.</Text>
+  </Message>
+</Messages>

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<languageData Version="galileoNG">
+	<texts>
+		<standard Guid="74e5b8d4-e4d9-4a6e-b547-2bc54a324cfe" textID="1"><![CDATA[0]]></standard>
+		<standard Guid="a5c6ab5e-030f-4f85-8d4f-359957fbffda" textID="2"><![CDATA[1]]></standard>
+		<standard Guid="b265b315-e6f8-4793-a67f-969b46aec0df" textID="3"><![CDATA[I0]]></standard>
+		<standard Guid="96e1da9e-604d-48c1-a4ba-3198bec09b05" textID="4"><![CDATA[I1]]></standard>
+		<standard Guid="0e4afa8a-0778-47b9-afa3-cc3a0e06ed6d" textID="5"><![CDATA[I2]]></standard>
+		<standard Guid="baa35c0b-f76d-45b1-bbdd-5e94aacb5e80" textID="6"><![CDATA[I3]]></standard>
+		<standard Guid="53e7976f-a4f6-4289-b33b-25d0e877b190" textID="7"><![CDATA[I4]]></standard>
+		<standard Guid="fb792e6e-7665-4ff7-aee8-ab94086d1fea" textID="8"><![CDATA[I5]]></standard>
+		<standard Guid="6c276be9-d929-4e4b-a845-6c5473c23cfb" textID="9"><![CDATA[I6]]></standard>
+		<standard Guid="0f1eea57-b22b-48ac-823a-37f32f9f9cb1" textID="10"><![CDATA[I7]]></standard>
+		<standard Guid="de228c3a-d8b9-45cd-ba6f-855a8776efb1" textID="11"><![CDATA[I8]]></standard>
+		<standard Guid="f30d3872-8ce0-4f4c-bed4-49510c59d698" textID="12"><![CDATA[I9]]></standard>
+		<standard Guid="1ef28a7b-55ea-4422-98de-c684879b8a26" textID="13"><![CDATA[AI0]]></standard>
+		<standard Guid="1e8962bb-cd60-4e38-981a-146867bbb677" textID="14"><![CDATA[AI1]]></standard>
+		<standard Guid="6c082d87-e42e-403d-96d1-b6c80ce1d2f7" textID="15"><![CDATA[AI2]]></standard>
+		<standard Guid="adc09b6c-5977-46f5-b1b9-48e40faed1ad" textID="16"><![CDATA[AI3]]></standard>
+		<standard Guid="fbe7009e-9e76-4af5-a13e-7b3cfd866a02" textID="17"><![CDATA[AI4]]></standard>
+		<standard Guid="e64a8d9c-b5c2-4571-bbdc-ef07b9028265" textID="18"><![CDATA[AI5]]></standard>
+		<standard Guid="64ebf3c8-4849-4409-9bbb-15f1a3b9728d" textID="19"><![CDATA[AI6]]></standard>
+		<standard Guid="d54ac490-ac20-477a-ac20-f0d8e126baa3" textID="20"><![CDATA[0]]></standard>
+		<standard Guid="9c322a20-e86a-4480-87a0-5248160ea1c0" textID="21"><![CDATA[1]]></standard>
+		<standard Guid="f74b7cb9-0d7e-4a03-873f-56ba7bbe0e07" textID="22"><![CDATA[Q0]]></standard>
+		<standard Guid="2cf13722-3eaf-40d2-bc7a-a396bd342806" textID="23"><![CDATA[Q1]]></standard>
+		<standard Guid="7b714871-99b3-43d8-8e02-eb1495908805" textID="24"><![CDATA[Q2]]></standard>
+		<standard Guid="395a2395-7fe8-4b72-a5cb-3092595705b9" textID="25"><![CDATA[Q3]]></standard>
+		<standard Guid="abe59df0-d72f-4226-8442-21e1be88065d" textID="26"><![CDATA[Q4]]></standard>
+		<standard Guid="c2226f0f-2648-44f3-87b8-b94d62a86184" textID="27"><![CDATA[Q5]]></standard>
+		<standard Guid="55e06da1-7b03-4802-86b2-67a24ebfde41" textID="28"><![CDATA[Q6]]></standard>
+		<standard Guid="013d545b-e947-4cc5-93a5-9dad5b81efd6" textID="29"><![CDATA[Q7]]></standard>
+		<standard Guid="eb20784b-55ed-4c1c-b268-465e99525790" textID="30"><![CDATA[Q8]]></standard>
+		<standard Guid="b08d382b-b385-477e-a547-309b51451233" textID="31"><![CDATA[Q9]]></standard>
+		<standard Guid="8ae7bced-f0bc-45ac-95eb-d50aff77600f" textID="33"><![CDATA[Q10]]></standard>
+		<standard Guid="eae27f6b-de5b-4b23-ae75-b7aa6d9b733b" textID="34"><![CDATA[Q11]]></standard>
+		<standard Guid="cb4f3790-cbea-4400-b963-6f2df45b376e" textID="38"><![CDATA[Set 0.00 V to 10.00 V]]></standard>
+		<standard Guid="a76cf3b7-29c3-4f58-8d92-2b04989643c6" textID="39"><![CDATA[Set 0.00 V to 10.00 V]]></standard>
+		<standard Guid="f01d2612-c733-4833-bdbf-f67e80e327e2" textID="40"><![CDATA[Set 0.0 V to 10.0 V]]></standard>
+		<standard Guid="b4ea30f2-90d0-42e1-9926-3272df963c62" textID="41"><![CDATA[Set 0.0 V to 10.0 V]]></standard>
+		<standard Guid="49ccb15c-67f3-4006-a970-94c1efb64519" textID="46"><![CDATA[Set 0 to 4095]]></standard>
+		<standard Guid="8f92fe8f-0e3d-486e-a2b9-650c71fd4dad" textID="47"><![CDATA[Set 0 to 4095]]></standard>
+		<standard Guid="3821fa36-b216-4ab4-b022-42d3da9f3c75" textID="48"><![CDATA[Set 0.0 V to 10.0 V]]></standard>
+		<standard Guid="82fc2df4-4827-4ec7-ac1d-8768f9254dca" textID="49"><![CDATA[Set 0 to 4095]]></standard>
+		<standard Guid="12e76d64-7d9d-41ab-a6cd-e16c04517ac9" textID="50"><![CDATA[Set 0 to 4095]]></standard>
+		<standard Guid="cedb784d-cee9-4890-b313-45424876a27c" textID="51"><![CDATA[Set 0.00 V to 10.00 V]]></standard>
+		<standard Guid="9b1a2204-9150-4e15-be26-2aceaa145edc" textID="52"><![CDATA[Set 0.00 V to 10.00 V]]></standard>
+		<standard Guid="3a8d47d9-8e38-4878-9192-c0bb9b566350" textID="53"><![CDATA[Set 0.0 V to 10.0 V]]></standard>
+		<standard Guid="25712c32-41fc-4f3c-bf07-b2cd2f01d52d" textID="54"><![CDATA[ V]]></standard>
+		<standard Guid="eee10b7c-7aa7-4ae3-a510-67ab34344a3d" textID="55"><![CDATA[ V]]></standard>
+		<standard Guid="f88d6fae-814c-4e03-b072-7b41dd6c1064" textID="56"><![CDATA[Analog Out 0]]></standard>
+		<standard Guid="53001e70-63a5-451f-9eb9-ffbf1ff2a43b" textID="58"><![CDATA[Analog Out 1]]></standard>
+		<standard Guid="081f51ff-20df-4a48-8694-8a7163b1495c" textID="59"><![CDATA[ V]]></standard>
+		<standard Guid="097d0556-0b4e-4faa-b321-54ec0e1b31aa" textID="60"><![CDATA[calcRPM]]></standard>
+		<standard Guid="6d9d7653-9ee5-4d74-a96f-351f69d68214" textID="61"><![CDATA[No bit set]]></standard>
+		<standard Guid="f009191e-ccfc-46c0-8869-287dea3be11c" textID="0"><![CDATA[]]></standard>
+		<standard Guid="215cf29d-1680-4cf5-81fe-411b8608d7a6" textID="62"><![CDATA[I10]]></standard>
+		<standard Guid="b8ffff8a-da40-41ef-af5a-b173b2f7d9b3" textID="63"><![CDATA[I11]]></standard>
+		<standard Guid="72774e5b-6647-4ba4-b2fe-1eb2e10d6204" textID="64"><![CDATA[I12]]></standard>
+		<standard Guid="09540c65-b4a0-4fc2-8ce9-5af02bfeac78" textID="65"><![CDATA[I13]]></standard>
+		<standard Guid="e5985169-6466-4149-9ce7-b45776ded44a" textID="66"><![CDATA[I14]]></standard>
+		<standard Guid="69fe9ce2-35e8-4eb7-bdb4-d3368cf2836d" textID="67"><![CDATA[I15]]></standard>
+		<standard Guid="2eb4aad7-3bee-4a95-ab3d-5a0639e5fd9d" textID="68"><![CDATA[Q12]]></standard>
+		<standard Guid="a9b30560-555b-4297-938e-2ce93e28217a" textID="69"><![CDATA[Q13]]></standard>
+		<standard Guid="932e2b16-7bd2-4207-add4-5576614b1071" textID="70"><![CDATA[Q14]]></standard>
+		<standard Guid="54388d6f-e26a-4066-827d-e917fa39edba" textID="71"><![CDATA[Q15]]></standard>
+		<standard Guid="a8f361e5-d85e-408c-a7d5-3c4a76c0f134" textID="72"><![CDATA[Remote Run / Stop]]></standard>
+		<standard Guid="73c2ab1a-17c8-4e48-acc6-52f45977e719" textID="73"><![CDATA[Run Switch]]></standard>
+		<standard Guid="9b88b3e9-8824-43df-af69-755dcf7ce9c3" textID="74"><![CDATA[Y0.n Error]]></standard>
+		<standard Guid="216f19af-4d20-4144-bd3d-0beb5448b0d8" textID="75"><![CDATA[Y1.n Error]]></standard>
+		<standard Guid="68f02971-d3f1-4876-a561-53db5fe333cc" textID="76"><![CDATA[Reset all errors]]></standard>
+		<standard Guid="bf4158c9-0743-4f97-b74b-acecb7276cdc" textID="77"><![CDATA[Run status]]></standard>
+		<standard Guid="f78dd5ef-9797-4e00-8879-85f051d953e3" textID="78"><![CDATA[Don't Reset out bits in Stop mode]]></standard>
+		<standard Guid="b65e19e9-bc60-4aa3-8558-66a23ba93af9" textID="79"><![CDATA[Timeout Error]]></standard>
+		<standard Guid="a8ccceb6-171e-4b19-884b-b5c08c796580" textID="80"><![CDATA[Timeout]]></standard>
+		<error Guid="726b52d1-9d3e-47aa-a1df-f8dee31156a9" textID="0"><![CDATA[]]></error>
+		<help Guid="879a8096-94f0-438f-a954-1ff326304b2f" textID="0"><![CDATA[]]></help>
+	</texts>
+</languageData>

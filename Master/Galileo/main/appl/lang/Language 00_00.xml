@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<languageData>
+	<fileversion major="1" minor="5" />
+	<systemkeyboard path="de_CH" />
+	<textprint fontid="0" size="10" bold="0" italic="0" />
+	<fonts>
+		<font id="0" fontname="Arial" filename="arial.ttf" fontsizefactor="100" regular="1" bold="0" italic="0" />
+		<font id="1" fontname="Tahoma" filename="tahoma.ttf" fontsizefactor="100" regular="1" bold="0" italic="0" />
+		<font id="2" fontname="Arial Bold" filename="arialbd.ttf" fontsizefactor="100" regular="0" bold="1" italic="0" />
+	</fonts>
+	<texts>
+		<standard>
+			<s ID="1"><![CDATA[0]]></s>
+			<s ID="2"><![CDATA[1]]></s>
+			<s ID="3"><![CDATA[I0]]></s>
+			<s ID="4"><![CDATA[I1]]></s>
+			<s ID="5"><![CDATA[I2]]></s>
+			<s ID="6"><![CDATA[I3]]></s>
+			<s ID="7"><![CDATA[I4]]></s>
+			<s ID="8"><![CDATA[I5]]></s>
+			<s ID="9"><![CDATA[I6]]></s>
+			<s ID="10"><![CDATA[I7]]></s>
+			<s ID="11"><![CDATA[I8]]></s>
+			<s ID="12"><![CDATA[I9]]></s>
+			<s ID="13"><![CDATA[AI0]]></s>
+			<s ID="14"><![CDATA[AI1]]></s>
+			<s ID="15"><![CDATA[AI2]]></s>
+			<s ID="16"><![CDATA[AI3]]></s>
+			<s ID="17"><![CDATA[AI4]]></s>
+			<s ID="18"><![CDATA[AI5]]></s>
+			<s ID="19"><![CDATA[AI6]]></s>
+			<s ID="20"><![CDATA[0]]></s>
+			<s ID="21"><![CDATA[1]]></s>
+			<s ID="22"><![CDATA[Q0]]></s>
+			<s ID="23"><![CDATA[Q1]]></s>
+			<s ID="24"><![CDATA[Q2]]></s>
+			<s ID="25"><![CDATA[Q3]]></s>
+			<s ID="26"><![CDATA[Q4]]></s>
+			<s ID="27"><![CDATA[Q5]]></s>
+			<s ID="28"><![CDATA[Q6]]></s>
+			<s ID="29"><![CDATA[Q7]]></s>
+			<s ID="30"><![CDATA[Q8]]></s>
+			<s ID="31"><![CDATA[Q9]]></s>
+			<s ID="33"><![CDATA[Q10]]></s>
+			<s ID="34"><![CDATA[Q11]]></s>
+			<s ID="38"><![CDATA[Set 0.00 V to 10.00 V]]></s>
+			<s ID="39"><![CDATA[Set 0.00 V to 10.00 V]]></s>
+			<s ID="40"><![CDATA[Set 0.0 V to 10.0 V]]></s>
+			<s ID="41"><![CDATA[Set 0.0 V to 10.0 V]]></s>
+			<s ID="46"><![CDATA[Set 0 to 4095]]></s>
+			<s ID="47"><![CDATA[Set 0 to 4095]]></s>
+			<s ID="48"><![CDATA[Set 0.0 V to 10.0 V]]></s>
+			<s ID="49"><![CDATA[Set 0 to 4095]]></s>
+			<s ID="50"><![CDATA[Set 0 to 4095]]></s>
+			<s ID="51"><![CDATA[Set 0.00 V to 10.00 V]]></s>
+			<s ID="52"><![CDATA[Set 0.00 V to 10.00 V]]></s>
+			<s ID="53"><![CDATA[Set 0.0 V to 10.0 V]]></s>
+			<s ID="54"><![CDATA[ V]]></s>
+			<s ID="55"><![CDATA[ V]]></s>
+			<s ID="56"><![CDATA[Analog Out 0]]></s>
+			<s ID="58"><![CDATA[Analog Out 1]]></s>
+			<s ID="59"><![CDATA[ V]]></s>
+			<s ID="60"><![CDATA[calcRPM]]></s>
+			<s ID="61"><![CDATA[No bit set]]></s>
+			<s ID="0"><![CDATA[]]></s>
+			<s ID="62"><![CDATA[I10]]></s>
+			<s ID="63"><![CDATA[I11]]></s>
+			<s ID="64"><![CDATA[I12]]></s>
+			<s ID="65"><![CDATA[I13]]></s>
+			<s ID="66"><![CDATA[I14]]></s>
+			<s ID="67"><![CDATA[I15]]></s>
+			<s ID="68"><![CDATA[Q12]]></s>
+			<s ID="69"><![CDATA[Q13]]></s>
+			<s ID="70"><![CDATA[Q14]]></s>
+			<s ID="71"><![CDATA[Q15]]></s>
+			<s ID="72"><![CDATA[Remote Run / Stop]]></s>
+			<s ID="73"><![CDATA[Run Switch]]></s>
+			<s ID="74"><![CDATA[Y0.n Error]]></s>
+			<s ID="75"><![CDATA[Y1.n Error]]></s>
+			<s ID="76"><![CDATA[Reset all errors]]></s>
+			<s ID="77"><![CDATA[Run status]]></s>
+			<s ID="78"><![CDATA[Don't Reset out bits in Stop mode]]></s>
+			<s ID="79"><![CDATA[Timeout Error]]></s>
+			<s ID="80"><![CDATA[Timeout]]></s>
+		</standard>
+		<help>
+			<h ID="0"><![CDATA[]]></h>
+		</help>
+		<error>
+			<e ID="0"><![CDATA[]]></e>
+		</error>
+		<system>
+			<sys ID="0"><![CDATA[%1]]></sys>
+			<sys ID="1"><![CDATA[%1]]></sys>
+			<sys ID="2"><![CDATA[Can't find or read from file '%1']]></sys>
+			<sys ID="3"><![CDATA[Can't read from text number <%1!d!> from file '%2' !]]></sys>
+			<sys ID="4"><![CDATA[Project entry screen (%1) not found !]]></sys>
+			<sys ID="5"><![CDATA[No matching file found (%1) !]]></sys>
+			<sys ID="6"><![CDATA[No more memory available for function %1 !]]></sys>
+			<sys ID="7"><![CDATA[Some texts in textfile '%1' are missing !]]></sys>
+			<sys ID="8"><![CDATA[Accessing '%1' failed with error '%2' !]]></sys>
+			<sys ID="9"><![CDATA[The function < %1 > is not supported !]]></sys>
+			<sys ID="10"><![CDATA[Touch is dirty or defect!]]></sys>
+			<sys ID="11"><![CDATA[Can't create or write to file '%1' !]]></sys>
+			<sys ID="12"><![CDATA[Header information in file is invalid (%1) !]]></sys>
+			<sys ID="13"><![CDATA[Recipe with id < %1 > not found]]></sys>
+			<sys ID="14"><![CDATA[Can't save recipe with empty name !]]></sys>
+			<sys ID="15"><![CDATA[The recipe name '%1' already exist ! Choose another name.]]></sys>
+			<sys ID="16"><![CDATA[Execution of function %1 has failed (%2) !]]></sys>
+			<sys ID="17"><![CDATA[Error in script %1 !]]></sys>
+			<sys ID="18"><![CDATA[Can't read from file '%1' - structure mismatch!]]></sys>
+			<sys ID="19"><![CDATA[No user authorization for %1 !]]></sys>
+			<sys ID="20"><![CDATA[Communication disturbed: '%1' !]]></sys>
+			<sys ID="21"><![CDATA[Not enough Diskspace available (%1 kB)]]></sys>
+			<sys ID="22"><![CDATA[Protected or invalid path defined (%1) !]]></sys>
+			<sys ID="23"><![CDATA[Printer not ready !]]></sys>
+			<sys ID="24"><![CDATA[Printer busy !]]></sys>
+			<sys ID="25"><![CDATA[Incorrect Galileo registration code (%1) - DEMO mode !]]></sys>
+			<sys ID="26"><![CDATA[No valid runtime license found - DEMO mode !]]></sys>
+			<sys ID="27"><![CDATA[Demo mode has expired! Runtime will shut down.]]></sys>
+			<sys ID="28"><![CDATA[Printer < %1 > not detected !]]></sys>
+			<sys ID="29"><![CDATA[%1 (%2)]]></sys>
+			<sys ID="30"><![CDATA[Authentication failed: Username and/or password wrong]]></sys>
+			<sys ID="31"><![CDATA[Username is empty]]></sys>
+			<sys ID="32"><![CDATA[Password is empty]]></sys>
+			<sys ID="33"><![CDATA[No group selected]]></sys>
+			<sys ID="34"><![CDATA[Your password has expired and must be changed]]></sys>
+			<sys ID="35"><![CDATA[Too many failed login attempts, the account is locked]]></sys>
+			<sys ID="36"><![CDATA[Cannot create user: Number of users has reached the maximum]]></sys>
+			<sys ID="37"><![CDATA[Group '%1' does not exist]]></sys>
+			<sys ID="38"><![CDATA[User '%1' does not exist]]></sys>
+			<sys ID="39"><![CDATA[User '%1' already exists]]></sys>
+			<sys ID="40"><![CDATA[New Password must differ from current one]]></sys>
+			<sys ID="41"><![CDATA[New Password already used in history]]></sys>
+			<sys ID="42"><![CDATA[Cannot confirm new password: not matching]]></sys>
+			<sys ID="43"><![CDATA[No active user present. Please login to perform action]]></sys>
+			<sys ID="44"><![CDATA[User '%1' is locked]]></sys>
+			<sys ID="45"><![CDATA[Password is too short. Type at least %1 characters]]></sys>
+			<sys ID="46"><![CDATA[Cannot lock active user]]></sys>
+			<sys ID="47"><![CDATA[Cannot delete active user]]></sys>
+			<sys ID="48"><![CDATA[No permission to create user in group '%1']]></sys>
+			<sys ID="49"><![CDATA[No permission to delete user '%1' in group '%2']]></sys>
+			<sys ID="50"><![CDATA[No permission to change password of user '%1']]></sys>
+			<sys ID="51"><![CDATA[No permission to change group of user '%1']]></sys>
+			<sys ID="52"><![CDATA[No permission to modify group '%1']]></sys>
+			<sys ID="53"><![CDATA[No permission to lock user '%1']]></sys>
+			<sys ID="54"><![CDATA[No permission to unlock user '%1']]></sys>
+			<sys ID="55"><![CDATA[No permission to create users on this device]]></sys>
+			<sys ID="56"><![CDATA[No permission to delete users on this device]]></sys>
+			<sys ID="57"><![CDATA[No permission to change passwords]]></sys>
+			<sys ID="58"><![CDATA[No permission to change group affiliations]]></sys>
+			<sys ID="59"><![CDATA[No permission to lock/unlock users]]></sys>
+			<sys ID="60"><![CDATA[Successfully created user '%1']]></sys>
+			<sys ID="61"><![CDATA[Successfully deleted user '%1']]></sys>
+			<sys ID="62"><![CDATA[Successfully locked user '%1']]></sys>
+			<sys ID="63"><![CDATA[Successfully unlocked user '%1']]></sys>
+			<sys ID="64"><![CDATA[Successfully changed password of user '%1']]></sys>
+			<sys ID="65"><![CDATA[Successfully changed group of user '%1']]></sys>
+			<sys ID="66"><![CDATA[GraphBlock is running. Please stop to perform file loading.]]></sys>
+		</system>
+	</texts>
+</languageData>

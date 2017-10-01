@@ -537,28 +537,22 @@ ISR( TIMER3_COMPA_vect )
 
 	PORTG ^= MCU_PG0_bm;
 
-	if( 5 == ++n0 ) {
+	if( 10 == ++n0 ) {
 		uc10msTimerEvent = 1;
 		n0 = 0;
 	}
 
-	if( 50 == ++n1 ) {
+	if( 100 == ++n1 ) {
 		uc100msTimerEvent = 1;
 		n1 = 0;
 	}
 
-	if( 500 == ++n2 ) {
+	if( 1000 == ++n2 ) {
 		uc1000msTimerEvent = 1;
 		n2 = 0;
 	}
 
-	if( uiSysRS485SendRequestTimer ) {
-		--uiSysRS485SendRequestTimer;
-	}
-
-	if( uiSysRS485ReciverTimer ) {
-		--uiSysRS485ReciverTimer;
-	}
+	rs485TimerIsr();
 
 	if( uiRegHolding[18] ) {
 		if( uiModbusTimeOutCounter ) {
@@ -591,9 +585,8 @@ void initBoard(void)
 
 	PORTG |= MCU_IO_RESET_bm;
 
-	TCCR3A |= (1<<WGM31) | (0<<WGM30);
-	TCCR3B |= (0<<CS32) | (1<<CS31) | (1<<CS30);
-
-	ETIMSK |= (1<<OCIE3A);
 	OCR3A = 249;
+	TCCR3A = 0;
+	TCCR3B = (1<<WGM32) | (1<<CS31) | (1<<CS30);
+	ETIMSK |= (1<<OCIE3A);
 }

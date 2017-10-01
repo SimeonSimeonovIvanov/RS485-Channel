@@ -3,8 +3,8 @@
 
 volatile static uint8_t __RS485_PAUSE_FOR_NEXT_REQUEST__ = 2;
 
-volatile uint16_t uiSysRS485SendRequestTimer = 5;
-volatile uint16_t uiSysRS485ReciverTimer = 0;
+volatile static uint16_t uiSysRS485SendRequestTimer = 5;
+volatile static uint16_t uiSysRS485ReciverTimer = 0;
 
 volatile static uint8_t ucRS485txrxBuffer[260];
 
@@ -114,6 +114,17 @@ void rs485TaskInit( void )
 	ucChanelCount = 0;
 	for( i = 0; i < size_of_array( lpArrRS485Chanel ); i++ ) {
 		lpArrRS485Chanel[i] = NULL;
+	}
+}
+
+void rs485TimerIsr( void )
+{
+	if( uiSysRS485SendRequestTimer ) {
+		--uiSysRS485SendRequestTimer;
+	}
+
+	if( uiSysRS485ReciverTimer ) {
+		--uiSysRS485ReciverTimer;
 	}
 }
 

@@ -33,6 +33,7 @@ uint8_t rs485TaskIsEnable( void );
 
 void rs485Task( void );
 void rs485TaskInit( void );
+void rs485TimerIsr( void );
 uint8_t rs485AddChanel( LP_OBJ_RS485_CHANEL lpChanel );
 void rs485ChanelDefInit( LP_OBJ_RS485_CHANEL lpChanel );
 

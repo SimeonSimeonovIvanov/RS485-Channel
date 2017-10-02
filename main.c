@@ -96,12 +96,12 @@ volatile uint16_t uc1000msTimerEvent = 0;
 volatile uint8_t ucFlagTimeOutOutError = 0;
 volatile uint16_t uiModbusTimeOutCounter = 0;
 
-OBJ_RS485_CHANEL arrRS485Chanel[10];
+OBJ_RS485_CHANNEL arrRS485Channel[10];
 
-volatile MB_MASTER_READ_INPUT_STATUS stSlaveChanelReadInputsA3, stSlaveChanelReadInputsA11;
-volatile MB_MASTER_RW_COILS stSlaveChanelWriteCoilsA3, stSlaveChanelWriteCoilsA11;
+volatile MB_MASTER_READ_INPUT_STATUS stSlaveChannelReadInputsA3, stSlaveChannelReadInputsA11;
+volatile MB_MASTER_RW_COILS stSlaveChannelWriteCoilsA3, stSlaveChannelWriteCoilsA11;
 
-volatile MB_MASTER_PRESET_SINGLE_REGISTER stSlaveChanelPresetRegisterA10;
+volatile MB_MASTER_PRESET_SINGLE_REGISTER stSlaveChannelPresetRegisterA10;
 
 volatile uint8_t ucRegDiscBufA3[2], ucRegCoilsBufA3[2];
 volatile uint8_t ucRegDiscBufA11[2], ucRegCoilsBufA11[2];
@@ -127,98 +127,117 @@ int main(void)
 
 	///////////////////////////////////////////////////////////////////////
 
-	rs485ChanelDefInit( &arrRS485Chanel[1] );
+	rs485ChannelDefInit( &arrRS485Channel[0] );
 
-	stSlaveChanelReadInputsA3.address = 3;
-	stSlaveChanelReadInputsA3.inputs_address = 0;
-	stSlaveChanelReadInputsA3.inputs_number = 10;
-	stSlaveChanelReadInputsA3.lpInputs = (uint8_t*)ucRegDiscBufA3;
+	stSlaveChannelWriteCoilsA11.address = 11;
+	stSlaveChannelWriteCoilsA11.coils_address = 11;
+	stSlaveChannelWriteCoilsA11.lpCoils = (uint8_t*)&inPort[15];
 
-	arrRS485Chanel[1].lpData = (void*)&stSlaveChanelReadInputsA3;
-	arrRS485Chanel[1].ucEnableRequest = 1;
-	arrRS485Chanel[1].msReadTimeOut = 8;
+	arrRS485Channel[0].lpData = (void*)&stSlaveChannelWriteCoilsA11;
+	arrRS485Channel[0].ucEnableRequest = 1;
+	arrRS485Channel[0].msReadTimeOut = 8;
 
-	arrRS485Chanel[1].rs485SendRequestFunc = mbSendRequestReadInputStatus;
-	arrRS485Chanel[1].rs485GetResponseFunc = mbReceiveRequestReadInputStatus;
-	arrRS485Chanel[1].rs485ClrTimeOutError = mbMasterClrTimeOutError;
+	arrRS485Channel[0].rs485SendRequestFunc = mbSendRequestForceSingleCoil;
+	arrRS485Channel[0].rs485GetResponseFunc = mbReceiveRequestForceSingleCoil;		
+	arrRS485Channel[0].rs485SetTimeOutError = rs485SetTimeOutErrorNullFunc;
+	arrRS485Channel[0].rs485ClrTimeOutError = mbMasterClrTimeOutError;
 
-	rs485AddChanel( &arrRS485Chanel[1] );
-
-	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-	rs485ChanelDefInit( &arrRS485Chanel[2] );
-
-	stSlaveChanelReadInputsA11.address = 11;
-	stSlaveChanelReadInputsA11.inputs_address = 0;
-	stSlaveChanelReadInputsA11.inputs_number = 10;
-	stSlaveChanelReadInputsA11.lpInputs = (uint8_t*)ucRegDiscBufA11;
-
-	arrRS485Chanel[2].lpData = (void*)&stSlaveChanelReadInputsA11;
-	arrRS485Chanel[2].ucEnableRequest = 1;
-	arrRS485Chanel[2].msReadTimeOut = 8;
-
-	arrRS485Chanel[2].rs485SendRequestFunc = mbSendRequestReadInputStatus;
-	arrRS485Chanel[2].rs485GetResponseFunc = mbReceiveRequestReadInputStatus;
-	arrRS485Chanel[2].rs485ClrTimeOutError = mbMasterClrTimeOutError;
-
-	rs485AddChanel( &arrRS485Chanel[2] );
+	//rs485AddChannel( &arrRS485Channel[0] );
 
 	///////////////////////////////////////////////////////////////////////
 
-	rs485ChanelDefInit( &arrRS485Chanel[3] );
+	rs485ChannelDefInit( &arrRS485Channel[1] );
 
-	stSlaveChanelWriteCoilsA3.address = 3;
-	stSlaveChanelWriteCoilsA3.coils_address = 0;
-	stSlaveChanelWriteCoilsA3.coils_number = 12;
-	stSlaveChanelWriteCoilsA3.lpCoils = (uint8_t*)ucRegDiscBufA11;
+	stSlaveChannelReadInputsA3.address = 3;
+	stSlaveChannelReadInputsA3.inputs_address = 0;
+	stSlaveChannelReadInputsA3.inputs_number = 10;
+	stSlaveChannelReadInputsA3.lpInputs = (uint8_t*)ucRegDiscBufA3;
 
-	arrRS485Chanel[3].lpData = (void*)&stSlaveChanelWriteCoilsA3;
-	arrRS485Chanel[3].ucEnableRequest = 1;
-	arrRS485Chanel[3].msReadTimeOut = 8;
+	arrRS485Channel[1].lpData = (void*)&stSlaveChannelReadInputsA3;
+	arrRS485Channel[1].ucEnableRequest = 1;
+	arrRS485Channel[1].msReadTimeOut = 8;
 
-	arrRS485Chanel[3].rs485SendRequestFunc = mbSendRequestForceMultipleCoils;
-	arrRS485Chanel[3].rs485GetResponseFunc = mbReceiveRequestForceMultipleCoils;		
-	arrRS485Chanel[3].rs485ClrTimeOutError = mbMasterClrTimeOutError;
+	arrRS485Channel[1].rs485SendRequestFunc = mbSendRequestReadInputStatus;
+	arrRS485Channel[1].rs485GetResponseFunc = mbReceiveRequestReadInputStatus;
+	arrRS485Channel[1].rs485ClrTimeOutError = mbMasterClrTimeOutError;
 
-	rs485AddChanel( &arrRS485Chanel[3] );
-	
+	rs485AddChannel( &arrRS485Channel[1] );
+
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	
-	rs485ChanelDefInit( &arrRS485Chanel[4] );
 
-	stSlaveChanelWriteCoilsA11.address = 11;
-	stSlaveChanelWriteCoilsA11.coils_address = 0;
-	stSlaveChanelWriteCoilsA11.coils_number = 12;
-	stSlaveChanelWriteCoilsA11.lpCoils = (uint8_t*)ucRegDiscBufA3Temp;
+	rs485ChannelDefInit( &arrRS485Channel[2] );
 
-	arrRS485Chanel[4].lpData = (void*)&stSlaveChanelWriteCoilsA11;
-	arrRS485Chanel[4].ucEnableRequest = 1;
-	arrRS485Chanel[4].msReadTimeOut = 8;
+	stSlaveChannelReadInputsA11.address = 11;
+	stSlaveChannelReadInputsA11.inputs_address = 0;
+	stSlaveChannelReadInputsA11.inputs_number = 10;
+	stSlaveChannelReadInputsA11.lpInputs = (uint8_t*)ucRegDiscBufA11;
 
-	arrRS485Chanel[4].rs485SendRequestFunc = mbSendRequestForceMultipleCoils;
-	arrRS485Chanel[4].rs485GetResponseFunc = mbReceiveRequestForceMultipleCoils;		
-	arrRS485Chanel[4].rs485ClrTimeOutError = mbMasterClrTimeOutError;
+	arrRS485Channel[2].lpData = (void*)&stSlaveChannelReadInputsA11;
+	arrRS485Channel[2].ucEnableRequest = 1;
+	arrRS485Channel[2].msReadTimeOut = 8;
 
-	rs485AddChanel( &arrRS485Chanel[4] );
+	arrRS485Channel[2].rs485SendRequestFunc = mbSendRequestReadInputStatus;
+	arrRS485Channel[2].rs485GetResponseFunc = mbReceiveRequestReadInputStatus;
+	arrRS485Channel[2].rs485ClrTimeOutError = mbMasterClrTimeOutError;
+
+	rs485AddChannel( &arrRS485Channel[2] );
 
 	///////////////////////////////////////////////////////////////////////
 
-	rs485ChanelDefInit( &arrRS485Chanel[5] );
+	rs485ChannelDefInit( &arrRS485Channel[3] );
 
-	stSlaveChanelPresetRegisterA10.address = 11;
-	stSlaveChanelPresetRegisterA10.register_address = 15;
-	stSlaveChanelPresetRegisterA10.lpRegister = &remote_run;
-	stSlaveChanelPresetRegisterA10.lpRegisterNew = NULL;
+	stSlaveChannelWriteCoilsA3.address = 3;
+	stSlaveChannelWriteCoilsA3.coils_address = 0;
+	stSlaveChannelWriteCoilsA3.coils_number = 12;
+	stSlaveChannelWriteCoilsA3.lpCoils = (uint8_t*)ucRegDiscBufA11;
 
-	arrRS485Chanel[5].lpData = (void*)&stSlaveChanelPresetRegisterA10;
-	arrRS485Chanel[5].ucEnableRequest = 1;
-	arrRS485Chanel[5].msReadTimeOut = 8;
+	arrRS485Channel[3].lpData = (void*)&stSlaveChannelWriteCoilsA3;
+	arrRS485Channel[3].ucEnableRequest = 1;
+	arrRS485Channel[3].msReadTimeOut = 8;
 
-	arrRS485Chanel[5].rs485SendRequestFunc = mbSendRequestPresetSingleRegister;
-	arrRS485Chanel[5].rs485GetResponseFunc = rs485getResponseNullFunc; // ???
-	arrRS485Chanel[5].rs485ClrTimeOutError = mbMasterClrTimeOutError;
+	arrRS485Channel[3].rs485SendRequestFunc = mbSendRequestForceMultipleCoils;
+	arrRS485Channel[3].rs485GetResponseFunc = mbReceiveRequestForceMultipleCoils;		
+	arrRS485Channel[3].rs485ClrTimeOutError = mbMasterClrTimeOutError;
 
-	rs485AddChanel( &arrRS485Chanel[5] );
+	rs485AddChannel( &arrRS485Channel[3] );
+	
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	
+	rs485ChannelDefInit( &arrRS485Channel[4] );
+
+	stSlaveChannelWriteCoilsA11.address = 11;
+	stSlaveChannelWriteCoilsA11.coils_address = 0;
+	stSlaveChannelWriteCoilsA11.coils_number = 12;
+	stSlaveChannelWriteCoilsA11.lpCoils = (uint8_t*)ucRegDiscBufA3Temp;
+
+	arrRS485Channel[4].lpData = (void*)&stSlaveChannelWriteCoilsA11;
+	arrRS485Channel[4].ucEnableRequest = 1;
+	arrRS485Channel[4].msReadTimeOut = 8;
+
+	arrRS485Channel[4].rs485SendRequestFunc = mbSendRequestForceMultipleCoils;
+	arrRS485Channel[4].rs485GetResponseFunc = mbReceiveRequestForceMultipleCoils;		
+	arrRS485Channel[4].rs485ClrTimeOutError = mbMasterClrTimeOutError;
+
+	rs485AddChannel( &arrRS485Channel[4] );
+
+	///////////////////////////////////////////////////////////////////////
+
+	rs485ChannelDefInit( &arrRS485Channel[5] );
+
+	stSlaveChannelPresetRegisterA10.address = 11;
+	stSlaveChannelPresetRegisterA10.register_address = 15;
+	stSlaveChannelPresetRegisterA10.lpRegister = &remote_run;
+	stSlaveChannelPresetRegisterA10.lpRegisterNew = NULL;
+
+	arrRS485Channel[5].lpData = (void*)&stSlaveChannelPresetRegisterA10;
+	arrRS485Channel[5].ucEnableRequest = 1;
+	arrRS485Channel[5].msReadTimeOut = 8;
+
+	arrRS485Channel[5].rs485SendRequestFunc = mbSendRequestPresetSingleRegister;
+	arrRS485Channel[5].rs485GetResponseFunc = rs485getResponseNullFunc; // ???
+	arrRS485Channel[5].rs485ClrTimeOutError = mbMasterClrTimeOutError;
+
+	rs485AddChannel( &arrRS485Channel[5] );
 
 	///////////////////////////////////////////////////////////////////////
 
@@ -587,4 +606,3 @@ void initBoard(void)
 	TCCR3B = (1<<WGM32) | (1<<CS31) | (1<<CS30);
 	ETIMSK |= (1<<OCIE3A);
 }
-

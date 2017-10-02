@@ -2,7 +2,7 @@
 #define __MODBUS_RTU_H__
 
 #include <stdio.h>
-#include "..//rs485Chanel/rs485Chanel.h"
+#include "..//rs485Channel//rs485Channel.h"
 
 typedef struct {
 	uint8_t exception_code;

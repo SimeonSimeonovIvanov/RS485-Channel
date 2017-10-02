@@ -40,7 +40,7 @@ HEX_EEPROM_FLAGS += --change-section-lma .eeprom=0 --no-change-warnings
 INCLUDES = -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\arch" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\rtu" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\tcp" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\rs485Device" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\port" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\ascii" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\functions" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\digital_in_out_func" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus_master" 
 
 ## Objects that must be built in order to link
-OBJECTS = main.o mbrtu.o mbascii.o mbfunccoils.o mbfuncdiag.o mbfuncdisc.o mbfuncholding.o mbfuncinput.o mbfuncother.o mbutils.o mbcrc.o portevent.o portserial.o porttimer.o mb.o mbtcp.o digital_in_out_func.o spi.o modbus-rtu.o rs485Chanel.o 
+OBJECTS = main.o mbrtu.o mbascii.o mbfunccoils.o mbfuncdiag.o mbfuncdisc.o mbfuncholding.o mbfuncinput.o mbfuncother.o mbutils.o mbcrc.o portevent.o portserial.o porttimer.o mb.o mbtcp.o digital_in_out_func.o spi.o modbus-rtu.o rs485Channel.o 
 
 ## Objects explicitly added by the user
 LINKONLYOBJECTS = 
@@ -106,7 +106,7 @@ spi.o: ../arch/spi.c
 modbus-rtu.o: ../modbus_master/modbus-rtu.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
-rs485Chanel.o: ../rs485Chanel/rs485Chanel.c
+rs485Channel.o: ../rs485Channel/rs485Channel.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 ##Link

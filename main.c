@@ -234,7 +234,7 @@ int main(void)
 	arrRS485Channel[5].msReadTimeOut = 8;
 
 	arrRS485Channel[5].rs485SendRequestFunc = mbSendRequestPresetSingleRegister;
-	arrRS485Channel[5].rs485GetResponseFunc = rs485getResponseNullFunc; // ???
+	arrRS485Channel[5].rs485GetResponseFunc = mbReceiveRequestPresetSingleRegister;
 	arrRS485Channel[5].rs485ClrTimeOutError = mbMasterClrTimeOutError;
 
 	rs485AddChannel( &arrRS485Channel[5] );

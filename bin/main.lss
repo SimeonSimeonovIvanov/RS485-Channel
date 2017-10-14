@@ -3,27 +3,27 @@ main.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000038  00800100  00003110  000031a4  2**0
+  0 .data         00000038  00800100  000031ae  00003242  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00003110  00000000  00000000  00000094  2**1
+  1 .text         000031ae  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          000005d8  00800138  00800138  000031dc  2**0
+  2 .bss          000005d8  00800138  00800138  0000327a  2**0
                   ALLOC
-  3 .debug_aranges 00000240  00000000  00000000  000031dc  2**0
+  3 .debug_aranges 00000240  00000000  00000000  0000327a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .debug_pubnames 00000c9a  00000000  00000000  0000341c  2**0
+  4 .debug_pubnames 00000cc3  00000000  00000000  000034ba  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00003d4e  00000000  00000000  000040b6  2**0
+  5 .debug_info   00003dca  00000000  00000000  0000417d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000012bb  00000000  00000000  00007e04  2**0
+  6 .debug_abbrev 00001325  00000000  00000000  00007f47  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00003a7e  00000000  00000000  000090bf  2**0
+  7 .debug_line   00003aea  00000000  00000000  0000926c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000780  00000000  00000000  0000cb40  2**2
+  8 .debug_frame  00000790  00000000  00000000  0000cd58  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000018fa  00000000  00000000  0000d2c0  2**0
+  9 .debug_str    0000191f  00000000  00000000  0000d4e8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00002296  00000000  00000000  0000ebba  2**0
+ 10 .debug_loc    00002370  00000000  00000000  0000ee07  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -47,9 +47,9 @@ Disassembly of section .text:
       3c:	0c 94 65 01 	jmp	0x2ca	; 0x2ca <__bad_interrupt>
       40:	0c 94 65 01 	jmp	0x2ca	; 0x2ca <__bad_interrupt>
       44:	0c 94 65 01 	jmp	0x2ca	; 0x2ca <__bad_interrupt>
-      48:	0c 94 63 16 	jmp	0x2cc6	; 0x2cc6 <__vector_18>
-      4c:	0c 94 ae 16 	jmp	0x2d5c	; 0x2d5c <__vector_19>
-      50:	0c 94 27 16 	jmp	0x2c4e	; 0x2c4e <__vector_20>
+      48:	0c 94 b2 16 	jmp	0x2d64	; 0x2d64 <__vector_18>
+      4c:	0c 94 fd 16 	jmp	0x2dfa	; 0x2dfa <__vector_19>
+      50:	0c 94 76 16 	jmp	0x2cec	; 0x2cec <__vector_20>
       54:	0c 94 65 01 	jmp	0x2ca	; 0x2ca <__bad_interrupt>
       58:	0c 94 65 01 	jmp	0x2ca	; 0x2ca <__bad_interrupt>
       5c:	0c 94 65 01 	jmp	0x2ca	; 0x2ca <__bad_interrupt>
@@ -113,7 +113,7 @@ Disassembly of section .text:
      298:	11 e0       	ldi	r17, 0x01	; 1
      29a:	a0 e0       	ldi	r26, 0x00	; 0
      29c:	b1 e0       	ldi	r27, 0x01	; 1
-     29e:	e0 e1       	ldi	r30, 0x10	; 16
+     29e:	ee ea       	ldi	r30, 0xAE	; 174
      2a0:	f1 e3       	ldi	r31, 0x31	; 49
      2a2:	00 e0       	ldi	r16, 0x00	; 0
      2a4:	0b bf       	out	0x3b, r16	; 59
@@ -138,7 +138,7 @@ Disassembly of section .text:
      2be:	b1 07       	cpc	r27, r17
      2c0:	e1 f7       	brne	.-8      	; 0x2ba <.do_clear_bss_loop>
      2c2:	0e 94 b3 03 	call	0x766	; 0x766 <main>
-     2c6:	0c 94 86 18 	jmp	0x310c	; 0x310c <_exit>
+     2c6:	0c 94 d5 18 	jmp	0x31aa	; 0x31aa <_exit>
 
 000002ca <__bad_interrupt>:
      2ca:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -674,7 +674,7 @@ ISR( TIMER3_COMPA_vect )
 	}
 
 	rs485TimerIsr();
-     596:	0e 94 c5 15 	call	0x2b8a	; 0x2b8a <rs485TimerIsr>
+     596:	0e 94 14 16 	call	0x2c28	; 0x2c28 <rs485TimerIsr>
 
 	if( uiRegHolding[18] ) {
      59a:	80 91 cc 01 	lds	r24, 0x01CC
@@ -1010,7 +1010,7 @@ void veznaEepRestoreUartSetings( void *lpObject )
      740:	48 e0       	ldi	r20, 0x08	; 8
      742:	21 e0       	ldi	r18, 0x01	; 1
      744:	01 e0       	ldi	r16, 0x01	; 1
-     746:	0e 94 dd 16 	call	0x2dba	; 0x2dba <initRS485>
+     746:	0e 94 2c 17 	call	0x2e58	; 0x2e58 <initRS485>
 }
      74a:	0f 91       	pop	r16
      74c:	08 95       	ret
@@ -1031,7 +1031,7 @@ void veznaEepSetUartSetings( void *lpObject )
      758:	48 e0       	ldi	r20, 0x08	; 8
      75a:	21 e0       	ldi	r18, 0x01	; 1
      75c:	00 e0       	ldi	r16, 0x00	; 0
-     75e:	0e 94 dd 16 	call	0x2dba	; 0x2dba <initRS485>
+     75e:	0e 94 2c 17 	call	0x2e58	; 0x2e58 <initRS485>
 }
      762:	0f 91       	pop	r16
      764:	08 95       	ret
@@ -1094,14 +1094,14 @@ int main(void)
      7b2:	0e 94 36 02 	call	0x46c	; 0x46c <initBoard>
 	
 	rs485TaskInit();
-     7b6:	0e 94 a9 15 	call	0x2b52	; 0x2b52 <rs485TaskInit>
+     7b6:	0e 94 f8 15 	call	0x2bf0	; 0x2bf0 <rs485TaskInit>
 
 	///////////////////////////////////////////////////////////////////////
 
 	rs485ChannelDefInit( &arrRS485Channel[0] );
      7ba:	82 e3       	ldi	r24, 0x32	; 50
      7bc:	95 e0       	ldi	r25, 0x05	; 5
-     7be:	0e 94 fd 15 	call	0x2bfa	; 0x2bfa <rs485ChannelDefInit>
+     7be:	0e 94 4c 16 	call	0x2c98	; 0x2c98 <rs485ChannelDefInit>
 
 	stSlaveChannelWriteCoilsA11.address = 11;
      7c2:	7b e0       	ldi	r23, 0x0B	; 11
@@ -1134,17 +1134,17 @@ int main(void)
      7fc:	80 92 34 05 	sts	0x0534, r8
 
 	arrRS485Channel[0].rs485SendRequestFunc = mbSendRequestForceSingleCoil;
-     800:	8f ea       	ldi	r24, 0xAF	; 175
+     800:	8e ef       	ldi	r24, 0xFE	; 254
      802:	93 e1       	ldi	r25, 0x13	; 19
      804:	90 93 42 05 	sts	0x0542, r25
      808:	80 93 41 05 	sts	0x0541, r24
 	arrRS485Channel[0].rs485GetResponseFunc = mbReceiveRequestForceSingleCoil;		
-     80c:	84 e4       	ldi	r24, 0x44	; 68
+     80c:	83 e9       	ldi	r24, 0x93	; 147
      80e:	92 e1       	ldi	r25, 0x12	; 18
      810:	90 93 44 05 	sts	0x0544, r25
      814:	80 93 43 05 	sts	0x0543, r24
 	arrRS485Channel[0].rs485SetTimeOutError = rs485SetTimeOutErrorNullFunc;
-     818:	85 e2       	ldi	r24, 0x25	; 37
+     818:	84 e7       	ldi	r24, 0x74	; 116
      81a:	96 e1       	ldi	r25, 0x16	; 22
      81c:	90 93 3a 05 	sts	0x053A, r25
      820:	80 93 39 05 	sts	0x0539, r24
@@ -1163,7 +1163,7 @@ int main(void)
 	rs485ChannelDefInit( &arrRS485Channel[1] );
      834:	85 e4       	ldi	r24, 0x45	; 69
      836:	95 e0       	ldi	r25, 0x05	; 5
-     838:	0e 94 fd 15 	call	0x2bfa	; 0x2bfa <rs485ChannelDefInit>
+     838:	0e 94 4c 16 	call	0x2c98	; 0x2c98 <rs485ChannelDefInit>
 
 	stSlaveChannelReadInputsA3.address = 3;
      83c:	33 e0       	ldi	r19, 0x03	; 3
@@ -1195,14 +1195,14 @@ int main(void)
      876:	80 92 47 05 	sts	0x0547, r8
 
 	arrRS485Channel[1].rs485SendRequestFunc = mbSendRequestReadInputStatus;
-     87a:	91 ee       	ldi	r25, 0xE1	; 225
+     87a:	90 e3       	ldi	r25, 0x30	; 48
      87c:	c9 2e       	mov	r12, r25
-     87e:	93 e1       	ldi	r25, 0x13	; 19
+     87e:	94 e1       	ldi	r25, 0x14	; 20
      880:	d9 2e       	mov	r13, r25
      882:	d0 92 55 05 	sts	0x0555, r13
      886:	c0 92 54 05 	sts	0x0554, r12
 	arrRS485Channel[1].rs485GetResponseFunc = mbReceiveRequestReadInputStatus;
-     88a:	09 e9       	ldi	r16, 0x99	; 153
+     88a:	08 ee       	ldi	r16, 0xE8	; 232
      88c:	12 e1       	ldi	r17, 0x12	; 18
      88e:	10 93 57 05 	sts	0x0557, r17
      892:	00 93 56 05 	sts	0x0556, r16
@@ -1213,14 +1213,14 @@ int main(void)
 	rs485AddChannel( &arrRS485Channel[1] );
      89e:	85 e4       	ldi	r24, 0x45	; 69
      8a0:	95 e0       	ldi	r25, 0x05	; 5
-     8a2:	0e 94 e4 15 	call	0x2bc8	; 0x2bc8 <rs485AddChannel>
+     8a2:	0e 94 33 16 	call	0x2c66	; 0x2c66 <rs485AddChannel>
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 	rs485ChannelDefInit( &arrRS485Channel[2] );
      8a6:	88 e5       	ldi	r24, 0x58	; 88
      8a8:	95 e0       	ldi	r25, 0x05	; 5
-     8aa:	0e 94 fd 15 	call	0x2bfa	; 0x2bfa <rs485ChannelDefInit>
+     8aa:	0e 94 4c 16 	call	0x2c98	; 0x2c98 <rs485ChannelDefInit>
 
 	stSlaveChannelReadInputsA11.address = 11;
      8ae:	60 92 23 05 	sts	0x0523, r6
@@ -1261,14 +1261,14 @@ int main(void)
 	rs485AddChannel( &arrRS485Channel[2] );
      8fe:	88 e5       	ldi	r24, 0x58	; 88
      900:	95 e0       	ldi	r25, 0x05	; 5
-     902:	0e 94 e4 15 	call	0x2bc8	; 0x2bc8 <rs485AddChannel>
+     902:	0e 94 33 16 	call	0x2c66	; 0x2c66 <rs485AddChannel>
 
 	///////////////////////////////////////////////////////////////////////
 
 	rs485ChannelDefInit( &arrRS485Channel[3] );
      906:	8b e6       	ldi	r24, 0x6B	; 107
      908:	95 e0       	ldi	r25, 0x05	; 5
-     90a:	0e 94 fd 15 	call	0x2bfa	; 0x2bfa <rs485ChannelDefInit>
+     90a:	0e 94 4c 16 	call	0x2c98	; 0x2c98 <rs485ChannelDefInit>
 
 	stSlaveChannelWriteCoilsA3.address = 3;
      90e:	50 92 f3 05 	sts	0x05F3, r5
@@ -1296,7 +1296,7 @@ int main(void)
      940:	80 92 6d 05 	sts	0x056D, r8
 
 	arrRS485Channel[3].rs485SendRequestFunc = mbSendRequestForceMultipleCoils;
-     944:	1d e0       	ldi	r17, 0x0D	; 13
+     944:	1c e5       	ldi	r17, 0x5C	; 92
      946:	e1 2e       	mov	r14, r17
      948:	13 e1       	ldi	r17, 0x13	; 19
      94a:	f1 2e       	mov	r15, r17
@@ -1314,14 +1314,14 @@ int main(void)
 	rs485AddChannel( &arrRS485Channel[3] );
      968:	8b e6       	ldi	r24, 0x6B	; 107
      96a:	95 e0       	ldi	r25, 0x05	; 5
-     96c:	0e 94 e4 15 	call	0x2bc8	; 0x2bc8 <rs485AddChannel>
+     96c:	0e 94 33 16 	call	0x2c66	; 0x2c66 <rs485AddChannel>
 	
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	
 	rs485ChannelDefInit( &arrRS485Channel[4] );
      970:	8e e7       	ldi	r24, 0x7E	; 126
      972:	95 e0       	ldi	r25, 0x05	; 5
-     974:	0e 94 fd 15 	call	0x2bfa	; 0x2bfa <rs485ChannelDefInit>
+     974:	0e 94 4c 16 	call	0x2c98	; 0x2c98 <rs485ChannelDefInit>
 
 	stSlaveChannelWriteCoilsA11.address = 11;
      978:	60 92 fc 05 	sts	0x05FC, r6
@@ -1358,14 +1358,14 @@ int main(void)
 	rs485AddChannel( &arrRS485Channel[4] );
      9c0:	8e e7       	ldi	r24, 0x7E	; 126
      9c2:	95 e0       	ldi	r25, 0x05	; 5
-     9c4:	0e 94 e4 15 	call	0x2bc8	; 0x2bc8 <rs485AddChannel>
+     9c4:	0e 94 33 16 	call	0x2c66	; 0x2c66 <rs485AddChannel>
 
 	///////////////////////////////////////////////////////////////////////
 
 	rs485ChannelDefInit( &arrRS485Channel[5] );
      9c8:	81 e9       	ldi	r24, 0x91	; 145
      9ca:	95 e0       	ldi	r25, 0x05	; 5
-     9cc:	0e 94 fd 15 	call	0x2bfa	; 0x2bfa <rs485ChannelDefInit>
+     9cc:	0e 94 4c 16 	call	0x2c98	; 0x2c98 <rs485ChannelDefInit>
 
 	stSlaveChannelPresetRegisterA10.address = 11;
      9d0:	60 92 2b 05 	sts	0x052B, r6
@@ -1395,13 +1395,13 @@ int main(void)
      a08:	80 92 93 05 	sts	0x0593, r8
 
 	arrRS485Channel[5].rs485SendRequestFunc = mbSendRequestPresetSingleRegister;
-     a0c:	83 e7       	ldi	r24, 0x73	; 115
+     a0c:	82 ec       	ldi	r24, 0xC2	; 194
      a0e:	93 e1       	ldi	r25, 0x13	; 19
      a10:	90 93 a1 05 	sts	0x05A1, r25
      a14:	80 93 a0 05 	sts	0x05A0, r24
-	arrRS485Channel[5].rs485GetResponseFunc = rs485getResponseNullFunc; // ???
-     a18:	81 e2       	ldi	r24, 0x21	; 33
-     a1a:	96 e1       	ldi	r25, 0x16	; 22
+	arrRS485Channel[5].rs485GetResponseFunc = mbReceiveRequestPresetSingleRegister;
+     a18:	84 e4       	ldi	r24, 0x44	; 68
+     a1a:	92 e1       	ldi	r25, 0x12	; 18
      a1c:	90 93 a3 05 	sts	0x05A3, r25
      a20:	80 93 a2 05 	sts	0x05A2, r24
 	arrRS485Channel[5].rs485ClrTimeOutError = mbMasterClrTimeOutError;
@@ -1411,7 +1411,7 @@ int main(void)
 	rs485AddChannel( &arrRS485Channel[5] );
      a2c:	81 e9       	ldi	r24, 0x91	; 145
      a2e:	95 e0       	ldi	r25, 0x05	; 5
-     a30:	0e 94 e4 15 	call	0x2bc8	; 0x2bc8 <rs485AddChannel>
+     a30:	0e 94 33 16 	call	0x2c66	; 0x2c66 <rs485AddChannel>
 
 	///////////////////////////////////////////////////////////////////////
 
@@ -1529,18 +1529,18 @@ int main(void)
      adc:	cc 20       	and	r12, r12
      ade:	19 f4       	brne	.+6      	; 0xae6 <main+0x380>
 				rs485TaskEnable();
-     ae0:	0e 94 9f 15 	call	0x2b3e	; 0x2b3e <rs485TaskEnable>
+     ae0:	0e 94 ee 15 	call	0x2bdc	; 0x2bdc <rs485TaskEnable>
      ae4:	02 c0       	rjmp	.+4      	; 0xaea <main+0x384>
 			} else {
 				rs485TaskDisable();
-     ae6:	0e 94 a3 15 	call	0x2b46	; 0x2b46 <rs485TaskDisable>
+     ae6:	0e 94 f2 15 	call	0x2be4	; 0x2be4 <rs485TaskDisable>
 			}
 
 			eStatus = eMBDisable();
      aea:	0e 94 4b 0f 	call	0x1e96	; 0x1e96 <eMBDisable>
 
 			if( !rs485TaskIsEnable() ) {
-     aee:	0e 94 a6 15 	call	0x2b4c	; 0x2b4c <rs485TaskIsEnable>
+     aee:	0e 94 f5 15 	call	0x2bea	; 0x2bea <rs485TaskIsEnable>
      af2:	88 23       	and	r24, r24
      af4:	a1 f4       	brne	.+40     	; 0xb1e <main+0x3b8>
 				eStatus = eMBInit( MB_RTU, ucRS485_address, 0, 115200, MB_PAR_EVEN );
@@ -1572,7 +1572,7 @@ int main(void)
      b26:	48 e0       	ldi	r20, 0x08	; 8
      b28:	21 e0       	ldi	r18, 0x01	; 1
      b2a:	01 e0       	ldi	r16, 0x01	; 1
-     b2c:	0e 94 dd 16 	call	0x2dba	; 0x2dba <initRS485>
+     b2c:	0e 94 2c 17 	call	0x2e58	; 0x2e58 <initRS485>
 			}
 		}
 
@@ -1616,7 +1616,7 @@ int main(void)
 		}
 
 		if( !rs485TaskIsEnable() ) {
-     b76:	0e 94 a6 15 	call	0x2b4c	; 0x2b4c <rs485TaskIsEnable>
+     b76:	0e 94 f5 15 	call	0x2bea	; 0x2bea <rs485TaskIsEnable>
      b7a:	88 23       	and	r24, r24
      b7c:	19 f4       	brne	.+6      	; 0xb84 <main+0x41e>
 			eMBPoll();
@@ -1633,7 +1633,7 @@ int main(void)
      b94:	1d 82       	std	Y+5, r1	; 0x05
 
 			rs485Task();
-     b96:	0e 94 31 14 	call	0x2862	; 0x2862 <rs485Task>
+     b96:	0e 94 80 14 	call	0x2900	; 0x2900 <rs485Task>
 		}
 
 		uint8_t temp = ( ~1 & ucRegDiscBufA3[0] );
@@ -2383,7 +2383,7 @@ eMBRTUInit( UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity ePar
      fb8:	90 e0       	ldi	r25, 0x00	; 0
      fba:	a7 01       	movw	r20, r14
      fbc:	96 01       	movw	r18, r12
-     fbe:	0e 94 5b 18 	call	0x30b6	; 0x30b6 <__udivmodsi4>
+     fbe:	0e 94 aa 18 	call	0x3154	; 0x3154 <__udivmodsi4>
      fc2:	c9 01       	movw	r24, r18
         }
         if( xMBPortTimersInit( ( USHORT ) usTimerT35_50us ) != TRUE )
@@ -4509,7 +4509,7 @@ eMBFuncReportSlaveID( UCHAR * pucFrame, USHORT * usLen )
     1906:	50 91 89 03 	lds	r21, 0x0389
     190a:	c9 01       	movw	r24, r18
     190c:	bf 01       	movw	r22, r30
-    190e:	0e 94 7d 18 	call	0x30fa	; 0x30fa <memcpy>
+    190e:	0e 94 cc 18 	call	0x3198	; 0x3198 <memcpy>
     *usLen = ( USHORT )( MB_PDU_DATA_OFF + usMBSlaveIDLen );
     1912:	80 91 88 03 	lds	r24, 0x0388
     1916:	90 91 89 03 	lds	r25, 0x0389
@@ -4572,7 +4572,7 @@ eMBSetSlaveID( UCHAR ucSlaveID, BOOL xIsRunning,
     1964:	c9 01       	movw	r24, r18
     1966:	ba 01       	movw	r22, r20
     1968:	ae 01       	movw	r20, r28
-    196a:	0e 94 7d 18 	call	0x30fa	; 0x30fa <memcpy>
+    196a:	0e 94 cc 18 	call	0x3198	; 0x3198 <memcpy>
                     ( size_t )usAdditionalLen );
             usMBSlaveIDLen += usAdditionalLen;
     196e:	80 91 88 03 	lds	r24, 0x0388
@@ -5181,7 +5181,7 @@ xMBPortSerialInit( UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
     1c98:	90 e0       	ldi	r25, 0x00	; 0
     1c9a:	a7 01       	movw	r20, r14
     1c9c:	96 01       	movw	r18, r12
-    1c9e:	0e 94 5b 18 	call	0x30b6	; 0x30b6 <__udivmodsi4>
+    1c9e:	0e 94 aa 18 	call	0x3154	; 0x3154 <__udivmodsi4>
     1ca2:	21 50       	subi	r18, 0x01	; 1
     1ca4:	30 40       	sbci	r19, 0x00	; 0
     1ca6:	02 c0       	rjmp	.+4      	; 0x1cac <xMBPortSerialInit+0x1ae>
@@ -5349,12 +5349,12 @@ xMBPortTimersInit( USHORT usTim1Timerout50us )
     1d46:	3d e3       	ldi	r19, 0x3D	; 61
     1d48:	40 e0       	ldi	r20, 0x00	; 0
     1d4a:	50 e0       	ldi	r21, 0x00	; 0
-    1d4c:	0e 94 3c 18 	call	0x3078	; 0x3078 <__mulsi3>
+    1d4c:	0e 94 8b 18 	call	0x3116	; 0x3116 <__mulsi3>
     1d50:	20 e2       	ldi	r18, 0x20	; 32
     1d52:	3e e4       	ldi	r19, 0x4E	; 78
     1d54:	40 e0       	ldi	r20, 0x00	; 0
     1d56:	50 e0       	ldi	r21, 0x00	; 0
-    1d58:	0e 94 5b 18 	call	0x30b6	; 0x30b6 <__udivmodsi4>
+    1d58:	0e 94 aa 18 	call	0x3154	; 0x3154 <__udivmodsi4>
     1d5c:	30 93 8d 03 	sts	0x038D, r19
     1d60:	20 93 8c 03 	sts	0x038C, r18
 
@@ -6868,931 +6868,976 @@ uint8_t mbReceiveRequestForceMultipleCoils( uint8_t *rxBuffer, uint8_t len, void
     2484:	0f 91       	pop	r16
     2486:	08 95       	ret
 
-00002488 <mbReceiveRequestForceSingleCoil>:
+00002488 <mbReceiveRequestPresetSingleRegister>:
+
+	mbRtuAddCrcAndSendBuffer( txBuffer, 8 );
+}
+
+uint8_t mbReceiveRequestPresetSingleRegister( uint8_t *rxBuffer, uint8_t len, void *lpObject )
+{
+    2488:	0f 93       	push	r16
+    248a:	1f 93       	push	r17
+    248c:	cf 93       	push	r28
+    248e:	df 93       	push	r29
+    2490:	8c 01       	movw	r16, r24
+    2492:	26 2f       	mov	r18, r22
+	LP_MB_MASTER_PRESET_SINGLE_REGISTER lpData = (LP_MB_MASTER_PRESET_SINGLE_REGISTER)lpObject;
+    2494:	ea 01       	movw	r28, r20
+
+	if( rxBuffer[0] == lpData->address ) {
+    2496:	fc 01       	movw	r30, r24
+    2498:	90 81       	ld	r25, Z
+    249a:	89 81       	ldd	r24, Y+1	; 0x01
+    249c:	98 17       	cp	r25, r24
+    249e:	e9 f5       	brne	.+122    	; 0x251a <mbReceiveRequestPresetSingleRegister+0x92>
+
+		if( 6 == rxBuffer[1] ) {
+    24a0:	81 81       	ldd	r24, Z+1	; 0x01
+    24a2:	86 30       	cpi	r24, 0x06	; 6
+    24a4:	a1 f5       	brne	.+104    	; 0x250e <mbReceiveRequestPresetSingleRegister+0x86>
+			if( 8 == len ) {
+    24a6:	68 30       	cpi	r22, 0x08	; 8
+    24a8:	c1 f5       	brne	.+112    	; 0x251a <mbReceiveRequestPresetSingleRegister+0x92>
+				uint16_t check_sum;
+
+				check_sum = usMBCRC16( rxBuffer, 6 );
+    24aa:	c8 01       	movw	r24, r16
+    24ac:	66 e0       	ldi	r22, 0x06	; 6
+    24ae:	70 e0       	ldi	r23, 0x00	; 0
+    24b0:	0e 94 35 0d 	call	0x1a6a	; 0x1a6a <usMBCRC16>
+    24b4:	ac 01       	movw	r20, r24
+
+				if( ( ( 0xff & check_sum>>0 ) == rxBuffer[6] ) &&
+    24b6:	9c 01       	movw	r18, r24
+    24b8:	30 70       	andi	r19, 0x00	; 0
+    24ba:	f8 01       	movw	r30, r16
+    24bc:	86 81       	ldd	r24, Z+6	; 0x06
+    24be:	90 e0       	ldi	r25, 0x00	; 0
+    24c0:	28 17       	cp	r18, r24
+    24c2:	39 07       	cpc	r19, r25
+    24c4:	51 f5       	brne	.+84     	; 0x251a <mbReceiveRequestPresetSingleRegister+0x92>
+    24c6:	25 2f       	mov	r18, r21
+    24c8:	33 27       	eor	r19, r19
+    24ca:	87 81       	ldd	r24, Z+7	; 0x07
+    24cc:	90 e0       	ldi	r25, 0x00	; 0
+    24ce:	28 17       	cp	r18, r24
+    24d0:	39 07       	cpc	r19, r25
+    24d2:	19 f5       	brne	.+70     	; 0x251a <mbReceiveRequestPresetSingleRegister+0x92>
+					( ( 0xff & check_sum>>8 ) == rxBuffer[7] )
+				) {
+					if( rxBuffer[2] == lpData->register_address>>8	&&
+    24d4:	4a 81       	ldd	r20, Y+2	; 0x02
+    24d6:	5b 81       	ldd	r21, Y+3	; 0x03
+    24d8:	82 81       	ldd	r24, Z+2	; 0x02
+    24da:	90 e0       	ldi	r25, 0x00	; 0
+    24dc:	25 2f       	mov	r18, r21
+    24de:	33 27       	eor	r19, r19
+    24e0:	82 17       	cp	r24, r18
+    24e2:	93 07       	cpc	r25, r19
+    24e4:	d1 f4       	brne	.+52     	; 0x251a <mbReceiveRequestPresetSingleRegister+0x92>
+    24e6:	83 81       	ldd	r24, Z+3	; 0x03
+    24e8:	90 e0       	ldi	r25, 0x00	; 0
+    24ea:	84 17       	cp	r24, r20
+    24ec:	95 07       	cpc	r25, r21
+    24ee:	a9 f4       	brne	.+42     	; 0x251a <mbReceiveRequestPresetSingleRegister+0x92>
+						rxBuffer[3] == lpData->register_address
+					) {
+						if( NULL != lpData->lpRegisterNew ) {
+    24f0:	8e 81       	ldd	r24, Y+6	; 0x06
+    24f2:	9f 81       	ldd	r25, Y+7	; 0x07
+    24f4:	89 2b       	or	r24, r25
+    24f6:	41 f0       	breq	.+16     	; 0x2508 <mbReceiveRequestPresetSingleRegister+0x80>
+							lpData->lpRegisterNew = ( rxBuffer[4]<<8 ) | rxBuffer[5];
+    24f8:	94 81       	ldd	r25, Z+4	; 0x04
+    24fa:	80 e0       	ldi	r24, 0x00	; 0
+    24fc:	25 81       	ldd	r18, Z+5	; 0x05
+    24fe:	30 e0       	ldi	r19, 0x00	; 0
+    2500:	82 2b       	or	r24, r18
+    2502:	93 2b       	or	r25, r19
+    2504:	9f 83       	std	Y+7, r25	; 0x07
+    2506:	8e 83       	std	Y+6, r24	; 0x06
+						}
+
+						lpData->exception_code = 0;
+    2508:	18 82       	st	Y, r1
+    250a:	81 e0       	ldi	r24, 0x01	; 1
+    250c:	07 c0       	rjmp	.+14     	; 0x251c <mbReceiveRequestPresetSingleRegister+0x94>
+			}
+
+			return 0;
+		}
+		
+		return mbCheckExceptionForResponse( &lpData->exception_code, 6, rxBuffer, len );
+    250e:	ca 01       	movw	r24, r20
+    2510:	66 e0       	ldi	r22, 0x06	; 6
+    2512:	a8 01       	movw	r20, r16
+    2514:	0e 94 e0 11 	call	0x23c0	; 0x23c0 <mbCheckExceptionForResponse>
+    2518:	01 c0       	rjmp	.+2      	; 0x251c <mbReceiveRequestPresetSingleRegister+0x94>
+    251a:	80 e0       	ldi	r24, 0x00	; 0
+	}
+
+	return 0;
+}
+    251c:	df 91       	pop	r29
+    251e:	cf 91       	pop	r28
+    2520:	1f 91       	pop	r17
+    2522:	0f 91       	pop	r16
+    2524:	08 95       	ret
+
+00002526 <mbReceiveRequestForceSingleCoil>:
 
 	mbRtuAddCrcAndSendBuffer( txBuffer, 8 );
 }
 
 uint8_t mbReceiveRequestForceSingleCoil( uint8_t *rxBuffer, uint8_t len, void *lpObject )
 {
-    2488:	0f 93       	push	r16
-    248a:	1f 93       	push	r17
-    248c:	cf 93       	push	r28
-    248e:	df 93       	push	r29
-    2490:	ec 01       	movw	r28, r24
-    2492:	26 2f       	mov	r18, r22
+    2526:	0f 93       	push	r16
+    2528:	1f 93       	push	r17
+    252a:	cf 93       	push	r28
+    252c:	df 93       	push	r29
+    252e:	ec 01       	movw	r28, r24
+    2530:	26 2f       	mov	r18, r22
 	LP_MB_MASTER_WRITE_SINGLE_COIL lpData = (LP_MB_MASTER_WRITE_SINGLE_COIL)lpObject;
-    2494:	8a 01       	movw	r16, r20
+    2532:	8a 01       	movw	r16, r20
 
 	if( rxBuffer[0] == lpData->address ) {
-    2496:	98 81       	ld	r25, Y
-    2498:	da 01       	movw	r26, r20
-    249a:	11 96       	adiw	r26, 0x01	; 1
-    249c:	8c 91       	ld	r24, X
-    249e:	98 17       	cp	r25, r24
-    24a0:	09 f0       	breq	.+2      	; 0x24a4 <mbReceiveRequestForceSingleCoil+0x1c>
-    24a2:	41 c0       	rjmp	.+130    	; 0x2526 <mbReceiveRequestForceSingleCoil+0x9e>
+    2534:	98 81       	ld	r25, Y
+    2536:	da 01       	movw	r26, r20
+    2538:	11 96       	adiw	r26, 0x01	; 1
+    253a:	8c 91       	ld	r24, X
+    253c:	98 17       	cp	r25, r24
+    253e:	09 f0       	breq	.+2      	; 0x2542 <mbReceiveRequestForceSingleCoil+0x1c>
+    2540:	41 c0       	rjmp	.+130    	; 0x25c4 <mbReceiveRequestForceSingleCoil+0x9e>
 
 		if( 5 == rxBuffer[1] ) {
-    24a4:	89 81       	ldd	r24, Y+1	; 0x01
-    24a6:	85 30       	cpi	r24, 0x05	; 5
-    24a8:	c1 f5       	brne	.+112    	; 0x251a <mbReceiveRequestForceSingleCoil+0x92>
+    2542:	89 81       	ldd	r24, Y+1	; 0x01
+    2544:	85 30       	cpi	r24, 0x05	; 5
+    2546:	c1 f5       	brne	.+112    	; 0x25b8 <mbReceiveRequestForceSingleCoil+0x92>
 			if( 8 == len ) {
-    24aa:	68 30       	cpi	r22, 0x08	; 8
-    24ac:	e1 f5       	brne	.+120    	; 0x2526 <mbReceiveRequestForceSingleCoil+0x9e>
+    2548:	68 30       	cpi	r22, 0x08	; 8
+    254a:	e1 f5       	brne	.+120    	; 0x25c4 <mbReceiveRequestForceSingleCoil+0x9e>
 				uint16_t check_sum;
 
 				check_sum = usMBCRC16( rxBuffer, 6 );
-    24ae:	ce 01       	movw	r24, r28
-    24b0:	66 e0       	ldi	r22, 0x06	; 6
-    24b2:	70 e0       	ldi	r23, 0x00	; 0
-    24b4:	0e 94 35 0d 	call	0x1a6a	; 0x1a6a <usMBCRC16>
-    24b8:	ac 01       	movw	r20, r24
+    254c:	ce 01       	movw	r24, r28
+    254e:	66 e0       	ldi	r22, 0x06	; 6
+    2550:	70 e0       	ldi	r23, 0x00	; 0
+    2552:	0e 94 35 0d 	call	0x1a6a	; 0x1a6a <usMBCRC16>
+    2556:	ac 01       	movw	r20, r24
 
 				if( ( ( 0xff & check_sum>>0 ) == rxBuffer[6] ) &&
-    24ba:	9c 01       	movw	r18, r24
-    24bc:	30 70       	andi	r19, 0x00	; 0
-    24be:	8e 81       	ldd	r24, Y+6	; 0x06
-    24c0:	90 e0       	ldi	r25, 0x00	; 0
-    24c2:	28 17       	cp	r18, r24
-    24c4:	39 07       	cpc	r19, r25
-    24c6:	79 f5       	brne	.+94     	; 0x2526 <mbReceiveRequestForceSingleCoil+0x9e>
-    24c8:	25 2f       	mov	r18, r21
-    24ca:	33 27       	eor	r19, r19
-    24cc:	8f 81       	ldd	r24, Y+7	; 0x07
-    24ce:	90 e0       	ldi	r25, 0x00	; 0
-    24d0:	28 17       	cp	r18, r24
-    24d2:	39 07       	cpc	r19, r25
-    24d4:	41 f5       	brne	.+80     	; 0x2526 <mbReceiveRequestForceSingleCoil+0x9e>
+    2558:	9c 01       	movw	r18, r24
+    255a:	30 70       	andi	r19, 0x00	; 0
+    255c:	8e 81       	ldd	r24, Y+6	; 0x06
+    255e:	90 e0       	ldi	r25, 0x00	; 0
+    2560:	28 17       	cp	r18, r24
+    2562:	39 07       	cpc	r19, r25
+    2564:	79 f5       	brne	.+94     	; 0x25c4 <mbReceiveRequestForceSingleCoil+0x9e>
+    2566:	25 2f       	mov	r18, r21
+    2568:	33 27       	eor	r19, r19
+    256a:	8f 81       	ldd	r24, Y+7	; 0x07
+    256c:	90 e0       	ldi	r25, 0x00	; 0
+    256e:	28 17       	cp	r18, r24
+    2570:	39 07       	cpc	r19, r25
+    2572:	41 f5       	brne	.+80     	; 0x25c4 <mbReceiveRequestForceSingleCoil+0x9e>
 					( ( 0xff & check_sum>>8 ) == rxBuffer[7] )
 				) {
 					if( rxBuffer[2] == lpData->coil_address>>8	&&
-    24d6:	f8 01       	movw	r30, r16
-    24d8:	96 81       	ldd	r25, Z+6	; 0x06
-    24da:	8a 81       	ldd	r24, Y+2	; 0x02
-    24dc:	88 23       	and	r24, r24
-    24de:	19 f5       	brne	.+70     	; 0x2526 <mbReceiveRequestForceSingleCoil+0x9e>
-    24e0:	8b 81       	ldd	r24, Y+3	; 0x03
-    24e2:	89 17       	cp	r24, r25
-    24e4:	01 f5       	brne	.+64     	; 0x2526 <mbReceiveRequestForceSingleCoil+0x9e>
-    24e6:	8d 81       	ldd	r24, Y+5	; 0x05
-    24e8:	88 23       	and	r24, r24
-    24ea:	e9 f4       	brne	.+58     	; 0x2526 <mbReceiveRequestForceSingleCoil+0x9e>
+    2574:	f8 01       	movw	r30, r16
+    2576:	96 81       	ldd	r25, Z+6	; 0x06
+    2578:	8a 81       	ldd	r24, Y+2	; 0x02
+    257a:	88 23       	and	r24, r24
+    257c:	19 f5       	brne	.+70     	; 0x25c4 <mbReceiveRequestForceSingleCoil+0x9e>
+    257e:	8b 81       	ldd	r24, Y+3	; 0x03
+    2580:	89 17       	cp	r24, r25
+    2582:	01 f5       	brne	.+64     	; 0x25c4 <mbReceiveRequestForceSingleCoil+0x9e>
+    2584:	8d 81       	ldd	r24, Y+5	; 0x05
+    2586:	88 23       	and	r24, r24
+    2588:	e9 f4       	brne	.+58     	; 0x25c4 <mbReceiveRequestForceSingleCoil+0x9e>
 						rxBuffer[3] == lpData->coil_address		&&
 						rxBuffer[5] == 0
 					) {
 						if( NULL != lpData->lpCoilNew ) {
-    24ec:	04 80       	ldd	r0, Z+4	; 0x04
-    24ee:	f5 81       	ldd	r31, Z+5	; 0x05
-    24f0:	e0 2d       	mov	r30, r0
-    24f2:	30 97       	sbiw	r30, 0x00	; 0
-    24f4:	71 f0       	breq	.+28     	; 0x2512 <mbReceiveRequestForceSingleCoil+0x8a>
+    258a:	04 80       	ldd	r0, Z+4	; 0x04
+    258c:	f5 81       	ldd	r31, Z+5	; 0x05
+    258e:	e0 2d       	mov	r30, r0
+    2590:	30 97       	sbiw	r30, 0x00	; 0
+    2592:	71 f0       	breq	.+28     	; 0x25b0 <mbReceiveRequestForceSingleCoil+0x8a>
 							if( 0xff == rxBuffer[4] ) {
-    24f6:	8c 81       	ldd	r24, Y+4	; 0x04
-    24f8:	8f 3f       	cpi	r24, 0xFF	; 255
-    24fa:	11 f4       	brne	.+4      	; 0x2500 <mbReceiveRequestForceSingleCoil+0x78>
+    2594:	8c 81       	ldd	r24, Y+4	; 0x04
+    2596:	8f 3f       	cpi	r24, 0xFF	; 255
+    2598:	11 f4       	brne	.+4      	; 0x259e <mbReceiveRequestForceSingleCoil+0x78>
 								*lpData->lpCoilNew = 1;
-    24fc:	81 e0       	ldi	r24, 0x01	; 1
-    24fe:	80 83       	st	Z, r24
+    259a:	81 e0       	ldi	r24, 0x01	; 1
+    259c:	80 83       	st	Z, r24
 							}
 
 							if( 0x00 == rxBuffer[4] ) {
-    2500:	8c 81       	ldd	r24, Y+4	; 0x04
-    2502:	88 23       	and	r24, r24
-    2504:	31 f4       	brne	.+12     	; 0x2512 <mbReceiveRequestForceSingleCoil+0x8a>
+    259e:	8c 81       	ldd	r24, Y+4	; 0x04
+    25a0:	88 23       	and	r24, r24
+    25a2:	31 f4       	brne	.+12     	; 0x25b0 <mbReceiveRequestForceSingleCoil+0x8a>
 								*lpData->lpCoilNew = 0;
-    2506:	d8 01       	movw	r26, r16
-    2508:	14 96       	adiw	r26, 0x04	; 4
-    250a:	ed 91       	ld	r30, X+
-    250c:	fc 91       	ld	r31, X
-    250e:	15 97       	sbiw	r26, 0x05	; 5
-    2510:	10 82       	st	Z, r1
+    25a4:	d8 01       	movw	r26, r16
+    25a6:	14 96       	adiw	r26, 0x04	; 4
+    25a8:	ed 91       	ld	r30, X+
+    25aa:	fc 91       	ld	r31, X
+    25ac:	15 97       	sbiw	r26, 0x05	; 5
+    25ae:	10 82       	st	Z, r1
 							}
 						}
 
 						lpData->exception_code = 0;
-    2512:	f8 01       	movw	r30, r16
-    2514:	10 82       	st	Z, r1
-    2516:	81 e0       	ldi	r24, 0x01	; 1
-    2518:	07 c0       	rjmp	.+14     	; 0x2528 <mbReceiveRequestForceSingleCoil+0xa0>
+    25b0:	f8 01       	movw	r30, r16
+    25b2:	10 82       	st	Z, r1
+    25b4:	81 e0       	ldi	r24, 0x01	; 1
+    25b6:	07 c0       	rjmp	.+14     	; 0x25c6 <mbReceiveRequestForceSingleCoil+0xa0>
 			}
 
 			return 0;
 		}
 		
 		return mbCheckExceptionForResponse( &lpData->exception_code, 5, rxBuffer, len );
-    251a:	ca 01       	movw	r24, r20
-    251c:	65 e0       	ldi	r22, 0x05	; 5
-    251e:	ae 01       	movw	r20, r28
-    2520:	0e 94 e0 11 	call	0x23c0	; 0x23c0 <mbCheckExceptionForResponse>
-    2524:	01 c0       	rjmp	.+2      	; 0x2528 <mbReceiveRequestForceSingleCoil+0xa0>
-    2526:	80 e0       	ldi	r24, 0x00	; 0
+    25b8:	ca 01       	movw	r24, r20
+    25ba:	65 e0       	ldi	r22, 0x05	; 5
+    25bc:	ae 01       	movw	r20, r28
+    25be:	0e 94 e0 11 	call	0x23c0	; 0x23c0 <mbCheckExceptionForResponse>
+    25c2:	01 c0       	rjmp	.+2      	; 0x25c6 <mbReceiveRequestForceSingleCoil+0xa0>
+    25c4:	80 e0       	ldi	r24, 0x00	; 0
 	}
 
 	return 0;
 }
-    2528:	df 91       	pop	r29
-    252a:	cf 91       	pop	r28
-    252c:	1f 91       	pop	r17
-    252e:	0f 91       	pop	r16
-    2530:	08 95       	ret
+    25c6:	df 91       	pop	r29
+    25c8:	cf 91       	pop	r28
+    25ca:	1f 91       	pop	r17
+    25cc:	0f 91       	pop	r16
+    25ce:	08 95       	ret
 
-00002532 <mbReceiveRequestReadInputStatus>:
+000025d0 <mbReceiveRequestReadInputStatus>:
 
 	mbRtuAddCrcAndSendBuffer( txBuffer, 8 );
 }
 
 uint8_t mbReceiveRequestReadInputStatus( uint8_t *rxBuffer, uint8_t len, void *lpObject )
 {
-    2532:	ef 92       	push	r14
-    2534:	ff 92       	push	r15
-    2536:	0f 93       	push	r16
-    2538:	1f 93       	push	r17
-    253a:	cf 93       	push	r28
-    253c:	df 93       	push	r29
-    253e:	8c 01       	movw	r16, r24
-    2540:	26 2f       	mov	r18, r22
+    25d0:	ef 92       	push	r14
+    25d2:	ff 92       	push	r15
+    25d4:	0f 93       	push	r16
+    25d6:	1f 93       	push	r17
+    25d8:	cf 93       	push	r28
+    25da:	df 93       	push	r29
+    25dc:	8c 01       	movw	r16, r24
+    25de:	26 2f       	mov	r18, r22
 	LP_MB_MASTER_READ_INPUT_STATUS lpData = (LP_MB_MASTER_READ_INPUT_STATUS)lpObject;
-    2542:	ea 01       	movw	r28, r20
+    25e0:	ea 01       	movw	r28, r20
 
 	if( rxBuffer[0] == lpData->address ) {
-    2544:	fc 01       	movw	r30, r24
-    2546:	90 81       	ld	r25, Z
-    2548:	89 81       	ldd	r24, Y+1	; 0x01
-    254a:	98 17       	cp	r25, r24
-    254c:	09 f0       	breq	.+2      	; 0x2550 <mbReceiveRequestReadInputStatus+0x1e>
-    254e:	44 c0       	rjmp	.+136    	; 0x25d8 <mbReceiveRequestReadInputStatus+0xa6>
+    25e2:	fc 01       	movw	r30, r24
+    25e4:	90 81       	ld	r25, Z
+    25e6:	89 81       	ldd	r24, Y+1	; 0x01
+    25e8:	98 17       	cp	r25, r24
+    25ea:	09 f0       	breq	.+2      	; 0x25ee <mbReceiveRequestReadInputStatus+0x1e>
+    25ec:	44 c0       	rjmp	.+136    	; 0x2676 <mbReceiveRequestReadInputStatus+0xa6>
 
 		if( 2 == rxBuffer[1] ) {
-    2550:	81 81       	ldd	r24, Z+1	; 0x01
-    2552:	82 30       	cpi	r24, 0x02	; 2
-    2554:	d9 f5       	brne	.+118    	; 0x25cc <mbReceiveRequestReadInputStatus+0x9a>
+    25ee:	81 81       	ldd	r24, Z+1	; 0x01
+    25f0:	82 30       	cpi	r24, 0x02	; 2
+    25f2:	d9 f5       	brne	.+118    	; 0x266a <mbReceiveRequestReadInputStatus+0x9a>
 
 			if( len == 5 + lpData->byte_number ) {
-    2556:	8f 81       	ldd	r24, Y+7	; 0x07
-    2558:	68 2f       	mov	r22, r24
-    255a:	70 e0       	ldi	r23, 0x00	; 0
-    255c:	e2 2e       	mov	r14, r18
-    255e:	ff 24       	eor	r15, r15
-    2560:	cb 01       	movw	r24, r22
-    2562:	05 96       	adiw	r24, 0x05	; 5
-    2564:	e8 16       	cp	r14, r24
-    2566:	f9 06       	cpc	r15, r25
-    2568:	b9 f5       	brne	.+110    	; 0x25d8 <mbReceiveRequestReadInputStatus+0xa6>
+    25f4:	8f 81       	ldd	r24, Y+7	; 0x07
+    25f6:	68 2f       	mov	r22, r24
+    25f8:	70 e0       	ldi	r23, 0x00	; 0
+    25fa:	e2 2e       	mov	r14, r18
+    25fc:	ff 24       	eor	r15, r15
+    25fe:	cb 01       	movw	r24, r22
+    2600:	05 96       	adiw	r24, 0x05	; 5
+    2602:	e8 16       	cp	r14, r24
+    2604:	f9 06       	cpc	r15, r25
+    2606:	b9 f5       	brne	.+110    	; 0x2676 <mbReceiveRequestReadInputStatus+0xa6>
 				uint16_t check_sum;
 
 				check_sum = usMBCRC16( rxBuffer, 3 + lpData->byte_number );
-    256a:	6d 5f       	subi	r22, 0xFD	; 253
-    256c:	7f 4f       	sbci	r23, 0xFF	; 255
-    256e:	c8 01       	movw	r24, r16
-    2570:	0e 94 35 0d 	call	0x1a6a	; 0x1a6a <usMBCRC16>
-    2574:	ac 01       	movw	r20, r24
+    2608:	6d 5f       	subi	r22, 0xFD	; 253
+    260a:	7f 4f       	sbci	r23, 0xFF	; 255
+    260c:	c8 01       	movw	r24, r16
+    260e:	0e 94 35 0d 	call	0x1a6a	; 0x1a6a <usMBCRC16>
+    2612:	ac 01       	movw	r20, r24
 
 				if( ( ( 0xff & check_sum>>0 ) == rxBuffer[ len - 2 ] ) &&
-    2576:	9c 01       	movw	r18, r24
-    2578:	30 70       	andi	r19, 0x00	; 0
-    257a:	f8 01       	movw	r30, r16
-    257c:	ee 0d       	add	r30, r14
-    257e:	ff 1d       	adc	r31, r15
-    2580:	32 97       	sbiw	r30, 0x02	; 2
-    2582:	80 81       	ld	r24, Z
-    2584:	32 96       	adiw	r30, 0x02	; 2
-    2586:	90 e0       	ldi	r25, 0x00	; 0
-    2588:	28 17       	cp	r18, r24
-    258a:	39 07       	cpc	r19, r25
-    258c:	29 f5       	brne	.+74     	; 0x25d8 <mbReceiveRequestReadInputStatus+0xa6>
-    258e:	25 2f       	mov	r18, r21
-    2590:	33 27       	eor	r19, r19
-    2592:	31 97       	sbiw	r30, 0x01	; 1
-    2594:	80 81       	ld	r24, Z
-    2596:	90 e0       	ldi	r25, 0x00	; 0
-    2598:	28 17       	cp	r18, r24
-    259a:	39 07       	cpc	r19, r25
-    259c:	e9 f4       	brne	.+58     	; 0x25d8 <mbReceiveRequestReadInputStatus+0xa6>
+    2614:	9c 01       	movw	r18, r24
+    2616:	30 70       	andi	r19, 0x00	; 0
+    2618:	f8 01       	movw	r30, r16
+    261a:	ee 0d       	add	r30, r14
+    261c:	ff 1d       	adc	r31, r15
+    261e:	32 97       	sbiw	r30, 0x02	; 2
+    2620:	80 81       	ld	r24, Z
+    2622:	32 96       	adiw	r30, 0x02	; 2
+    2624:	90 e0       	ldi	r25, 0x00	; 0
+    2626:	28 17       	cp	r18, r24
+    2628:	39 07       	cpc	r19, r25
+    262a:	29 f5       	brne	.+74     	; 0x2676 <mbReceiveRequestReadInputStatus+0xa6>
+    262c:	25 2f       	mov	r18, r21
+    262e:	33 27       	eor	r19, r19
+    2630:	31 97       	sbiw	r30, 0x01	; 1
+    2632:	80 81       	ld	r24, Z
+    2634:	90 e0       	ldi	r25, 0x00	; 0
+    2636:	28 17       	cp	r18, r24
+    2638:	39 07       	cpc	r19, r25
+    263a:	e9 f4       	brne	.+58     	; 0x2676 <mbReceiveRequestReadInputStatus+0xa6>
 					( ( 0xff & check_sum>>8 ) == rxBuffer[ len - 1 ] )
 				) {
 					if( NULL != lpData->lpInputs ) {
-    259e:	8a 81       	ldd	r24, Y+2	; 0x02
-    25a0:	9b 81       	ldd	r25, Y+3	; 0x03
-    25a2:	89 2b       	or	r24, r25
-    25a4:	81 f0       	breq	.+32     	; 0x25c6 <mbReceiveRequestReadInputStatus+0x94>
-    25a6:	90 e0       	ldi	r25, 0x00	; 0
-    25a8:	0b c0       	rjmp	.+22     	; 0x25c0 <mbReceiveRequestReadInputStatus+0x8e>
+    263c:	8a 81       	ldd	r24, Y+2	; 0x02
+    263e:	9b 81       	ldd	r25, Y+3	; 0x03
+    2640:	89 2b       	or	r24, r25
+    2642:	81 f0       	breq	.+32     	; 0x2664 <mbReceiveRequestReadInputStatus+0x94>
+    2644:	90 e0       	ldi	r25, 0x00	; 0
+    2646:	0b c0       	rjmp	.+22     	; 0x265e <mbReceiveRequestReadInputStatus+0x8e>
 						uint8_t i;
 
 						for( i = 0; i < lpData->byte_number; i++ ) {
 							lpData->lpInputs[ i ] = rxBuffer[ 3 + i ];
-    25aa:	e9 2f       	mov	r30, r25
-    25ac:	f0 e0       	ldi	r31, 0x00	; 0
-    25ae:	aa 81       	ldd	r26, Y+2	; 0x02
-    25b0:	bb 81       	ldd	r27, Y+3	; 0x03
-    25b2:	ae 0f       	add	r26, r30
-    25b4:	bf 1f       	adc	r27, r31
-    25b6:	e0 0f       	add	r30, r16
-    25b8:	f1 1f       	adc	r31, r17
-    25ba:	83 81       	ldd	r24, Z+3	; 0x03
-    25bc:	8c 93       	st	X, r24
+    2648:	e9 2f       	mov	r30, r25
+    264a:	f0 e0       	ldi	r31, 0x00	; 0
+    264c:	aa 81       	ldd	r26, Y+2	; 0x02
+    264e:	bb 81       	ldd	r27, Y+3	; 0x03
+    2650:	ae 0f       	add	r26, r30
+    2652:	bf 1f       	adc	r27, r31
+    2654:	e0 0f       	add	r30, r16
+    2656:	f1 1f       	adc	r31, r17
+    2658:	83 81       	ldd	r24, Z+3	; 0x03
+    265a:	8c 93       	st	X, r24
 					( ( 0xff & check_sum>>8 ) == rxBuffer[ len - 1 ] )
 				) {
 					if( NULL != lpData->lpInputs ) {
 						uint8_t i;
 
 						for( i = 0; i < lpData->byte_number; i++ ) {
-    25be:	9f 5f       	subi	r25, 0xFF	; 255
-    25c0:	8f 81       	ldd	r24, Y+7	; 0x07
-    25c2:	98 17       	cp	r25, r24
-    25c4:	90 f3       	brcs	.-28     	; 0x25aa <mbReceiveRequestReadInputStatus+0x78>
+    265c:	9f 5f       	subi	r25, 0xFF	; 255
+    265e:	8f 81       	ldd	r24, Y+7	; 0x07
+    2660:	98 17       	cp	r25, r24
+    2662:	90 f3       	brcs	.-28     	; 0x2648 <mbReceiveRequestReadInputStatus+0x78>
 							lpData->lpInputs[ i ] = rxBuffer[ 3 + i ];
 						}
 					}
 
 					lpData->exception_code = 0;
-    25c6:	18 82       	st	Y, r1
-    25c8:	81 e0       	ldi	r24, 0x01	; 1
-    25ca:	07 c0       	rjmp	.+14     	; 0x25da <mbReceiveRequestReadInputStatus+0xa8>
+    2664:	18 82       	st	Y, r1
+    2666:	81 e0       	ldi	r24, 0x01	; 1
+    2668:	07 c0       	rjmp	.+14     	; 0x2678 <mbReceiveRequestReadInputStatus+0xa8>
 			}
 
 			return 0;
 		}
 
 		return mbCheckExceptionForResponse( &lpData->exception_code, 2, rxBuffer, len );
-    25cc:	ca 01       	movw	r24, r20
-    25ce:	62 e0       	ldi	r22, 0x02	; 2
-    25d0:	a8 01       	movw	r20, r16
-    25d2:	0e 94 e0 11 	call	0x23c0	; 0x23c0 <mbCheckExceptionForResponse>
-    25d6:	01 c0       	rjmp	.+2      	; 0x25da <mbReceiveRequestReadInputStatus+0xa8>
-    25d8:	80 e0       	ldi	r24, 0x00	; 0
+    266a:	ca 01       	movw	r24, r20
+    266c:	62 e0       	ldi	r22, 0x02	; 2
+    266e:	a8 01       	movw	r20, r16
+    2670:	0e 94 e0 11 	call	0x23c0	; 0x23c0 <mbCheckExceptionForResponse>
+    2674:	01 c0       	rjmp	.+2      	; 0x2678 <mbReceiveRequestReadInputStatus+0xa8>
+    2676:	80 e0       	ldi	r24, 0x00	; 0
 	}
 
 	return 0;
 }
-    25da:	df 91       	pop	r29
-    25dc:	cf 91       	pop	r28
-    25de:	1f 91       	pop	r17
-    25e0:	0f 91       	pop	r16
-    25e2:	ff 90       	pop	r15
-    25e4:	ef 90       	pop	r14
-    25e6:	08 95       	ret
+    2678:	df 91       	pop	r29
+    267a:	cf 91       	pop	r28
+    267c:	1f 91       	pop	r17
+    267e:	0f 91       	pop	r16
+    2680:	ff 90       	pop	r15
+    2682:	ef 90       	pop	r14
+    2684:	08 95       	ret
 
-000025e8 <mbRtuAddCrcAndSendBuffer>:
+00002686 <mbRtuAddCrcAndSendBuffer>:
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void mbRtuAddCrcAndSendBuffer( uint8_t *txBuffer, uint16_t len )
 {
-    25e8:	ef 92       	push	r14
-    25ea:	ff 92       	push	r15
-    25ec:	0f 93       	push	r16
-    25ee:	1f 93       	push	r17
-    25f0:	8c 01       	movw	r16, r24
-    25f2:	7b 01       	movw	r14, r22
+    2686:	ef 92       	push	r14
+    2688:	ff 92       	push	r15
+    268a:	0f 93       	push	r16
+    268c:	1f 93       	push	r17
+    268e:	8c 01       	movw	r16, r24
+    2690:	7b 01       	movw	r14, r22
 	uint16_t check_sum = usMBCRC16( txBuffer, len - 2 );
-    25f4:	62 50       	subi	r22, 0x02	; 2
-    25f6:	70 40       	sbci	r23, 0x00	; 0
-    25f8:	0e 94 35 0d 	call	0x1a6a	; 0x1a6a <usMBCRC16>
+    2692:	62 50       	subi	r22, 0x02	; 2
+    2694:	70 40       	sbci	r23, 0x00	; 0
+    2696:	0e 94 35 0d 	call	0x1a6a	; 0x1a6a <usMBCRC16>
 
 	txBuffer[ len - 2 ] = check_sum;
-    25fc:	f8 01       	movw	r30, r16
-    25fe:	ee 0d       	add	r30, r14
-    2600:	ff 1d       	adc	r31, r15
-    2602:	32 97       	sbiw	r30, 0x02	; 2
-    2604:	81 93       	st	Z+, r24
+    269a:	f8 01       	movw	r30, r16
+    269c:	ee 0d       	add	r30, r14
+    269e:	ff 1d       	adc	r31, r15
+    26a0:	32 97       	sbiw	r30, 0x02	; 2
+    26a2:	81 93       	st	Z+, r24
 	txBuffer[ len - 1 ] = check_sum>>8;
-    2606:	90 83       	st	Z, r25
+    26a4:	90 83       	st	Z, r25
 
 	rs485SendBuffer( txBuffer, len );
-    2608:	c8 01       	movw	r24, r16
-    260a:	6e 2d       	mov	r22, r14
-    260c:	0e 94 17 18 	call	0x302e	; 0x302e <rs485SendBuffer>
+    26a6:	c8 01       	movw	r24, r16
+    26a8:	6e 2d       	mov	r22, r14
+    26aa:	0e 94 66 18 	call	0x30cc	; 0x30cc <rs485SendBuffer>
 }
-    2610:	1f 91       	pop	r17
-    2612:	0f 91       	pop	r16
-    2614:	ff 90       	pop	r15
-    2616:	ef 90       	pop	r14
-    2618:	08 95       	ret
+    26ae:	1f 91       	pop	r17
+    26b0:	0f 91       	pop	r16
+    26b2:	ff 90       	pop	r15
+    26b4:	ef 90       	pop	r14
+    26b6:	08 95       	ret
 
-0000261a <mbSendRequestForceMultipleCoils>:
+000026b8 <mbSendRequestForceMultipleCoils>:
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Force Multiple Coils (FC=15)
 
 void mbSendRequestForceMultipleCoils( void *lpObject )
 {
-    261a:	df 93       	push	r29
-    261c:	cf 93       	push	r28
-    261e:	cd b7       	in	r28, 0x3d	; 61
-    2620:	de b7       	in	r29, 0x3e	; 62
-    2622:	c4 50       	subi	r28, 0x04	; 4
-    2624:	d1 40       	sbci	r29, 0x01	; 1
-    2626:	0f b6       	in	r0, 0x3f	; 63
-    2628:	f8 94       	cli
-    262a:	de bf       	out	0x3e, r29	; 62
-    262c:	0f be       	out	0x3f, r0	; 63
-    262e:	cd bf       	out	0x3d, r28	; 61
+    26b8:	df 93       	push	r29
+    26ba:	cf 93       	push	r28
+    26bc:	cd b7       	in	r28, 0x3d	; 61
+    26be:	de b7       	in	r29, 0x3e	; 62
+    26c0:	c4 50       	subi	r28, 0x04	; 4
+    26c2:	d1 40       	sbci	r29, 0x01	; 1
+    26c4:	0f b6       	in	r0, 0x3f	; 63
+    26c6:	f8 94       	cli
+    26c8:	de bf       	out	0x3e, r29	; 62
+    26ca:	0f be       	out	0x3f, r0	; 63
+    26cc:	cd bf       	out	0x3d, r28	; 61
 	LP_MB_MASTER_RW_COILS lpData = (LP_MB_MASTER_RW_COILS)lpObject;
-    2630:	dc 01       	movw	r26, r24
+    26ce:	dc 01       	movw	r26, r24
 	uint8_t txBuffer[260] = { 0 };
-    2632:	ae 01       	movw	r20, r28
-    2634:	4f 5f       	subi	r20, 0xFF	; 255
-    2636:	5f 4f       	sbci	r21, 0xFF	; 255
-    2638:	84 e0       	ldi	r24, 0x04	; 4
-    263a:	91 e0       	ldi	r25, 0x01	; 1
-    263c:	fa 01       	movw	r30, r20
-    263e:	9c 01       	movw	r18, r24
-    2640:	11 92       	st	Z+, r1
-    2642:	21 50       	subi	r18, 0x01	; 1
-    2644:	30 40       	sbci	r19, 0x00	; 0
-    2646:	e1 f7       	brne	.-8      	; 0x2640 <mbSendRequestForceMultipleCoils+0x26>
+    26d0:	ae 01       	movw	r20, r28
+    26d2:	4f 5f       	subi	r20, 0xFF	; 255
+    26d4:	5f 4f       	sbci	r21, 0xFF	; 255
+    26d6:	84 e0       	ldi	r24, 0x04	; 4
+    26d8:	91 e0       	ldi	r25, 0x01	; 1
+    26da:	fa 01       	movw	r30, r20
+    26dc:	9c 01       	movw	r18, r24
+    26de:	11 92       	st	Z+, r1
+    26e0:	21 50       	subi	r18, 0x01	; 1
+    26e2:	30 40       	sbci	r19, 0x00	; 0
+    26e4:	e1 f7       	brne	.-8      	; 0x26de <mbSendRequestForceMultipleCoils+0x26>
 	uint8_t i, byte_number;
 
 	lpData->exception_code = 0;
-    2648:	1c 92       	st	X, r1
+    26e6:	1c 92       	st	X, r1
 
 	txBuffer[0] = lpData->address;
-    264a:	11 96       	adiw	r26, 0x01	; 1
-    264c:	8c 91       	ld	r24, X
-    264e:	11 97       	sbiw	r26, 0x01	; 1
-    2650:	89 83       	std	Y+1, r24	; 0x01
+    26e8:	11 96       	adiw	r26, 0x01	; 1
+    26ea:	8c 91       	ld	r24, X
+    26ec:	11 97       	sbiw	r26, 0x01	; 1
+    26ee:	89 83       	std	Y+1, r24	; 0x01
 	txBuffer[1] = 15;
-    2652:	8f e0       	ldi	r24, 0x0F	; 15
-    2654:	8a 83       	std	Y+2, r24	; 0x02
+    26f0:	8f e0       	ldi	r24, 0x0F	; 15
+    26f2:	8a 83       	std	Y+2, r24	; 0x02
 
 	txBuffer[2] = lpData->coils_address>>8;
-    2656:	1b 82       	std	Y+3, r1	; 0x03
+    26f4:	1b 82       	std	Y+3, r1	; 0x03
 	txBuffer[3] = lpData->coils_address;
-    2658:	14 96       	adiw	r26, 0x04	; 4
-    265a:	8c 91       	ld	r24, X
-    265c:	14 97       	sbiw	r26, 0x04	; 4
-    265e:	8c 83       	std	Y+4, r24	; 0x04
+    26f6:	14 96       	adiw	r26, 0x04	; 4
+    26f8:	8c 91       	ld	r24, X
+    26fa:	14 97       	sbiw	r26, 0x04	; 4
+    26fc:	8c 83       	std	Y+4, r24	; 0x04
 
 	txBuffer[4] = lpData->coils_number>>8;
-    2660:	16 96       	adiw	r26, 0x06	; 6
-    2662:	8c 91       	ld	r24, X
-    2664:	16 97       	sbiw	r26, 0x06	; 6
-    2666:	8d 83       	std	Y+5, r24	; 0x05
+    26fe:	16 96       	adiw	r26, 0x06	; 6
+    2700:	8c 91       	ld	r24, X
+    2702:	16 97       	sbiw	r26, 0x06	; 6
+    2704:	8d 83       	std	Y+5, r24	; 0x05
 	txBuffer[5] = lpData->coils_number;
-    2668:	15 96       	adiw	r26, 0x05	; 5
-    266a:	8c 91       	ld	r24, X
-    266c:	15 97       	sbiw	r26, 0x05	; 5
-    266e:	8e 83       	std	Y+6, r24	; 0x06
+    2706:	15 96       	adiw	r26, 0x05	; 5
+    2708:	8c 91       	ld	r24, X
+    270a:	15 97       	sbiw	r26, 0x05	; 5
+    270c:	8e 83       	std	Y+6, r24	; 0x06
 
 	byte_number = lpData->coils_number / 8;
-    2670:	15 96       	adiw	r26, 0x05	; 5
-    2672:	2d 91       	ld	r18, X+
-    2674:	3c 91       	ld	r19, X
-    2676:	16 97       	sbiw	r26, 0x06	; 6
-    2678:	c9 01       	movw	r24, r18
-    267a:	53 e0       	ldi	r21, 0x03	; 3
-    267c:	96 95       	lsr	r25
-    267e:	87 95       	ror	r24
-    2680:	5a 95       	dec	r21
-    2682:	e1 f7       	brne	.-8      	; 0x267c <mbSendRequestForceMultipleCoils+0x62>
-    2684:	68 2f       	mov	r22, r24
+    270e:	15 96       	adiw	r26, 0x05	; 5
+    2710:	2d 91       	ld	r18, X+
+    2712:	3c 91       	ld	r19, X
+    2714:	16 97       	sbiw	r26, 0x06	; 6
+    2716:	c9 01       	movw	r24, r18
+    2718:	f3 e0       	ldi	r31, 0x03	; 3
+    271a:	96 95       	lsr	r25
+    271c:	87 95       	ror	r24
+    271e:	fa 95       	dec	r31
+    2720:	e1 f7       	brne	.-8      	; 0x271a <mbSendRequestForceMultipleCoils+0x62>
+    2722:	68 2f       	mov	r22, r24
 	if( 8 * byte_number < lpData->coils_number ) {
-    2686:	90 e0       	ldi	r25, 0x00	; 0
-    2688:	43 e0       	ldi	r20, 0x03	; 3
-    268a:	88 0f       	add	r24, r24
-    268c:	99 1f       	adc	r25, r25
-    268e:	4a 95       	dec	r20
-    2690:	e1 f7       	brne	.-8      	; 0x268a <mbSendRequestForceMultipleCoils+0x70>
-    2692:	82 17       	cp	r24, r18
-    2694:	93 07       	cpc	r25, r19
-    2696:	08 f4       	brcc	.+2      	; 0x269a <mbSendRequestForceMultipleCoils+0x80>
+    2724:	90 e0       	ldi	r25, 0x00	; 0
+    2726:	e3 e0       	ldi	r30, 0x03	; 3
+    2728:	88 0f       	add	r24, r24
+    272a:	99 1f       	adc	r25, r25
+    272c:	ea 95       	dec	r30
+    272e:	e1 f7       	brne	.-8      	; 0x2728 <mbSendRequestForceMultipleCoils+0x70>
+    2730:	82 17       	cp	r24, r18
+    2732:	93 07       	cpc	r25, r19
+    2734:	08 f4       	brcc	.+2      	; 0x2738 <mbSendRequestForceMultipleCoils+0x80>
 		++byte_number;
-    2698:	6f 5f       	subi	r22, 0xFF	; 255
+    2736:	6f 5f       	subi	r22, 0xFF	; 255
 	}
 
 	txBuffer[6] = byte_number;
-    269a:	6f 83       	std	Y+7, r22	; 0x07
-    269c:	ae 01       	movw	r20, r28
-    269e:	48 5f       	subi	r20, 0xF8	; 248
-    26a0:	5f 4f       	sbci	r21, 0xFF	; 255
-    26a2:	20 e0       	ldi	r18, 0x00	; 0
-    26a4:	30 e0       	ldi	r19, 0x00	; 0
-    26a6:	0c c0       	rjmp	.+24     	; 0x26c0 <mbSendRequestForceMultipleCoils+0xa6>
+    2738:	6f 83       	std	Y+7, r22	; 0x07
+    273a:	ae 01       	movw	r20, r28
+    273c:	48 5f       	subi	r20, 0xF8	; 248
+    273e:	5f 4f       	sbci	r21, 0xFF	; 255
+    2740:	20 e0       	ldi	r18, 0x00	; 0
+    2742:	30 e0       	ldi	r19, 0x00	; 0
+    2744:	0c c0       	rjmp	.+24     	; 0x275e <mbSendRequestForceMultipleCoils+0xa6>
 	for( i = 0; i < byte_number; i++ ) {
 		txBuffer[ i + 7 ] = lpData->lpCoils[i];
-    26a8:	12 96       	adiw	r26, 0x02	; 2
-    26aa:	ed 91       	ld	r30, X+
-    26ac:	fc 91       	ld	r31, X
-    26ae:	13 97       	sbiw	r26, 0x03	; 3
-    26b0:	e2 0f       	add	r30, r18
-    26b2:	f3 1f       	adc	r31, r19
-    26b4:	80 81       	ld	r24, Z
-    26b6:	fa 01       	movw	r30, r20
-    26b8:	81 93       	st	Z+, r24
-    26ba:	af 01       	movw	r20, r30
-    26bc:	2f 5f       	subi	r18, 0xFF	; 255
-    26be:	3f 4f       	sbci	r19, 0xFF	; 255
+    2746:	12 96       	adiw	r26, 0x02	; 2
+    2748:	ed 91       	ld	r30, X+
+    274a:	fc 91       	ld	r31, X
+    274c:	13 97       	sbiw	r26, 0x03	; 3
+    274e:	e2 0f       	add	r30, r18
+    2750:	f3 1f       	adc	r31, r19
+    2752:	80 81       	ld	r24, Z
+    2754:	fa 01       	movw	r30, r20
+    2756:	81 93       	st	Z+, r24
+    2758:	af 01       	movw	r20, r30
+    275a:	2f 5f       	subi	r18, 0xFF	; 255
+    275c:	3f 4f       	sbci	r19, 0xFF	; 255
 	if( 8 * byte_number < lpData->coils_number ) {
 		++byte_number;
 	}
 
 	txBuffer[6] = byte_number;
 	for( i = 0; i < byte_number; i++ ) {
-    26c0:	26 17       	cp	r18, r22
-    26c2:	90 f3       	brcs	.-28     	; 0x26a8 <mbSendRequestForceMultipleCoils+0x8e>
+    275e:	26 17       	cp	r18, r22
+    2760:	90 f3       	brcs	.-28     	; 0x2746 <mbSendRequestForceMultipleCoils+0x8e>
 		txBuffer[ i + 7 ] = lpData->lpCoils[i];
 	}
 
 	mbRtuAddCrcAndSendBuffer( txBuffer, 9 + byte_number );
-    26c4:	70 e0       	ldi	r23, 0x00	; 0
-    26c6:	67 5f       	subi	r22, 0xF7	; 247
-    26c8:	7f 4f       	sbci	r23, 0xFF	; 255
-    26ca:	ce 01       	movw	r24, r28
-    26cc:	01 96       	adiw	r24, 0x01	; 1
-    26ce:	0e 94 f4 12 	call	0x25e8	; 0x25e8 <mbRtuAddCrcAndSendBuffer>
+    2762:	70 e0       	ldi	r23, 0x00	; 0
+    2764:	67 5f       	subi	r22, 0xF7	; 247
+    2766:	7f 4f       	sbci	r23, 0xFF	; 255
+    2768:	ce 01       	movw	r24, r28
+    276a:	01 96       	adiw	r24, 0x01	; 1
+    276c:	0e 94 43 13 	call	0x2686	; 0x2686 <mbRtuAddCrcAndSendBuffer>
 }
-    26d2:	cc 5f       	subi	r28, 0xFC	; 252
-    26d4:	de 4f       	sbci	r29, 0xFE	; 254
-    26d6:	0f b6       	in	r0, 0x3f	; 63
-    26d8:	f8 94       	cli
-    26da:	de bf       	out	0x3e, r29	; 62
-    26dc:	0f be       	out	0x3f, r0	; 63
-    26de:	cd bf       	out	0x3d, r28	; 61
-    26e0:	cf 91       	pop	r28
-    26e2:	df 91       	pop	r29
-    26e4:	08 95       	ret
+    2770:	cc 5f       	subi	r28, 0xFC	; 252
+    2772:	de 4f       	sbci	r29, 0xFE	; 254
+    2774:	0f b6       	in	r0, 0x3f	; 63
+    2776:	f8 94       	cli
+    2778:	de bf       	out	0x3e, r29	; 62
+    277a:	0f be       	out	0x3f, r0	; 63
+    277c:	cd bf       	out	0x3d, r28	; 61
+    277e:	cf 91       	pop	r28
+    2780:	df 91       	pop	r29
+    2782:	08 95       	ret
 
-000026e6 <mbSendRequestPresetSingleRegister>:
+00002784 <mbSendRequestPresetSingleRegister>:
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Preset Single Register (FC=06)
 
 void mbSendRequestPresetSingleRegister( void *lpObject )
 {
-    26e6:	df 93       	push	r29
-    26e8:	cf 93       	push	r28
-    26ea:	cd b7       	in	r28, 0x3d	; 61
-    26ec:	de b7       	in	r29, 0x3e	; 62
-    26ee:	28 97       	sbiw	r28, 0x08	; 8
-    26f0:	0f b6       	in	r0, 0x3f	; 63
-    26f2:	f8 94       	cli
-    26f4:	de bf       	out	0x3e, r29	; 62
-    26f6:	0f be       	out	0x3f, r0	; 63
-    26f8:	cd bf       	out	0x3d, r28	; 61
+    2784:	df 93       	push	r29
+    2786:	cf 93       	push	r28
+    2788:	cd b7       	in	r28, 0x3d	; 61
+    278a:	de b7       	in	r29, 0x3e	; 62
+    278c:	28 97       	sbiw	r28, 0x08	; 8
+    278e:	0f b6       	in	r0, 0x3f	; 63
+    2790:	f8 94       	cli
+    2792:	de bf       	out	0x3e, r29	; 62
+    2794:	0f be       	out	0x3f, r0	; 63
+    2796:	cd bf       	out	0x3d, r28	; 61
 	LP_MB_MASTER_PRESET_SINGLE_REGISTER lpData = (LP_MB_MASTER_PRESET_SINGLE_REGISTER)lpObject;
-    26fa:	dc 01       	movw	r26, r24
+    2798:	dc 01       	movw	r26, r24
 	uint8_t txBuffer[8] = { 0 };
-    26fc:	9e 01       	movw	r18, r28
-    26fe:	2f 5f       	subi	r18, 0xFF	; 255
-    2700:	3f 4f       	sbci	r19, 0xFF	; 255
-    2702:	88 e0       	ldi	r24, 0x08	; 8
-    2704:	f9 01       	movw	r30, r18
-    2706:	11 92       	st	Z+, r1
-    2708:	8a 95       	dec	r24
-    270a:	e9 f7       	brne	.-6      	; 0x2706 <mbSendRequestPresetSingleRegister+0x20>
+    279a:	9e 01       	movw	r18, r28
+    279c:	2f 5f       	subi	r18, 0xFF	; 255
+    279e:	3f 4f       	sbci	r19, 0xFF	; 255
+    27a0:	88 e0       	ldi	r24, 0x08	; 8
+    27a2:	f9 01       	movw	r30, r18
+    27a4:	11 92       	st	Z+, r1
+    27a6:	8a 95       	dec	r24
+    27a8:	e9 f7       	brne	.-6      	; 0x27a4 <mbSendRequestPresetSingleRegister+0x20>
 
 	lpData->exception_code = 0;
-    270c:	1c 92       	st	X, r1
+    27aa:	1c 92       	st	X, r1
 
 	txBuffer[0] = lpData->address;
-    270e:	11 96       	adiw	r26, 0x01	; 1
-    2710:	8c 91       	ld	r24, X
-    2712:	11 97       	sbiw	r26, 0x01	; 1
-    2714:	89 83       	std	Y+1, r24	; 0x01
+    27ac:	11 96       	adiw	r26, 0x01	; 1
+    27ae:	8c 91       	ld	r24, X
+    27b0:	11 97       	sbiw	r26, 0x01	; 1
+    27b2:	89 83       	std	Y+1, r24	; 0x01
 	txBuffer[1] = 6;
-    2716:	86 e0       	ldi	r24, 0x06	; 6
-    2718:	8a 83       	std	Y+2, r24	; 0x02
+    27b4:	86 e0       	ldi	r24, 0x06	; 6
+    27b6:	8a 83       	std	Y+2, r24	; 0x02
 
 	txBuffer[2] = lpData->register_address>>8;
-    271a:	13 96       	adiw	r26, 0x03	; 3
-    271c:	8c 91       	ld	r24, X
-    271e:	13 97       	sbiw	r26, 0x03	; 3
-    2720:	8b 83       	std	Y+3, r24	; 0x03
+    27b8:	13 96       	adiw	r26, 0x03	; 3
+    27ba:	8c 91       	ld	r24, X
+    27bc:	13 97       	sbiw	r26, 0x03	; 3
+    27be:	8b 83       	std	Y+3, r24	; 0x03
 	txBuffer[3] = lpData->register_address;
-    2722:	12 96       	adiw	r26, 0x02	; 2
-    2724:	8c 91       	ld	r24, X
-    2726:	12 97       	sbiw	r26, 0x02	; 2
-    2728:	8c 83       	std	Y+4, r24	; 0x04
+    27c0:	12 96       	adiw	r26, 0x02	; 2
+    27c2:	8c 91       	ld	r24, X
+    27c4:	12 97       	sbiw	r26, 0x02	; 2
+    27c6:	8c 83       	std	Y+4, r24	; 0x04
 
 	txBuffer[4] = *lpData->lpRegister>>8;
-    272a:	14 96       	adiw	r26, 0x04	; 4
-    272c:	ed 91       	ld	r30, X+
-    272e:	fc 91       	ld	r31, X
-    2730:	15 97       	sbiw	r26, 0x05	; 5
-    2732:	81 81       	ldd	r24, Z+1	; 0x01
-    2734:	8d 83       	std	Y+5, r24	; 0x05
+    27c8:	14 96       	adiw	r26, 0x04	; 4
+    27ca:	ed 91       	ld	r30, X+
+    27cc:	fc 91       	ld	r31, X
+    27ce:	15 97       	sbiw	r26, 0x05	; 5
+    27d0:	81 81       	ldd	r24, Z+1	; 0x01
+    27d2:	8d 83       	std	Y+5, r24	; 0x05
 	txBuffer[5] = *lpData->lpRegister;
-    2736:	14 96       	adiw	r26, 0x04	; 4
-    2738:	ed 91       	ld	r30, X+
-    273a:	fc 91       	ld	r31, X
-    273c:	15 97       	sbiw	r26, 0x05	; 5
-    273e:	80 81       	ld	r24, Z
-    2740:	8e 83       	std	Y+6, r24	; 0x06
+    27d4:	14 96       	adiw	r26, 0x04	; 4
+    27d6:	ed 91       	ld	r30, X+
+    27d8:	fc 91       	ld	r31, X
+    27da:	15 97       	sbiw	r26, 0x05	; 5
+    27dc:	80 81       	ld	r24, Z
+    27de:	8e 83       	std	Y+6, r24	; 0x06
 
 	mbRtuAddCrcAndSendBuffer( txBuffer, 8 );
-    2742:	c9 01       	movw	r24, r18
-    2744:	68 e0       	ldi	r22, 0x08	; 8
-    2746:	70 e0       	ldi	r23, 0x00	; 0
-    2748:	0e 94 f4 12 	call	0x25e8	; 0x25e8 <mbRtuAddCrcAndSendBuffer>
+    27e0:	c9 01       	movw	r24, r18
+    27e2:	68 e0       	ldi	r22, 0x08	; 8
+    27e4:	70 e0       	ldi	r23, 0x00	; 0
+    27e6:	0e 94 43 13 	call	0x2686	; 0x2686 <mbRtuAddCrcAndSendBuffer>
 }
-    274c:	28 96       	adiw	r28, 0x08	; 8
-    274e:	0f b6       	in	r0, 0x3f	; 63
-    2750:	f8 94       	cli
-    2752:	de bf       	out	0x3e, r29	; 62
-    2754:	0f be       	out	0x3f, r0	; 63
-    2756:	cd bf       	out	0x3d, r28	; 61
-    2758:	cf 91       	pop	r28
-    275a:	df 91       	pop	r29
-    275c:	08 95       	ret
+    27ea:	28 96       	adiw	r28, 0x08	; 8
+    27ec:	0f b6       	in	r0, 0x3f	; 63
+    27ee:	f8 94       	cli
+    27f0:	de bf       	out	0x3e, r29	; 62
+    27f2:	0f be       	out	0x3f, r0	; 63
+    27f4:	cd bf       	out	0x3d, r28	; 61
+    27f6:	cf 91       	pop	r28
+    27f8:	df 91       	pop	r29
+    27fa:	08 95       	ret
 
-0000275e <mbSendRequestForceSingleCoil>:
+000027fc <mbSendRequestForceSingleCoil>:
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Force Single Coil (FC=05)
 
 void mbSendRequestForceSingleCoil( void *lpObject )
 {
-    275e:	df 93       	push	r29
-    2760:	cf 93       	push	r28
-    2762:	cd b7       	in	r28, 0x3d	; 61
-    2764:	de b7       	in	r29, 0x3e	; 62
-    2766:	28 97       	sbiw	r28, 0x08	; 8
-    2768:	0f b6       	in	r0, 0x3f	; 63
-    276a:	f8 94       	cli
-    276c:	de bf       	out	0x3e, r29	; 62
-    276e:	0f be       	out	0x3f, r0	; 63
-    2770:	cd bf       	out	0x3d, r28	; 61
+    27fc:	df 93       	push	r29
+    27fe:	cf 93       	push	r28
+    2800:	cd b7       	in	r28, 0x3d	; 61
+    2802:	de b7       	in	r29, 0x3e	; 62
+    2804:	28 97       	sbiw	r28, 0x08	; 8
+    2806:	0f b6       	in	r0, 0x3f	; 63
+    2808:	f8 94       	cli
+    280a:	de bf       	out	0x3e, r29	; 62
+    280c:	0f be       	out	0x3f, r0	; 63
+    280e:	cd bf       	out	0x3d, r28	; 61
 	LP_MB_MASTER_WRITE_SINGLE_COIL lpData = (LP_MB_MASTER_WRITE_SINGLE_COIL)lpObject;
-    2772:	fc 01       	movw	r30, r24
+    2810:	fc 01       	movw	r30, r24
 	uint8_t txBuffer[8] = { 0 };
-    2774:	9e 01       	movw	r18, r28
-    2776:	2f 5f       	subi	r18, 0xFF	; 255
-    2778:	3f 4f       	sbci	r19, 0xFF	; 255
-    277a:	88 e0       	ldi	r24, 0x08	; 8
-    277c:	d9 01       	movw	r26, r18
-    277e:	1d 92       	st	X+, r1
-    2780:	8a 95       	dec	r24
-    2782:	e9 f7       	brne	.-6      	; 0x277e <mbSendRequestForceSingleCoil+0x20>
+    2812:	9e 01       	movw	r18, r28
+    2814:	2f 5f       	subi	r18, 0xFF	; 255
+    2816:	3f 4f       	sbci	r19, 0xFF	; 255
+    2818:	88 e0       	ldi	r24, 0x08	; 8
+    281a:	d9 01       	movw	r26, r18
+    281c:	1d 92       	st	X+, r1
+    281e:	8a 95       	dec	r24
+    2820:	e9 f7       	brne	.-6      	; 0x281c <mbSendRequestForceSingleCoil+0x20>
 
 	lpData->exception_code = 0;
-    2784:	10 82       	st	Z, r1
+    2822:	10 82       	st	Z, r1
 
 	txBuffer[0] = lpData->address;
-    2786:	81 81       	ldd	r24, Z+1	; 0x01
-    2788:	89 83       	std	Y+1, r24	; 0x01
+    2824:	81 81       	ldd	r24, Z+1	; 0x01
+    2826:	89 83       	std	Y+1, r24	; 0x01
 	txBuffer[1] = 5;
-    278a:	85 e0       	ldi	r24, 0x05	; 5
-    278c:	8a 83       	std	Y+2, r24	; 0x02
+    2828:	85 e0       	ldi	r24, 0x05	; 5
+    282a:	8a 83       	std	Y+2, r24	; 0x02
 
 	txBuffer[2] = lpData->coil_address>>8;
-    278e:	1b 82       	std	Y+3, r1	; 0x03
+    282c:	1b 82       	std	Y+3, r1	; 0x03
 	txBuffer[3] = lpData->coil_address;
-    2790:	86 81       	ldd	r24, Z+6	; 0x06
-    2792:	8c 83       	std	Y+4, r24	; 0x04
+    282e:	86 81       	ldd	r24, Z+6	; 0x06
+    2830:	8c 83       	std	Y+4, r24	; 0x04
 
 	if( *lpData->lpCoil ) {
-    2794:	02 80       	ldd	r0, Z+2	; 0x02
-    2796:	f3 81       	ldd	r31, Z+3	; 0x03
-    2798:	e0 2d       	mov	r30, r0
-    279a:	80 81       	ld	r24, Z
-    279c:	88 23       	and	r24, r24
-    279e:	11 f0       	breq	.+4      	; 0x27a4 <mbSendRequestForceSingleCoil+0x46>
+    2832:	02 80       	ldd	r0, Z+2	; 0x02
+    2834:	f3 81       	ldd	r31, Z+3	; 0x03
+    2836:	e0 2d       	mov	r30, r0
+    2838:	80 81       	ld	r24, Z
+    283a:	88 23       	and	r24, r24
+    283c:	11 f0       	breq	.+4      	; 0x2842 <mbSendRequestForceSingleCoil+0x46>
 		txBuffer[4] = 0xff;
-    27a0:	8f ef       	ldi	r24, 0xFF	; 255
-    27a2:	8d 83       	std	Y+5, r24	; 0x05
+    283e:	8f ef       	ldi	r24, 0xFF	; 255
+    2840:	8d 83       	std	Y+5, r24	; 0x05
 	}
 
 	mbRtuAddCrcAndSendBuffer( txBuffer, 8 );
-    27a4:	ce 01       	movw	r24, r28
-    27a6:	01 96       	adiw	r24, 0x01	; 1
-    27a8:	68 e0       	ldi	r22, 0x08	; 8
-    27aa:	70 e0       	ldi	r23, 0x00	; 0
-    27ac:	0e 94 f4 12 	call	0x25e8	; 0x25e8 <mbRtuAddCrcAndSendBuffer>
+    2842:	ce 01       	movw	r24, r28
+    2844:	01 96       	adiw	r24, 0x01	; 1
+    2846:	68 e0       	ldi	r22, 0x08	; 8
+    2848:	70 e0       	ldi	r23, 0x00	; 0
+    284a:	0e 94 43 13 	call	0x2686	; 0x2686 <mbRtuAddCrcAndSendBuffer>
 }
-    27b0:	28 96       	adiw	r28, 0x08	; 8
-    27b2:	0f b6       	in	r0, 0x3f	; 63
-    27b4:	f8 94       	cli
-    27b6:	de bf       	out	0x3e, r29	; 62
-    27b8:	0f be       	out	0x3f, r0	; 63
-    27ba:	cd bf       	out	0x3d, r28	; 61
-    27bc:	cf 91       	pop	r28
-    27be:	df 91       	pop	r29
-    27c0:	08 95       	ret
+    284e:	28 96       	adiw	r28, 0x08	; 8
+    2850:	0f b6       	in	r0, 0x3f	; 63
+    2852:	f8 94       	cli
+    2854:	de bf       	out	0x3e, r29	; 62
+    2856:	0f be       	out	0x3f, r0	; 63
+    2858:	cd bf       	out	0x3d, r28	; 61
+    285a:	cf 91       	pop	r28
+    285c:	df 91       	pop	r29
+    285e:	08 95       	ret
 
-000027c2 <mbSendRequestReadInputStatus>:
+00002860 <mbSendRequestReadInputStatus>:
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Read Input Status (FC=02)
 
 void mbSendRequestReadInputStatus( void *lpObject )
 {
-    27c2:	df 93       	push	r29
-    27c4:	cf 93       	push	r28
-    27c6:	cd b7       	in	r28, 0x3d	; 61
-    27c8:	de b7       	in	r29, 0x3e	; 62
-    27ca:	28 97       	sbiw	r28, 0x08	; 8
-    27cc:	0f b6       	in	r0, 0x3f	; 63
-    27ce:	f8 94       	cli
-    27d0:	de bf       	out	0x3e, r29	; 62
-    27d2:	0f be       	out	0x3f, r0	; 63
-    27d4:	cd bf       	out	0x3d, r28	; 61
+    2860:	df 93       	push	r29
+    2862:	cf 93       	push	r28
+    2864:	cd b7       	in	r28, 0x3d	; 61
+    2866:	de b7       	in	r29, 0x3e	; 62
+    2868:	28 97       	sbiw	r28, 0x08	; 8
+    286a:	0f b6       	in	r0, 0x3f	; 63
+    286c:	f8 94       	cli
+    286e:	de bf       	out	0x3e, r29	; 62
+    2870:	0f be       	out	0x3f, r0	; 63
+    2872:	cd bf       	out	0x3d, r28	; 61
 	LP_MB_MASTER_READ_INPUT_STATUS lpData = (LP_MB_MASTER_READ_INPUT_STATUS)lpObject;
-    27d6:	dc 01       	movw	r26, r24
+    2874:	dc 01       	movw	r26, r24
 	uint8_t txBuffer[8] = { 0 };
-    27d8:	9e 01       	movw	r18, r28
-    27da:	2f 5f       	subi	r18, 0xFF	; 255
-    27dc:	3f 4f       	sbci	r19, 0xFF	; 255
-    27de:	88 e0       	ldi	r24, 0x08	; 8
-    27e0:	f9 01       	movw	r30, r18
-    27e2:	11 92       	st	Z+, r1
-    27e4:	8a 95       	dec	r24
-    27e6:	e9 f7       	brne	.-6      	; 0x27e2 <mbSendRequestReadInputStatus+0x20>
+    2876:	9e 01       	movw	r18, r28
+    2878:	2f 5f       	subi	r18, 0xFF	; 255
+    287a:	3f 4f       	sbci	r19, 0xFF	; 255
+    287c:	88 e0       	ldi	r24, 0x08	; 8
+    287e:	f9 01       	movw	r30, r18
+    2880:	11 92       	st	Z+, r1
+    2882:	8a 95       	dec	r24
+    2884:	e9 f7       	brne	.-6      	; 0x2880 <mbSendRequestReadInputStatus+0x20>
 
 	lpData->exception_code = 0;
-    27e8:	1c 92       	st	X, r1
+    2886:	1c 92       	st	X, r1
 
 	lpData->byte_number = lpData->inputs_number / 8;
-    27ea:	15 96       	adiw	r26, 0x05	; 5
-    27ec:	2d 91       	ld	r18, X+
-    27ee:	3c 91       	ld	r19, X
-    27f0:	16 97       	sbiw	r26, 0x06	; 6
-    27f2:	c9 01       	movw	r24, r18
-    27f4:	73 e0       	ldi	r23, 0x03	; 3
-    27f6:	96 95       	lsr	r25
-    27f8:	87 95       	ror	r24
-    27fa:	7a 95       	dec	r23
-    27fc:	e1 f7       	brne	.-8      	; 0x27f6 <mbSendRequestReadInputStatus+0x34>
-    27fe:	48 2f       	mov	r20, r24
-    2800:	17 96       	adiw	r26, 0x07	; 7
-    2802:	8c 93       	st	X, r24
-    2804:	17 97       	sbiw	r26, 0x07	; 7
+    2888:	15 96       	adiw	r26, 0x05	; 5
+    288a:	2d 91       	ld	r18, X+
+    288c:	3c 91       	ld	r19, X
+    288e:	16 97       	sbiw	r26, 0x06	; 6
+    2890:	c9 01       	movw	r24, r18
+    2892:	63 e0       	ldi	r22, 0x03	; 3
+    2894:	96 95       	lsr	r25
+    2896:	87 95       	ror	r24
+    2898:	6a 95       	dec	r22
+    289a:	e1 f7       	brne	.-8      	; 0x2894 <mbSendRequestReadInputStatus+0x34>
+    289c:	48 2f       	mov	r20, r24
+    289e:	17 96       	adiw	r26, 0x07	; 7
+    28a0:	8c 93       	st	X, r24
+    28a2:	17 97       	sbiw	r26, 0x07	; 7
 	if( 8 * lpData->byte_number < lpData->inputs_number ) {
-    2806:	90 e0       	ldi	r25, 0x00	; 0
-    2808:	63 e0       	ldi	r22, 0x03	; 3
-    280a:	88 0f       	add	r24, r24
-    280c:	99 1f       	adc	r25, r25
-    280e:	6a 95       	dec	r22
-    2810:	e1 f7       	brne	.-8      	; 0x280a <mbSendRequestReadInputStatus+0x48>
-    2812:	82 17       	cp	r24, r18
-    2814:	93 07       	cpc	r25, r19
-    2816:	20 f4       	brcc	.+8      	; 0x2820 <mbSendRequestReadInputStatus+0x5e>
+    28a4:	90 e0       	ldi	r25, 0x00	; 0
+    28a6:	53 e0       	ldi	r21, 0x03	; 3
+    28a8:	88 0f       	add	r24, r24
+    28aa:	99 1f       	adc	r25, r25
+    28ac:	5a 95       	dec	r21
+    28ae:	e1 f7       	brne	.-8      	; 0x28a8 <mbSendRequestReadInputStatus+0x48>
+    28b0:	82 17       	cp	r24, r18
+    28b2:	93 07       	cpc	r25, r19
+    28b4:	20 f4       	brcc	.+8      	; 0x28be <mbSendRequestReadInputStatus+0x5e>
 		++lpData->byte_number;
-    2818:	4f 5f       	subi	r20, 0xFF	; 255
-    281a:	17 96       	adiw	r26, 0x07	; 7
-    281c:	4c 93       	st	X, r20
-    281e:	17 97       	sbiw	r26, 0x07	; 7
+    28b6:	4f 5f       	subi	r20, 0xFF	; 255
+    28b8:	17 96       	adiw	r26, 0x07	; 7
+    28ba:	4c 93       	st	X, r20
+    28bc:	17 97       	sbiw	r26, 0x07	; 7
 	}
 
 	txBuffer[0] = lpData->address;
-    2820:	11 96       	adiw	r26, 0x01	; 1
-    2822:	8c 91       	ld	r24, X
-    2824:	11 97       	sbiw	r26, 0x01	; 1
-    2826:	89 83       	std	Y+1, r24	; 0x01
+    28be:	11 96       	adiw	r26, 0x01	; 1
+    28c0:	8c 91       	ld	r24, X
+    28c2:	11 97       	sbiw	r26, 0x01	; 1
+    28c4:	89 83       	std	Y+1, r24	; 0x01
 	txBuffer[1] = 2;
-    2828:	82 e0       	ldi	r24, 0x02	; 2
-    282a:	8a 83       	std	Y+2, r24	; 0x02
+    28c6:	82 e0       	ldi	r24, 0x02	; 2
+    28c8:	8a 83       	std	Y+2, r24	; 0x02
 
 	txBuffer[2] = lpData->inputs_address>>8;
-    282c:	1b 82       	std	Y+3, r1	; 0x03
+    28ca:	1b 82       	std	Y+3, r1	; 0x03
 	txBuffer[3] = lpData->inputs_address;
-    282e:	14 96       	adiw	r26, 0x04	; 4
-    2830:	8c 91       	ld	r24, X
-    2832:	14 97       	sbiw	r26, 0x04	; 4
-    2834:	8c 83       	std	Y+4, r24	; 0x04
+    28cc:	14 96       	adiw	r26, 0x04	; 4
+    28ce:	8c 91       	ld	r24, X
+    28d0:	14 97       	sbiw	r26, 0x04	; 4
+    28d2:	8c 83       	std	Y+4, r24	; 0x04
 
 	txBuffer[4] = lpData->inputs_number>>8;
-    2836:	16 96       	adiw	r26, 0x06	; 6
-    2838:	8c 91       	ld	r24, X
-    283a:	16 97       	sbiw	r26, 0x06	; 6
-    283c:	8d 83       	std	Y+5, r24	; 0x05
+    28d4:	16 96       	adiw	r26, 0x06	; 6
+    28d6:	8c 91       	ld	r24, X
+    28d8:	16 97       	sbiw	r26, 0x06	; 6
+    28da:	8d 83       	std	Y+5, r24	; 0x05
 	txBuffer[5] = lpData->inputs_number;
-    283e:	15 96       	adiw	r26, 0x05	; 5
-    2840:	8c 91       	ld	r24, X
-    2842:	8e 83       	std	Y+6, r24	; 0x06
+    28dc:	15 96       	adiw	r26, 0x05	; 5
+    28de:	8c 91       	ld	r24, X
+    28e0:	8e 83       	std	Y+6, r24	; 0x06
 
 	mbRtuAddCrcAndSendBuffer( txBuffer, 8 );
-    2844:	ce 01       	movw	r24, r28
-    2846:	01 96       	adiw	r24, 0x01	; 1
-    2848:	68 e0       	ldi	r22, 0x08	; 8
-    284a:	70 e0       	ldi	r23, 0x00	; 0
-    284c:	0e 94 f4 12 	call	0x25e8	; 0x25e8 <mbRtuAddCrcAndSendBuffer>
+    28e2:	ce 01       	movw	r24, r28
+    28e4:	01 96       	adiw	r24, 0x01	; 1
+    28e6:	68 e0       	ldi	r22, 0x08	; 8
+    28e8:	70 e0       	ldi	r23, 0x00	; 0
+    28ea:	0e 94 43 13 	call	0x2686	; 0x2686 <mbRtuAddCrcAndSendBuffer>
 }
-    2850:	28 96       	adiw	r28, 0x08	; 8
-    2852:	0f b6       	in	r0, 0x3f	; 63
-    2854:	f8 94       	cli
-    2856:	de bf       	out	0x3e, r29	; 62
-    2858:	0f be       	out	0x3f, r0	; 63
-    285a:	cd bf       	out	0x3d, r28	; 61
-    285c:	cf 91       	pop	r28
-    285e:	df 91       	pop	r29
-    2860:	08 95       	ret
+    28ee:	28 96       	adiw	r28, 0x08	; 8
+    28f0:	0f b6       	in	r0, 0x3f	; 63
+    28f2:	f8 94       	cli
+    28f4:	de bf       	out	0x3e, r29	; 62
+    28f6:	0f be       	out	0x3f, r0	; 63
+    28f8:	cd bf       	out	0x3d, r28	; 61
+    28fa:	cf 91       	pop	r28
+    28fc:	df 91       	pop	r29
+    28fe:	08 95       	ret
 
-00002862 <rs485Task>:
+00002900 <rs485Task>:
 
 volatile static uint8_t usRS485PortAsMaster = 0;
 
 void rs485Task( void )
 {
 	if( !ucChannelCount || !usRS485PortAsMaster ) {
-    2862:	80 91 a2 03 	lds	r24, 0x03A2
-    2866:	88 23       	and	r24, r24
-    2868:	09 f4       	brne	.+2      	; 0x286c <rs485Task+0xa>
-    286a:	68 c1       	rjmp	.+720    	; 0x2b3c <rs485Task+0x2da>
-    286c:	80 91 a1 03 	lds	r24, 0x03A1
-    2870:	88 23       	and	r24, r24
-    2872:	09 f4       	brne	.+2      	; 0x2876 <rs485Task+0x14>
-    2874:	63 c1       	rjmp	.+710    	; 0x2b3c <rs485Task+0x2da>
+    2900:	80 91 a2 03 	lds	r24, 0x03A2
+    2904:	88 23       	and	r24, r24
+    2906:	09 f4       	brne	.+2      	; 0x290a <rs485Task+0xa>
+    2908:	68 c1       	rjmp	.+720    	; 0x2bda <rs485Task+0x2da>
+    290a:	80 91 a1 03 	lds	r24, 0x03A1
+    290e:	88 23       	and	r24, r24
+    2910:	09 f4       	brne	.+2      	; 0x2914 <rs485Task+0x14>
+    2912:	63 c1       	rjmp	.+710    	; 0x2bda <rs485Task+0x2da>
 		return;
 	}
 
 	if( !uiSysRS485SendRequestTimer ) {
-    2876:	80 91 34 01 	lds	r24, 0x0134
-    287a:	90 91 35 01 	lds	r25, 0x0135
-    287e:	89 2b       	or	r24, r25
-    2880:	09 f0       	breq	.+2      	; 0x2884 <rs485Task+0x22>
-    2882:	88 c0       	rjmp	.+272    	; 0x2994 <rs485Task+0x132>
+    2914:	80 91 34 01 	lds	r24, 0x0134
+    2918:	90 91 35 01 	lds	r25, 0x0135
+    291c:	89 2b       	or	r24, r25
+    291e:	09 f0       	breq	.+2      	; 0x2922 <rs485Task+0x22>
+    2920:	88 c0       	rjmp	.+272    	; 0x2a32 <rs485Task+0x132>
 
 		ucRS485ChannelIndex = ucRS485ChannelCounter;
-    2884:	80 91 a5 03 	lds	r24, 0x03A5
-    2888:	80 93 a6 03 	sts	0x03A6, r24
+    2922:	80 91 a5 03 	lds	r24, 0x03A5
+    2926:	80 93 a6 03 	sts	0x03A6, r24
 		if( ++ucRS485ChannelCounter >= ucChannelCount ) {
-    288c:	80 91 a5 03 	lds	r24, 0x03A5
-    2890:	8f 5f       	subi	r24, 0xFF	; 255
-    2892:	80 93 a5 03 	sts	0x03A5, r24
-    2896:	90 91 a5 03 	lds	r25, 0x03A5
-    289a:	80 91 a2 03 	lds	r24, 0x03A2
-    289e:	98 17       	cp	r25, r24
-    28a0:	40 f0       	brcs	.+16     	; 0x28b2 <rs485Task+0x50>
+    292a:	80 91 a5 03 	lds	r24, 0x03A5
+    292e:	8f 5f       	subi	r24, 0xFF	; 255
+    2930:	80 93 a5 03 	sts	0x03A5, r24
+    2934:	90 91 a5 03 	lds	r25, 0x03A5
+    2938:	80 91 a2 03 	lds	r24, 0x03A2
+    293c:	98 17       	cp	r25, r24
+    293e:	40 f0       	brcs	.+16     	; 0x2950 <rs485Task+0x50>
 			ucRS485ChannelCounter = 0;
-    28a2:	10 92 a5 03 	sts	0x03A5, r1
+    2940:	10 92 a5 03 	sts	0x03A5, r1
 			PORTG ^= MCU_PG1_bm;
-    28a6:	80 91 65 00 	lds	r24, 0x0065
-    28aa:	92 e0       	ldi	r25, 0x02	; 2
-    28ac:	89 27       	eor	r24, r25
-    28ae:	80 93 65 00 	sts	0x0065, r24
+    2944:	80 91 65 00 	lds	r24, 0x0065
+    2948:	92 e0       	ldi	r25, 0x02	; 2
+    294a:	89 27       	eor	r24, r25
+    294c:	80 93 65 00 	sts	0x0065, r24
 		}
 
 		if( NULL == lpArrRS485Channel[ ucRS485ChannelIndex ] ) {
-    28b2:	e0 91 a6 03 	lds	r30, 0x03A6
-    28b6:	f0 e0       	ldi	r31, 0x00	; 0
-    28b8:	ee 0f       	add	r30, r30
-    28ba:	ff 1f       	adc	r31, r31
-    28bc:	ec 54       	subi	r30, 0x4C	; 76
-    28be:	fb 4f       	sbci	r31, 0xFB	; 251
-    28c0:	80 81       	ld	r24, Z
-    28c2:	91 81       	ldd	r25, Z+1	; 0x01
-    28c4:	89 2b       	or	r24, r25
-    28c6:	09 f4       	brne	.+2      	; 0x28ca <rs485Task+0x68>
-    28c8:	39 c1       	rjmp	.+626    	; 0x2b3c <rs485Task+0x2da>
+    2950:	e0 91 a6 03 	lds	r30, 0x03A6
+    2954:	f0 e0       	ldi	r31, 0x00	; 0
+    2956:	ee 0f       	add	r30, r30
+    2958:	ff 1f       	adc	r31, r31
+    295a:	ec 54       	subi	r30, 0x4C	; 76
+    295c:	fb 4f       	sbci	r31, 0xFB	; 251
+    295e:	80 81       	ld	r24, Z
+    2960:	91 81       	ldd	r25, Z+1	; 0x01
+    2962:	89 2b       	or	r24, r25
+    2964:	09 f4       	brne	.+2      	; 0x2968 <rs485Task+0x68>
+    2966:	39 c1       	rjmp	.+626    	; 0x2bda <rs485Task+0x2da>
 
 		/*
 			На всеки xx мс. се изпраща запитване към следващото устройство
 			свързано към RS485 линията.
 		*/
 		lpArrRS485Channel[ ucRS485ChannelIndex ]->ucFlag = 0;
-    28ca:	e0 91 a6 03 	lds	r30, 0x03A6
-    28ce:	f0 e0       	ldi	r31, 0x00	; 0
-    28d0:	ee 0f       	add	r30, r30
-    28d2:	ff 1f       	adc	r31, r31
-    28d4:	ec 54       	subi	r30, 0x4C	; 76
-    28d6:	fb 4f       	sbci	r31, 0xFB	; 251
-    28d8:	01 90       	ld	r0, Z+
-    28da:	f0 81       	ld	r31, Z
-    28dc:	e0 2d       	mov	r30, r0
-    28de:	15 82       	std	Z+5, r1	; 0x05
+    2968:	e0 91 a6 03 	lds	r30, 0x03A6
+    296c:	f0 e0       	ldi	r31, 0x00	; 0
+    296e:	ee 0f       	add	r30, r30
+    2970:	ff 1f       	adc	r31, r31
+    2972:	ec 54       	subi	r30, 0x4C	; 76
+    2974:	fb 4f       	sbci	r31, 0xFB	; 251
+    2976:	01 90       	ld	r0, Z+
+    2978:	f0 81       	ld	r31, Z
+    297a:	e0 2d       	mov	r30, r0
+    297c:	15 82       	std	Z+5, r1	; 0x05
 		lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485SetUartSetings( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpData );
-    28e0:	e0 91 a6 03 	lds	r30, 0x03A6
-    28e4:	f0 e0       	ldi	r31, 0x00	; 0
-    28e6:	ee 0f       	add	r30, r30
-    28e8:	ff 1f       	adc	r31, r31
-    28ea:	ec 54       	subi	r30, 0x4C	; 76
-    28ec:	fb 4f       	sbci	r31, 0xFB	; 251
-    28ee:	a0 81       	ld	r26, Z
-    28f0:	b1 81       	ldd	r27, Z+1	; 0x01
-    28f2:	e0 91 a6 03 	lds	r30, 0x03A6
-    28f6:	f0 e0       	ldi	r31, 0x00	; 0
-    28f8:	ee 0f       	add	r30, r30
-    28fa:	ff 1f       	adc	r31, r31
-    28fc:	ec 54       	subi	r30, 0x4C	; 76
-    28fe:	fb 4f       	sbci	r31, 0xFB	; 251
-    2900:	01 90       	ld	r0, Z+
-    2902:	f0 81       	ld	r31, Z
-    2904:	e0 2d       	mov	r30, r0
-    2906:	1b 96       	adiw	r26, 0x0b	; 11
-    2908:	2d 91       	ld	r18, X+
-    290a:	3c 91       	ld	r19, X
-    290c:	1c 97       	sbiw	r26, 0x0c	; 12
-    290e:	80 81       	ld	r24, Z
-    2910:	91 81       	ldd	r25, Z+1	; 0x01
-    2912:	f9 01       	movw	r30, r18
-    2914:	09 95       	icall
+    297e:	e0 91 a6 03 	lds	r30, 0x03A6
+    2982:	f0 e0       	ldi	r31, 0x00	; 0
+    2984:	ee 0f       	add	r30, r30
+    2986:	ff 1f       	adc	r31, r31
+    2988:	ec 54       	subi	r30, 0x4C	; 76
+    298a:	fb 4f       	sbci	r31, 0xFB	; 251
+    298c:	a0 81       	ld	r26, Z
+    298e:	b1 81       	ldd	r27, Z+1	; 0x01
+    2990:	e0 91 a6 03 	lds	r30, 0x03A6
+    2994:	f0 e0       	ldi	r31, 0x00	; 0
+    2996:	ee 0f       	add	r30, r30
+    2998:	ff 1f       	adc	r31, r31
+    299a:	ec 54       	subi	r30, 0x4C	; 76
+    299c:	fb 4f       	sbci	r31, 0xFB	; 251
+    299e:	01 90       	ld	r0, Z+
+    29a0:	f0 81       	ld	r31, Z
+    29a2:	e0 2d       	mov	r30, r0
+    29a4:	1b 96       	adiw	r26, 0x0b	; 11
+    29a6:	2d 91       	ld	r18, X+
+    29a8:	3c 91       	ld	r19, X
+    29aa:	1c 97       	sbiw	r26, 0x0c	; 12
+    29ac:	80 81       	ld	r24, Z
+    29ae:	91 81       	ldd	r25, Z+1	; 0x01
+    29b0:	f9 01       	movw	r30, r18
+    29b2:	09 95       	icall
 		lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485SendRequestFunc( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpData );
-    2916:	e0 91 a6 03 	lds	r30, 0x03A6
-    291a:	f0 e0       	ldi	r31, 0x00	; 0
-    291c:	ee 0f       	add	r30, r30
-    291e:	ff 1f       	adc	r31, r31
-    2920:	ec 54       	subi	r30, 0x4C	; 76
-    2922:	fb 4f       	sbci	r31, 0xFB	; 251
-    2924:	a0 81       	ld	r26, Z
-    2926:	b1 81       	ldd	r27, Z+1	; 0x01
-    2928:	e0 91 a6 03 	lds	r30, 0x03A6
-    292c:	f0 e0       	ldi	r31, 0x00	; 0
-    292e:	ee 0f       	add	r30, r30
-    2930:	ff 1f       	adc	r31, r31
-    2932:	ec 54       	subi	r30, 0x4C	; 76
-    2934:	fb 4f       	sbci	r31, 0xFB	; 251
-    2936:	01 90       	ld	r0, Z+
-    2938:	f0 81       	ld	r31, Z
-    293a:	e0 2d       	mov	r30, r0
-    293c:	1f 96       	adiw	r26, 0x0f	; 15
-    293e:	2d 91       	ld	r18, X+
-    2940:	3c 91       	ld	r19, X
-    2942:	50 97       	sbiw	r26, 0x10	; 16
-    2944:	80 81       	ld	r24, Z
-    2946:	91 81       	ldd	r25, Z+1	; 0x01
-    2948:	f9 01       	movw	r30, r18
-    294a:	09 95       	icall
+    29b4:	e0 91 a6 03 	lds	r30, 0x03A6
+    29b8:	f0 e0       	ldi	r31, 0x00	; 0
+    29ba:	ee 0f       	add	r30, r30
+    29bc:	ff 1f       	adc	r31, r31
+    29be:	ec 54       	subi	r30, 0x4C	; 76
+    29c0:	fb 4f       	sbci	r31, 0xFB	; 251
+    29c2:	a0 81       	ld	r26, Z
+    29c4:	b1 81       	ldd	r27, Z+1	; 0x01
+    29c6:	e0 91 a6 03 	lds	r30, 0x03A6
+    29ca:	f0 e0       	ldi	r31, 0x00	; 0
+    29cc:	ee 0f       	add	r30, r30
+    29ce:	ff 1f       	adc	r31, r31
+    29d0:	ec 54       	subi	r30, 0x4C	; 76
+    29d2:	fb 4f       	sbci	r31, 0xFB	; 251
+    29d4:	01 90       	ld	r0, Z+
+    29d6:	f0 81       	ld	r31, Z
+    29d8:	e0 2d       	mov	r30, r0
+    29da:	1f 96       	adiw	r26, 0x0f	; 15
+    29dc:	2d 91       	ld	r18, X+
+    29de:	3c 91       	ld	r19, X
+    29e0:	50 97       	sbiw	r26, 0x10	; 16
+    29e2:	80 81       	ld	r24, Z
+    29e4:	91 81       	ldd	r25, Z+1	; 0x01
+    29e6:	f9 01       	movw	r30, r18
+    29e8:	09 95       	icall
 
 		// Пауза за следващото запитване + Timeout
 		uiSysRS485ReciverTimer		= lpArrRS485Channel[ ucRS485ChannelIndex ]->msReadTimeOut;
-    294c:	e0 91 a6 03 	lds	r30, 0x03A6
-    2950:	f0 e0       	ldi	r31, 0x00	; 0
-    2952:	ee 0f       	add	r30, r30
-    2954:	ff 1f       	adc	r31, r31
-    2956:	ec 54       	subi	r30, 0x4C	; 76
-    2958:	fb 4f       	sbci	r31, 0xFB	; 251
-    295a:	01 90       	ld	r0, Z+
-    295c:	f0 81       	ld	r31, Z
-    295e:	e0 2d       	mov	r30, r0
-    2960:	82 81       	ldd	r24, Z+2	; 0x02
-    2962:	93 81       	ldd	r25, Z+3	; 0x03
-    2964:	90 93 a4 03 	sts	0x03A4, r25
-    2968:	80 93 a3 03 	sts	0x03A3, r24
+    29ea:	e0 91 a6 03 	lds	r30, 0x03A6
+    29ee:	f0 e0       	ldi	r31, 0x00	; 0
+    29f0:	ee 0f       	add	r30, r30
+    29f2:	ff 1f       	adc	r31, r31
+    29f4:	ec 54       	subi	r30, 0x4C	; 76
+    29f6:	fb 4f       	sbci	r31, 0xFB	; 251
+    29f8:	01 90       	ld	r0, Z+
+    29fa:	f0 81       	ld	r31, Z
+    29fc:	e0 2d       	mov	r30, r0
+    29fe:	82 81       	ldd	r24, Z+2	; 0x02
+    2a00:	93 81       	ldd	r25, Z+3	; 0x03
+    2a02:	90 93 a4 03 	sts	0x03A4, r25
+    2a06:	80 93 a3 03 	sts	0x03A3, r24
 		uiSysRS485SendRequestTimer	= lpArrRS485Channel[ ucRS485ChannelIndex ]->msReadTimeOut + __RS485_PAUSE_FOR_NEXT_REQUEST__;
-    296c:	e0 91 a6 03 	lds	r30, 0x03A6
-    2970:	f0 e0       	ldi	r31, 0x00	; 0
-    2972:	ee 0f       	add	r30, r30
-    2974:	ff 1f       	adc	r31, r31
-    2976:	ec 54       	subi	r30, 0x4C	; 76
-    2978:	fb 4f       	sbci	r31, 0xFB	; 251
-    297a:	01 90       	ld	r0, Z+
-    297c:	f0 81       	ld	r31, Z
-    297e:	e0 2d       	mov	r30, r0
-    2980:	20 91 36 01 	lds	r18, 0x0136
-    2984:	82 81       	ldd	r24, Z+2	; 0x02
-    2986:	93 81       	ldd	r25, Z+3	; 0x03
-    2988:	82 0f       	add	r24, r18
-    298a:	91 1d       	adc	r25, r1
-    298c:	90 93 35 01 	sts	0x0135, r25
-    2990:	80 93 34 01 	sts	0x0134, r24
-	}
-
-	if( uiSysRS485ReciverTimer ) {
-    2994:	80 91 a3 03 	lds	r24, 0x03A3
-    2998:	90 91 a4 03 	lds	r25, 0x03A4
-    299c:	89 2b       	or	r24, r25
-    299e:	09 f4       	brne	.+2      	; 0x29a2 <rs485Task+0x140>
-    29a0:	62 c0       	rjmp	.+196    	; 0x2a66 <rs485Task+0x204>
-		if( 1 ) {//|| rs485ReciverTimer != rs485ReciverTimerOld ) {
-			rs485ReciverTimerOld = uiSysRS485ReciverTimer;
-    29a2:	80 91 a3 03 	lds	r24, 0x03A3
-    29a6:	90 91 a4 03 	lds	r25, 0x03A4
-    29aa:	90 93 a8 03 	sts	0x03A8, r25
-    29ae:	80 93 a7 03 	sts	0x03A7, r24
-
-			if( lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485GetResponseFunc( (uint8_t*)ucRS485rxBuffer, ucRS485rxState, lpArrRS485Channel[ ucRS485ChannelIndex ]->lpData ) ) {
-    29b2:	e0 91 a6 03 	lds	r30, 0x03A6
-    29b6:	f0 e0       	ldi	r31, 0x00	; 0
-    29b8:	ee 0f       	add	r30, r30
-    29ba:	ff 1f       	adc	r31, r31
-    29bc:	ec 54       	subi	r30, 0x4C	; 76
-    29be:	fb 4f       	sbci	r31, 0xFB	; 251
-    29c0:	a0 81       	ld	r26, Z
-    29c2:	b1 81       	ldd	r27, Z+1	; 0x01
-    29c4:	60 91 b1 04 	lds	r22, 0x04B1
-    29c8:	e0 91 a6 03 	lds	r30, 0x03A6
-    29cc:	f0 e0       	ldi	r31, 0x00	; 0
-    29ce:	ee 0f       	add	r30, r30
-    29d0:	ff 1f       	adc	r31, r31
-    29d2:	ec 54       	subi	r30, 0x4C	; 76
-    29d4:	fb 4f       	sbci	r31, 0xFB	; 251
-    29d6:	01 90       	ld	r0, Z+
-    29d8:	f0 81       	ld	r31, Z
-    29da:	e0 2d       	mov	r30, r0
-    29dc:	40 81       	ld	r20, Z
-    29de:	51 81       	ldd	r21, Z+1	; 0x01
-    29e0:	51 96       	adiw	r26, 0x11	; 17
-    29e2:	ed 91       	ld	r30, X+
-    29e4:	fc 91       	ld	r31, X
-    29e6:	52 97       	sbiw	r26, 0x12	; 18
-    29e8:	80 91 b2 04 	lds	r24, 0x04B2
-    29ec:	90 91 b3 04 	lds	r25, 0x04B3
-    29f0:	09 95       	icall
-    29f2:	88 23       	and	r24, r24
-    29f4:	09 f4       	brne	.+2      	; 0x29f8 <rs485Task+0x196>
-    29f6:	a2 c0       	rjmp	.+324    	; 0x2b3c <rs485Task+0x2da>
-				lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485ClrTimeOutError( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpData );
-    29f8:	e0 91 a6 03 	lds	r30, 0x03A6
-    29fc:	f0 e0       	ldi	r31, 0x00	; 0
-    29fe:	ee 0f       	add	r30, r30
-    2a00:	ff 1f       	adc	r31, r31
-    2a02:	ec 54       	subi	r30, 0x4C	; 76
-    2a04:	fb 4f       	sbci	r31, 0xFB	; 251
-    2a06:	a0 81       	ld	r26, Z
-    2a08:	b1 81       	ldd	r27, Z+1	; 0x01
     2a0a:	e0 91 a6 03 	lds	r30, 0x03A6
     2a0e:	f0 e0       	ldi	r31, 0x00	; 0
     2a10:	ee 0f       	add	r30, r30
@@ -7802,1111 +7847,1182 @@ void rs485Task( void )
     2a18:	01 90       	ld	r0, Z+
     2a1a:	f0 81       	ld	r31, Z
     2a1c:	e0 2d       	mov	r30, r0
-    2a1e:	19 96       	adiw	r26, 0x09	; 9
-    2a20:	2d 91       	ld	r18, X+
-    2a22:	3c 91       	ld	r19, X
-    2a24:	1a 97       	sbiw	r26, 0x0a	; 10
-    2a26:	80 81       	ld	r24, Z
-    2a28:	91 81       	ldd	r25, Z+1	; 0x01
-    2a2a:	f9 01       	movw	r30, r18
-    2a2c:	09 95       	icall
-				lpArrRS485Channel[ ucRS485ChannelIndex ]->rxErrorCounter = 0;
-    2a2e:	e0 91 a6 03 	lds	r30, 0x03A6
-    2a32:	f0 e0       	ldi	r31, 0x00	; 0
-    2a34:	ee 0f       	add	r30, r30
-    2a36:	ff 1f       	adc	r31, r31
-    2a38:	ec 54       	subi	r30, 0x4C	; 76
-    2a3a:	fb 4f       	sbci	r31, 0xFB	; 251
-    2a3c:	01 90       	ld	r0, Z+
-    2a3e:	f0 81       	ld	r31, Z
-    2a40:	e0 2d       	mov	r30, r0
-    2a42:	16 82       	std	Z+6, r1	; 0x06
-				lpArrRS485Channel[ ucRS485ChannelIndex ]->ucFlag = 1; // OK
-    2a44:	e0 91 a6 03 	lds	r30, 0x03A6
-    2a48:	f0 e0       	ldi	r31, 0x00	; 0
-    2a4a:	ee 0f       	add	r30, r30
-    2a4c:	ff 1f       	adc	r31, r31
-    2a4e:	ec 54       	subi	r30, 0x4C	; 76
-    2a50:	fb 4f       	sbci	r31, 0xFB	; 251
-    2a52:	01 90       	ld	r0, Z+
-    2a54:	f0 81       	ld	r31, Z
-    2a56:	e0 2d       	mov	r30, r0
-    2a58:	81 e0       	ldi	r24, 0x01	; 1
-    2a5a:	85 83       	std	Z+5, r24	; 0x05
+    2a1e:	20 91 36 01 	lds	r18, 0x0136
+    2a22:	82 81       	ldd	r24, Z+2	; 0x02
+    2a24:	93 81       	ldd	r25, Z+3	; 0x03
+    2a26:	82 0f       	add	r24, r18
+    2a28:	91 1d       	adc	r25, r1
+    2a2a:	90 93 35 01 	sts	0x0135, r25
+    2a2e:	80 93 34 01 	sts	0x0134, r24
+	}
 
-				uiSysRS485ReciverTimer = 0;
-    2a5c:	10 92 a4 03 	sts	0x03A4, r1
-    2a60:	10 92 a3 03 	sts	0x03A3, r1
-    2a64:	08 95       	ret
-			}
-		}
-	} else {
-		lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485RestoreUartSetings( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpData );
+	if( uiSysRS485ReciverTimer ) {
+    2a32:	80 91 a3 03 	lds	r24, 0x03A3
+    2a36:	90 91 a4 03 	lds	r25, 0x03A4
+    2a3a:	89 2b       	or	r24, r25
+    2a3c:	09 f4       	brne	.+2      	; 0x2a40 <rs485Task+0x140>
+    2a3e:	62 c0       	rjmp	.+196    	; 0x2b04 <rs485Task+0x204>
+		if( 1 ) {//|| rs485ReciverTimer != rs485ReciverTimerOld ) {
+			rs485ReciverTimerOld = uiSysRS485ReciverTimer;
+    2a40:	80 91 a3 03 	lds	r24, 0x03A3
+    2a44:	90 91 a4 03 	lds	r25, 0x03A4
+    2a48:	90 93 a8 03 	sts	0x03A8, r25
+    2a4c:	80 93 a7 03 	sts	0x03A7, r24
+
+			if( lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485GetResponseFunc( (uint8_t*)ucRS485rxBuffer, ucRS485rxState, lpArrRS485Channel[ ucRS485ChannelIndex ]->lpData ) ) {
+    2a50:	e0 91 a6 03 	lds	r30, 0x03A6
+    2a54:	f0 e0       	ldi	r31, 0x00	; 0
+    2a56:	ee 0f       	add	r30, r30
+    2a58:	ff 1f       	adc	r31, r31
+    2a5a:	ec 54       	subi	r30, 0x4C	; 76
+    2a5c:	fb 4f       	sbci	r31, 0xFB	; 251
+    2a5e:	a0 81       	ld	r26, Z
+    2a60:	b1 81       	ldd	r27, Z+1	; 0x01
+    2a62:	60 91 b1 04 	lds	r22, 0x04B1
     2a66:	e0 91 a6 03 	lds	r30, 0x03A6
     2a6a:	f0 e0       	ldi	r31, 0x00	; 0
     2a6c:	ee 0f       	add	r30, r30
     2a6e:	ff 1f       	adc	r31, r31
     2a70:	ec 54       	subi	r30, 0x4C	; 76
     2a72:	fb 4f       	sbci	r31, 0xFB	; 251
-    2a74:	a0 81       	ld	r26, Z
-    2a76:	b1 81       	ldd	r27, Z+1	; 0x01
-    2a78:	e0 91 a6 03 	lds	r30, 0x03A6
-    2a7c:	f0 e0       	ldi	r31, 0x00	; 0
-    2a7e:	ee 0f       	add	r30, r30
-    2a80:	ff 1f       	adc	r31, r31
-    2a82:	ec 54       	subi	r30, 0x4C	; 76
-    2a84:	fb 4f       	sbci	r31, 0xFB	; 251
-    2a86:	01 90       	ld	r0, Z+
-    2a88:	f0 81       	ld	r31, Z
-    2a8a:	e0 2d       	mov	r30, r0
-    2a8c:	1d 96       	adiw	r26, 0x0d	; 13
-    2a8e:	2d 91       	ld	r18, X+
-    2a90:	3c 91       	ld	r19, X
-    2a92:	1e 97       	sbiw	r26, 0x0e	; 14
-    2a94:	80 81       	ld	r24, Z
-    2a96:	91 81       	ldd	r25, Z+1	; 0x01
-    2a98:	f9 01       	movw	r30, r18
-    2a9a:	09 95       	icall
+    2a74:	01 90       	ld	r0, Z+
+    2a76:	f0 81       	ld	r31, Z
+    2a78:	e0 2d       	mov	r30, r0
+    2a7a:	40 81       	ld	r20, Z
+    2a7c:	51 81       	ldd	r21, Z+1	; 0x01
+    2a7e:	51 96       	adiw	r26, 0x11	; 17
+    2a80:	ed 91       	ld	r30, X+
+    2a82:	fc 91       	ld	r31, X
+    2a84:	52 97       	sbiw	r26, 0x12	; 18
+    2a86:	80 91 b2 04 	lds	r24, 0x04B2
+    2a8a:	90 91 b3 04 	lds	r25, 0x04B3
+    2a8e:	09 95       	icall
+    2a90:	88 23       	and	r24, r24
+    2a92:	09 f4       	brne	.+2      	; 0x2a96 <rs485Task+0x196>
+    2a94:	a2 c0       	rjmp	.+324    	; 0x2bda <rs485Task+0x2da>
+				lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485ClrTimeOutError( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpData );
+    2a96:	e0 91 a6 03 	lds	r30, 0x03A6
+    2a9a:	f0 e0       	ldi	r31, 0x00	; 0
+    2a9c:	ee 0f       	add	r30, r30
+    2a9e:	ff 1f       	adc	r31, r31
+    2aa0:	ec 54       	subi	r30, 0x4C	; 76
+    2aa2:	fb 4f       	sbci	r31, 0xFB	; 251
+    2aa4:	a0 81       	ld	r26, Z
+    2aa6:	b1 81       	ldd	r27, Z+1	; 0x01
+    2aa8:	e0 91 a6 03 	lds	r30, 0x03A6
+    2aac:	f0 e0       	ldi	r31, 0x00	; 0
+    2aae:	ee 0f       	add	r30, r30
+    2ab0:	ff 1f       	adc	r31, r31
+    2ab2:	ec 54       	subi	r30, 0x4C	; 76
+    2ab4:	fb 4f       	sbci	r31, 0xFB	; 251
+    2ab6:	01 90       	ld	r0, Z+
+    2ab8:	f0 81       	ld	r31, Z
+    2aba:	e0 2d       	mov	r30, r0
+    2abc:	19 96       	adiw	r26, 0x09	; 9
+    2abe:	2d 91       	ld	r18, X+
+    2ac0:	3c 91       	ld	r19, X
+    2ac2:	1a 97       	sbiw	r26, 0x0a	; 10
+    2ac4:	80 81       	ld	r24, Z
+    2ac6:	91 81       	ldd	r25, Z+1	; 0x01
+    2ac8:	f9 01       	movw	r30, r18
+    2aca:	09 95       	icall
+				lpArrRS485Channel[ ucRS485ChannelIndex ]->rxErrorCounter = 0;
+    2acc:	e0 91 a6 03 	lds	r30, 0x03A6
+    2ad0:	f0 e0       	ldi	r31, 0x00	; 0
+    2ad2:	ee 0f       	add	r30, r30
+    2ad4:	ff 1f       	adc	r31, r31
+    2ad6:	ec 54       	subi	r30, 0x4C	; 76
+    2ad8:	fb 4f       	sbci	r31, 0xFB	; 251
+    2ada:	01 90       	ld	r0, Z+
+    2adc:	f0 81       	ld	r31, Z
+    2ade:	e0 2d       	mov	r30, r0
+    2ae0:	16 82       	std	Z+6, r1	; 0x06
+				lpArrRS485Channel[ ucRS485ChannelIndex ]->ucFlag = 1; // OK
+    2ae2:	e0 91 a6 03 	lds	r30, 0x03A6
+    2ae6:	f0 e0       	ldi	r31, 0x00	; 0
+    2ae8:	ee 0f       	add	r30, r30
+    2aea:	ff 1f       	adc	r31, r31
+    2aec:	ec 54       	subi	r30, 0x4C	; 76
+    2aee:	fb 4f       	sbci	r31, 0xFB	; 251
+    2af0:	01 90       	ld	r0, Z+
+    2af2:	f0 81       	ld	r31, Z
+    2af4:	e0 2d       	mov	r30, r0
+    2af6:	81 e0       	ldi	r24, 0x01	; 1
+    2af8:	85 83       	std	Z+5, r24	; 0x05
+
+				uiSysRS485ReciverTimer = 0;
+    2afa:	10 92 a4 03 	sts	0x03A4, r1
+    2afe:	10 92 a3 03 	sts	0x03A3, r1
+    2b02:	08 95       	ret
+			}
+		}
+	} else {
+		lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485RestoreUartSetings( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpData );
+    2b04:	e0 91 a6 03 	lds	r30, 0x03A6
+    2b08:	f0 e0       	ldi	r31, 0x00	; 0
+    2b0a:	ee 0f       	add	r30, r30
+    2b0c:	ff 1f       	adc	r31, r31
+    2b0e:	ec 54       	subi	r30, 0x4C	; 76
+    2b10:	fb 4f       	sbci	r31, 0xFB	; 251
+    2b12:	a0 81       	ld	r26, Z
+    2b14:	b1 81       	ldd	r27, Z+1	; 0x01
+    2b16:	e0 91 a6 03 	lds	r30, 0x03A6
+    2b1a:	f0 e0       	ldi	r31, 0x00	; 0
+    2b1c:	ee 0f       	add	r30, r30
+    2b1e:	ff 1f       	adc	r31, r31
+    2b20:	ec 54       	subi	r30, 0x4C	; 76
+    2b22:	fb 4f       	sbci	r31, 0xFB	; 251
+    2b24:	01 90       	ld	r0, Z+
+    2b26:	f0 81       	ld	r31, Z
+    2b28:	e0 2d       	mov	r30, r0
+    2b2a:	1d 96       	adiw	r26, 0x0d	; 13
+    2b2c:	2d 91       	ld	r18, X+
+    2b2e:	3c 91       	ld	r19, X
+    2b30:	1e 97       	sbiw	r26, 0x0e	; 14
+    2b32:	80 81       	ld	r24, Z
+    2b34:	91 81       	ldd	r25, Z+1	; 0x01
+    2b36:	f9 01       	movw	r30, r18
+    2b38:	09 95       	icall
 
 		if( !lpArrRS485Channel[ ucRS485ChannelIndex ]->ucFlag ) {
-    2a9c:	e0 91 a6 03 	lds	r30, 0x03A6
-    2aa0:	f0 e0       	ldi	r31, 0x00	; 0
-    2aa2:	ee 0f       	add	r30, r30
-    2aa4:	ff 1f       	adc	r31, r31
-    2aa6:	ec 54       	subi	r30, 0x4C	; 76
-    2aa8:	fb 4f       	sbci	r31, 0xFB	; 251
-    2aaa:	01 90       	ld	r0, Z+
-    2aac:	f0 81       	ld	r31, Z
-    2aae:	e0 2d       	mov	r30, r0
-    2ab0:	85 81       	ldd	r24, Z+5	; 0x05
-    2ab2:	88 23       	and	r24, r24
-    2ab4:	09 f0       	breq	.+2      	; 0x2ab8 <rs485Task+0x256>
-    2ab6:	42 c0       	rjmp	.+132    	; 0x2b3c <rs485Task+0x2da>
+    2b3a:	e0 91 a6 03 	lds	r30, 0x03A6
+    2b3e:	f0 e0       	ldi	r31, 0x00	; 0
+    2b40:	ee 0f       	add	r30, r30
+    2b42:	ff 1f       	adc	r31, r31
+    2b44:	ec 54       	subi	r30, 0x4C	; 76
+    2b46:	fb 4f       	sbci	r31, 0xFB	; 251
+    2b48:	01 90       	ld	r0, Z+
+    2b4a:	f0 81       	ld	r31, Z
+    2b4c:	e0 2d       	mov	r30, r0
+    2b4e:	85 81       	ldd	r24, Z+5	; 0x05
+    2b50:	88 23       	and	r24, r24
+    2b52:	09 f0       	breq	.+2      	; 0x2b56 <rs485Task+0x256>
+    2b54:	42 c0       	rjmp	.+132    	; 0x2bda <rs485Task+0x2da>
 			lpArrRS485Channel[ ucRS485ChannelIndex ]->ucFlag = 2; // Timeout
-    2ab8:	e0 91 a6 03 	lds	r30, 0x03A6
-    2abc:	f0 e0       	ldi	r31, 0x00	; 0
-    2abe:	ee 0f       	add	r30, r30
-    2ac0:	ff 1f       	adc	r31, r31
-    2ac2:	ec 54       	subi	r30, 0x4C	; 76
-    2ac4:	fb 4f       	sbci	r31, 0xFB	; 251
-    2ac6:	01 90       	ld	r0, Z+
-    2ac8:	f0 81       	ld	r31, Z
-    2aca:	e0 2d       	mov	r30, r0
-    2acc:	82 e0       	ldi	r24, 0x02	; 2
-    2ace:	85 83       	std	Z+5, r24	; 0x05
+    2b56:	e0 91 a6 03 	lds	r30, 0x03A6
+    2b5a:	f0 e0       	ldi	r31, 0x00	; 0
+    2b5c:	ee 0f       	add	r30, r30
+    2b5e:	ff 1f       	adc	r31, r31
+    2b60:	ec 54       	subi	r30, 0x4C	; 76
+    2b62:	fb 4f       	sbci	r31, 0xFB	; 251
+    2b64:	01 90       	ld	r0, Z+
+    2b66:	f0 81       	ld	r31, Z
+    2b68:	e0 2d       	mov	r30, r0
+    2b6a:	82 e0       	ldi	r24, 0x02	; 2
+    2b6c:	85 83       	std	Z+5, r24	; 0x05
 
 			// Изчаква N timeout грешки за вдигане на timeout флаг
 			if( lpArrRS485Channel[ ucRS485ChannelIndex ]->rxErrorCounter < 5 ) {
-    2ad0:	e0 91 a6 03 	lds	r30, 0x03A6
-    2ad4:	f0 e0       	ldi	r31, 0x00	; 0
-    2ad6:	ee 0f       	add	r30, r30
-    2ad8:	ff 1f       	adc	r31, r31
-    2ada:	ec 54       	subi	r30, 0x4C	; 76
-    2adc:	fb 4f       	sbci	r31, 0xFB	; 251
-    2ade:	01 90       	ld	r0, Z+
-    2ae0:	f0 81       	ld	r31, Z
-    2ae2:	e0 2d       	mov	r30, r0
-    2ae4:	86 81       	ldd	r24, Z+6	; 0x06
-    2ae6:	85 30       	cpi	r24, 0x05	; 5
-    2ae8:	70 f4       	brcc	.+28     	; 0x2b06 <rs485Task+0x2a4>
+    2b6e:	e0 91 a6 03 	lds	r30, 0x03A6
+    2b72:	f0 e0       	ldi	r31, 0x00	; 0
+    2b74:	ee 0f       	add	r30, r30
+    2b76:	ff 1f       	adc	r31, r31
+    2b78:	ec 54       	subi	r30, 0x4C	; 76
+    2b7a:	fb 4f       	sbci	r31, 0xFB	; 251
+    2b7c:	01 90       	ld	r0, Z+
+    2b7e:	f0 81       	ld	r31, Z
+    2b80:	e0 2d       	mov	r30, r0
+    2b82:	86 81       	ldd	r24, Z+6	; 0x06
+    2b84:	85 30       	cpi	r24, 0x05	; 5
+    2b86:	70 f4       	brcc	.+28     	; 0x2ba4 <rs485Task+0x2a4>
 				++lpArrRS485Channel[ ucRS485ChannelIndex ]->rxErrorCounter;
-    2aea:	e0 91 a6 03 	lds	r30, 0x03A6
-    2aee:	f0 e0       	ldi	r31, 0x00	; 0
-    2af0:	ee 0f       	add	r30, r30
-    2af2:	ff 1f       	adc	r31, r31
-    2af4:	ec 54       	subi	r30, 0x4C	; 76
-    2af6:	fb 4f       	sbci	r31, 0xFB	; 251
-    2af8:	01 90       	ld	r0, Z+
-    2afa:	f0 81       	ld	r31, Z
-    2afc:	e0 2d       	mov	r30, r0
-    2afe:	86 81       	ldd	r24, Z+6	; 0x06
-    2b00:	8f 5f       	subi	r24, 0xFF	; 255
-    2b02:	86 83       	std	Z+6, r24	; 0x06
-    2b04:	08 95       	ret
+    2b88:	e0 91 a6 03 	lds	r30, 0x03A6
+    2b8c:	f0 e0       	ldi	r31, 0x00	; 0
+    2b8e:	ee 0f       	add	r30, r30
+    2b90:	ff 1f       	adc	r31, r31
+    2b92:	ec 54       	subi	r30, 0x4C	; 76
+    2b94:	fb 4f       	sbci	r31, 0xFB	; 251
+    2b96:	01 90       	ld	r0, Z+
+    2b98:	f0 81       	ld	r31, Z
+    2b9a:	e0 2d       	mov	r30, r0
+    2b9c:	86 81       	ldd	r24, Z+6	; 0x06
+    2b9e:	8f 5f       	subi	r24, 0xFF	; 255
+    2ba0:	86 83       	std	Z+6, r24	; 0x06
+    2ba2:	08 95       	ret
 			} else {
 				lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485SetTimeOutError( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpData );
-    2b06:	e0 91 a6 03 	lds	r30, 0x03A6
-    2b0a:	f0 e0       	ldi	r31, 0x00	; 0
-    2b0c:	ee 0f       	add	r30, r30
-    2b0e:	ff 1f       	adc	r31, r31
-    2b10:	ec 54       	subi	r30, 0x4C	; 76
-    2b12:	fb 4f       	sbci	r31, 0xFB	; 251
-    2b14:	a0 81       	ld	r26, Z
-    2b16:	b1 81       	ldd	r27, Z+1	; 0x01
-    2b18:	e0 91 a6 03 	lds	r30, 0x03A6
-    2b1c:	f0 e0       	ldi	r31, 0x00	; 0
-    2b1e:	ee 0f       	add	r30, r30
-    2b20:	ff 1f       	adc	r31, r31
-    2b22:	ec 54       	subi	r30, 0x4C	; 76
-    2b24:	fb 4f       	sbci	r31, 0xFB	; 251
-    2b26:	01 90       	ld	r0, Z+
-    2b28:	f0 81       	ld	r31, Z
-    2b2a:	e0 2d       	mov	r30, r0
-    2b2c:	17 96       	adiw	r26, 0x07	; 7
-    2b2e:	2d 91       	ld	r18, X+
-    2b30:	3c 91       	ld	r19, X
-    2b32:	18 97       	sbiw	r26, 0x08	; 8
-    2b34:	80 81       	ld	r24, Z
-    2b36:	91 81       	ldd	r25, Z+1	; 0x01
-    2b38:	f9 01       	movw	r30, r18
-    2b3a:	09 95       	icall
-    2b3c:	08 95       	ret
+    2ba4:	e0 91 a6 03 	lds	r30, 0x03A6
+    2ba8:	f0 e0       	ldi	r31, 0x00	; 0
+    2baa:	ee 0f       	add	r30, r30
+    2bac:	ff 1f       	adc	r31, r31
+    2bae:	ec 54       	subi	r30, 0x4C	; 76
+    2bb0:	fb 4f       	sbci	r31, 0xFB	; 251
+    2bb2:	a0 81       	ld	r26, Z
+    2bb4:	b1 81       	ldd	r27, Z+1	; 0x01
+    2bb6:	e0 91 a6 03 	lds	r30, 0x03A6
+    2bba:	f0 e0       	ldi	r31, 0x00	; 0
+    2bbc:	ee 0f       	add	r30, r30
+    2bbe:	ff 1f       	adc	r31, r31
+    2bc0:	ec 54       	subi	r30, 0x4C	; 76
+    2bc2:	fb 4f       	sbci	r31, 0xFB	; 251
+    2bc4:	01 90       	ld	r0, Z+
+    2bc6:	f0 81       	ld	r31, Z
+    2bc8:	e0 2d       	mov	r30, r0
+    2bca:	17 96       	adiw	r26, 0x07	; 7
+    2bcc:	2d 91       	ld	r18, X+
+    2bce:	3c 91       	ld	r19, X
+    2bd0:	18 97       	sbiw	r26, 0x08	; 8
+    2bd2:	80 81       	ld	r24, Z
+    2bd4:	91 81       	ldd	r25, Z+1	; 0x01
+    2bd6:	f9 01       	movw	r30, r18
+    2bd8:	09 95       	icall
+    2bda:	08 95       	ret
 
-00002b3e <rs485TaskEnable>:
+00002bdc <rs485TaskEnable>:
 	}
 }
 
 void rs485TaskEnable( void )
 {
 	usRS485PortAsMaster = 1;
-    2b3e:	81 e0       	ldi	r24, 0x01	; 1
-    2b40:	80 93 a1 03 	sts	0x03A1, r24
+    2bdc:	81 e0       	ldi	r24, 0x01	; 1
+    2bde:	80 93 a1 03 	sts	0x03A1, r24
 }
-    2b44:	08 95       	ret
+    2be2:	08 95       	ret
 
-00002b46 <rs485TaskDisable>:
+00002be4 <rs485TaskDisable>:
 
 void rs485TaskDisable( void )
 {
 	usRS485PortAsMaster = 0;
-    2b46:	10 92 a1 03 	sts	0x03A1, r1
+    2be4:	10 92 a1 03 	sts	0x03A1, r1
 }
-    2b4a:	08 95       	ret
+    2be8:	08 95       	ret
 
-00002b4c <rs485TaskIsEnable>:
+00002bea <rs485TaskIsEnable>:
 
 uint8_t rs485TaskIsEnable( void )
 {
 	return usRS485PortAsMaster;
-    2b4c:	80 91 a1 03 	lds	r24, 0x03A1
+    2bea:	80 91 a1 03 	lds	r24, 0x03A1
 }
-    2b50:	08 95       	ret
+    2bee:	08 95       	ret
 
-00002b52 <rs485TaskInit>:
+00002bf0 <rs485TaskInit>:
 	usRS485PortAsMaster = 1;
 }
 
 void rs485TaskDisable( void )
 {
 	usRS485PortAsMaster = 0;
-    2b52:	10 92 a1 03 	sts	0x03A1, r1
+    2bf0:	10 92 a1 03 	sts	0x03A1, r1
 {
 	uint8_t i;
 
 	rs485TaskDisable();
 
 	ucRS485txBuffer = ucRS485txrxBuffer;
-    2b56:	89 ea       	ldi	r24, 0xA9	; 169
-    2b58:	93 e0       	ldi	r25, 0x03	; 3
-    2b5a:	90 93 af 04 	sts	0x04AF, r25
-    2b5e:	80 93 ae 04 	sts	0x04AE, r24
+    2bf4:	89 ea       	ldi	r24, 0xA9	; 169
+    2bf6:	93 e0       	ldi	r25, 0x03	; 3
+    2bf8:	90 93 af 04 	sts	0x04AF, r25
+    2bfc:	80 93 ae 04 	sts	0x04AE, r24
 	ucRS485rxBuffer = ucRS485txrxBuffer;
-    2b62:	90 93 b3 04 	sts	0x04B3, r25
-    2b66:	80 93 b2 04 	sts	0x04B2, r24
+    2c00:	90 93 b3 04 	sts	0x04B3, r25
+    2c04:	80 93 b2 04 	sts	0x04B2, r24
 
 	ucChannelCount = 0;
-    2b6a:	10 92 a2 03 	sts	0x03A2, r1
-    2b6e:	80 e0       	ldi	r24, 0x00	; 0
-    2b70:	90 e0       	ldi	r25, 0x00	; 0
+    2c08:	10 92 a2 03 	sts	0x03A2, r1
+    2c0c:	80 e0       	ldi	r24, 0x00	; 0
+    2c0e:	90 e0       	ldi	r25, 0x00	; 0
 	for( i = 0; i < size_of_array( lpArrRS485Channel ); i++ ) {
 		lpArrRS485Channel[i] = NULL;
-    2b72:	fc 01       	movw	r30, r24
-    2b74:	ee 0f       	add	r30, r30
-    2b76:	ff 1f       	adc	r31, r31
-    2b78:	ec 54       	subi	r30, 0x4C	; 76
-    2b7a:	fb 4f       	sbci	r31, 0xFB	; 251
-    2b7c:	11 82       	std	Z+1, r1	; 0x01
-    2b7e:	10 82       	st	Z, r1
-    2b80:	01 96       	adiw	r24, 0x01	; 1
+    2c10:	fc 01       	movw	r30, r24
+    2c12:	ee 0f       	add	r30, r30
+    2c14:	ff 1f       	adc	r31, r31
+    2c16:	ec 54       	subi	r30, 0x4C	; 76
+    2c18:	fb 4f       	sbci	r31, 0xFB	; 251
+    2c1a:	11 82       	std	Z+1, r1	; 0x01
+    2c1c:	10 82       	st	Z, r1
+    2c1e:	01 96       	adiw	r24, 0x01	; 1
 
 	ucRS485txBuffer = ucRS485txrxBuffer;
 	ucRS485rxBuffer = ucRS485txrxBuffer;
 
 	ucChannelCount = 0;
 	for( i = 0; i < size_of_array( lpArrRS485Channel ); i++ ) {
-    2b82:	82 33       	cpi	r24, 0x32	; 50
-    2b84:	91 05       	cpc	r25, r1
-    2b86:	a9 f7       	brne	.-22     	; 0x2b72 <rs485TaskInit+0x20>
+    2c20:	82 33       	cpi	r24, 0x32	; 50
+    2c22:	91 05       	cpc	r25, r1
+    2c24:	a9 f7       	brne	.-22     	; 0x2c10 <rs485TaskInit+0x20>
 		lpArrRS485Channel[i] = NULL;
 	}
 }
-    2b88:	08 95       	ret
+    2c26:	08 95       	ret
 
-00002b8a <rs485TimerIsr>:
+00002c28 <rs485TimerIsr>:
 
 void rs485TimerIsr( void )
 {
 	if( uiSysRS485SendRequestTimer ) {
-    2b8a:	80 91 34 01 	lds	r24, 0x0134
-    2b8e:	90 91 35 01 	lds	r25, 0x0135
-    2b92:	89 2b       	or	r24, r25
-    2b94:	49 f0       	breq	.+18     	; 0x2ba8 <rs485TimerIsr+0x1e>
+    2c28:	80 91 34 01 	lds	r24, 0x0134
+    2c2c:	90 91 35 01 	lds	r25, 0x0135
+    2c30:	89 2b       	or	r24, r25
+    2c32:	49 f0       	breq	.+18     	; 0x2c46 <rs485TimerIsr+0x1e>
 		--uiSysRS485SendRequestTimer;
-    2b96:	80 91 34 01 	lds	r24, 0x0134
-    2b9a:	90 91 35 01 	lds	r25, 0x0135
-    2b9e:	01 97       	sbiw	r24, 0x01	; 1
-    2ba0:	90 93 35 01 	sts	0x0135, r25
-    2ba4:	80 93 34 01 	sts	0x0134, r24
+    2c34:	80 91 34 01 	lds	r24, 0x0134
+    2c38:	90 91 35 01 	lds	r25, 0x0135
+    2c3c:	01 97       	sbiw	r24, 0x01	; 1
+    2c3e:	90 93 35 01 	sts	0x0135, r25
+    2c42:	80 93 34 01 	sts	0x0134, r24
 	}
 
 	if( uiSysRS485ReciverTimer ) {
-    2ba8:	80 91 a3 03 	lds	r24, 0x03A3
-    2bac:	90 91 a4 03 	lds	r25, 0x03A4
-    2bb0:	89 2b       	or	r24, r25
-    2bb2:	49 f0       	breq	.+18     	; 0x2bc6 <rs485TimerIsr+0x3c>
+    2c46:	80 91 a3 03 	lds	r24, 0x03A3
+    2c4a:	90 91 a4 03 	lds	r25, 0x03A4
+    2c4e:	89 2b       	or	r24, r25
+    2c50:	49 f0       	breq	.+18     	; 0x2c64 <rs485TimerIsr+0x3c>
 		--uiSysRS485ReciverTimer;
-    2bb4:	80 91 a3 03 	lds	r24, 0x03A3
-    2bb8:	90 91 a4 03 	lds	r25, 0x03A4
-    2bbc:	01 97       	sbiw	r24, 0x01	; 1
-    2bbe:	90 93 a4 03 	sts	0x03A4, r25
-    2bc2:	80 93 a3 03 	sts	0x03A3, r24
-    2bc6:	08 95       	ret
+    2c52:	80 91 a3 03 	lds	r24, 0x03A3
+    2c56:	90 91 a4 03 	lds	r25, 0x03A4
+    2c5a:	01 97       	sbiw	r24, 0x01	; 1
+    2c5c:	90 93 a4 03 	sts	0x03A4, r25
+    2c60:	80 93 a3 03 	sts	0x03A3, r24
+    2c64:	08 95       	ret
 
-00002bc8 <rs485AddChannel>:
+00002c66 <rs485AddChannel>:
 	}
 }
 
 uint8_t rs485AddChannel( LP_OBJ_RS485_CHANNEL lpChannel )
 {
 	lpArrRS485Channel[ ucChannelCount ] = lpChannel;
-    2bc8:	e0 91 a2 03 	lds	r30, 0x03A2
-    2bcc:	f0 e0       	ldi	r31, 0x00	; 0
-    2bce:	ee 0f       	add	r30, r30
-    2bd0:	ff 1f       	adc	r31, r31
-    2bd2:	ec 54       	subi	r30, 0x4C	; 76
-    2bd4:	fb 4f       	sbci	r31, 0xFB	; 251
-    2bd6:	91 83       	std	Z+1, r25	; 0x01
-    2bd8:	80 83       	st	Z, r24
+    2c66:	e0 91 a2 03 	lds	r30, 0x03A2
+    2c6a:	f0 e0       	ldi	r31, 0x00	; 0
+    2c6c:	ee 0f       	add	r30, r30
+    2c6e:	ff 1f       	adc	r31, r31
+    2c70:	ec 54       	subi	r30, 0x4C	; 76
+    2c72:	fb 4f       	sbci	r31, 0xFB	; 251
+    2c74:	91 83       	std	Z+1, r25	; 0x01
+    2c76:	80 83       	st	Z, r24
 
 	if( ++ucChannelCount > size_of_array( lpArrRS485Channel ) ) {
-    2bda:	80 91 a2 03 	lds	r24, 0x03A2
-    2bde:	8f 5f       	subi	r24, 0xFF	; 255
-    2be0:	80 93 a2 03 	sts	0x03A2, r24
-    2be4:	80 91 a2 03 	lds	r24, 0x03A2
-    2be8:	83 33       	cpi	r24, 0x33	; 51
-    2bea:	10 f4       	brcc	.+4      	; 0x2bf0 <rs485AddChannel+0x28>
-    2bec:	81 e0       	ldi	r24, 0x01	; 1
-    2bee:	08 95       	ret
+    2c78:	80 91 a2 03 	lds	r24, 0x03A2
+    2c7c:	8f 5f       	subi	r24, 0xFF	; 255
+    2c7e:	80 93 a2 03 	sts	0x03A2, r24
+    2c82:	80 91 a2 03 	lds	r24, 0x03A2
+    2c86:	83 33       	cpi	r24, 0x33	; 51
+    2c88:	10 f4       	brcc	.+4      	; 0x2c8e <rs485AddChannel+0x28>
+    2c8a:	81 e0       	ldi	r24, 0x01	; 1
+    2c8c:	08 95       	ret
 		ucChannelCount = size_of_array( lpArrRS485Channel );
-    2bf0:	82 e3       	ldi	r24, 0x32	; 50
-    2bf2:	80 93 a2 03 	sts	0x03A2, r24
-    2bf6:	80 e0       	ldi	r24, 0x00	; 0
+    2c8e:	82 e3       	ldi	r24, 0x32	; 50
+    2c90:	80 93 a2 03 	sts	0x03A2, r24
+    2c94:	80 e0       	ldi	r24, 0x00	; 0
 		return 0;
 	}
 
 	return 1;
 }
-    2bf8:	08 95       	ret
+    2c96:	08 95       	ret
 
-00002bfa <rs485ChannelDefInit>:
+00002c98 <rs485ChannelDefInit>:
 
 void rs485ChannelDefInit( LP_OBJ_RS485_CHANNEL lpChannel )
 {
-    2bfa:	fc 01       	movw	r30, r24
+    2c98:	fc 01       	movw	r30, r24
 	lpChannel->lpData = NULL;
-    2bfc:	11 82       	std	Z+1, r1	; 0x01
-    2bfe:	10 82       	st	Z, r1
+    2c9a:	11 82       	std	Z+1, r1	; 0x01
+    2c9c:	10 82       	st	Z, r1
 
 	lpChannel->msReadTimeOut = 100;
-    2c00:	84 e6       	ldi	r24, 0x64	; 100
-    2c02:	90 e0       	ldi	r25, 0x00	; 0
-    2c04:	93 83       	std	Z+3, r25	; 0x03
-    2c06:	82 83       	std	Z+2, r24	; 0x02
+    2c9e:	84 e6       	ldi	r24, 0x64	; 100
+    2ca0:	90 e0       	ldi	r25, 0x00	; 0
+    2ca2:	93 83       	std	Z+3, r25	; 0x03
+    2ca4:	82 83       	std	Z+2, r24	; 0x02
 	lpChannel->ucEnableRequest = 0;
-    2c08:	14 82       	std	Z+4, r1	; 0x04
+    2ca6:	14 82       	std	Z+4, r1	; 0x04
 	lpChannel->rxErrorCounter = 0;
-    2c0a:	16 82       	std	Z+6, r1	; 0x06
+    2ca8:	16 82       	std	Z+6, r1	; 0x06
 	lpChannel->ucFlag = 0;
-    2c0c:	15 82       	std	Z+5, r1	; 0x05
+    2caa:	15 82       	std	Z+5, r1	; 0x05
 
 	lpChannel->rs485SetUartSetings = rs485SetUartSetingsNullFunc;
-    2c0e:	83 e2       	ldi	r24, 0x23	; 35
-    2c10:	96 e1       	ldi	r25, 0x16	; 22
-    2c12:	94 87       	std	Z+12, r25	; 0x0c
-    2c14:	83 87       	std	Z+11, r24	; 0x0b
+    2cac:	82 e7       	ldi	r24, 0x72	; 114
+    2cae:	96 e1       	ldi	r25, 0x16	; 22
+    2cb0:	94 87       	std	Z+12, r25	; 0x0c
+    2cb2:	83 87       	std	Z+11, r24	; 0x0b
 	lpChannel->rs485RestoreUartSetings = rs485RestoreUartSetingsNullFunc;
-    2c16:	84 e2       	ldi	r24, 0x24	; 36
-    2c18:	96 e1       	ldi	r25, 0x16	; 22
-    2c1a:	96 87       	std	Z+14, r25	; 0x0e
-    2c1c:	85 87       	std	Z+13, r24	; 0x0d
+    2cb4:	83 e7       	ldi	r24, 0x73	; 115
+    2cb6:	96 e1       	ldi	r25, 0x16	; 22
+    2cb8:	96 87       	std	Z+14, r25	; 0x0e
+    2cba:	85 87       	std	Z+13, r24	; 0x0d
 
 	lpChannel->rs485SendRequestFunc = rs485sendRequestNullFunc;
-    2c1e:	80 e2       	ldi	r24, 0x20	; 32
-    2c20:	96 e1       	ldi	r25, 0x16	; 22
-    2c22:	90 8b       	std	Z+16, r25	; 0x10
-    2c24:	87 87       	std	Z+15, r24	; 0x0f
+    2cbc:	8f e6       	ldi	r24, 0x6F	; 111
+    2cbe:	96 e1       	ldi	r25, 0x16	; 22
+    2cc0:	90 8b       	std	Z+16, r25	; 0x10
+    2cc2:	87 87       	std	Z+15, r24	; 0x0f
 	lpChannel->rs485GetResponseFunc = rs485getResponseNullFunc;
-    2c26:	81 e2       	ldi	r24, 0x21	; 33
-    2c28:	96 e1       	ldi	r25, 0x16	; 22
-    2c2a:	92 8b       	std	Z+18, r25	; 0x12
-    2c2c:	81 8b       	std	Z+17, r24	; 0x11
+    2cc4:	80 e7       	ldi	r24, 0x70	; 112
+    2cc6:	96 e1       	ldi	r25, 0x16	; 22
+    2cc8:	92 8b       	std	Z+18, r25	; 0x12
+    2cca:	81 8b       	std	Z+17, r24	; 0x11
 
 	lpChannel->rs485SetTimeOutError = rs485SetTimeOutErrorNullFunc;
-    2c2e:	85 e2       	ldi	r24, 0x25	; 37
-    2c30:	96 e1       	ldi	r25, 0x16	; 22
-    2c32:	90 87       	std	Z+8, r25	; 0x08
-    2c34:	87 83       	std	Z+7, r24	; 0x07
+    2ccc:	84 e7       	ldi	r24, 0x74	; 116
+    2cce:	96 e1       	ldi	r25, 0x16	; 22
+    2cd0:	90 87       	std	Z+8, r25	; 0x08
+    2cd2:	87 83       	std	Z+7, r24	; 0x07
 	lpChannel->rs485ClrTimeOutError = rs485ClrTimeOutErrorNullFunc;
-    2c36:	86 e2       	ldi	r24, 0x26	; 38
-    2c38:	96 e1       	ldi	r25, 0x16	; 22
-    2c3a:	92 87       	std	Z+10, r25	; 0x0a
-    2c3c:	81 87       	std	Z+9, r24	; 0x09
+    2cd4:	85 e7       	ldi	r24, 0x75	; 117
+    2cd6:	96 e1       	ldi	r25, 0x16	; 22
+    2cd8:	92 87       	std	Z+10, r25	; 0x0a
+    2cda:	81 87       	std	Z+9, r24	; 0x09
 }
-    2c3e:	08 95       	ret
+    2cdc:	08 95       	ret
 
-00002c40 <rs485sendRequestNullFunc>:
+00002cde <rs485sendRequestNullFunc>:
 
 void rs485sendRequestNullFunc( void *lpData )
 {
 }
-    2c40:	08 95       	ret
+    2cde:	08 95       	ret
 
-00002c42 <rs485getResponseNullFunc>:
+00002ce0 <rs485getResponseNullFunc>:
 
 uint8_t rs485getResponseNullFunc( uint8_t *rxBuffer, uint8_t len, void *lpData )
 {
 	return 1;
 }
-    2c42:	81 e0       	ldi	r24, 0x01	; 1
-    2c44:	08 95       	ret
+    2ce0:	81 e0       	ldi	r24, 0x01	; 1
+    2ce2:	08 95       	ret
 
-00002c46 <rs485SetUartSetingsNullFunc>:
+00002ce4 <rs485SetUartSetingsNullFunc>:
 
 void rs485SetUartSetingsNullFunc( void *lpData )
 {
 }
-    2c46:	08 95       	ret
+    2ce4:	08 95       	ret
 
-00002c48 <rs485RestoreUartSetingsNullFunc>:
+00002ce6 <rs485RestoreUartSetingsNullFunc>:
 
 void rs485RestoreUartSetingsNullFunc( void *lpData )
 {
 }
-    2c48:	08 95       	ret
+    2ce6:	08 95       	ret
 
-00002c4a <rs485SetTimeOutErrorNullFunc>:
+00002ce8 <rs485SetTimeOutErrorNullFunc>:
 
 void rs485SetTimeOutErrorNullFunc( void *lpData )
 {
 }
-    2c4a:	08 95       	ret
+    2ce8:	08 95       	ret
 
-00002c4c <rs485ClrTimeOutErrorNullFunc>:
+00002cea <rs485ClrTimeOutErrorNullFunc>:
 
 void rs485ClrTimeOutErrorNullFunc( void *lpData )
 {
 }
-    2c4c:	08 95       	ret
+    2cea:	08 95       	ret
 
-00002c4e <__vector_20>:
+00002cec <__vector_20>:
 
 	UDR0 = ucRS485txBuffer[ ucRS485txState ];
 }
 
 ISR( USART0_TX_vect )
 {
-    2c4e:	1f 92       	push	r1
-    2c50:	0f 92       	push	r0
-    2c52:	0f b6       	in	r0, 0x3f	; 63
-    2c54:	0f 92       	push	r0
-    2c56:	0b b6       	in	r0, 0x3b	; 59
-    2c58:	0f 92       	push	r0
-    2c5a:	11 24       	eor	r1, r1
-    2c5c:	8f 93       	push	r24
-    2c5e:	9f 93       	push	r25
-    2c60:	ef 93       	push	r30
-    2c62:	ff 93       	push	r31
+    2cec:	1f 92       	push	r1
+    2cee:	0f 92       	push	r0
+    2cf0:	0f b6       	in	r0, 0x3f	; 63
+    2cf2:	0f 92       	push	r0
+    2cf4:	0b b6       	in	r0, 0x3b	; 59
+    2cf6:	0f 92       	push	r0
+    2cf8:	11 24       	eor	r1, r1
+    2cfa:	8f 93       	push	r24
+    2cfc:	9f 93       	push	r25
+    2cfe:	ef 93       	push	r30
+    2d00:	ff 93       	push	r31
 	if( !usRS485PortAsMaster ) {
-    2c64:	80 91 a1 03 	lds	r24, 0x03A1
-    2c68:	88 23       	and	r24, r24
-    2c6a:	11 f4       	brne	.+4      	; 0x2c70 <__vector_20+0x22>
+    2d02:	80 91 a1 03 	lds	r24, 0x03A1
+    2d06:	88 23       	and	r24, r24
+    2d08:	11 f4       	brne	.+4      	; 0x2d0e <__vector_20+0x22>
 		disable_rs485_transmit();
-    2c6c:	1a 98       	cbi	0x03, 2	; 3
-    2c6e:	20 c0       	rjmp	.+64     	; 0x2cb0 <__vector_20+0x62>
+    2d0a:	1a 98       	cbi	0x03, 2	; 3
+    2d0c:	20 c0       	rjmp	.+64     	; 0x2d4e <__vector_20+0x62>
 	} else {
 		if( ++ucRS485txState != ucRS485txBufferLenght ) {
-    2c70:	80 91 ad 04 	lds	r24, 0x04AD
-    2c74:	8f 5f       	subi	r24, 0xFF	; 255
-    2c76:	80 93 ad 04 	sts	0x04AD, r24
-    2c7a:	90 91 ad 04 	lds	r25, 0x04AD
-    2c7e:	80 91 b0 04 	lds	r24, 0x04B0
-    2c82:	98 17       	cp	r25, r24
-    2c84:	59 f0       	breq	.+22     	; 0x2c9c <__vector_20+0x4e>
+    2d0e:	80 91 ad 04 	lds	r24, 0x04AD
+    2d12:	8f 5f       	subi	r24, 0xFF	; 255
+    2d14:	80 93 ad 04 	sts	0x04AD, r24
+    2d18:	90 91 ad 04 	lds	r25, 0x04AD
+    2d1c:	80 91 b0 04 	lds	r24, 0x04B0
+    2d20:	98 17       	cp	r25, r24
+    2d22:	59 f0       	breq	.+22     	; 0x2d3a <__vector_20+0x4e>
 			UDR0 = ucRS485txBuffer[ ucRS485txState ];
-    2c86:	80 91 ad 04 	lds	r24, 0x04AD
-    2c8a:	e0 91 ae 04 	lds	r30, 0x04AE
-    2c8e:	f0 91 af 04 	lds	r31, 0x04AF
-    2c92:	e8 0f       	add	r30, r24
-    2c94:	f1 1d       	adc	r31, r1
-    2c96:	80 81       	ld	r24, Z
-    2c98:	8c b9       	out	0x0c, r24	; 12
-    2c9a:	0a c0       	rjmp	.+20     	; 0x2cb0 <__vector_20+0x62>
+    2d24:	80 91 ad 04 	lds	r24, 0x04AD
+    2d28:	e0 91 ae 04 	lds	r30, 0x04AE
+    2d2c:	f0 91 af 04 	lds	r31, 0x04AF
+    2d30:	e8 0f       	add	r30, r24
+    2d32:	f1 1d       	adc	r31, r1
+    2d34:	80 81       	ld	r24, Z
+    2d36:	8c b9       	out	0x0c, r24	; 12
+    2d38:	0a c0       	rjmp	.+20     	; 0x2d4e <__vector_20+0x62>
 		} else {
 			disable_rs485_transmit();
-    2c9c:	1a 98       	cbi	0x03, 2	; 3
+    2d3a:	1a 98       	cbi	0x03, 2	; 3
 			UCSR0B |= _BV( RXEN0 ) | _BV( RXCIE0 );
-    2c9e:	8a b1       	in	r24, 0x0a	; 10
-    2ca0:	80 69       	ori	r24, 0x90	; 144
-    2ca2:	8a b9       	out	0x0a, r24	; 10
+    2d3c:	8a b1       	in	r24, 0x0a	; 10
+    2d3e:	80 69       	ori	r24, 0x90	; 144
+    2d40:	8a b9       	out	0x0a, r24	; 10
 
 			ucRS485txState = ucRS485txBufferLenght = 0;
-    2ca4:	10 92 b0 04 	sts	0x04B0, r1
-    2ca8:	80 91 b0 04 	lds	r24, 0x04B0
-    2cac:	80 93 ad 04 	sts	0x04AD, r24
+    2d42:	10 92 b0 04 	sts	0x04B0, r1
+    2d46:	80 91 b0 04 	lds	r24, 0x04B0
+    2d4a:	80 93 ad 04 	sts	0x04AD, r24
 		}
 	}
 }
-    2cb0:	ff 91       	pop	r31
-    2cb2:	ef 91       	pop	r30
-    2cb4:	9f 91       	pop	r25
-    2cb6:	8f 91       	pop	r24
-    2cb8:	0f 90       	pop	r0
-    2cba:	0b be       	out	0x3b, r0	; 59
-    2cbc:	0f 90       	pop	r0
-    2cbe:	0f be       	out	0x3f, r0	; 63
-    2cc0:	0f 90       	pop	r0
-    2cc2:	1f 90       	pop	r1
-    2cc4:	18 95       	reti
+    2d4e:	ff 91       	pop	r31
+    2d50:	ef 91       	pop	r30
+    2d52:	9f 91       	pop	r25
+    2d54:	8f 91       	pop	r24
+    2d56:	0f 90       	pop	r0
+    2d58:	0b be       	out	0x3b, r0	; 59
+    2d5a:	0f 90       	pop	r0
+    2d5c:	0f be       	out	0x3f, r0	; 63
+    2d5e:	0f 90       	pop	r0
+    2d60:	1f 90       	pop	r1
+    2d62:	18 95       	reti
 
-00002cc6 <__vector_18>:
+00002d64 <__vector_18>:
 
 ISR( USART0_RX_vect )
 {
-    2cc6:	1f 92       	push	r1
-    2cc8:	0f 92       	push	r0
-    2cca:	0f b6       	in	r0, 0x3f	; 63
-    2ccc:	0f 92       	push	r0
-    2cce:	0b b6       	in	r0, 0x3b	; 59
-    2cd0:	0f 92       	push	r0
-    2cd2:	11 24       	eor	r1, r1
-    2cd4:	2f 93       	push	r18
-    2cd6:	3f 93       	push	r19
-    2cd8:	4f 93       	push	r20
-    2cda:	5f 93       	push	r21
-    2cdc:	6f 93       	push	r22
-    2cde:	7f 93       	push	r23
-    2ce0:	8f 93       	push	r24
-    2ce2:	9f 93       	push	r25
-    2ce4:	af 93       	push	r26
-    2ce6:	bf 93       	push	r27
-    2ce8:	ef 93       	push	r30
-    2cea:	ff 93       	push	r31
-    2cec:	df 93       	push	r29
-    2cee:	cf 93       	push	r28
-    2cf0:	0f 92       	push	r0
-    2cf2:	cd b7       	in	r28, 0x3d	; 61
-    2cf4:	de b7       	in	r29, 0x3e	; 62
+    2d64:	1f 92       	push	r1
+    2d66:	0f 92       	push	r0
+    2d68:	0f b6       	in	r0, 0x3f	; 63
+    2d6a:	0f 92       	push	r0
+    2d6c:	0b b6       	in	r0, 0x3b	; 59
+    2d6e:	0f 92       	push	r0
+    2d70:	11 24       	eor	r1, r1
+    2d72:	2f 93       	push	r18
+    2d74:	3f 93       	push	r19
+    2d76:	4f 93       	push	r20
+    2d78:	5f 93       	push	r21
+    2d7a:	6f 93       	push	r22
+    2d7c:	7f 93       	push	r23
+    2d7e:	8f 93       	push	r24
+    2d80:	9f 93       	push	r25
+    2d82:	af 93       	push	r26
+    2d84:	bf 93       	push	r27
+    2d86:	ef 93       	push	r30
+    2d88:	ff 93       	push	r31
+    2d8a:	df 93       	push	r29
+    2d8c:	cf 93       	push	r28
+    2d8e:	0f 92       	push	r0
+    2d90:	cd b7       	in	r28, 0x3d	; 61
+    2d92:	de b7       	in	r29, 0x3e	; 62
 	if( !usRS485PortAsMaster ) {
-    2cf6:	80 91 a1 03 	lds	r24, 0x03A1
-    2cfa:	88 23       	and	r24, r24
-    2cfc:	31 f4       	brne	.+12     	; 0x2d0a <__vector_18+0x44>
+    2d94:	80 91 a1 03 	lds	r24, 0x03A1
+    2d98:	88 23       	and	r24, r24
+    2d9a:	31 f4       	brne	.+12     	; 0x2da8 <__vector_18+0x44>
 		pxMBFrameCBByteReceived();
-    2cfe:	e0 91 0a 07 	lds	r30, 0x070A
-    2d02:	f0 91 0b 07 	lds	r31, 0x070B
-    2d06:	09 95       	icall
-    2d08:	13 c0       	rjmp	.+38     	; 0x2d30 <__vector_18+0x6a>
+    2d9c:	e0 91 0a 07 	lds	r30, 0x070A
+    2da0:	f0 91 0b 07 	lds	r31, 0x070B
+    2da4:	09 95       	icall
+    2da6:	13 c0       	rjmp	.+38     	; 0x2dce <__vector_18+0x6a>
 	} else {
 		volatile char c = UDR0;
-    2d0a:	8c b1       	in	r24, 0x0c	; 12
-    2d0c:	89 83       	std	Y+1, r24	; 0x01
+    2da8:	8c b1       	in	r24, 0x0c	; 12
+    2daa:	89 83       	std	Y+1, r24	; 0x01
 
 		if( ucRS485rxState < 260 ) {
-    2d0e:	80 91 b1 04 	lds	r24, 0x04B1
+    2dac:	80 91 b1 04 	lds	r24, 0x04B1
 			ucRS485rxBuffer[ ucRS485rxState ] = c;
-    2d12:	80 91 b1 04 	lds	r24, 0x04B1
-    2d16:	e0 91 b2 04 	lds	r30, 0x04B2
-    2d1a:	f0 91 b3 04 	lds	r31, 0x04B3
-    2d1e:	e8 0f       	add	r30, r24
-    2d20:	f1 1d       	adc	r31, r1
-    2d22:	89 81       	ldd	r24, Y+1	; 0x01
-    2d24:	80 83       	st	Z, r24
+    2db0:	80 91 b1 04 	lds	r24, 0x04B1
+    2db4:	e0 91 b2 04 	lds	r30, 0x04B2
+    2db8:	f0 91 b3 04 	lds	r31, 0x04B3
+    2dbc:	e8 0f       	add	r30, r24
+    2dbe:	f1 1d       	adc	r31, r1
+    2dc0:	89 81       	ldd	r24, Y+1	; 0x01
+    2dc2:	80 83       	st	Z, r24
 
 			++ucRS485rxState;
-    2d26:	80 91 b1 04 	lds	r24, 0x04B1
-    2d2a:	8f 5f       	subi	r24, 0xFF	; 255
-    2d2c:	80 93 b1 04 	sts	0x04B1, r24
+    2dc4:	80 91 b1 04 	lds	r24, 0x04B1
+    2dc8:	8f 5f       	subi	r24, 0xFF	; 255
+    2dca:	80 93 b1 04 	sts	0x04B1, r24
 		} else {
 			ucRS485rxState = 0;
 		}
 	}
 }
-    2d30:	0f 90       	pop	r0
-    2d32:	cf 91       	pop	r28
-    2d34:	df 91       	pop	r29
-    2d36:	ff 91       	pop	r31
-    2d38:	ef 91       	pop	r30
-    2d3a:	bf 91       	pop	r27
-    2d3c:	af 91       	pop	r26
-    2d3e:	9f 91       	pop	r25
-    2d40:	8f 91       	pop	r24
-    2d42:	7f 91       	pop	r23
-    2d44:	6f 91       	pop	r22
-    2d46:	5f 91       	pop	r21
-    2d48:	4f 91       	pop	r20
-    2d4a:	3f 91       	pop	r19
-    2d4c:	2f 91       	pop	r18
-    2d4e:	0f 90       	pop	r0
-    2d50:	0b be       	out	0x3b, r0	; 59
-    2d52:	0f 90       	pop	r0
-    2d54:	0f be       	out	0x3f, r0	; 63
-    2d56:	0f 90       	pop	r0
-    2d58:	1f 90       	pop	r1
-    2d5a:	18 95       	reti
+    2dce:	0f 90       	pop	r0
+    2dd0:	cf 91       	pop	r28
+    2dd2:	df 91       	pop	r29
+    2dd4:	ff 91       	pop	r31
+    2dd6:	ef 91       	pop	r30
+    2dd8:	bf 91       	pop	r27
+    2dda:	af 91       	pop	r26
+    2ddc:	9f 91       	pop	r25
+    2dde:	8f 91       	pop	r24
+    2de0:	7f 91       	pop	r23
+    2de2:	6f 91       	pop	r22
+    2de4:	5f 91       	pop	r21
+    2de6:	4f 91       	pop	r20
+    2de8:	3f 91       	pop	r19
+    2dea:	2f 91       	pop	r18
+    2dec:	0f 90       	pop	r0
+    2dee:	0b be       	out	0x3b, r0	; 59
+    2df0:	0f 90       	pop	r0
+    2df2:	0f be       	out	0x3f, r0	; 63
+    2df4:	0f 90       	pop	r0
+    2df6:	1f 90       	pop	r1
+    2df8:	18 95       	reti
 
-00002d5c <__vector_19>:
+00002dfa <__vector_19>:
 
 ISR( USART0_UDRE_vect )
 {
-    2d5c:	1f 92       	push	r1
-    2d5e:	0f 92       	push	r0
-    2d60:	0f b6       	in	r0, 0x3f	; 63
-    2d62:	0f 92       	push	r0
-    2d64:	0b b6       	in	r0, 0x3b	; 59
-    2d66:	0f 92       	push	r0
-    2d68:	11 24       	eor	r1, r1
-    2d6a:	2f 93       	push	r18
-    2d6c:	3f 93       	push	r19
-    2d6e:	4f 93       	push	r20
-    2d70:	5f 93       	push	r21
-    2d72:	6f 93       	push	r22
-    2d74:	7f 93       	push	r23
-    2d76:	8f 93       	push	r24
-    2d78:	9f 93       	push	r25
-    2d7a:	af 93       	push	r26
-    2d7c:	bf 93       	push	r27
-    2d7e:	ef 93       	push	r30
-    2d80:	ff 93       	push	r31
+    2dfa:	1f 92       	push	r1
+    2dfc:	0f 92       	push	r0
+    2dfe:	0f b6       	in	r0, 0x3f	; 63
+    2e00:	0f 92       	push	r0
+    2e02:	0b b6       	in	r0, 0x3b	; 59
+    2e04:	0f 92       	push	r0
+    2e06:	11 24       	eor	r1, r1
+    2e08:	2f 93       	push	r18
+    2e0a:	3f 93       	push	r19
+    2e0c:	4f 93       	push	r20
+    2e0e:	5f 93       	push	r21
+    2e10:	6f 93       	push	r22
+    2e12:	7f 93       	push	r23
+    2e14:	8f 93       	push	r24
+    2e16:	9f 93       	push	r25
+    2e18:	af 93       	push	r26
+    2e1a:	bf 93       	push	r27
+    2e1c:	ef 93       	push	r30
+    2e1e:	ff 93       	push	r31
 	if( !usRS485PortAsMaster ) {
-    2d82:	80 91 a1 03 	lds	r24, 0x03A1
-    2d86:	88 23       	and	r24, r24
-    2d88:	29 f4       	brne	.+10     	; 0x2d94 <__vector_19+0x38>
+    2e20:	80 91 a1 03 	lds	r24, 0x03A1
+    2e24:	88 23       	and	r24, r24
+    2e26:	29 f4       	brne	.+10     	; 0x2e32 <__vector_19+0x38>
 		pxMBFrameCBTransmitterEmpty();
-    2d8a:	e0 91 06 07 	lds	r30, 0x0706
-    2d8e:	f0 91 07 07 	lds	r31, 0x0707
-    2d92:	09 95       	icall
+    2e28:	e0 91 06 07 	lds	r30, 0x0706
+    2e2c:	f0 91 07 07 	lds	r31, 0x0707
+    2e30:	09 95       	icall
 	}
 }
-    2d94:	ff 91       	pop	r31
-    2d96:	ef 91       	pop	r30
-    2d98:	bf 91       	pop	r27
-    2d9a:	af 91       	pop	r26
-    2d9c:	9f 91       	pop	r25
-    2d9e:	8f 91       	pop	r24
-    2da0:	7f 91       	pop	r23
-    2da2:	6f 91       	pop	r22
-    2da4:	5f 91       	pop	r21
-    2da6:	4f 91       	pop	r20
-    2da8:	3f 91       	pop	r19
-    2daa:	2f 91       	pop	r18
-    2dac:	0f 90       	pop	r0
-    2dae:	0b be       	out	0x3b, r0	; 59
-    2db0:	0f 90       	pop	r0
-    2db2:	0f be       	out	0x3f, r0	; 63
-    2db4:	0f 90       	pop	r0
-    2db6:	1f 90       	pop	r1
-    2db8:	18 95       	reti
+    2e32:	ff 91       	pop	r31
+    2e34:	ef 91       	pop	r30
+    2e36:	bf 91       	pop	r27
+    2e38:	af 91       	pop	r26
+    2e3a:	9f 91       	pop	r25
+    2e3c:	8f 91       	pop	r24
+    2e3e:	7f 91       	pop	r23
+    2e40:	6f 91       	pop	r22
+    2e42:	5f 91       	pop	r21
+    2e44:	4f 91       	pop	r20
+    2e46:	3f 91       	pop	r19
+    2e48:	2f 91       	pop	r18
+    2e4a:	0f 90       	pop	r0
+    2e4c:	0b be       	out	0x3b, r0	; 59
+    2e4e:	0f 90       	pop	r0
+    2e50:	0f be       	out	0x3f, r0	; 63
+    2e52:	0f 90       	pop	r0
+    2e54:	1f 90       	pop	r1
+    2e56:	18 95       	reti
 
-00002dba <initRS485>:
+00002e58 <initRS485>:
 
 void initRS485( unsigned long ulBaudRate, uint8_t ucDataBits, uint8_t ucStopBits, uint8_t ucParity )
 {
-    2dba:	cf 92       	push	r12
-    2dbc:	df 92       	push	r13
-    2dbe:	ef 92       	push	r14
-    2dc0:	ff 92       	push	r15
-    2dc2:	0f 93       	push	r16
-    2dc4:	6b 01       	movw	r12, r22
-    2dc6:	7c 01       	movw	r14, r24
+    2e58:	cf 92       	push	r12
+    2e5a:	df 92       	push	r13
+    2e5c:	ef 92       	push	r14
+    2e5e:	ff 92       	push	r15
+    2e60:	0f 93       	push	r16
+    2e62:	6b 01       	movw	r12, r22
+    2e64:	7c 01       	movw	r14, r24
 	if( usRS485PortAsMaster ) {
-    2dc8:	80 91 a1 03 	lds	r24, 0x03A1
-    2dcc:	88 23       	and	r24, r24
-    2dce:	09 f4       	brne	.+2      	; 0x2dd2 <initRS485+0x18>
-    2dd0:	28 c1       	rjmp	.+592    	; 0x3022 <initRS485+0x268>
+    2e66:	80 91 a1 03 	lds	r24, 0x03A1
+    2e6a:	88 23       	and	r24, r24
+    2e6c:	09 f4       	brne	.+2      	; 0x2e70 <initRS485+0x18>
+    2e6e:	28 c1       	rjmp	.+592    	; 0x30c0 <initRS485+0x268>
 		disable_rs485_transmit();
-    2dd2:	1a 98       	cbi	0x03, 2	; 3
+    2e70:	1a 98       	cbi	0x03, 2	; 3
 		
 		UCSR0A = 0;
-    2dd4:	1b b8       	out	0x0b, r1	; 11
+    2e72:	1b b8       	out	0x0b, r1	; 11
 		UCSR0B = 0;
-    2dd6:	1a b8       	out	0x0a, r1	; 10
+    2e74:	1a b8       	out	0x0a, r1	; 10
 		UCSR0C = 0;
-    2dd8:	10 92 95 00 	sts	0x0095, r1
+    2e76:	10 92 95 00 	sts	0x0095, r1
 
 		switch( ulBaudRate ) {
-    2ddc:	80 e0       	ldi	r24, 0x00	; 0
-    2dde:	c8 16       	cp	r12, r24
-    2de0:	86 e9       	ldi	r24, 0x96	; 150
-    2de2:	d8 06       	cpc	r13, r24
-    2de4:	80 e0       	ldi	r24, 0x00	; 0
-    2de6:	e8 06       	cpc	r14, r24
-    2de8:	80 e0       	ldi	r24, 0x00	; 0
-    2dea:	f8 06       	cpc	r15, r24
-    2dec:	09 f4       	brne	.+2      	; 0x2df0 <initRS485+0x36>
-    2dee:	c7 c0       	rjmp	.+398    	; 0x2f7e <initRS485+0x1c4>
-    2df0:	81 e0       	ldi	r24, 0x01	; 1
-    2df2:	c8 16       	cp	r12, r24
-    2df4:	86 e9       	ldi	r24, 0x96	; 150
-    2df6:	d8 06       	cpc	r13, r24
-    2df8:	80 e0       	ldi	r24, 0x00	; 0
-    2dfa:	e8 06       	cpc	r14, r24
-    2dfc:	80 e0       	ldi	r24, 0x00	; 0
-    2dfe:	f8 06       	cpc	r15, r24
-    2e00:	08 f0       	brcs	.+2      	; 0x2e04 <initRS485+0x4a>
-    2e02:	47 c0       	rjmp	.+142    	; 0x2e92 <initRS485+0xd8>
-    2e04:	80 e8       	ldi	r24, 0x80	; 128
-    2e06:	c8 16       	cp	r12, r24
-    2e08:	85 e2       	ldi	r24, 0x25	; 37
-    2e0a:	d8 06       	cpc	r13, r24
-    2e0c:	80 e0       	ldi	r24, 0x00	; 0
-    2e0e:	e8 06       	cpc	r14, r24
-    2e10:	80 e0       	ldi	r24, 0x00	; 0
-    2e12:	f8 06       	cpc	r15, r24
-    2e14:	09 f4       	brne	.+2      	; 0x2e18 <initRS485+0x5e>
-    2e16:	9b c0       	rjmp	.+310    	; 0x2f4e <initRS485+0x194>
-    2e18:	81 e8       	ldi	r24, 0x81	; 129
-    2e1a:	c8 16       	cp	r12, r24
-    2e1c:	85 e2       	ldi	r24, 0x25	; 37
-    2e1e:	d8 06       	cpc	r13, r24
-    2e20:	80 e0       	ldi	r24, 0x00	; 0
-    2e22:	e8 06       	cpc	r14, r24
-    2e24:	80 e0       	ldi	r24, 0x00	; 0
-    2e26:	f8 06       	cpc	r15, r24
-    2e28:	a8 f4       	brcc	.+42     	; 0x2e54 <initRS485+0x9a>
-    2e2a:	80 e6       	ldi	r24, 0x60	; 96
-    2e2c:	c8 16       	cp	r12, r24
-    2e2e:	89 e0       	ldi	r24, 0x09	; 9
-    2e30:	d8 06       	cpc	r13, r24
-    2e32:	80 e0       	ldi	r24, 0x00	; 0
-    2e34:	e8 06       	cpc	r14, r24
-    2e36:	80 e0       	ldi	r24, 0x00	; 0
-    2e38:	f8 06       	cpc	r15, r24
-    2e3a:	09 f4       	brne	.+2      	; 0x2e3e <initRS485+0x84>
-    2e3c:	7b c0       	rjmp	.+246    	; 0x2f34 <initRS485+0x17a>
-    2e3e:	80 ec       	ldi	r24, 0xC0	; 192
-    2e40:	c8 16       	cp	r12, r24
-    2e42:	82 e1       	ldi	r24, 0x12	; 18
-    2e44:	d8 06       	cpc	r13, r24
-    2e46:	80 e0       	ldi	r24, 0x00	; 0
-    2e48:	e8 06       	cpc	r14, r24
-    2e4a:	80 e0       	ldi	r24, 0x00	; 0
-    2e4c:	f8 06       	cpc	r15, r24
-    2e4e:	09 f0       	breq	.+2      	; 0x2e52 <initRS485+0x98>
-    2e50:	bd c0       	rjmp	.+378    	; 0x2fcc <initRS485+0x212>
-    2e52:	77 c0       	rjmp	.+238    	; 0x2f42 <initRS485+0x188>
-    2e54:	80 e0       	ldi	r24, 0x00	; 0
-    2e56:	c8 16       	cp	r12, r24
-    2e58:	8b e4       	ldi	r24, 0x4B	; 75
-    2e5a:	d8 06       	cpc	r13, r24
-    2e5c:	80 e0       	ldi	r24, 0x00	; 0
-    2e5e:	e8 06       	cpc	r14, r24
-    2e60:	80 e0       	ldi	r24, 0x00	; 0
-    2e62:	f8 06       	cpc	r15, r24
-    2e64:	09 f4       	brne	.+2      	; 0x2e68 <initRS485+0xae>
-    2e66:	7f c0       	rjmp	.+254    	; 0x2f66 <initRS485+0x1ac>
-    2e68:	80 e8       	ldi	r24, 0x80	; 128
-    2e6a:	c8 16       	cp	r12, r24
-    2e6c:	80 e7       	ldi	r24, 0x70	; 112
-    2e6e:	d8 06       	cpc	r13, r24
-    2e70:	80 e0       	ldi	r24, 0x00	; 0
-    2e72:	e8 06       	cpc	r14, r24
-    2e74:	80 e0       	ldi	r24, 0x00	; 0
-    2e76:	f8 06       	cpc	r15, r24
-    2e78:	09 f4       	brne	.+2      	; 0x2e7c <initRS485+0xc2>
-    2e7a:	7b c0       	rjmp	.+246    	; 0x2f72 <initRS485+0x1b8>
-    2e7c:	80 e4       	ldi	r24, 0x40	; 64
-    2e7e:	c8 16       	cp	r12, r24
-    2e80:	88 e3       	ldi	r24, 0x38	; 56
-    2e82:	d8 06       	cpc	r13, r24
-    2e84:	80 e0       	ldi	r24, 0x00	; 0
-    2e86:	e8 06       	cpc	r14, r24
-    2e88:	80 e0       	ldi	r24, 0x00	; 0
-    2e8a:	f8 06       	cpc	r15, r24
-    2e8c:	09 f0       	breq	.+2      	; 0x2e90 <initRS485+0xd6>
-    2e8e:	9e c0       	rjmp	.+316    	; 0x2fcc <initRS485+0x212>
-    2e90:	64 c0       	rjmp	.+200    	; 0x2f5a <initRS485+0x1a0>
-    2e92:	80 e0       	ldi	r24, 0x00	; 0
-    2e94:	c8 16       	cp	r12, r24
-    2e96:	84 e8       	ldi	r24, 0x84	; 132
-    2e98:	d8 06       	cpc	r13, r24
-    2e9a:	83 e0       	ldi	r24, 0x03	; 3
-    2e9c:	e8 06       	cpc	r14, r24
-    2e9e:	80 e0       	ldi	r24, 0x00	; 0
-    2ea0:	f8 06       	cpc	r15, r24
-    2ea2:	09 f4       	brne	.+2      	; 0x2ea6 <initRS485+0xec>
-    2ea4:	8e c0       	rjmp	.+284    	; 0x2fc2 <initRS485+0x208>
-    2ea6:	81 e0       	ldi	r24, 0x01	; 1
-    2ea8:	c8 16       	cp	r12, r24
-    2eaa:	84 e8       	ldi	r24, 0x84	; 132
-    2eac:	d8 06       	cpc	r13, r24
-    2eae:	83 e0       	ldi	r24, 0x03	; 3
-    2eb0:	e8 06       	cpc	r14, r24
-    2eb2:	80 e0       	ldi	r24, 0x00	; 0
-    2eb4:	f8 06       	cpc	r15, r24
-    2eb6:	f8 f4       	brcc	.+62     	; 0x2ef6 <initRS485+0x13c>
-    2eb8:	80 e0       	ldi	r24, 0x00	; 0
-    2eba:	c8 16       	cp	r12, r24
-    2ebc:	8c e2       	ldi	r24, 0x2C	; 44
-    2ebe:	d8 06       	cpc	r13, r24
-    2ec0:	81 e0       	ldi	r24, 0x01	; 1
-    2ec2:	e8 06       	cpc	r14, r24
-    2ec4:	80 e0       	ldi	r24, 0x00	; 0
-    2ec6:	f8 06       	cpc	r15, r24
-    2ec8:	09 f4       	brne	.+2      	; 0x2ecc <initRS485+0x112>
-    2eca:	65 c0       	rjmp	.+202    	; 0x2f96 <initRS485+0x1dc>
-    2ecc:	80 e0       	ldi	r24, 0x00	; 0
-    2ece:	c8 16       	cp	r12, r24
-    2ed0:	82 ec       	ldi	r24, 0xC2	; 194
-    2ed2:	d8 06       	cpc	r13, r24
-    2ed4:	81 e0       	ldi	r24, 0x01	; 1
-    2ed6:	e8 06       	cpc	r14, r24
-    2ed8:	80 e0       	ldi	r24, 0x00	; 0
-    2eda:	f8 06       	cpc	r15, r24
-    2edc:	09 f4       	brne	.+2      	; 0x2ee0 <initRS485+0x126>
-    2ede:	61 c0       	rjmp	.+194    	; 0x2fa2 <initRS485+0x1e8>
-    2ee0:	80 e0       	ldi	r24, 0x00	; 0
-    2ee2:	c8 16       	cp	r12, r24
-    2ee4:	81 ee       	ldi	r24, 0xE1	; 225
-    2ee6:	d8 06       	cpc	r13, r24
+    2e7a:	80 e0       	ldi	r24, 0x00	; 0
+    2e7c:	c8 16       	cp	r12, r24
+    2e7e:	86 e9       	ldi	r24, 0x96	; 150
+    2e80:	d8 06       	cpc	r13, r24
+    2e82:	80 e0       	ldi	r24, 0x00	; 0
+    2e84:	e8 06       	cpc	r14, r24
+    2e86:	80 e0       	ldi	r24, 0x00	; 0
+    2e88:	f8 06       	cpc	r15, r24
+    2e8a:	09 f4       	brne	.+2      	; 0x2e8e <initRS485+0x36>
+    2e8c:	c7 c0       	rjmp	.+398    	; 0x301c <initRS485+0x1c4>
+    2e8e:	81 e0       	ldi	r24, 0x01	; 1
+    2e90:	c8 16       	cp	r12, r24
+    2e92:	86 e9       	ldi	r24, 0x96	; 150
+    2e94:	d8 06       	cpc	r13, r24
+    2e96:	80 e0       	ldi	r24, 0x00	; 0
+    2e98:	e8 06       	cpc	r14, r24
+    2e9a:	80 e0       	ldi	r24, 0x00	; 0
+    2e9c:	f8 06       	cpc	r15, r24
+    2e9e:	08 f0       	brcs	.+2      	; 0x2ea2 <initRS485+0x4a>
+    2ea0:	47 c0       	rjmp	.+142    	; 0x2f30 <initRS485+0xd8>
+    2ea2:	80 e8       	ldi	r24, 0x80	; 128
+    2ea4:	c8 16       	cp	r12, r24
+    2ea6:	85 e2       	ldi	r24, 0x25	; 37
+    2ea8:	d8 06       	cpc	r13, r24
+    2eaa:	80 e0       	ldi	r24, 0x00	; 0
+    2eac:	e8 06       	cpc	r14, r24
+    2eae:	80 e0       	ldi	r24, 0x00	; 0
+    2eb0:	f8 06       	cpc	r15, r24
+    2eb2:	09 f4       	brne	.+2      	; 0x2eb6 <initRS485+0x5e>
+    2eb4:	9b c0       	rjmp	.+310    	; 0x2fec <initRS485+0x194>
+    2eb6:	81 e8       	ldi	r24, 0x81	; 129
+    2eb8:	c8 16       	cp	r12, r24
+    2eba:	85 e2       	ldi	r24, 0x25	; 37
+    2ebc:	d8 06       	cpc	r13, r24
+    2ebe:	80 e0       	ldi	r24, 0x00	; 0
+    2ec0:	e8 06       	cpc	r14, r24
+    2ec2:	80 e0       	ldi	r24, 0x00	; 0
+    2ec4:	f8 06       	cpc	r15, r24
+    2ec6:	a8 f4       	brcc	.+42     	; 0x2ef2 <initRS485+0x9a>
+    2ec8:	80 e6       	ldi	r24, 0x60	; 96
+    2eca:	c8 16       	cp	r12, r24
+    2ecc:	89 e0       	ldi	r24, 0x09	; 9
+    2ece:	d8 06       	cpc	r13, r24
+    2ed0:	80 e0       	ldi	r24, 0x00	; 0
+    2ed2:	e8 06       	cpc	r14, r24
+    2ed4:	80 e0       	ldi	r24, 0x00	; 0
+    2ed6:	f8 06       	cpc	r15, r24
+    2ed8:	09 f4       	brne	.+2      	; 0x2edc <initRS485+0x84>
+    2eda:	7b c0       	rjmp	.+246    	; 0x2fd2 <initRS485+0x17a>
+    2edc:	80 ec       	ldi	r24, 0xC0	; 192
+    2ede:	c8 16       	cp	r12, r24
+    2ee0:	82 e1       	ldi	r24, 0x12	; 18
+    2ee2:	d8 06       	cpc	r13, r24
+    2ee4:	80 e0       	ldi	r24, 0x00	; 0
+    2ee6:	e8 06       	cpc	r14, r24
     2ee8:	80 e0       	ldi	r24, 0x00	; 0
-    2eea:	e8 06       	cpc	r14, r24
-    2eec:	80 e0       	ldi	r24, 0x00	; 0
-    2eee:	f8 06       	cpc	r15, r24
-    2ef0:	09 f0       	breq	.+2      	; 0x2ef4 <initRS485+0x13a>
-    2ef2:	6c c0       	rjmp	.+216    	; 0x2fcc <initRS485+0x212>
-    2ef4:	4a c0       	rjmp	.+148    	; 0x2f8a <initRS485+0x1d0>
-    2ef6:	80 e2       	ldi	r24, 0x20	; 32
-    2ef8:	c8 16       	cp	r12, r24
-    2efa:	81 ea       	ldi	r24, 0xA1	; 161
-    2efc:	d8 06       	cpc	r13, r24
-    2efe:	87 e0       	ldi	r24, 0x07	; 7
-    2f00:	e8 06       	cpc	r14, r24
-    2f02:	80 e0       	ldi	r24, 0x00	; 0
-    2f04:	f8 06       	cpc	r15, r24
-    2f06:	09 f4       	brne	.+2      	; 0x2f0a <initRS485+0x150>
-    2f08:	52 c0       	rjmp	.+164    	; 0x2fae <initRS485+0x1f4>
-    2f0a:	80 e4       	ldi	r24, 0x40	; 64
-    2f0c:	c8 16       	cp	r12, r24
-    2f0e:	82 e4       	ldi	r24, 0x42	; 66
-    2f10:	d8 06       	cpc	r13, r24
-    2f12:	8f e0       	ldi	r24, 0x0F	; 15
-    2f14:	e8 06       	cpc	r14, r24
-    2f16:	80 e0       	ldi	r24, 0x00	; 0
-    2f18:	f8 06       	cpc	r15, r24
-    2f1a:	09 f4       	brne	.+2      	; 0x2f1e <initRS485+0x164>
-    2f1c:	4e c0       	rjmp	.+156    	; 0x2fba <initRS485+0x200>
-    2f1e:	80 e9       	ldi	r24, 0x90	; 144
-    2f20:	c8 16       	cp	r12, r24
-    2f22:	80 ed       	ldi	r24, 0xD0	; 208
-    2f24:	d8 06       	cpc	r13, r24
-    2f26:	83 e0       	ldi	r24, 0x03	; 3
-    2f28:	e8 06       	cpc	r14, r24
-    2f2a:	80 e0       	ldi	r24, 0x00	; 0
-    2f2c:	f8 06       	cpc	r15, r24
-    2f2e:	09 f0       	breq	.+2      	; 0x2f32 <initRS485+0x178>
-    2f30:	4d c0       	rjmp	.+154    	; 0x2fcc <initRS485+0x212>
-    2f32:	47 c0       	rjmp	.+142    	; 0x2fc2 <initRS485+0x208>
-    2f34:	e0 ea       	ldi	r30, 0xA0	; 160
-    2f36:	ce 2e       	mov	r12, r30
-    2f38:	e1 e0       	ldi	r30, 0x01	; 1
-    2f3a:	de 2e       	mov	r13, r30
-    2f3c:	e1 2c       	mov	r14, r1
-    2f3e:	f1 2c       	mov	r15, r1
-    2f40:	45 c0       	rjmp	.+138    	; 0x2fcc <initRS485+0x212>
-    2f42:	7f ec       	ldi	r23, 0xCF	; 207
-    2f44:	c7 2e       	mov	r12, r23
-    2f46:	d1 2c       	mov	r13, r1
-    2f48:	e1 2c       	mov	r14, r1
-    2f4a:	f1 2c       	mov	r15, r1
-    2f4c:	3f c0       	rjmp	.+126    	; 0x2fcc <initRS485+0x212>
+    2eea:	f8 06       	cpc	r15, r24
+    2eec:	09 f0       	breq	.+2      	; 0x2ef0 <initRS485+0x98>
+    2eee:	bd c0       	rjmp	.+378    	; 0x306a <initRS485+0x212>
+    2ef0:	77 c0       	rjmp	.+238    	; 0x2fe0 <initRS485+0x188>
+    2ef2:	80 e0       	ldi	r24, 0x00	; 0
+    2ef4:	c8 16       	cp	r12, r24
+    2ef6:	8b e4       	ldi	r24, 0x4B	; 75
+    2ef8:	d8 06       	cpc	r13, r24
+    2efa:	80 e0       	ldi	r24, 0x00	; 0
+    2efc:	e8 06       	cpc	r14, r24
+    2efe:	80 e0       	ldi	r24, 0x00	; 0
+    2f00:	f8 06       	cpc	r15, r24
+    2f02:	09 f4       	brne	.+2      	; 0x2f06 <initRS485+0xae>
+    2f04:	7f c0       	rjmp	.+254    	; 0x3004 <initRS485+0x1ac>
+    2f06:	80 e8       	ldi	r24, 0x80	; 128
+    2f08:	c8 16       	cp	r12, r24
+    2f0a:	80 e7       	ldi	r24, 0x70	; 112
+    2f0c:	d8 06       	cpc	r13, r24
+    2f0e:	80 e0       	ldi	r24, 0x00	; 0
+    2f10:	e8 06       	cpc	r14, r24
+    2f12:	80 e0       	ldi	r24, 0x00	; 0
+    2f14:	f8 06       	cpc	r15, r24
+    2f16:	09 f4       	brne	.+2      	; 0x2f1a <initRS485+0xc2>
+    2f18:	7b c0       	rjmp	.+246    	; 0x3010 <initRS485+0x1b8>
+    2f1a:	80 e4       	ldi	r24, 0x40	; 64
+    2f1c:	c8 16       	cp	r12, r24
+    2f1e:	88 e3       	ldi	r24, 0x38	; 56
+    2f20:	d8 06       	cpc	r13, r24
+    2f22:	80 e0       	ldi	r24, 0x00	; 0
+    2f24:	e8 06       	cpc	r14, r24
+    2f26:	80 e0       	ldi	r24, 0x00	; 0
+    2f28:	f8 06       	cpc	r15, r24
+    2f2a:	09 f0       	breq	.+2      	; 0x2f2e <initRS485+0xd6>
+    2f2c:	9e c0       	rjmp	.+316    	; 0x306a <initRS485+0x212>
+    2f2e:	64 c0       	rjmp	.+200    	; 0x2ff8 <initRS485+0x1a0>
+    2f30:	80 e0       	ldi	r24, 0x00	; 0
+    2f32:	c8 16       	cp	r12, r24
+    2f34:	84 e8       	ldi	r24, 0x84	; 132
+    2f36:	d8 06       	cpc	r13, r24
+    2f38:	83 e0       	ldi	r24, 0x03	; 3
+    2f3a:	e8 06       	cpc	r14, r24
+    2f3c:	80 e0       	ldi	r24, 0x00	; 0
+    2f3e:	f8 06       	cpc	r15, r24
+    2f40:	09 f4       	brne	.+2      	; 0x2f44 <initRS485+0xec>
+    2f42:	8e c0       	rjmp	.+284    	; 0x3060 <initRS485+0x208>
+    2f44:	81 e0       	ldi	r24, 0x01	; 1
+    2f46:	c8 16       	cp	r12, r24
+    2f48:	84 e8       	ldi	r24, 0x84	; 132
+    2f4a:	d8 06       	cpc	r13, r24
+    2f4c:	83 e0       	ldi	r24, 0x03	; 3
+    2f4e:	e8 06       	cpc	r14, r24
+    2f50:	80 e0       	ldi	r24, 0x00	; 0
+    2f52:	f8 06       	cpc	r15, r24
+    2f54:	f8 f4       	brcc	.+62     	; 0x2f94 <initRS485+0x13c>
+    2f56:	80 e0       	ldi	r24, 0x00	; 0
+    2f58:	c8 16       	cp	r12, r24
+    2f5a:	8c e2       	ldi	r24, 0x2C	; 44
+    2f5c:	d8 06       	cpc	r13, r24
+    2f5e:	81 e0       	ldi	r24, 0x01	; 1
+    2f60:	e8 06       	cpc	r14, r24
+    2f62:	80 e0       	ldi	r24, 0x00	; 0
+    2f64:	f8 06       	cpc	r15, r24
+    2f66:	09 f4       	brne	.+2      	; 0x2f6a <initRS485+0x112>
+    2f68:	65 c0       	rjmp	.+202    	; 0x3034 <initRS485+0x1dc>
+    2f6a:	80 e0       	ldi	r24, 0x00	; 0
+    2f6c:	c8 16       	cp	r12, r24
+    2f6e:	82 ec       	ldi	r24, 0xC2	; 194
+    2f70:	d8 06       	cpc	r13, r24
+    2f72:	81 e0       	ldi	r24, 0x01	; 1
+    2f74:	e8 06       	cpc	r14, r24
+    2f76:	80 e0       	ldi	r24, 0x00	; 0
+    2f78:	f8 06       	cpc	r15, r24
+    2f7a:	09 f4       	brne	.+2      	; 0x2f7e <initRS485+0x126>
+    2f7c:	61 c0       	rjmp	.+194    	; 0x3040 <initRS485+0x1e8>
+    2f7e:	80 e0       	ldi	r24, 0x00	; 0
+    2f80:	c8 16       	cp	r12, r24
+    2f82:	81 ee       	ldi	r24, 0xE1	; 225
+    2f84:	d8 06       	cpc	r13, r24
+    2f86:	80 e0       	ldi	r24, 0x00	; 0
+    2f88:	e8 06       	cpc	r14, r24
+    2f8a:	80 e0       	ldi	r24, 0x00	; 0
+    2f8c:	f8 06       	cpc	r15, r24
+    2f8e:	09 f0       	breq	.+2      	; 0x2f92 <initRS485+0x13a>
+    2f90:	6c c0       	rjmp	.+216    	; 0x306a <initRS485+0x212>
+    2f92:	4a c0       	rjmp	.+148    	; 0x3028 <initRS485+0x1d0>
+    2f94:	80 e2       	ldi	r24, 0x20	; 32
+    2f96:	c8 16       	cp	r12, r24
+    2f98:	81 ea       	ldi	r24, 0xA1	; 161
+    2f9a:	d8 06       	cpc	r13, r24
+    2f9c:	87 e0       	ldi	r24, 0x07	; 7
+    2f9e:	e8 06       	cpc	r14, r24
+    2fa0:	80 e0       	ldi	r24, 0x00	; 0
+    2fa2:	f8 06       	cpc	r15, r24
+    2fa4:	09 f4       	brne	.+2      	; 0x2fa8 <initRS485+0x150>
+    2fa6:	52 c0       	rjmp	.+164    	; 0x304c <initRS485+0x1f4>
+    2fa8:	80 e4       	ldi	r24, 0x40	; 64
+    2faa:	c8 16       	cp	r12, r24
+    2fac:	82 e4       	ldi	r24, 0x42	; 66
+    2fae:	d8 06       	cpc	r13, r24
+    2fb0:	8f e0       	ldi	r24, 0x0F	; 15
+    2fb2:	e8 06       	cpc	r14, r24
+    2fb4:	80 e0       	ldi	r24, 0x00	; 0
+    2fb6:	f8 06       	cpc	r15, r24
+    2fb8:	09 f4       	brne	.+2      	; 0x2fbc <initRS485+0x164>
+    2fba:	4e c0       	rjmp	.+156    	; 0x3058 <initRS485+0x200>
+    2fbc:	80 e9       	ldi	r24, 0x90	; 144
+    2fbe:	c8 16       	cp	r12, r24
+    2fc0:	80 ed       	ldi	r24, 0xD0	; 208
+    2fc2:	d8 06       	cpc	r13, r24
+    2fc4:	83 e0       	ldi	r24, 0x03	; 3
+    2fc6:	e8 06       	cpc	r14, r24
+    2fc8:	80 e0       	ldi	r24, 0x00	; 0
+    2fca:	f8 06       	cpc	r15, r24
+    2fcc:	09 f0       	breq	.+2      	; 0x2fd0 <initRS485+0x178>
+    2fce:	4d c0       	rjmp	.+154    	; 0x306a <initRS485+0x212>
+    2fd0:	47 c0       	rjmp	.+142    	; 0x3060 <initRS485+0x208>
+    2fd2:	e0 ea       	ldi	r30, 0xA0	; 160
+    2fd4:	ce 2e       	mov	r12, r30
+    2fd6:	e1 e0       	ldi	r30, 0x01	; 1
+    2fd8:	de 2e       	mov	r13, r30
+    2fda:	e1 2c       	mov	r14, r1
+    2fdc:	f1 2c       	mov	r15, r1
+    2fde:	45 c0       	rjmp	.+138    	; 0x306a <initRS485+0x212>
+    2fe0:	7f ec       	ldi	r23, 0xCF	; 207
+    2fe2:	c7 2e       	mov	r12, r23
+    2fe4:	d1 2c       	mov	r13, r1
+    2fe6:	e1 2c       	mov	r14, r1
+    2fe8:	f1 2c       	mov	r15, r1
+    2fea:	3f c0       	rjmp	.+126    	; 0x306a <initRS485+0x212>
 		case 2400: ulBaudRate = 416; break;
 		case 4800: ulBaudRate = 207; break;
-    2f4e:	67 e6       	ldi	r22, 0x67	; 103
-    2f50:	c6 2e       	mov	r12, r22
-    2f52:	d1 2c       	mov	r13, r1
-    2f54:	e1 2c       	mov	r14, r1
-    2f56:	f1 2c       	mov	r15, r1
-    2f58:	39 c0       	rjmp	.+114    	; 0x2fcc <initRS485+0x212>
+    2fec:	67 e6       	ldi	r22, 0x67	; 103
+    2fee:	c6 2e       	mov	r12, r22
+    2ff0:	d1 2c       	mov	r13, r1
+    2ff2:	e1 2c       	mov	r14, r1
+    2ff4:	f1 2c       	mov	r15, r1
+    2ff6:	39 c0       	rjmp	.+114    	; 0x306a <initRS485+0x212>
 		case 9600: ulBaudRate = 103; break;
-    2f5a:	54 e4       	ldi	r21, 0x44	; 68
-    2f5c:	c5 2e       	mov	r12, r21
-    2f5e:	d1 2c       	mov	r13, r1
-    2f60:	e1 2c       	mov	r14, r1
-    2f62:	f1 2c       	mov	r15, r1
-    2f64:	33 c0       	rjmp	.+102    	; 0x2fcc <initRS485+0x212>
+    2ff8:	54 e4       	ldi	r21, 0x44	; 68
+    2ffa:	c5 2e       	mov	r12, r21
+    2ffc:	d1 2c       	mov	r13, r1
+    2ffe:	e1 2c       	mov	r14, r1
+    3000:	f1 2c       	mov	r15, r1
+    3002:	33 c0       	rjmp	.+102    	; 0x306a <initRS485+0x212>
 		case 14400: ulBaudRate = 68; break;
-    2f66:	33 e3       	ldi	r19, 0x33	; 51
-    2f68:	c3 2e       	mov	r12, r19
-    2f6a:	d1 2c       	mov	r13, r1
-    2f6c:	e1 2c       	mov	r14, r1
-    2f6e:	f1 2c       	mov	r15, r1
-    2f70:	2d c0       	rjmp	.+90     	; 0x2fcc <initRS485+0x212>
+    3004:	33 e3       	ldi	r19, 0x33	; 51
+    3006:	c3 2e       	mov	r12, r19
+    3008:	d1 2c       	mov	r13, r1
+    300a:	e1 2c       	mov	r14, r1
+    300c:	f1 2c       	mov	r15, r1
+    300e:	2d c0       	rjmp	.+90     	; 0x306a <initRS485+0x212>
 		case 19200: ulBaudRate = 51; break;
-    2f72:	92 e2       	ldi	r25, 0x22	; 34
-    2f74:	c9 2e       	mov	r12, r25
-    2f76:	d1 2c       	mov	r13, r1
-    2f78:	e1 2c       	mov	r14, r1
-    2f7a:	f1 2c       	mov	r15, r1
-    2f7c:	27 c0       	rjmp	.+78     	; 0x2fcc <initRS485+0x212>
+    3010:	92 e2       	ldi	r25, 0x22	; 34
+    3012:	c9 2e       	mov	r12, r25
+    3014:	d1 2c       	mov	r13, r1
+    3016:	e1 2c       	mov	r14, r1
+    3018:	f1 2c       	mov	r15, r1
+    301a:	27 c0       	rjmp	.+78     	; 0x306a <initRS485+0x212>
 		case 28800: ulBaudRate = 34; break;
-    2f7e:	89 e1       	ldi	r24, 0x19	; 25
-    2f80:	c8 2e       	mov	r12, r24
-    2f82:	d1 2c       	mov	r13, r1
-    2f84:	e1 2c       	mov	r14, r1
-    2f86:	f1 2c       	mov	r15, r1
-    2f88:	21 c0       	rjmp	.+66     	; 0x2fcc <initRS485+0x212>
+    301c:	89 e1       	ldi	r24, 0x19	; 25
+    301e:	c8 2e       	mov	r12, r24
+    3020:	d1 2c       	mov	r13, r1
+    3022:	e1 2c       	mov	r14, r1
+    3024:	f1 2c       	mov	r15, r1
+    3026:	21 c0       	rjmp	.+66     	; 0x306a <initRS485+0x212>
 		case 38400: ulBaudRate = 25; break;
-    2f8a:	b0 e1       	ldi	r27, 0x10	; 16
-    2f8c:	cb 2e       	mov	r12, r27
-    2f8e:	d1 2c       	mov	r13, r1
-    2f90:	e1 2c       	mov	r14, r1
-    2f92:	f1 2c       	mov	r15, r1
-    2f94:	1b c0       	rjmp	.+54     	; 0x2fcc <initRS485+0x212>
+    3028:	b0 e1       	ldi	r27, 0x10	; 16
+    302a:	cb 2e       	mov	r12, r27
+    302c:	d1 2c       	mov	r13, r1
+    302e:	e1 2c       	mov	r14, r1
+    3030:	f1 2c       	mov	r15, r1
+    3032:	1b c0       	rjmp	.+54     	; 0x306a <initRS485+0x212>
 		case 57600: ulBaudRate = 16; break;
-    2f96:	ac e0       	ldi	r26, 0x0C	; 12
-    2f98:	ca 2e       	mov	r12, r26
-    2f9a:	d1 2c       	mov	r13, r1
-    2f9c:	e1 2c       	mov	r14, r1
-    2f9e:	f1 2c       	mov	r15, r1
-    2fa0:	15 c0       	rjmp	.+42     	; 0x2fcc <initRS485+0x212>
+    3034:	ac e0       	ldi	r26, 0x0C	; 12
+    3036:	ca 2e       	mov	r12, r26
+    3038:	d1 2c       	mov	r13, r1
+    303a:	e1 2c       	mov	r14, r1
+    303c:	f1 2c       	mov	r15, r1
+    303e:	15 c0       	rjmp	.+42     	; 0x306a <initRS485+0x212>
 		case 76800: ulBaudRate = 12; break;
-    2fa2:	f8 e0       	ldi	r31, 0x08	; 8
-    2fa4:	cf 2e       	mov	r12, r31
-    2fa6:	d1 2c       	mov	r13, r1
-    2fa8:	e1 2c       	mov	r14, r1
-    2faa:	f1 2c       	mov	r15, r1
-    2fac:	0f c0       	rjmp	.+30     	; 0x2fcc <initRS485+0x212>
+    3040:	f8 e0       	ldi	r31, 0x08	; 8
+    3042:	cf 2e       	mov	r12, r31
+    3044:	d1 2c       	mov	r13, r1
+    3046:	e1 2c       	mov	r14, r1
+    3048:	f1 2c       	mov	r15, r1
+    304a:	0f c0       	rjmp	.+30     	; 0x306a <initRS485+0x212>
 		case 115200: ulBaudRate = 8; break;
-    2fae:	e1 e0       	ldi	r30, 0x01	; 1
-    2fb0:	ce 2e       	mov	r12, r30
-    2fb2:	d1 2c       	mov	r13, r1
-    2fb4:	e1 2c       	mov	r14, r1
-    2fb6:	f1 2c       	mov	r15, r1
-    2fb8:	09 c0       	rjmp	.+18     	; 0x2fcc <initRS485+0x212>
+    304c:	e1 e0       	ldi	r30, 0x01	; 1
+    304e:	ce 2e       	mov	r12, r30
+    3050:	d1 2c       	mov	r13, r1
+    3052:	e1 2c       	mov	r14, r1
+    3054:	f1 2c       	mov	r15, r1
+    3056:	09 c0       	rjmp	.+18     	; 0x306a <initRS485+0x212>
 		//case 115200: UCSR0C |= 1<<UMSEL0; UCSR0A |= 1<<U2X0; ulBaudRate = 16; break;
 		case 230400: ulBaudRate = 3; break;
 		case 250000: ulBaudRate = 3; break;
 		case 500000: ulBaudRate = 1; break;
-    2fba:	cc 24       	eor	r12, r12
-    2fbc:	dd 24       	eor	r13, r13
-    2fbe:	76 01       	movw	r14, r12
-    2fc0:	05 c0       	rjmp	.+10     	; 0x2fcc <initRS485+0x212>
-    2fc2:	73 e0       	ldi	r23, 0x03	; 3
-    2fc4:	c7 2e       	mov	r12, r23
-    2fc6:	d1 2c       	mov	r13, r1
-    2fc8:	e1 2c       	mov	r14, r1
-    2fca:	f1 2c       	mov	r15, r1
+    3058:	cc 24       	eor	r12, r12
+    305a:	dd 24       	eor	r13, r13
+    305c:	76 01       	movw	r14, r12
+    305e:	05 c0       	rjmp	.+10     	; 0x306a <initRS485+0x212>
+    3060:	73 e0       	ldi	r23, 0x03	; 3
+    3062:	c7 2e       	mov	r12, r23
+    3064:	d1 2c       	mov	r13, r1
+    3066:	e1 2c       	mov	r14, r1
+    3068:	f1 2c       	mov	r15, r1
 		case 1000000: ulBaudRate = 0; break;
 		//default: ulBaudRate = UART_BAUD_CALC( ulBaudRate, F_CPU );
 		}
 
 		UBRR0H = ulBaudRate>>8;
-    2fcc:	bb 27       	eor	r27, r27
-    2fce:	af 2d       	mov	r26, r15
-    2fd0:	9e 2d       	mov	r25, r14
-    2fd2:	8d 2d       	mov	r24, r13
-    2fd4:	80 93 90 00 	sts	0x0090, r24
+    306a:	bb 27       	eor	r27, r27
+    306c:	af 2d       	mov	r26, r15
+    306e:	9e 2d       	mov	r25, r14
+    3070:	8d 2d       	mov	r24, r13
+    3072:	80 93 90 00 	sts	0x0090, r24
 		UBRR0L = ulBaudRate;
-    2fd8:	c9 b8       	out	0x09, r12	; 9
+    3076:	c9 b8       	out	0x09, r12	; 9
 
 		switch ( ucDataBits ) {
-    2fda:	47 30       	cpi	r20, 0x07	; 7
-    2fdc:	31 f0       	breq	.+12     	; 0x2fea <initRS485+0x230>
-    2fde:	48 30       	cpi	r20, 0x08	; 8
-    2fe0:	49 f4       	brne	.+18     	; 0x2ff4 <initRS485+0x23a>
+    3078:	47 30       	cpi	r20, 0x07	; 7
+    307a:	31 f0       	breq	.+12     	; 0x3088 <initRS485+0x230>
+    307c:	48 30       	cpi	r20, 0x08	; 8
+    307e:	49 f4       	brne	.+18     	; 0x3092 <initRS485+0x23a>
 		case 8:
 			UCSR0C |= _BV( UCSZ01 ) | _BV( UCSZ00 );
-    2fe2:	80 91 95 00 	lds	r24, 0x0095
-    2fe6:	86 60       	ori	r24, 0x06	; 6
-    2fe8:	03 c0       	rjmp	.+6      	; 0x2ff0 <initRS485+0x236>
+    3080:	80 91 95 00 	lds	r24, 0x0095
+    3084:	86 60       	ori	r24, 0x06	; 6
+    3086:	03 c0       	rjmp	.+6      	; 0x308e <initRS485+0x236>
 		 break;
 		case 7:
 			UCSR0C |= _BV( UCSZ01 );
-    2fea:	80 91 95 00 	lds	r24, 0x0095
-    2fee:	84 60       	ori	r24, 0x04	; 4
-    2ff0:	80 93 95 00 	sts	0x0095, r24
+    3088:	80 91 95 00 	lds	r24, 0x0095
+    308c:	84 60       	ori	r24, 0x04	; 4
+    308e:	80 93 95 00 	sts	0x0095, r24
 		 break;
 		}
 
 		switch ( ucStopBits ) {
-    2ff4:	22 30       	cpi	r18, 0x02	; 2
-    2ff6:	29 f4       	brne	.+10     	; 0x3002 <initRS485+0x248>
+    3092:	22 30       	cpi	r18, 0x02	; 2
+    3094:	29 f4       	brne	.+10     	; 0x30a0 <initRS485+0x248>
 		case 1: 
 		 break;
 		case 2:
 			UCSR0C |= _BV( USBS0 );
-    2ff8:	80 91 95 00 	lds	r24, 0x0095
-    2ffc:	88 60       	ori	r24, 0x08	; 8
-    2ffe:	80 93 95 00 	sts	0x0095, r24
+    3096:	80 91 95 00 	lds	r24, 0x0095
+    309a:	88 60       	ori	r24, 0x08	; 8
+    309c:	80 93 95 00 	sts	0x0095, r24
 		 break;
 		}
 
 		switch ( ucParity ) {
-    3002:	01 30       	cpi	r16, 0x01	; 1
-    3004:	19 f0       	breq	.+6      	; 0x300c <initRS485+0x252>
-    3006:	02 30       	cpi	r16, 0x02	; 2
-    3008:	51 f4       	brne	.+20     	; 0x301e <initRS485+0x264>
-    300a:	04 c0       	rjmp	.+8      	; 0x3014 <initRS485+0x25a>
+    30a0:	01 30       	cpi	r16, 0x01	; 1
+    30a2:	19 f0       	breq	.+6      	; 0x30aa <initRS485+0x252>
+    30a4:	02 30       	cpi	r16, 0x02	; 2
+    30a6:	51 f4       	brne	.+20     	; 0x30bc <initRS485+0x264>
+    30a8:	04 c0       	rjmp	.+8      	; 0x30b2 <initRS485+0x25a>
 		case 0: // PAR_NONE:
 		 break;
 
 		case 1: // PAR_ODD
 			UCSR0C |= _BV( UPM01 ) | _BV( UPM00 );
-    300c:	80 91 95 00 	lds	r24, 0x0095
-    3010:	80 63       	ori	r24, 0x30	; 48
-    3012:	03 c0       	rjmp	.+6      	; 0x301a <initRS485+0x260>
+    30aa:	80 91 95 00 	lds	r24, 0x0095
+    30ae:	80 63       	ori	r24, 0x30	; 48
+    30b0:	03 c0       	rjmp	.+6      	; 0x30b8 <initRS485+0x260>
 		 break;
 
 		case 2: // PAR_EVEN
 			UCSR0C |= _BV( UPM01 );
-    3014:	80 91 95 00 	lds	r24, 0x0095
-    3018:	80 62       	ori	r24, 0x20	; 32
-    301a:	80 93 95 00 	sts	0x0095, r24
+    30b2:	80 91 95 00 	lds	r24, 0x0095
+    30b6:	80 62       	ori	r24, 0x20	; 32
+    30b8:	80 93 95 00 	sts	0x0095, r24
 		 break;
 		}
 
 		UCSR0B = _BV( TXEN0 ) | _BV( TXCIE0 );
-    301e:	88 e4       	ldi	r24, 0x48	; 72
-    3020:	8a b9       	out	0x0a, r24	; 10
+    30bc:	88 e4       	ldi	r24, 0x48	; 72
+    30be:	8a b9       	out	0x0a, r24	; 10
 	}
 }
-    3022:	0f 91       	pop	r16
-    3024:	ff 90       	pop	r15
-    3026:	ef 90       	pop	r14
-    3028:	df 90       	pop	r13
-    302a:	cf 90       	pop	r12
-    302c:	08 95       	ret
+    30c0:	0f 91       	pop	r16
+    30c2:	ff 90       	pop	r15
+    30c4:	ef 90       	pop	r14
+    30c6:	df 90       	pop	r13
+    30c8:	cf 90       	pop	r12
+    30ca:	08 95       	ret
 
-0000302e <rs485SendBuffer>:
+000030cc <rs485SendBuffer>:
 void rs485ClrTimeOutErrorNullFunc( void *lpData )
 {
 }
 
 void rs485SendBuffer( uint8_t *buffer, uint8_t len )
 {
-    302e:	1f 93       	push	r17
-    3030:	28 2f       	mov	r18, r24
-    3032:	79 2f       	mov	r23, r25
-    3034:	16 2f       	mov	r17, r22
+    30cc:	1f 93       	push	r17
+    30ce:	28 2f       	mov	r18, r24
+    30d0:	79 2f       	mov	r23, r25
+    30d2:	16 2f       	mov	r17, r22
 	memcpy( (char*)ucRS485txBuffer, buffer, len );
-    3036:	80 91 ae 04 	lds	r24, 0x04AE
-    303a:	90 91 af 04 	lds	r25, 0x04AF
-    303e:	62 2f       	mov	r22, r18
-    3040:	41 2f       	mov	r20, r17
-    3042:	50 e0       	ldi	r21, 0x00	; 0
-    3044:	0e 94 7d 18 	call	0x30fa	; 0x30fa <memcpy>
+    30d4:	80 91 ae 04 	lds	r24, 0x04AE
+    30d8:	90 91 af 04 	lds	r25, 0x04AF
+    30dc:	62 2f       	mov	r22, r18
+    30de:	41 2f       	mov	r20, r17
+    30e0:	50 e0       	ldi	r21, 0x00	; 0
+    30e2:	0e 94 cc 18 	call	0x3198	; 0x3198 <memcpy>
 
 	ucRS485txBufferLenght = len;
-    3048:	10 93 b0 04 	sts	0x04B0, r17
+    30e6:	10 93 b0 04 	sts	0x04B0, r17
 	ucRS485rxState = ucRS485txState = 0;
-    304c:	10 92 ad 04 	sts	0x04AD, r1
-    3050:	80 91 ad 04 	lds	r24, 0x04AD
-    3054:	80 93 b1 04 	sts	0x04B1, r24
+    30ea:	10 92 ad 04 	sts	0x04AD, r1
+    30ee:	80 91 ad 04 	lds	r24, 0x04AD
+    30f2:	80 93 b1 04 	sts	0x04B1, r24
 
 	UCSR0B &= ~( _BV( RXEN0 ) |  _BV( RXCIE0 ) );
-    3058:	8a b1       	in	r24, 0x0a	; 10
-    305a:	8f 76       	andi	r24, 0x6F	; 111
-    305c:	8a b9       	out	0x0a, r24	; 10
+    30f6:	8a b1       	in	r24, 0x0a	; 10
+    30f8:	8f 76       	andi	r24, 0x6F	; 111
+    30fa:	8a b9       	out	0x0a, r24	; 10
 	enable_rs485_transmit();
-    305e:	1a 9a       	sbi	0x03, 2	; 3
+    30fc:	1a 9a       	sbi	0x03, 2	; 3
 
 	UDR0 = ucRS485txBuffer[ ucRS485txState ];
-    3060:	80 91 ad 04 	lds	r24, 0x04AD
-    3064:	e0 91 ae 04 	lds	r30, 0x04AE
-    3068:	f0 91 af 04 	lds	r31, 0x04AF
-    306c:	e8 0f       	add	r30, r24
-    306e:	f1 1d       	adc	r31, r1
-    3070:	80 81       	ld	r24, Z
-    3072:	8c b9       	out	0x0c, r24	; 12
+    30fe:	80 91 ad 04 	lds	r24, 0x04AD
+    3102:	e0 91 ae 04 	lds	r30, 0x04AE
+    3106:	f0 91 af 04 	lds	r31, 0x04AF
+    310a:	e8 0f       	add	r30, r24
+    310c:	f1 1d       	adc	r31, r1
+    310e:	80 81       	ld	r24, Z
+    3110:	8c b9       	out	0x0c, r24	; 12
 }
-    3074:	1f 91       	pop	r17
-    3076:	08 95       	ret
+    3112:	1f 91       	pop	r17
+    3114:	08 95       	ret
 
-00003078 <__mulsi3>:
-    3078:	62 9f       	mul	r22, r18
-    307a:	d0 01       	movw	r26, r0
-    307c:	73 9f       	mul	r23, r19
-    307e:	f0 01       	movw	r30, r0
-    3080:	82 9f       	mul	r24, r18
-    3082:	e0 0d       	add	r30, r0
-    3084:	f1 1d       	adc	r31, r1
-    3086:	64 9f       	mul	r22, r20
-    3088:	e0 0d       	add	r30, r0
-    308a:	f1 1d       	adc	r31, r1
-    308c:	92 9f       	mul	r25, r18
-    308e:	f0 0d       	add	r31, r0
-    3090:	83 9f       	mul	r24, r19
-    3092:	f0 0d       	add	r31, r0
-    3094:	74 9f       	mul	r23, r20
-    3096:	f0 0d       	add	r31, r0
-    3098:	65 9f       	mul	r22, r21
-    309a:	f0 0d       	add	r31, r0
-    309c:	99 27       	eor	r25, r25
-    309e:	72 9f       	mul	r23, r18
-    30a0:	b0 0d       	add	r27, r0
-    30a2:	e1 1d       	adc	r30, r1
-    30a4:	f9 1f       	adc	r31, r25
-    30a6:	63 9f       	mul	r22, r19
-    30a8:	b0 0d       	add	r27, r0
-    30aa:	e1 1d       	adc	r30, r1
-    30ac:	f9 1f       	adc	r31, r25
-    30ae:	bd 01       	movw	r22, r26
-    30b0:	cf 01       	movw	r24, r30
-    30b2:	11 24       	eor	r1, r1
-    30b4:	08 95       	ret
+00003116 <__mulsi3>:
+    3116:	62 9f       	mul	r22, r18
+    3118:	d0 01       	movw	r26, r0
+    311a:	73 9f       	mul	r23, r19
+    311c:	f0 01       	movw	r30, r0
+    311e:	82 9f       	mul	r24, r18
+    3120:	e0 0d       	add	r30, r0
+    3122:	f1 1d       	adc	r31, r1
+    3124:	64 9f       	mul	r22, r20
+    3126:	e0 0d       	add	r30, r0
+    3128:	f1 1d       	adc	r31, r1
+    312a:	92 9f       	mul	r25, r18
+    312c:	f0 0d       	add	r31, r0
+    312e:	83 9f       	mul	r24, r19
+    3130:	f0 0d       	add	r31, r0
+    3132:	74 9f       	mul	r23, r20
+    3134:	f0 0d       	add	r31, r0
+    3136:	65 9f       	mul	r22, r21
+    3138:	f0 0d       	add	r31, r0
+    313a:	99 27       	eor	r25, r25
+    313c:	72 9f       	mul	r23, r18
+    313e:	b0 0d       	add	r27, r0
+    3140:	e1 1d       	adc	r30, r1
+    3142:	f9 1f       	adc	r31, r25
+    3144:	63 9f       	mul	r22, r19
+    3146:	b0 0d       	add	r27, r0
+    3148:	e1 1d       	adc	r30, r1
+    314a:	f9 1f       	adc	r31, r25
+    314c:	bd 01       	movw	r22, r26
+    314e:	cf 01       	movw	r24, r30
+    3150:	11 24       	eor	r1, r1
+    3152:	08 95       	ret
 
-000030b6 <__udivmodsi4>:
-    30b6:	a1 e2       	ldi	r26, 0x21	; 33
-    30b8:	1a 2e       	mov	r1, r26
-    30ba:	aa 1b       	sub	r26, r26
-    30bc:	bb 1b       	sub	r27, r27
-    30be:	fd 01       	movw	r30, r26
-    30c0:	0d c0       	rjmp	.+26     	; 0x30dc <__udivmodsi4_ep>
+00003154 <__udivmodsi4>:
+    3154:	a1 e2       	ldi	r26, 0x21	; 33
+    3156:	1a 2e       	mov	r1, r26
+    3158:	aa 1b       	sub	r26, r26
+    315a:	bb 1b       	sub	r27, r27
+    315c:	fd 01       	movw	r30, r26
+    315e:	0d c0       	rjmp	.+26     	; 0x317a <__udivmodsi4_ep>
 
-000030c2 <__udivmodsi4_loop>:
-    30c2:	aa 1f       	adc	r26, r26
-    30c4:	bb 1f       	adc	r27, r27
-    30c6:	ee 1f       	adc	r30, r30
-    30c8:	ff 1f       	adc	r31, r31
-    30ca:	a2 17       	cp	r26, r18
-    30cc:	b3 07       	cpc	r27, r19
-    30ce:	e4 07       	cpc	r30, r20
-    30d0:	f5 07       	cpc	r31, r21
-    30d2:	20 f0       	brcs	.+8      	; 0x30dc <__udivmodsi4_ep>
-    30d4:	a2 1b       	sub	r26, r18
-    30d6:	b3 0b       	sbc	r27, r19
-    30d8:	e4 0b       	sbc	r30, r20
-    30da:	f5 0b       	sbc	r31, r21
+00003160 <__udivmodsi4_loop>:
+    3160:	aa 1f       	adc	r26, r26
+    3162:	bb 1f       	adc	r27, r27
+    3164:	ee 1f       	adc	r30, r30
+    3166:	ff 1f       	adc	r31, r31
+    3168:	a2 17       	cp	r26, r18
+    316a:	b3 07       	cpc	r27, r19
+    316c:	e4 07       	cpc	r30, r20
+    316e:	f5 07       	cpc	r31, r21
+    3170:	20 f0       	brcs	.+8      	; 0x317a <__udivmodsi4_ep>
+    3172:	a2 1b       	sub	r26, r18
+    3174:	b3 0b       	sbc	r27, r19
+    3176:	e4 0b       	sbc	r30, r20
+    3178:	f5 0b       	sbc	r31, r21
 
-000030dc <__udivmodsi4_ep>:
-    30dc:	66 1f       	adc	r22, r22
-    30de:	77 1f       	adc	r23, r23
-    30e0:	88 1f       	adc	r24, r24
-    30e2:	99 1f       	adc	r25, r25
-    30e4:	1a 94       	dec	r1
-    30e6:	69 f7       	brne	.-38     	; 0x30c2 <__udivmodsi4_loop>
-    30e8:	60 95       	com	r22
-    30ea:	70 95       	com	r23
-    30ec:	80 95       	com	r24
-    30ee:	90 95       	com	r25
-    30f0:	9b 01       	movw	r18, r22
-    30f2:	ac 01       	movw	r20, r24
-    30f4:	bd 01       	movw	r22, r26
-    30f6:	cf 01       	movw	r24, r30
-    30f8:	08 95       	ret
+0000317a <__udivmodsi4_ep>:
+    317a:	66 1f       	adc	r22, r22
+    317c:	77 1f       	adc	r23, r23
+    317e:	88 1f       	adc	r24, r24
+    3180:	99 1f       	adc	r25, r25
+    3182:	1a 94       	dec	r1
+    3184:	69 f7       	brne	.-38     	; 0x3160 <__udivmodsi4_loop>
+    3186:	60 95       	com	r22
+    3188:	70 95       	com	r23
+    318a:	80 95       	com	r24
+    318c:	90 95       	com	r25
+    318e:	9b 01       	movw	r18, r22
+    3190:	ac 01       	movw	r20, r24
+    3192:	bd 01       	movw	r22, r26
+    3194:	cf 01       	movw	r24, r30
+    3196:	08 95       	ret
 
-000030fa <memcpy>:
-    30fa:	fb 01       	movw	r30, r22
-    30fc:	dc 01       	movw	r26, r24
-    30fe:	02 c0       	rjmp	.+4      	; 0x3104 <memcpy+0xa>
-    3100:	01 90       	ld	r0, Z+
-    3102:	0d 92       	st	X+, r0
-    3104:	41 50       	subi	r20, 0x01	; 1
-    3106:	50 40       	sbci	r21, 0x00	; 0
-    3108:	d8 f7       	brcc	.-10     	; 0x3100 <memcpy+0x6>
-    310a:	08 95       	ret
+00003198 <memcpy>:
+    3198:	fb 01       	movw	r30, r22
+    319a:	dc 01       	movw	r26, r24
+    319c:	02 c0       	rjmp	.+4      	; 0x31a2 <memcpy+0xa>
+    319e:	01 90       	ld	r0, Z+
+    31a0:	0d 92       	st	X+, r0
+    31a2:	41 50       	subi	r20, 0x01	; 1
+    31a4:	50 40       	sbci	r21, 0x00	; 0
+    31a6:	d8 f7       	brcc	.-10     	; 0x319e <memcpy+0x6>
+    31a8:	08 95       	ret
 
-0000310c <_exit>:
-    310c:	f8 94       	cli
+000031aa <_exit>:
+    31aa:	f8 94       	cli
 
-0000310e <__stop_program>:
-    310e:	ff cf       	rjmp	.-2      	; 0x310e <__stop_program>
+000031ac <__stop_program>:
+    31ac:	ff cf       	rjmp	.-2      	; 0x31ac <__stop_program>

@@ -38,6 +38,7 @@ void mbSendRequestForceMultipleCoils( void *lpObject );
 uint8_t mbReceiveRequestForceMultipleCoils( uint8_t *rxBuffer, uint8_t len, void *lpObject );
 
 void mbSendRequestPresetSingleRegister( void *lpObject );
+uint8_t mbReceiveRequestPresetSingleRegister( uint8_t *rxBuffer, uint8_t len, void *lpObject );
 
 void mbRtuAddCrcAndSendBuffer( uint8_t *txBuffer, uint16_t len );
 uint8_t mbCheckExceptionForResponse( uint8_t *lpExceptionCode, uint8_t txFunctionCode, uint8_t *rxBuffer, uint8_t len );

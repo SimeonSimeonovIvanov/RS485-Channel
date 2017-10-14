@@ -155,6 +155,44 @@ void mbSendRequestPresetSingleRegister( void *lpObject )
 	mbRtuAddCrcAndSendBuffer( txBuffer, 8 );
 }
 
+uint8_t mbReceiveRequestPresetSingleRegister( uint8_t *rxBuffer, uint8_t len, void *lpObject )
+{
+	LP_MB_MASTER_PRESET_SINGLE_REGISTER lpData = (LP_MB_MASTER_PRESET_SINGLE_REGISTER)lpObject;
+
+	if( rxBuffer[0] == lpData->address ) {
+
+		if( 6 == rxBuffer[1] ) {
+			if( 8 == len ) {
+				uint16_t check_sum;
+
+				check_sum = usMBCRC16( rxBuffer, 6 );
+
+				if( ( ( 0xff & check_sum>>0 ) == rxBuffer[6] ) &&
+					( ( 0xff & check_sum>>8 ) == rxBuffer[7] )
+				) {
+					if( rxBuffer[2] == lpData->register_address>>8	&&
+						rxBuffer[3] == lpData->register_address
+					) {
+						if( NULL != lpData->lpRegisterNew ) {
+							lpData->lpRegisterNew = ( rxBuffer[4]<<8 ) | rxBuffer[5];
+						}
+
+						lpData->exception_code = 0;
+
+						return 1;
+					}
+				}
+			}
+
+			return 0;
+		}
+		
+		return mbCheckExceptionForResponse( &lpData->exception_code, 6, rxBuffer, len );
+	}
+
+	return 0;
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Force Multiple Coils (FC=15)
 

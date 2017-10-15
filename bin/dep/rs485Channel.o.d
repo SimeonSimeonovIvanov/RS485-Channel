@@ -23,11 +23,12 @@ rs485Channel.o: ../rs485Channel/rs485Channel.c ../rs485Channel/..//main.h \
   c:/winavr-20100110/lib/gcc/../../avr/include/avr/interrupt.h \
   ../rs485Channel/..//arch/spi.h \
   ../rs485Channel/..//modbus_master/modbus-rtu.h \
-  ../rs485Channel/..//modbus_master/..//rs485Channel//rs485Channel.h \
   D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mb.h \
   D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\port/port.h \
   D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbport.h \
   D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbproto.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\port/mbcrc.h \
+  ../rs485Channel/..//modbus_master/..//rs485Channel//rs485Channel.h \
   ../rs485Channel/..//digital_in_out_func/digital_in_out_func.h \
   ../rs485Channel/rs485Channel.h
 
@@ -81,8 +82,6 @@ c:/winavr-20100110/lib/gcc/../../avr/include/avr/interrupt.h:
 
 ../rs485Channel/..//modbus_master/modbus-rtu.h:
 
-../rs485Channel/..//modbus_master/..//rs485Channel//rs485Channel.h:
-
 D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mb.h:
 
 D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\port/port.h:
@@ -90,6 +89,10 @@ D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\gith
 D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbport.h:
 
 D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbproto.h:
+
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\port/mbcrc.h:
+
+../rs485Channel/..//modbus_master/..//rs485Channel//rs485Channel.h:
 
 ../rs485Channel/..//digital_in_out_func/digital_in_out_func.h:
 

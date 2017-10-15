@@ -24,11 +24,12 @@ digital_in_out_func.o: ../digital_in_out_func/digital_in_out_func.c \
   c:/winavr-20100110/lib/gcc/../../avr/include/avr/interrupt.h \
   ../digital_in_out_func/../arch/spi.h \
   ../digital_in_out_func/../modbus_master/modbus-rtu.h \
-  ../digital_in_out_func/../modbus_master/..//rs485Channel//rs485Channel.h \
   D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mb.h \
   D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\port/port.h \
   D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbport.h \
   D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbproto.h \
+  D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\port/mbcrc.h \
+  ../digital_in_out_func/../modbus_master/..//rs485Channel//rs485Channel.h \
   ../digital_in_out_func/../digital_in_out_func/digital_in_out_func.h \
   ../digital_in_out_func/digital_in_out_func.h
 
@@ -82,8 +83,6 @@ c:/winavr-20100110/lib/gcc/../../avr/include/avr/interrupt.h:
 
 ../digital_in_out_func/../modbus_master/modbus-rtu.h:
 
-../digital_in_out_func/../modbus_master/..//rs485Channel//rs485Channel.h:
-
 D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mb.h:
 
 D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\port/port.h:
@@ -91,6 +90,10 @@ D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\gith
 D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbport.h:
 
 D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\include/mbproto.h:
+
+D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\modbus\port/mbcrc.h:
+
+../digital_in_out_func/../modbus_master/..//rs485Channel//rs485Channel.h:
 
 ../digital_in_out_func/../digital_in_out_func/digital_in_out_func.h:
 

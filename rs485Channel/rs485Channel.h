@@ -2,7 +2,6 @@
 #define __RS485_CHANNEL_H__
 
 #include <avr/interrupt.h>
-#include "mb.h"
 
 #define MYBRR(BAUD, FOSC) (FOSC/16/BAUD-1)
 

@@ -2,6 +2,9 @@
 #define __MODBUS_RTU_H__
 
 #include <stdio.h>
+
+#include "mb.h"
+#include "mbcrc.h"
 #include "..//rs485Channel//rs485Channel.h"
 
 typedef struct {
@@ -42,5 +45,7 @@ uint8_t mbReceiveRequestPresetSingleRegister( uint8_t *rxBuffer, uint8_t len, vo
 
 void mbRtuAddCrcAndSendBuffer( uint8_t *txBuffer, uint16_t len );
 uint8_t mbCheckExceptionForResponse( uint8_t *lpExceptionCode, uint8_t txFunctionCode, uint8_t *rxBuffer, uint8_t len );
+
+uint8_t check_crc16( uint8_t *buffer, uint8_t len );
 
 #endif

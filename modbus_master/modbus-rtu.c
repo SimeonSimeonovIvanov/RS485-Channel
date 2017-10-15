@@ -34,26 +34,19 @@ uint8_t mbReceiveRequestReadInputStatus( uint8_t *rxBuffer, uint8_t len, void *l
 	if( rxBuffer[0] == lpData->address ) {
 
 		if( 2 == rxBuffer[1] ) {
+			if( len == 5 + lpData->byte_number &&
+				check_crc16( rxBuffer, 3 + lpData->byte_number )
+			) {
+				if( NULL != lpData->lpInputs ) {
+					uint8_t i;
 
-			if( len == 5 + lpData->byte_number ) {
-				uint16_t check_sum;
-
-				check_sum = usMBCRC16( rxBuffer, 3 + lpData->byte_number );
-
-				if( ( ( 0xff & check_sum>>0 ) == rxBuffer[ len - 2 ] ) &&
-					( ( 0xff & check_sum>>8 ) == rxBuffer[ len - 1 ] )
-				) {
-					if( NULL != lpData->lpInputs ) {
-						uint8_t i;
-
-						for( i = 0; i < lpData->byte_number; i++ ) {
-							lpData->lpInputs[ i ] = rxBuffer[ 3 + i ];
-						}
+					for( i = 0; i < lpData->byte_number; i++ ) {
+						lpData->lpInputs[ i ] = rxBuffer[ 3 + i ];
 					}
-
-					lpData->exception_code = 0;
-					return 1;
 				}
+
+				lpData->exception_code = 0;
+				return 1;
 			}
 
 			return 0;
@@ -95,32 +88,26 @@ uint8_t mbReceiveRequestForceSingleCoil( uint8_t *rxBuffer, uint8_t len, void *l
 	if( rxBuffer[0] == lpData->address ) {
 
 		if( 5 == rxBuffer[1] ) {
-			if( 8 == len ) {
-				uint16_t check_sum;
-
-				check_sum = usMBCRC16( rxBuffer, 6 );
-
-				if( ( ( 0xff & check_sum>>0 ) == rxBuffer[6] ) &&
-					( ( 0xff & check_sum>>8 ) == rxBuffer[7] )
+			if( 8 == len &&
+				check_crc16( rxBuffer, 6 )
+			) {
+				if( rxBuffer[2] == lpData->coil_address>>8	&&
+					rxBuffer[3] == lpData->coil_address		&&
+					rxBuffer[5] == 0
 				) {
-					if( rxBuffer[2] == lpData->coil_address>>8	&&
-						rxBuffer[3] == lpData->coil_address		&&
-						rxBuffer[5] == 0
-					) {
-						if( NULL != lpData->lpCoilNew ) {
-							if( 0xff == rxBuffer[4] ) {
-								*lpData->lpCoilNew = 1;
-							}
-
-							if( 0x00 == rxBuffer[4] ) {
-								*lpData->lpCoilNew = 0;
-							}
+					if( NULL != lpData->lpCoilNew ) {
+						if( 0xff == rxBuffer[4] ) {
+							*lpData->lpCoilNew = 1;
 						}
 
-						lpData->exception_code = 0;
-
-						return 1;
+						if( 0x00 == rxBuffer[4] ) {
+							*lpData->lpCoilNew = 0;
+						}
 					}
+
+					lpData->exception_code = 0;
+
+					return 1;
 				}
 			}
 
@@ -162,25 +149,19 @@ uint8_t mbReceiveRequestPresetSingleRegister( uint8_t *rxBuffer, uint8_t len, vo
 	if( rxBuffer[0] == lpData->address ) {
 
 		if( 6 == rxBuffer[1] ) {
-			if( 8 == len ) {
-				uint16_t check_sum;
-
-				check_sum = usMBCRC16( rxBuffer, 6 );
-
-				if( ( ( 0xff & check_sum>>0 ) == rxBuffer[6] ) &&
-					( ( 0xff & check_sum>>8 ) == rxBuffer[7] )
+			if( 8 == len &&
+				check_crc16( rxBuffer, 6 )
+			) {
+				if( rxBuffer[2] == lpData->register_address>>8	&&
+					rxBuffer[3] == lpData->register_address
 				) {
-					if( rxBuffer[2] == lpData->register_address>>8	&&
-						rxBuffer[3] == lpData->register_address
-					) {
-						if( NULL != lpData->lpRegisterNew ) {
-							lpData->lpRegisterNew = ( rxBuffer[4]<<8 ) | rxBuffer[5];
-						}
-
-						lpData->exception_code = 0;
-
-						return 1;
+					if( NULL != lpData->lpRegisterNew ) {
+						*lpData->lpRegisterNew = ( rxBuffer[4]<<8 ) | rxBuffer[5];
 					}
+
+					lpData->exception_code = 0;
+
+					return 1;
 				}
 			}
 
@@ -233,22 +214,17 @@ uint8_t mbReceiveRequestForceMultipleCoils( uint8_t *rxBuffer, uint8_t len, void
 	if( rxBuffer[0] == lpData->address ) {
 		
 		if( 15 == rxBuffer[1] ) {
-			if( 8 == len ) {
-				uint16_t check_sum;
+			if( 8 == len &&
+				check_crc16( rxBuffer, 6 )
+			) {
+				uint16_t coils_address, coils_number;
 
-				check_sum = usMBCRC16( rxBuffer, 6 );
-				if( ( ( 0xff & check_sum>>0 ) == rxBuffer[6] ) &&
-					( ( 0xff & check_sum>>8 ) == rxBuffer[7] )
-				) {
-					uint16_t coils_address, coils_number;
+				coils_address = rxBuffer[2]<<8 | rxBuffer[3];
+				coils_number = rxBuffer[4]<<8 | rxBuffer[5];
 
-					coils_address = rxBuffer[2]<<8 | rxBuffer[3];
-					coils_number = rxBuffer[4]<<8 | rxBuffer[5];
+				lpData->exception_code = 0;
 
-					lpData->exception_code = 0;
-
-					return 1;
-				}
+				return 1;
 			}
 
 			return 0;
@@ -291,3 +267,22 @@ uint8_t mbCheckExceptionForResponse( uint8_t *lpExceptionCode, uint8_t txFunctio
 
 	return 0;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+uint8_t check_crc16( uint8_t *buffer, uint8_t len )
+{
+	uint16_t check_sum;
+
+	check_sum = usMBCRC16( buffer, len );
+
+	if( ( ( 0xff & check_sum>>0 ) == buffer[ len + 0 ] ) &&
+		( ( 0xff & check_sum>>8 ) == buffer[ len + 1 ] )
+	) {
+		return 1;
+	}
+
+	return 0;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

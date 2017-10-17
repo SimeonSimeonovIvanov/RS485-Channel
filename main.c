@@ -125,7 +125,7 @@ int main(void)
 	
 	rs485TaskInit();
 
-	///////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 
 	rs485ChannelDefInit( &arrRS485Channel[0] );
 
@@ -144,7 +144,7 @@ int main(void)
 
 	//rs485AddChannel( &arrRS485Channel[0] );
 
-	///////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 
 	rs485ChannelDefInit( &arrRS485Channel[1] );
 
@@ -163,7 +163,7 @@ int main(void)
 
 	rs485AddChannel( &arrRS485Channel[1] );
 
-	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 	rs485ChannelDefInit( &arrRS485Channel[2] );
 
@@ -174,7 +174,7 @@ int main(void)
 
 	arrRS485Channel[2].lpData = (void*)&stSlaveChannelReadInputsA11;
 	arrRS485Channel[2].ucEnableRequest = 1;
-	arrRS485Channel[2].msReadTimeOut = 8;
+	arrRS485Channel[2].msReadTimeOut = 10;
 
 	arrRS485Channel[2].rs485SendRequestFunc = mbSendRequestReadInputStatus;
 	arrRS485Channel[2].rs485GetResponseFunc = mbReceiveRequestReadInputStatus;
@@ -182,7 +182,7 @@ int main(void)
 
 	rs485AddChannel( &arrRS485Channel[2] );
 
-	///////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 
 	rs485ChannelDefInit( &arrRS485Channel[3] );
 
@@ -201,7 +201,7 @@ int main(void)
 
 	rs485AddChannel( &arrRS485Channel[3] );
 	
-	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	
 	rs485ChannelDefInit( &arrRS485Channel[4] );
 
@@ -212,7 +212,7 @@ int main(void)
 
 	arrRS485Channel[4].lpData = (void*)&stSlaveChannelWriteCoilsA11;
 	arrRS485Channel[4].ucEnableRequest = 1;
-	arrRS485Channel[4].msReadTimeOut = 8;
+	arrRS485Channel[4].msReadTimeOut = 10;
 
 	arrRS485Channel[4].rs485SendRequestFunc = mbSendRequestForceMultipleCoils;
 	arrRS485Channel[4].rs485GetResponseFunc = mbReceiveRequestForceMultipleCoils;		
@@ -220,7 +220,7 @@ int main(void)
 
 	rs485AddChannel( &arrRS485Channel[4] );
 
-	///////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 
 	rs485ChannelDefInit( &arrRS485Channel[5] );
 
@@ -239,7 +239,7 @@ int main(void)
 
 	rs485AddChannel( &arrRS485Channel[5] );
 
-	///////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 
 	sei();
 	while( 1 ) {
@@ -279,12 +279,18 @@ int main(void)
 		byteArrToBitArr( (uint8_t*)ucRegDiscBuf, (uint8_t*)inPort, 42 );
 
 		if( uc10msTimerEvent ) {
+			static uint8_t n = 0;
+
 			uc10msTimerEvent = 0;
+
+			if( ++n == 50 ) {
+				ucRegDiscBufA3Temp[0] ^= 1;
+				n = 0;
+			}
 		}
 
 		if( uc100msTimerEvent ) {
 			uc100msTimerEvent = 0;
-			ucRegDiscBufA3Temp[0] ^= 1;
 		}
 
 		if( uc1000msTimerEvent ) {

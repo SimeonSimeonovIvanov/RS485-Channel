@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ConnectionManager xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FtpConnections />
+  <Folders />
+  <LastUsedTarget>00000000-0000-0000-0000-000000000000</LastUsedTarget>
+  <KeepAutoexec>false</KeepAutoexec>
+  <DownloadSourceAsZip>false</DownloadSourceAsZip>
+  <PasswordProtection>false</PasswordProtection>
+  <StopRunningGrs>true</StopRunningGrs>
+  <RestartGrs>true</RestartGrs>
+  <UploadRecipes>false</UploadRecipes>
+  <UploadUserManagement>false</UploadUserManagement>
+</ConnectionManager>

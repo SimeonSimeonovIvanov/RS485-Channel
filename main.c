@@ -50,11 +50,19 @@
 		BIT[1]				inPort[25]					Run status
 		BIT[2]				inPort[26]					Trig OUT0 Error
 		BIT[3]				inPort[27]					Trig OUT1 Error
-		BIT[4]				inPort[28]					Timeout error
+		BIT[4]				inPort[28]					Trig Timeout Error
+		BIT[5]				inPort[29]					Trig Out Error
+		BIT[5]				inPort[30]					Timeout ERROR is Enable
 */
 
 // MB_FUNC_READ_DISCRETE_INPUTS					( 2 )
 volatile static uint8_t ucRegDiscBuf[REG_DISC_SIZE / 8] = { 0 };
+
+#define MCU_VCC_FB0			inPort[20]
+#define MCU_VCC_FB1			inPort[21]
+#define MCU_DO_DIAG0		inPort[22]
+#define MCU_DO_DIAG1		inPort[23]
+#define MCU_RUN_SWITCH		inPort[24]
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -71,6 +79,10 @@ volatile static uint8_t ucRegDiscBuf[REG_DISC_SIZE / 8] = { 0 };
 // MB_FUNC_WRITE_SINGLE_COIL					( 5 )
 // MB_FUNC_WRITE_MULTIPLE_COILS					( 15 )
 volatile static uint8_t ucRegCoilsBuf[REG_COILS_SIZE / 8] = { 0 };
+
+#define QOIL_REMOTE_RUN							outPort[16]
+#define QOIL_REMOTE_RESET						outPort[17]
+#define QOIL_DISABLE_OUTPUT_RESET_IN_RUN		outPort[18]
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // MB_FUNC_READ_INPUT_REGISTER					( 4 )
@@ -91,6 +103,7 @@ volatile uint8_t outPort[32] = { 0 };
 volatile uint8_t hmiLed[40] = { 0 };
 volatile uint8_t uc10msTimerEvent = 0;
 volatile uint8_t uc100msTimerEvent = 0;
+volatile uint16_t uc500msTimerEvent = 0;
 volatile uint16_t uc1000msTimerEvent = 0;
 
 volatile uint8_t ucFlagTimeOutOutError = 0;
@@ -102,6 +115,8 @@ volatile MB_MASTER_READ_INPUT_STATUS stSlaveChannelReadInputsA3, stSlaveChannelR
 volatile MB_MASTER_RW_COILS stSlaveChannelWriteCoilsA3, stSlaveChannelWriteCoilsA11;
 
 volatile MB_MASTER_PRESET_SINGLE_REGISTER stSlaveChannelPresetRegisterA10;
+
+//volatile VEZNA_ELICOM_EEP veznaEEP;
 
 volatile uint8_t ucRegDiscBufA3[2], ucRegCoilsBufA3[2];
 volatile uint8_t ucRegDiscBufA11[2], ucRegCoilsBufA11[2];
@@ -115,9 +130,11 @@ int main(void)
 	uint8_t fFirstRun = 1, ucRS485_address, ucRS485_address_old = 0;
 	UCHAR ucSlaveID[] = { 0xAA, 0xBB, 0xCC };
 	eMBErrorCode eStatus;
-	uint16_t remote_run = 0;
+	uint16_t remote_run = 0, flashTimer = 0;
 
-	volatile uint8_t ucFlagOutError, ucTrigOut0Error = 0, ucTrigOut1Error = 0;
+	volatile uint8_t ucTrigOutError = 0, ucTrigOut0Error = 0, ucTrigOut1Error = 0;
+	volatile uint8_t ucTrigTimeOutError = 0;
+
 	uint8_t ucAutoStopIfOutError = 1;
 	uint8_t i, n;
 
@@ -241,18 +258,50 @@ int main(void)
 
 	///////////////////////////////////////////////////////////////////////////
 
+	/*rs485ChannelDefInit( &arrRS485Channel[6] );
+
+	int16_t temp;
+
+	veznaEEP.address = 15;
+	veznaEEP.lpFlag = &temp;
+	veznaEEP.lpKg = &temp;
+	veznaEEP.lpGr = &temp;
+	veznaEEP.lpOldKg = &temp;
+	veznaEEP.lpOldGr = &temp;
+
+	arrRS485Channel[6].lpData = (void*)&veznaEEP;
+	arrRS485Channel[6].ucEnableRequest = 1;
+	arrRS485Channel[6].msReadTimeOut = 100;
+
+	arrRS485Channel[6].rs485SetUartSetings = veznaEepSetUartSetings;
+	arrRS485Channel[6].rs485RestoreUartSetings = veznaEepRestoreUartSetings;
+
+	arrRS485Channel[6].rs485SendRequestFunc = sendRequestVeznaEEP_P04;
+	arrRS485Channel[6].rs485GetResponseFunc = getResponseVeznaEEP_P04;
+	arrRS485Channel[6].rs485ClrTimeOutError = mbMasterClrTimeOutError;*/
+
+	//rs485AddChannel( &arrRS485Channel[6] );
+
+	///////////////////////////////////////////////////////////////////////////
+
 	sei();
 	while( 1 ) {
 		readDigitalInput( (uint8_t*)inPort );
 
-		ucTrigOut0Error |= ( !inPort[22] && inPort[20] ); // !MCU_DO_DIAG0_bm && MCU_VCC_FB0_bm
-		ucTrigOut1Error |= ( !inPort[23] && inPort[21] ); // !MCU_DO_DIAG1_bm && MCU_VCC_FB1_bm
-		ucFlagOutError = ucTrigOut1Error || ucTrigOut0Error;
+		ucTrigOut0Error |= ( !MCU_DO_DIAG0 && MCU_VCC_FB0 ); // !MCU_DO_DIAG0_bm && MCU_VCC_FB0_bm
+		ucTrigOut1Error |= ( !MCU_DO_DIAG1 && MCU_VCC_FB1 ); // !MCU_DO_DIAG1_bm && MCU_VCC_FB1_bm
+		ucTrigOutError	|= ( ucTrigOut1Error || ucTrigOut0Error );
+
+		ucTrigTimeOutError |= ucFlagTimeOutOutError;
 
 		inPort[25] = isRun;
 		inPort[26] = ucTrigOut0Error;
 		inPort[27] = ucTrigOut1Error;
-		inPort[28] = ucFlagTimeOutOutError;
+		inPort[28] = ucTrigTimeOutError;
+		inPort[29] = ucTrigOutError;
+		inPort[30] = uiRegHolding[18] ? 1 : 0;
+
+		//=====================================================================
 
 		ucRS485_address = readAddressSwitch();
 
@@ -268,15 +317,17 @@ int main(void)
 			eStatus = eMBDisable();
 
 			if( !rs485TaskIsEnable() ) {
-				eStatus = eMBInit( MB_RTU, ucRS485_address, 0, 115200, MB_PAR_EVEN );
+				eStatus = eMBInit( MB_RTU, ucRS485_address, 0, 115200/2, MB_PAR_EVEN );
 				eStatus = eMBSetSlaveID( 0x34, TRUE, ucSlaveID, 3 );
 				eStatus = eMBEnable();
+				ucRegCoilsBuf[2] &= ~1;
 			} else {
 				initRS485( 115200, 8, 1, 1 );
+				ucRegCoilsBuf[2] |= 1;
 			}
 		}
 
-		byteArrToBitArr( (uint8_t*)ucRegDiscBuf, (uint8_t*)inPort, 42 );
+		//=====================================================================
 
 		if( uc10msTimerEvent ) {
 			static uint8_t n = 0;
@@ -293,47 +344,57 @@ int main(void)
 			uc100msTimerEvent = 0;
 		}
 
+		if( uc500msTimerEvent ) {
+			uc500msTimerEvent = 0;
+
+			flashTimer = !flashTimer;
+		}
+
 		if( uc1000msTimerEvent ) {
 			uc1000msTimerEvent = 0;
 		}
 
+		//=====================================================================
+
+		byteArrToBitArr( (uint8_t*)ucRegDiscBuf, (uint8_t*)inPort, 42 );
+
+		//=====================================================================
+
 		if( !rs485TaskIsEnable() ) {
 			eMBPoll();
 		} else {
+			uint8_t temp;
+
 			ucRegCoilsBuf[2] |= 1;
 			remote_run = isRun;
 
 			rs485Task();
+
+			temp  = ( ~1 & ucRegDiscBufA3[0] );
+			temp |= ( 1 & ucRegDiscBufA3Temp[0] );
+
+			ucRegDiscBufA3Temp[0] = temp;
+			ucRegDiscBufA3Temp[1] = ucRegDiscBufA3[1];
 		}
 
-		uint8_t temp = ( ~1 & ucRegDiscBufA3[0] );
+		//=====================================================================
 
-		temp |= ( 1 & ucRegDiscBufA3Temp[0] );
-
-		ucRegDiscBufA3Temp[0] = temp;
-		ucRegDiscBufA3Temp[1] = ucRegDiscBufA3[1];
-
-		if( !inPort[24]									|| // !MCU_RUN_STOP_bm
-			ucFlagTimeOutOutError						||
-			( ucAutoStopIfOutError && ucFlagOutError )
-		) {
-			ucRegDiscBuf[2] &= ~1; // Clear run 'switch'
+		if( !MCU_RUN_SWITCH || ucTrigTimeOutError || ( ucAutoStopIfOutError && ucTrigOutError ) ) {
+			ucRegCoilsBuf[2] &= ~1; // Clear QOIL_REMOTE_RUN
 		}
 
-		if( !inPort[24]		||	// !MCU_RUN_STOP_bm
-			!outPort[16]		// !RUN_STOP 'switch'
-		) {
-			if( !outPort[18] || ucFlagOutError || ucFlagTimeOutOutError ) {
+		if( !MCU_RUN_SWITCH || !QOIL_REMOTE_RUN ) {
+			if( !QOIL_DISABLE_OUTPUT_RESET_IN_RUN || ucTrigOutError || ucTrigTimeOutError ) {
 				ucRegCoilsBuf[ 0 ] = 0;
 				ucRegCoilsBuf[ 1 ] = 0;
 			}
 
 			PORTE &= ~MCU_DO_DIS_bm;
-			isRun = 0;
 		} else {
 			PORTE |= MCU_DO_DIS_bm;
-			isRun = outPort[16];
 		}
+
+		//=====================================================================
 
 		n = 0;
 		for( i = 0; i < 19; i++ ) {
@@ -344,28 +405,38 @@ int main(void)
 			}
 		}
 
-		if(	( !inPort[24] || outPort[17] ) && // Reset errors
-			( ( inPort[22] && inPort[20] ) && ( inPort[23] && inPort[21] ) )
+		writeDigitalOutput( (uint8_t*)outPort );
+
+		//=====================================================================
+
+		isRun = QOIL_REMOTE_RUN;
+
+		if(	( !MCU_RUN_SWITCH || QOIL_REMOTE_RESET )// &&
+			//( ( MCU_VCC_FB1 && MCU_DO_DIAG1 ) && ( MCU_VCC_FB0 && MCU_DO_DIAG0 ) )
 		) {
+			ucTrigTimeOutError = 0;
 			ucTrigOut0Error = 0;
 			ucTrigOut1Error = 0;
+
 			ucFlagTimeOutOutError = 0;
+			ucTrigOutError = 0;
 		}
 
+		//=====================================================================
+		// HMI:
 		memcpy( (char*)hmiLed, (char*)inPort, 16 );
 		memcpy( (char*)&hmiLed[20], (char*)outPort, 16 );
 
-		( ( PORTE & MCU_RS485_DE_bm ) || ucFlagTimeOutOutError ) ? ( hmiLed[19] = 1 ) : ( hmiLed[19] = 0 );
-
-		hmiLed[16] = isRun;
-		hmiLed[36] = inPort[20];		// MCU_VCC_FB0_bm
-		hmiLed[37] = inPort[21];		// MCU_VCC_FB1_bm
-		hmiLed[38] = ucTrigOut0Error;	// !MCU_DO_DIAG0_bm && MCU_VCC_FB0_bm
-		hmiLed[39] = ucTrigOut1Error;	// !MCU_DO_DIAG1_bm && MCU_VCC_FB1_bm
+		hmiLed[16] = !isRun || ( isRun && flashTimer );
+		hmiLed[18] = ucTrigTimeOutError;
+		hmiLed[19] = ( PORTE & MCU_RS485_DE_bm ) ? 1 : 0;
+		hmiLed[36] = MCU_VCC_FB0;
+		hmiLed[37] = MCU_VCC_FB1;
+		hmiLed[38] = ucTrigOut0Error;
+		hmiLed[39] = ucTrigOut1Error;
 
 		writeHmiLed( (uint8_t*)hmiLed );
-
-		writeDigitalOutput( (uint8_t*)outPort );
+		//=====================================================================
 
 		fFirstRun = 0;
 	}
@@ -453,8 +524,6 @@ eMBErrorCode eMBRegCoilsCB( UCHAR * pucRegBuffer, USHORT usAddress,
 			MB_FUNC_WRITE_MULTIPLE_COILS			( 15 )
 		 */
 		 case MB_REG_WRITE:
-			uiModbusTimeOutCounter = uiRegHolding[18];
-
 		 	while( iNCoils > 0 ) {
 				xMBUtilSetBits( ucRegCoilsBuf, usBitOffset,
 								(unsigned char)((iNCoils > 8) ? 8 : iNCoils),
@@ -555,9 +624,9 @@ void byteArrToBitArr( uint8_t *lpBit, const uint8_t *lpByte, uint16_t bit_count 
 
 ISR( TIMER3_COMPA_vect )
 {
-	volatile static uint16_t n0 = 0, n1 = 0, n2 = 0;
+	volatile static uint16_t n0 = 0, n1 = 0, n2 = 0, n3 = 0;
 
-	PORTG ^= MCU_PG0_bm;
+	PORTG |= MCU_PG0_bm;
 
 	if( 10 == ++n0 ) {
 		uc10msTimerEvent = 1;
@@ -569,9 +638,14 @@ ISR( TIMER3_COMPA_vect )
 		n1 = 0;
 	}
 
-	if( 1000 == ++n2 ) {
-		uc1000msTimerEvent = 1;
+	if( 500 == ++n2 ) {
+		uc500msTimerEvent = 1;
 		n2 = 0;
+	}
+
+	if( 1000 == ++n3 ) {
+		uc1000msTimerEvent = 1;
+		n3 = 0;
 	}
 
 	rs485TimerIsr();
@@ -585,6 +659,8 @@ ISR( TIMER3_COMPA_vect )
 	} else {
 		ucFlagTimeOutOutError = 0;
 	}
+
+	PORTG &= ~MCU_PG0_bm;
 }
 
 void initBoard(void)

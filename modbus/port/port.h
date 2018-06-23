@@ -64,22 +64,21 @@ typedef long    LONG;
 
 /* ----------------------- AVR platform specifics ---------------------------*/
 
+#define SIG_UART_TX		USART0_TX_vect
+#define SIG_UART_RX		USART0_RX_vect
+#define SIG_UART_UDRE	USART0_UDRE_vect
+
 #define UCSRB           UCSR0B
 #define UCSRC           UCSR0C
 #define UBRRH			UBRR0H
 #define UBRRL			UBRR0L
 #define UDR             UDR0
-#define SIG_UART_TRANS  USART0_TX_vect
-#define SIG_USART_RECV  USART0_RX_vect
-#define SIG_USART_DATA  USART0_UDRE_vect
+
 #define UCSZ_0			UCSZ00
 #define UCSZ_1			UCSZ01
 #define USBS_0			USBS0
 #define UPM_0			UPM00
 #define UPM_1			UPM01
-
-#define TIMSK1			TIMSK
-#define TIFR1			TIFR
 
 /* ----------------------- RS485 specifics ----------------------------------*/
 #ifdef  RTS_ENABLE

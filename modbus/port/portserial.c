@@ -38,32 +38,20 @@
 void
 vMBPortSerialEnable( BOOL xRxEnable, BOOL xTxEnable )
 {
-#ifdef RTS_ENABLE
-    UCSRB |= _BV( TXEN ) | _BV(TXCIE);
-#else
-    UCSRB |= _BV( TXEN );
-#endif
+	if( xRxEnable ) {
+		UCSRB |= _BV( RXEN ) | _BV( RXCIE );
+	} else {
+		UCSRB &= ~( _BV( RXEN ) | _BV( RXCIE ) );
+	}
 
-    if( xRxEnable )
-    {
-        UCSRB |= _BV( RXEN ) | _BV( RXCIE );
-    }
-    else
-    {
-        UCSRB &= ~( _BV( RXEN ) | _BV( RXCIE ) );
-    }
-
-    if( xTxEnable )
-    {
-        UCSRB |= _BV( TXEN ) | _BV( UDRE );
+	if( xTxEnable ) {
+		UCSRB |= _BV( TXEN ) | _BV(TXCIE) | _BV( UDRE );
 #ifdef RTS_ENABLE
-        RTS_HIGH;
+		RTS_HIGH;
 #endif
-    }
-    else
-    {
-        UCSRB &= ~( _BV( UDRE ) );
-    }
+	} else {
+		UCSRB &= ~( _BV( UDRE ) );
+	}
 }
 
 BOOL
@@ -71,6 +59,10 @@ xMBPortSerialInit( UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
 {
 	UCHAR ucUCSRC = 0;
 	uint16_t uiBaudRate = 0;
+
+#ifdef RTS_ENABLE
+	RTS_INIT;
+#endif
 
 	// F_CPU: 16.00 MHz
 	switch( ulBaudRate ) {
@@ -130,39 +122,39 @@ xMBPortSerialInit( UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
 
 	vMBPortSerialEnable( FALSE, FALSE );
 
-#ifdef RTS_ENABLE
-	RTS_INIT;
-#endif
 	return TRUE;
 }
 
 BOOL
 xMBPortSerialPutByte( CHAR ucByte )
 {
-    UDR = ucByte;
-    return TRUE;
+#ifdef RTS_ENABLE
+	RTS_HIGH;
+#endif
+	UDR = ucByte;
+	return TRUE;
 }
 
 BOOL
 xMBPortSerialGetByte( CHAR * pucByte )
 {
-    *pucByte = UDR;
-    return TRUE;
+	*pucByte = UDR;
+	return TRUE;
 }
 
-/*ISR( SIG_UART_TRANS )
+ISR( SIG_UART_TX )
 {
 #ifdef RTS_ENABLE
 	RTS_LOW;
 #endif
 }
 
-ISR( SIG_USART_RECV )
+ISR( SIG_UART_RX )
 {
 	pxMBFrameCBByteReceived(  );
 }
 
-ISR( SIG_USART_DATA )
+ISR( SIG_UART_UDRE )
 {
 	pxMBFrameCBTransmitterEmpty(  );
-}*/
+}

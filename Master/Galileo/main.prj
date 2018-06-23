@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <ProjectData Guid="b22a0043-54c9-49ac-99e6-04512f497f73" Version="[2.0]" GalileoVersion="Galileo (10.2.2.21374)">
-  <Checksum Value="2780317391" />
+  <Checksum Value="2062385456" />
   <LanguageManager Guid="3e7b3122-081f-4e02-9f8f-28622535cf2b" NextFreeGlobalID="2">
     <Language Guid="db3c2ada-8283-4b0e-ba33-b2214892186d" LanguageName="Language 00" Id="0" Enabled="1" Default="1" SysKeyboard="de_CH" SysMsgLanguage="40f13c75-af39-4d47-a22a-90aea9ef2321" PrintFont="[0,10,0]">
       <FontElement Guid="ff01cfda-18ed-4a1f-98a4-932b394b7b0c" FontName="Arial" Factor="100" />
@@ -202,7 +202,7 @@
     </ValueEntryStyle>
   </StyleManager>
   <PlcDataManager Guid="67100ec4-d549-4ba7-b5aa-0f53a045c3d7">
-    <GPanelCommunication Guid="c709acfa-d1bb-4b37-a843-b94cb283839e" CommKey="0" CommunicationId="100" EndianMode="64" BaudRate="[115200,14]" MemoryAlignment="4" StringTermination="2" StringEncoding="0" CommunicationDescription="" Param0="2" Param1="10" Param2="5" Param3="1" Param4="0" Param5="0" Param6="0" Param7="0" Param8="0" StringParam9="" StringParam10="" Param11="50" AdditionalParameters="" />
+    <GPanelCommunication Guid="c709acfa-d1bb-4b37-a843-b94cb283839e" CommKey="0" CommunicationId="100" EndianMode="64" BaudRate="[38400,7]" MemoryAlignment="4" StringTermination="2" StringEncoding="0" CommunicationDescription="" Param0="2" Param1="10" Param2="5" Param3="1" Param4="0" Param5="0" Param6="0" Param7="0" Param8="0" StringParam9="" StringParam10="" Param11="50" AdditionalParameters="" />
     <GPanel Guid="e773451c-4d32-4705-b5ff-5b27720647c4" PanelId="21" PanelName="GALILEO OPEN" BrandId="76" XResolution="800" YResolution="700" IniFileName="" Orientation="1">
       <GPanelConnection Guid="760ce11e-ab69-44af-acd2-d6a04bdbfb08" Description="COM1">
         <ConnectedCommunications />

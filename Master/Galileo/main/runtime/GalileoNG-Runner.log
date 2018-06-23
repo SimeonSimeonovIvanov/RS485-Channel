@@ -1,2 +1,1 @@
-ERROR: ..\..\Guiliani\src\core\control\GUI.cpp (284) CGUI::RunOnce: Caught an exception during timer processing.
 ERROR: ..\..\Guiliani\src\platform\win\GfxEnvWin.cpp (68) CGfxWrapeGMLwin::~CGfxWrapeGMLwin: The DC can not be deleted. There are some resources that may be not released.

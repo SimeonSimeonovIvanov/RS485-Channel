@@ -1,4 +1,4 @@
-# RS485-Chanel
+# RS485-Channel
 Multi channel RS485 master communication and simple Modbus master aplication layer over RS485.
 Work with Modbus IO Module:
 

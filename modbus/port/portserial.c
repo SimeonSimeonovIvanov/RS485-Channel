@@ -141,7 +141,7 @@ xMBPortSerialGetByte( CHAR * pucByte )
 	*pucByte = UDR;
 	return TRUE;
 }
-
+/*
 ISR( SIG_UART_TX )
 {
 #ifdef RTS_ENABLE
@@ -158,3 +158,4 @@ ISR( SIG_UART_UDRE )
 {
 	pxMBFrameCBTransmitterEmpty(  );
 }
+*/

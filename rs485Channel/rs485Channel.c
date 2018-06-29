@@ -197,7 +197,7 @@ void rs485SendBuffer( uint8_t *buffer, uint8_t len )
 	UDR0 = ucRS485txBuffer[ ucRS485txState ];
 }
 
-/*ISR( SIG_UART_TRANS )
+ISR( SIG_UART_TX )
 {
 	if( !usRS485PortAsMaster ) {
 		disable_rs485_transmit();
@@ -213,7 +213,7 @@ void rs485SendBuffer( uint8_t *buffer, uint8_t len )
 	}
 }
 
-ISR( SIG_USART_RECV )
+ISR( SIG_UART_RX )
 {
 	if( !usRS485PortAsMaster ) {
 		pxMBFrameCBByteReceived();
@@ -230,12 +230,12 @@ ISR( SIG_USART_RECV )
 	}
 }
 
-ISR( SIG_USART_DATA )
+ISR( SIG_UART_UDRE )
 {
 	if( !usRS485PortAsMaster ) {
 		pxMBFrameCBTransmitterEmpty();
 	}
-}*/
+}
 
 void initRS485( unsigned long ulBaudRate, uint8_t ucDataBits, uint8_t ucStopBits, uint8_t ucParity )
 {

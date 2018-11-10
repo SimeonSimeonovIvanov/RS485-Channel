@@ -3,7 +3,7 @@ Multi channel RS485 master communication and simple Modbus master aplication lay
 Work with Modbus IO Module:
 
 1) v.0.0.9: https://photos.app.goo.gl/yJJbBFp53oGfpSQh1
-ATmega128; 16 DI ( isolated ); 16 DO ( isolated ); RS485 ( isolated ); HMI: LED amd SPI expander
+ATmega128; 16 DI ( isolated ); 16 DO ( isolated ); RS485 ( isolated ); HMI: LED and SPI expander
 
 2) v.0.0.8: https://photos.app.goo.gl/Z9C2jXlDd0mY3kmC3
 ATmega128 + 64KB SRAM; Embedded JTAG ( isolated ); 10 DI ( isolated ); 12 DO ( isolated ); 7 AIN ( 12/16 bits - isolated ); 2 AO ( 16 bits - isolated ); RS485; USB->Virtual Serial Port ( isolated )

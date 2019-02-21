@@ -32,16 +32,16 @@ typedef struct {
 } MB_MASTER_RW_COILS, *LP_MB_MASTER_RW_COILS;
 
 void mbSendRequestReadInputStatus( void *lpObject );
-uint8_t mbReceiveRequestReadInputStatus( uint8_t *rxBuffer, uint8_t len, void *lpObject );
+uint8_t mbReceiveRequestReadInputStatus( void *lpObject, uint8_t *rxBuffer, uint8_t len );
 
 void mbSendRequestForceSingleCoil( void *lpObject );
-uint8_t mbReceiveRequestForceSingleCoil( uint8_t *rxBuffer, uint8_t len, void *lpObject );
+uint8_t mbReceiveRequestForceSingleCoil( void *lpObject, uint8_t *rxBuffer, uint8_t len );
 
 void mbSendRequestForceMultipleCoils( void *lpObject );
-uint8_t mbReceiveRequestForceMultipleCoils( uint8_t *rxBuffer, uint8_t len, void *lpObject );
+uint8_t mbReceiveRequestForceMultipleCoils( void *lpObject, uint8_t *rxBuffer, uint8_t len );
 
 void mbSendRequestPresetSingleRegister( void *lpObject );
-uint8_t mbReceiveRequestPresetSingleRegister( uint8_t *rxBuffer, uint8_t len, void *lpObject );
+uint8_t mbReceiveRequestPresetSingleRegister( void *lpObject, uint8_t *rxBuffer, uint8_t len );
 
 void mbRtuAddCrcAndSendBuffer( uint8_t *txBuffer, uint16_t len );
 uint8_t mbCheckExceptionForResponse( uint8_t *lpExceptionCode, uint8_t txFunctionCode, uint8_t *rxBuffer, uint8_t len );

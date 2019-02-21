@@ -9,7 +9,7 @@ typedef struct rs485Channel OBJ_RS485_CHANNEL;
 typedef struct rs485Channel *LP_OBJ_RS485_CHANNEL;
 
 struct rs485Channel {
-	void *lpData;
+	void *lpObject;
 
 	uint16_t msReadTimeOut;
 
@@ -22,7 +22,7 @@ struct rs485Channel {
 	void (*rs485RestoreUartSetings)( void *lpObject );
 
 	void (*rs485SendRequestFunc)( void *lpObject );
-	uint8_t (*rs485GetResponseFunc)( uint8_t *rxBuffer, uint8_t len, void *lpObject );
+	uint8_t (*rs485GetResponseFunc)( void *lpObject, uint8_t *rxBuffer, uint8_t len );
 };
 
 
@@ -40,7 +40,7 @@ void rs485SetUartSetingsNullFunc( void *lpObject );
 void rs485RestoreUartSetingsNullFunc( void *lpObject );
 
 void rs485sendRequestNullFunc( void *lpObject );
-uint8_t rs485getResponseNullFunc( uint8_t *rxBuffer, uint8_t len, void *lpObject );
+uint8_t rs485getResponseNullFunc( void *lpObject, uint8_t *rxBuffer, uint8_t len );
 
 void rs485SetTimeOutErrorNullFunc( void *lpObject );
 void rs485ClrTimeOutErrorNullFunc( void *lpObject );

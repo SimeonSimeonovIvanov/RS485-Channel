@@ -51,8 +51,8 @@ void rs485Task( void )
 			свързано към RS485 линията.
 		*/
 		lpArrRS485Channel[ ucRS485ChannelIndex ]->ucFlag = 0;
-		lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485SetUartSetings( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpData );
-		lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485SendRequestFunc( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpData );
+		lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485SetUartSetings( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpObject );
+		lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485SendRequestFunc( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpObject );
 
 		// Пауза за следващото запитване + Timeout
 		uiSysRS485ReciverTimer		= lpArrRS485Channel[ ucRS485ChannelIndex ]->msReadTimeOut;
@@ -63,8 +63,8 @@ void rs485Task( void )
 		if( 1 ) {//|| rs485ReciverTimer != rs485ReciverTimerOld ) {
 			rs485ReciverTimerOld = uiSysRS485ReciverTimer;
 
-			if( lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485GetResponseFunc( (uint8_t*)ucRS485rxBuffer, ucRS485rxState, lpArrRS485Channel[ ucRS485ChannelIndex ]->lpData ) ) {
-				lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485ClrTimeOutError( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpData );
+			if( lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485GetResponseFunc( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpObject, (uint8_t*)ucRS485rxBuffer, ucRS485rxState ) ) {
+				lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485ClrTimeOutError( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpObject );
 				lpArrRS485Channel[ ucRS485ChannelIndex ]->rxErrorCounter = 0;
 				lpArrRS485Channel[ ucRS485ChannelIndex ]->ucFlag = 1; // OK
 
@@ -72,7 +72,7 @@ void rs485Task( void )
 			}
 		}
 	} else {
-		lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485RestoreUartSetings( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpData );
+		lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485RestoreUartSetings( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpObject );
 
 		if( !lpArrRS485Channel[ ucRS485ChannelIndex ]->ucFlag ) {
 			lpArrRS485Channel[ ucRS485ChannelIndex ]->ucFlag = 2; // Timeout
@@ -81,7 +81,7 @@ void rs485Task( void )
 			if( lpArrRS485Channel[ ucRS485ChannelIndex ]->rxErrorCounter < 5 ) {
 				++lpArrRS485Channel[ ucRS485ChannelIndex ]->rxErrorCounter;
 			} else {
-				lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485SetTimeOutError( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpData );
+				lpArrRS485Channel[ ucRS485ChannelIndex ]->rs485SetTimeOutError( lpArrRS485Channel[ ucRS485ChannelIndex ]->lpObject );
 			}
 		}
 	}
@@ -142,7 +142,7 @@ uint8_t rs485AddChannel( LP_OBJ_RS485_CHANNEL lpChannel )
 
 void rs485ChannelDefInit( LP_OBJ_RS485_CHANNEL lpChannel )
 {
-	lpChannel->lpData = NULL;
+	lpChannel->lpObject = NULL;
 
 	lpChannel->msReadTimeOut = 100;
 	lpChannel->ucEnableRequest = 0;
@@ -159,28 +159,28 @@ void rs485ChannelDefInit( LP_OBJ_RS485_CHANNEL lpChannel )
 	lpChannel->rs485ClrTimeOutError = rs485ClrTimeOutErrorNullFunc;
 }
 
-void rs485sendRequestNullFunc( void *lpData )
+void rs485sendRequestNullFunc( void *lpObject )
 {
 }
 
-uint8_t rs485getResponseNullFunc( uint8_t *rxBuffer, uint8_t len, void *lpData )
+uint8_t rs485getResponseNullFunc( void *lpObject, uint8_t *rxBuffer, uint8_t len )
 {
 	return 1;
 }
 
-void rs485SetUartSetingsNullFunc( void *lpData )
+void rs485SetUartSetingsNullFunc( void *lpObject )
 {
 }
 
-void rs485RestoreUartSetingsNullFunc( void *lpData )
+void rs485RestoreUartSetingsNullFunc( void *lpObject )
 {
 }
 
-void rs485SetTimeOutErrorNullFunc( void *lpData )
+void rs485SetTimeOutErrorNullFunc( void *lpObject )
 {
 }
 
-void rs485ClrTimeOutErrorNullFunc( void *lpData )
+void rs485ClrTimeOutErrorNullFunc( void *lpObject )
 {
 }
 

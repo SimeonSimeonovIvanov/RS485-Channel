@@ -27,7 +27,7 @@ void mbSendRequestReadInputStatus( void *lpObject )
 	mbRtuAddCrcAndSendBuffer( txBuffer, 8 );
 }
 
-uint8_t mbReceiveRequestReadInputStatus( uint8_t *rxBuffer, uint8_t len, void *lpObject )
+uint8_t mbReceiveRequestReadInputStatus( void *lpObject, uint8_t *rxBuffer, uint8_t len )
 {
 	LP_MB_MASTER_READ_INPUT_STATUS lpData = (LP_MB_MASTER_READ_INPUT_STATUS)lpObject;
 
@@ -81,7 +81,7 @@ void mbSendRequestForceSingleCoil( void *lpObject )
 	mbRtuAddCrcAndSendBuffer( txBuffer, 8 );
 }
 
-uint8_t mbReceiveRequestForceSingleCoil( uint8_t *rxBuffer, uint8_t len, void *lpObject )
+uint8_t mbReceiveRequestForceSingleCoil( void *lpObject, uint8_t *rxBuffer, uint8_t len )
 {
 	LP_MB_MASTER_WRITE_SINGLE_COIL lpData = (LP_MB_MASTER_WRITE_SINGLE_COIL)lpObject;
 
@@ -142,7 +142,7 @@ void mbSendRequestPresetSingleRegister( void *lpObject )
 	mbRtuAddCrcAndSendBuffer( txBuffer, 8 );
 }
 
-uint8_t mbReceiveRequestPresetSingleRegister( uint8_t *rxBuffer, uint8_t len, void *lpObject )
+uint8_t mbReceiveRequestPresetSingleRegister( void *lpObject, uint8_t *rxBuffer, uint8_t len )
 {
 	LP_MB_MASTER_PRESET_SINGLE_REGISTER lpData = (LP_MB_MASTER_PRESET_SINGLE_REGISTER)lpObject;
 
@@ -207,7 +207,7 @@ void mbSendRequestForceMultipleCoils( void *lpObject )
 	mbRtuAddCrcAndSendBuffer( txBuffer, 9 + byte_number );
 }
 
-uint8_t mbReceiveRequestForceMultipleCoils( uint8_t *rxBuffer, uint8_t len, void *lpObject )
+uint8_t mbReceiveRequestForceMultipleCoils( void *lpObject, uint8_t *rxBuffer, uint8_t len )
 {
 	LP_MB_MASTER_RW_COILS lpData = (LP_MB_MASTER_RW_COILS)lpObject;
 

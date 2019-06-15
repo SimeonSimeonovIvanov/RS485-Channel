@@ -3,27 +3,27 @@ main.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000038  00800100  000032b2  00003346  2**0
+  0 .data         00000038  00800100  000032aa  0000333e  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000032b2  00000000  00000000  00000094  2**1
+  1 .text         000032aa  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          000005e1  00800138  00800138  0000337e  2**0
+  2 .bss          000005e1  00800138  00800138  00003376  2**0
                   ALLOC
-  3 .debug_aranges 00000260  00000000  00000000  0000337e  2**0
+  3 .debug_aranges 00000260  00000000  00000000  00003376  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .debug_pubnames 00000d55  00000000  00000000  000035de  2**0
+  4 .debug_pubnames 00000d55  00000000  00000000  000035d6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00004064  00000000  00000000  00004333  2**0
+  5 .debug_info   00003ffd  00000000  00000000  0000432b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000141b  00000000  00000000  00008397  2**0
+  6 .debug_abbrev 000013d2  00000000  00000000  00008328  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00003dc6  00000000  00000000  000097b2  2**0
+  7 .debug_line   00003dc4  00000000  00000000  000096fa  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000800  00000000  00000000  0000d578  2**2
+  8 .debug_frame  00000800  00000000  00000000  0000d4c0  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000019d7  00000000  00000000  0000dd78  2**0
+  9 .debug_str    000019d0  00000000  00000000  0000dcc0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    0000240a  00000000  00000000  0000f74f  2**0
+ 10 .debug_loc    000023e2  00000000  00000000  0000f690  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -113,7 +113,7 @@ Disassembly of section .text:
      298:	11 e0       	ldi	r17, 0x01	; 1
      29a:	a0 e0       	ldi	r26, 0x00	; 0
      29c:	b1 e0       	ldi	r27, 0x01	; 1
-     29e:	e2 eb       	ldi	r30, 0xB2	; 178
+     29e:	ea ea       	ldi	r30, 0xAA	; 170
      2a0:	f2 e3       	ldi	r31, 0x32	; 50
      2a2:	00 e0       	ldi	r16, 0x00	; 0
      2a4:	0b bf       	out	0x3b, r16	; 59
@@ -138,7 +138,7 @@ Disassembly of section .text:
      2be:	b1 07       	cpc	r27, r17
      2c0:	e1 f7       	brne	.-8      	; 0x2ba <.do_clear_bss_loop>
      2c2:	0e 94 aa 03 	call	0x754	; 0x754 <main>
-     2c6:	0c 94 57 19 	jmp	0x32ae	; 0x32ae <_exit>
+     2c6:	0c 94 53 19 	jmp	0x32a6	; 0x32a6 <_exit>
 
 000002ca <__bad_interrupt>:
      2ca:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -2448,7 +2448,7 @@ eMBRTUInit( UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity ePar
     101e:	90 e0       	ldi	r25, 0x00	; 0
     1020:	a7 01       	movw	r20, r14
     1022:	96 01       	movw	r18, r12
-    1024:	0e 94 2c 19 	call	0x3258	; 0x3258 <__udivmodsi4>
+    1024:	0e 94 28 19 	call	0x3250	; 0x3250 <__udivmodsi4>
     1028:	c9 01       	movw	r24, r18
         }
         if( xMBPortTimersInit( ( USHORT ) usTimerT35_50us ) != TRUE )
@@ -4574,7 +4574,7 @@ eMBFuncReportSlaveID( UCHAR * pucFrame, USHORT * usLen )
     196c:	50 91 8e 03 	lds	r21, 0x038E
     1970:	c9 01       	movw	r24, r18
     1972:	bf 01       	movw	r22, r30
-    1974:	0e 94 4e 19 	call	0x329c	; 0x329c <memcpy>
+    1974:	0e 94 4a 19 	call	0x3294	; 0x3294 <memcpy>
     *usLen = ( USHORT )( MB_PDU_DATA_OFF + usMBSlaveIDLen );
     1978:	80 91 8d 03 	lds	r24, 0x038D
     197c:	90 91 8e 03 	lds	r25, 0x038E
@@ -4637,7 +4637,7 @@ eMBSetSlaveID( UCHAR ucSlaveID, BOOL xIsRunning,
     19ca:	c9 01       	movw	r24, r18
     19cc:	ba 01       	movw	r22, r20
     19ce:	ae 01       	movw	r20, r28
-    19d0:	0e 94 4e 19 	call	0x329c	; 0x329c <memcpy>
+    19d0:	0e 94 4a 19 	call	0x3294	; 0x3294 <memcpy>
                     ( size_t )usAdditionalLen );
             usMBSlaveIDLen += usAdditionalLen;
     19d4:	80 91 8d 03 	lds	r24, 0x038D
@@ -5238,7 +5238,7 @@ xMBPortSerialInit( UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
     1cfc:	90 e0       	ldi	r25, 0x00	; 0
     1cfe:	a7 01       	movw	r20, r14
     1d00:	96 01       	movw	r18, r12
-    1d02:	0e 94 2c 19 	call	0x3258	; 0x3258 <__udivmodsi4>
+    1d02:	0e 94 28 19 	call	0x3250	; 0x3250 <__udivmodsi4>
     1d06:	21 50       	subi	r18, 0x01	; 1
     1d08:	30 40       	sbci	r19, 0x00	; 0
     1d0a:	02 c0       	rjmp	.+4      	; 0x1d10 <xMBPortSerialInit+0x1b2>
@@ -5405,12 +5405,12 @@ xMBPortTimersInit( USHORT usTim1Timerout50us )
     1da8:	3d e3       	ldi	r19, 0x3D	; 61
     1daa:	40 e0       	ldi	r20, 0x00	; 0
     1dac:	50 e0       	ldi	r21, 0x00	; 0
-    1dae:	0e 94 0d 19 	call	0x321a	; 0x321a <__mulsi3>
+    1dae:	0e 94 09 19 	call	0x3212	; 0x3212 <__mulsi3>
     1db2:	20 e2       	ldi	r18, 0x20	; 32
     1db4:	3e e4       	ldi	r19, 0x4E	; 78
     1db6:	40 e0       	ldi	r20, 0x00	; 0
     1db8:	50 e0       	ldi	r21, 0x00	; 0
-    1dba:	0e 94 2c 19 	call	0x3258	; 0x3258 <__udivmodsi4>
+    1dba:	0e 94 28 19 	call	0x3250	; 0x3250 <__udivmodsi4>
     1dbe:	30 93 92 03 	sts	0x0392, r19
     1dc2:	20 93 91 03 	sts	0x0391, r18
 
@@ -8929,7 +8929,7 @@ void rs485SendBuffer( uint8_t *buffer, uint8_t len )
     30fa:	62 2f       	mov	r22, r18
     30fc:	41 2f       	mov	r20, r17
     30fe:	50 e0       	ldi	r21, 0x00	; 0
-    3100:	0e 94 4e 19 	call	0x329c	; 0x329c <memcpy>
+    3100:	0e 94 4a 19 	call	0x3294	; 0x3294 <memcpy>
 
 	ucRS485txBufferLenght = len;
     3104:	10 93 b5 04 	sts	0x04B5, r17
@@ -9017,12 +9017,10 @@ void bitarr_low(uint8_t *data, unsigned index)
     3188:	08 95       	ret
 
 0000318a <bitarr_write>:
-	============
-*/
 
-#include "bit-array.h"
-
-inline uint8_t mask(unsigned index) { return 1 << (index & 0x7); }
+void bitarr_write(uint8_t *data, unsigned index, bool value)
+{
+	uint8_t m = mask(index);
     318a:	fb 01       	movw	r30, r22
     318c:	e7 70       	andi	r30, 0x07	; 7
     318e:	f0 70       	andi	r31, 0x00	; 0
@@ -9033,7 +9031,7 @@ inline uint8_t mask(unsigned index) { return 1 << (index & 0x7); }
     3198:	33 1f       	adc	r19, r19
     319a:	ea 95       	dec	r30
     319c:	e2 f7       	brpl	.-8      	; 0x3196 <bitarr_write+0xc>
-inline unsigned offset(unsigned index) { return index >> 3; }
+	unsigned o = offset(index);
     319e:	fb 01       	movw	r30, r22
     31a0:	53 e0       	ldi	r21, 0x03	; 3
     31a2:	f6 95       	lsr	r31
@@ -9042,10 +9040,6 @@ inline unsigned offset(unsigned index) { return index >> 3; }
     31a8:	e1 f7       	brne	.-8      	; 0x31a2 <bitarr_write+0x18>
     31aa:	e8 0f       	add	r30, r24
     31ac:	f9 1f       	adc	r31, r25
-void bitarr_write(uint8_t *data, unsigned index, bool value)
-{
-	uint8_t m = mask(index);
-	unsigned o = offset(index);
 
 	if (value) {
     31ae:	44 23       	and	r20, r20
@@ -9069,145 +9063,141 @@ void bitarr_write(uint8_t *data, unsigned index, bool value)
 bool bitarr_read(const uint8_t *data, unsigned index)
 {
     31c2:	fb 01       	movw	r30, r22
-    31c4:	ab 01       	movw	r20, r22
-    31c6:	47 70       	andi	r20, 0x07	; 7
-    31c8:	50 70       	andi	r21, 0x00	; 0
-    31ca:	21 e0       	ldi	r18, 0x01	; 1
-    31cc:	30 e0       	ldi	r19, 0x00	; 0
-    31ce:	02 c0       	rjmp	.+4      	; 0x31d4 <bitarr_read+0x12>
-    31d0:	22 0f       	add	r18, r18
-    31d2:	33 1f       	adc	r19, r19
-    31d4:	4a 95       	dec	r20
-    31d6:	e2 f7       	brpl	.-8      	; 0x31d0 <bitarr_read+0xe>
-    31d8:	63 e0       	ldi	r22, 0x03	; 3
-    31da:	f6 95       	lsr	r31
-    31dc:	e7 95       	ror	r30
-    31de:	6a 95       	dec	r22
-    31e0:	e1 f7       	brne	.-8      	; 0x31da <bitarr_read+0x18>
-    31e2:	e8 0f       	add	r30, r24
-    31e4:	f9 1f       	adc	r31, r25
-    31e6:	80 81       	ld	r24, Z
-    31e8:	82 23       	and	r24, r18
-    31ea:	09 f0       	breq	.+2      	; 0x31ee <bitarr_read+0x2c>
-    31ec:	81 e0       	ldi	r24, 0x01	; 1
+    31c4:	a3 e0       	ldi	r26, 0x03	; 3
+    31c6:	f6 95       	lsr	r31
+    31c8:	e7 95       	ror	r30
+    31ca:	aa 95       	dec	r26
+    31cc:	e1 f7       	brne	.-8      	; 0x31c6 <bitarr_read+0x4>
+    31ce:	e8 0f       	add	r30, r24
+    31d0:	f9 1f       	adc	r31, r25
+    31d2:	80 81       	ld	r24, Z
+    31d4:	90 e0       	ldi	r25, 0x00	; 0
+    31d6:	67 70       	andi	r22, 0x07	; 7
+    31d8:	70 70       	andi	r23, 0x00	; 0
+    31da:	02 c0       	rjmp	.+4      	; 0x31e0 <bitarr_read+0x1e>
+    31dc:	95 95       	asr	r25
+    31de:	87 95       	ror	r24
+    31e0:	6a 95       	dec	r22
+    31e2:	e2 f7       	brpl	.-8      	; 0x31dc <bitarr_read+0x1a>
 	return !!(data[offset(index)] & mask(index));
 }
-    31ee:	08 95       	ret
+    31e4:	81 70       	andi	r24, 0x01	; 1
+    31e6:	08 95       	ret
 
-000031f0 <bitarr_flip>:
+000031e8 <bitarr_flip>:
 
 void bitarr_flip(uint8_t *data, unsigned index)
 {
 	data[offset(index)] ^= mask(index);
-    31f0:	fb 01       	movw	r30, r22
-    31f2:	a3 e0       	ldi	r26, 0x03	; 3
-    31f4:	f6 95       	lsr	r31
-    31f6:	e7 95       	ror	r30
-    31f8:	aa 95       	dec	r26
-    31fa:	e1 f7       	brne	.-8      	; 0x31f4 <bitarr_flip+0x4>
-    31fc:	e8 0f       	add	r30, r24
-    31fe:	f9 1f       	adc	r31, r25
-    3200:	67 70       	andi	r22, 0x07	; 7
-    3202:	70 70       	andi	r23, 0x00	; 0
-    3204:	81 e0       	ldi	r24, 0x01	; 1
-    3206:	90 e0       	ldi	r25, 0x00	; 0
-    3208:	02 c0       	rjmp	.+4      	; 0x320e <bitarr_flip+0x1e>
-    320a:	88 0f       	add	r24, r24
-    320c:	99 1f       	adc	r25, r25
-    320e:	6a 95       	dec	r22
-    3210:	e2 f7       	brpl	.-8      	; 0x320a <bitarr_flip+0x1a>
-    3212:	20 81       	ld	r18, Z
-    3214:	28 27       	eor	r18, r24
-    3216:	20 83       	st	Z, r18
+    31e8:	fb 01       	movw	r30, r22
+    31ea:	b3 e0       	ldi	r27, 0x03	; 3
+    31ec:	f6 95       	lsr	r31
+    31ee:	e7 95       	ror	r30
+    31f0:	ba 95       	dec	r27
+    31f2:	e1 f7       	brne	.-8      	; 0x31ec <bitarr_flip+0x4>
+    31f4:	e8 0f       	add	r30, r24
+    31f6:	f9 1f       	adc	r31, r25
+    31f8:	67 70       	andi	r22, 0x07	; 7
+    31fa:	70 70       	andi	r23, 0x00	; 0
+    31fc:	81 e0       	ldi	r24, 0x01	; 1
+    31fe:	90 e0       	ldi	r25, 0x00	; 0
+    3200:	02 c0       	rjmp	.+4      	; 0x3206 <bitarr_flip+0x1e>
+    3202:	88 0f       	add	r24, r24
+    3204:	99 1f       	adc	r25, r25
+    3206:	6a 95       	dec	r22
+    3208:	e2 f7       	brpl	.-8      	; 0x3202 <bitarr_flip+0x1a>
+    320a:	20 81       	ld	r18, Z
+    320c:	28 27       	eor	r18, r24
+    320e:	20 83       	st	Z, r18
 }
-    3218:	08 95       	ret
+    3210:	08 95       	ret
 
-0000321a <__mulsi3>:
-    321a:	62 9f       	mul	r22, r18
-    321c:	d0 01       	movw	r26, r0
-    321e:	73 9f       	mul	r23, r19
-    3220:	f0 01       	movw	r30, r0
-    3222:	82 9f       	mul	r24, r18
-    3224:	e0 0d       	add	r30, r0
-    3226:	f1 1d       	adc	r31, r1
-    3228:	64 9f       	mul	r22, r20
-    322a:	e0 0d       	add	r30, r0
-    322c:	f1 1d       	adc	r31, r1
-    322e:	92 9f       	mul	r25, r18
+00003212 <__mulsi3>:
+    3212:	62 9f       	mul	r22, r18
+    3214:	d0 01       	movw	r26, r0
+    3216:	73 9f       	mul	r23, r19
+    3218:	f0 01       	movw	r30, r0
+    321a:	82 9f       	mul	r24, r18
+    321c:	e0 0d       	add	r30, r0
+    321e:	f1 1d       	adc	r31, r1
+    3220:	64 9f       	mul	r22, r20
+    3222:	e0 0d       	add	r30, r0
+    3224:	f1 1d       	adc	r31, r1
+    3226:	92 9f       	mul	r25, r18
+    3228:	f0 0d       	add	r31, r0
+    322a:	83 9f       	mul	r24, r19
+    322c:	f0 0d       	add	r31, r0
+    322e:	74 9f       	mul	r23, r20
     3230:	f0 0d       	add	r31, r0
-    3232:	83 9f       	mul	r24, r19
+    3232:	65 9f       	mul	r22, r21
     3234:	f0 0d       	add	r31, r0
-    3236:	74 9f       	mul	r23, r20
-    3238:	f0 0d       	add	r31, r0
-    323a:	65 9f       	mul	r22, r21
-    323c:	f0 0d       	add	r31, r0
-    323e:	99 27       	eor	r25, r25
-    3240:	72 9f       	mul	r23, r18
+    3236:	99 27       	eor	r25, r25
+    3238:	72 9f       	mul	r23, r18
+    323a:	b0 0d       	add	r27, r0
+    323c:	e1 1d       	adc	r30, r1
+    323e:	f9 1f       	adc	r31, r25
+    3240:	63 9f       	mul	r22, r19
     3242:	b0 0d       	add	r27, r0
     3244:	e1 1d       	adc	r30, r1
     3246:	f9 1f       	adc	r31, r25
-    3248:	63 9f       	mul	r22, r19
-    324a:	b0 0d       	add	r27, r0
-    324c:	e1 1d       	adc	r30, r1
-    324e:	f9 1f       	adc	r31, r25
-    3250:	bd 01       	movw	r22, r26
-    3252:	cf 01       	movw	r24, r30
-    3254:	11 24       	eor	r1, r1
-    3256:	08 95       	ret
+    3248:	bd 01       	movw	r22, r26
+    324a:	cf 01       	movw	r24, r30
+    324c:	11 24       	eor	r1, r1
+    324e:	08 95       	ret
 
-00003258 <__udivmodsi4>:
-    3258:	a1 e2       	ldi	r26, 0x21	; 33
-    325a:	1a 2e       	mov	r1, r26
-    325c:	aa 1b       	sub	r26, r26
-    325e:	bb 1b       	sub	r27, r27
-    3260:	fd 01       	movw	r30, r26
-    3262:	0d c0       	rjmp	.+26     	; 0x327e <__udivmodsi4_ep>
+00003250 <__udivmodsi4>:
+    3250:	a1 e2       	ldi	r26, 0x21	; 33
+    3252:	1a 2e       	mov	r1, r26
+    3254:	aa 1b       	sub	r26, r26
+    3256:	bb 1b       	sub	r27, r27
+    3258:	fd 01       	movw	r30, r26
+    325a:	0d c0       	rjmp	.+26     	; 0x3276 <__udivmodsi4_ep>
 
-00003264 <__udivmodsi4_loop>:
-    3264:	aa 1f       	adc	r26, r26
-    3266:	bb 1f       	adc	r27, r27
-    3268:	ee 1f       	adc	r30, r30
-    326a:	ff 1f       	adc	r31, r31
-    326c:	a2 17       	cp	r26, r18
-    326e:	b3 07       	cpc	r27, r19
-    3270:	e4 07       	cpc	r30, r20
-    3272:	f5 07       	cpc	r31, r21
-    3274:	20 f0       	brcs	.+8      	; 0x327e <__udivmodsi4_ep>
-    3276:	a2 1b       	sub	r26, r18
-    3278:	b3 0b       	sbc	r27, r19
-    327a:	e4 0b       	sbc	r30, r20
-    327c:	f5 0b       	sbc	r31, r21
+0000325c <__udivmodsi4_loop>:
+    325c:	aa 1f       	adc	r26, r26
+    325e:	bb 1f       	adc	r27, r27
+    3260:	ee 1f       	adc	r30, r30
+    3262:	ff 1f       	adc	r31, r31
+    3264:	a2 17       	cp	r26, r18
+    3266:	b3 07       	cpc	r27, r19
+    3268:	e4 07       	cpc	r30, r20
+    326a:	f5 07       	cpc	r31, r21
+    326c:	20 f0       	brcs	.+8      	; 0x3276 <__udivmodsi4_ep>
+    326e:	a2 1b       	sub	r26, r18
+    3270:	b3 0b       	sbc	r27, r19
+    3272:	e4 0b       	sbc	r30, r20
+    3274:	f5 0b       	sbc	r31, r21
 
-0000327e <__udivmodsi4_ep>:
-    327e:	66 1f       	adc	r22, r22
-    3280:	77 1f       	adc	r23, r23
-    3282:	88 1f       	adc	r24, r24
-    3284:	99 1f       	adc	r25, r25
-    3286:	1a 94       	dec	r1
-    3288:	69 f7       	brne	.-38     	; 0x3264 <__udivmodsi4_loop>
-    328a:	60 95       	com	r22
-    328c:	70 95       	com	r23
-    328e:	80 95       	com	r24
-    3290:	90 95       	com	r25
-    3292:	9b 01       	movw	r18, r22
-    3294:	ac 01       	movw	r20, r24
-    3296:	bd 01       	movw	r22, r26
-    3298:	cf 01       	movw	r24, r30
-    329a:	08 95       	ret
+00003276 <__udivmodsi4_ep>:
+    3276:	66 1f       	adc	r22, r22
+    3278:	77 1f       	adc	r23, r23
+    327a:	88 1f       	adc	r24, r24
+    327c:	99 1f       	adc	r25, r25
+    327e:	1a 94       	dec	r1
+    3280:	69 f7       	brne	.-38     	; 0x325c <__udivmodsi4_loop>
+    3282:	60 95       	com	r22
+    3284:	70 95       	com	r23
+    3286:	80 95       	com	r24
+    3288:	90 95       	com	r25
+    328a:	9b 01       	movw	r18, r22
+    328c:	ac 01       	movw	r20, r24
+    328e:	bd 01       	movw	r22, r26
+    3290:	cf 01       	movw	r24, r30
+    3292:	08 95       	ret
 
-0000329c <memcpy>:
-    329c:	fb 01       	movw	r30, r22
-    329e:	dc 01       	movw	r26, r24
-    32a0:	02 c0       	rjmp	.+4      	; 0x32a6 <memcpy+0xa>
-    32a2:	01 90       	ld	r0, Z+
-    32a4:	0d 92       	st	X+, r0
-    32a6:	41 50       	subi	r20, 0x01	; 1
-    32a8:	50 40       	sbci	r21, 0x00	; 0
-    32aa:	d8 f7       	brcc	.-10     	; 0x32a2 <memcpy+0x6>
-    32ac:	08 95       	ret
+00003294 <memcpy>:
+    3294:	fb 01       	movw	r30, r22
+    3296:	dc 01       	movw	r26, r24
+    3298:	02 c0       	rjmp	.+4      	; 0x329e <memcpy+0xa>
+    329a:	01 90       	ld	r0, Z+
+    329c:	0d 92       	st	X+, r0
+    329e:	41 50       	subi	r20, 0x01	; 1
+    32a0:	50 40       	sbci	r21, 0x00	; 0
+    32a2:	d8 f7       	brcc	.-10     	; 0x329a <memcpy+0x6>
+    32a4:	08 95       	ret
 
-000032ae <_exit>:
-    32ae:	f8 94       	cli
+000032a6 <_exit>:
+    32a6:	f8 94       	cli
 
-000032b0 <__stop_program>:
-    32b0:	ff cf       	rjmp	.-2      	; 0x32b0 <__stop_program>
+000032a8 <__stop_program>:
+    32a8:	ff cf       	rjmp	.-2      	; 0x32a8 <__stop_program>

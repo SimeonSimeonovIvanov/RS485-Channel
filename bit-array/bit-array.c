@@ -17,8 +17,11 @@
 
 #include "bit-array.h"
 
-inline uint8_t mask(unsigned index) { return 1 << (index & 0x7); }
-inline unsigned offset(unsigned index) { return index >> 3; }
+//inline uint8_t mask(unsigned index) { return 1 << ( 0x7 & index ); }
+//inline unsigned offset(unsigned index) { return index >> 3; }
+
+#define mask( index )	( 1<<( 0x7 & index ) )
+#define offset( index )	( index>>3 )
 
 /* TODO: Use ARM bitband region */
 

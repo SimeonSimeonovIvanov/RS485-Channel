@@ -23,6 +23,7 @@ digital_in_out_func.o: ../digital_in_out_func/digital_in_out_func.c \
   c:/winavr-20100110/lib/gcc/../../avr/include/avr/pgmspace.h \
   c:/winavr-20100110/lib/gcc/../../avr/include/avr/interrupt.h \
   ../digital_in_out_func/../arch/spi.h \
+  ../digital_in_out_func/../bit-array/bit-array.h \
   ../digital_in_out_func/../modbus_master/modbus-rtu.h \
   D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\RS485-Channel\modbus\include/mb.h \
   D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\RS485-Channel\modbus\port/port.h \
@@ -80,6 +81,8 @@ c:/winavr-20100110/lib/gcc/../../avr/include/avr/pgmspace.h:
 c:/winavr-20100110/lib/gcc/../../avr/include/avr/interrupt.h:
 
 ../digital_in_out_func/../arch/spi.h:
+
+../digital_in_out_func/../bit-array/bit-array.h:
 
 ../digital_in_out_func/../modbus_master/modbus-rtu.h:
 

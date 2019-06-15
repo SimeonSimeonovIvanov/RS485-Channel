@@ -141,6 +141,8 @@ volatile uint8_t ucRegDiscBufA3Temp[2];
 
 /* ----------------------- Start implementation -----------------------------*/
 
+volatile char lpBit[4];
+
 int main(void)
 {
 	uint8_t fFirstRun = 1, ucRS485_address, ucRS485_address_old = 0;
@@ -153,6 +155,11 @@ int main(void)
 
 	uint8_t ucAutoStopIfOutError = 1;
 	uint8_t i, n;
+
+	while( 0 )
+	{
+		byteArrToBitArr( lpBit, inPort, 32 );
+	}
 
 	initBoard();
 	
@@ -276,9 +283,9 @@ int main(void)
 
 	rs485ChannelDefInit( &arrRS485Channel[6] );
 
-	/*int16_t temp;
+	int16_t temp;
 
-	veznaEEP.address = 15;
+	/*veznaEEP.address = 15;
 	veznaEEP.lpFlag = (uint16_t*)&temp;
 	veznaEEP.lpKg = &temp;
 	veznaEEP.lpGr = &temp;
@@ -294,9 +301,9 @@ int main(void)
 
 	arrRS485Channel[6].rs485SendRequestFunc = sendRequestVeznaEEP_P04;
 	arrRS485Channel[6].rs485GetResponseFunc = getResponseVeznaEEP_P04;
-	arrRS485Channel[6].rs485ClrTimeOutError = mbMasterClrTimeOutError;*/
+	arrRS485Channel[6].rs485ClrTimeOutError = mbMasterClrTimeOutError;
 
-	//rs485AddChannel( &arrRS485Channel[6] );
+	rs485AddChannel( &arrRS485Channel[6] );*/
 
 	///////////////////////////////////////////////////////////////////////////
 
@@ -628,16 +635,22 @@ eMBErrorCode eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress,
 
 void byteArrToBitArr( uint8_t *lpBit, const uint8_t *lpByte, uint16_t bit_count )
 {
-	uint16_t i, n;
+	uint16_t i ;
 
 	for( i = 0; i < bit_count; i++ ) {
+		bitarr_write(lpBit, i, (1 & lpByte[i] ) ? 1:0 );
+	}
+
+	/*for( uint16_t i = 0; i < bit_count; i++ ) {
+		uint16_t n;
+
 		n = i / 8;
 		if( lpByte[i] ) {
 			lpBit[ n ] |=  ( 1<<(i - 8 * n) );
 		} else {
 			lpBit[ n ] &= ~( 1<<(i - 8 * n) );
 		}
-	}
+	}*/
 }
 
 ISR( TIMER3_COMPA_vect )

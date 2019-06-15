@@ -14,6 +14,7 @@
 
 //#include "veznaEEP.h"
 #include "arch/spi.h"
+#include "bit-array/bit-array.h"
 #include "modbus_master/modbus-rtu.h"
 #include "digital_in_out_func/digital_in_out_func.h"
 

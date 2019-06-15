@@ -40,7 +40,7 @@ HEX_EEPROM_FLAGS += --change-section-lma .eeprom=0 --no-change-warnings
 INCLUDES = -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\RS485-Channel\arch" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\RS485-Channel\modbus" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\RS485-Channel\modbus\rtu" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\RS485-Channel\modbus\tcp" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\RS485-Channel\rs485Device" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\RS485-Channel\modbus\port" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\RS485-Channel\modbus\ascii" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\RS485-Channel\modbus\include" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\RS485-Channel\modbus\functions" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\RS485-Channel\digital_in_out_func" -I"D:\Developments\Elektronika\MCU\ATMEL\AVR\AVR-IO-MODULE\v.0.0.9\B21.08.2017\github\RS485-Channel\modbus_master" 
 
 ## Objects that must be built in order to link
-OBJECTS = main.o mbrtu.o mbascii.o mbfunccoils.o mbfuncdiag.o mbfuncdisc.o mbfuncholding.o mbfuncinput.o mbfuncother.o mbutils.o mbcrc.o portevent.o portserial.o porttimer.o mb.o mbtcp.o digital_in_out_func.o spi.o modbus-rtu.o rs485Channel.o 
+OBJECTS = main.o mbrtu.o mbascii.o mbfunccoils.o mbfuncdiag.o mbfuncdisc.o mbfuncholding.o mbfuncinput.o mbfuncother.o mbutils.o mbcrc.o portevent.o portserial.o porttimer.o mb.o mbtcp.o digital_in_out_func.o spi.o modbus-rtu.o rs485Channel.o bit-array.o 
 
 ## Objects explicitly added by the user
 LINKONLYOBJECTS = 
@@ -107,6 +107,9 @@ modbus-rtu.o: ../modbus_master/modbus-rtu.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 rs485Channel.o: ../rs485Channel/rs485Channel.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
+
+bit-array.o: ../bit-array/bit-array.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 ##Link

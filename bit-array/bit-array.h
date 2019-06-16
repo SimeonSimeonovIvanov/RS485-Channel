@@ -21,6 +21,10 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+
+#define mask( index )   ( 1<<( 0x7 & index ) )
+#define offset( index ) ( index>>3 )
+
 void bitarr_high(uint8_t *data, unsigned index);
 void bitarr_low(uint8_t *data, unsigned index);
 void bitarr_write(uint8_t *data, unsigned index, bool value);

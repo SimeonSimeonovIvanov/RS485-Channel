@@ -21,14 +21,13 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-
-#define mask( index )   ( 1<<( 0x7 & index ) )
+#define mask( index )   ( 1<<( 7 & index ) )
 #define offset( index ) ( index>>3 )
 
-void bitarr_high(uint8_t *data, unsigned index);
-void bitarr_low(uint8_t *data, unsigned index);
-void bitarr_write(uint8_t *data, unsigned index, bool value);
-bool bitarr_read(const uint8_t *data, unsigned index);
-void bitarr_flip(uint8_t *data, unsigned index);
+void bitarr_write( uint8_t *data, uint16_t index, bool value );
+bool bitarr_read( const uint8_t *data, uint16_t index );
+void bitarr_flip( uint8_t *data, uint16_t index );
+void bitarr_high( uint8_t *data, uint16_t index );
+void bitarr_low( uint8_t *data, uint16_t index );
 
 #endif

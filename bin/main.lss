@@ -13,17 +13,17 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   4 .debug_pubnames 00000d55  00000000  00000000  000035d6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00003ffd  00000000  00000000  0000432b  2**0
+  5 .debug_info   00004008  00000000  00000000  0000432b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000013d2  00000000  00000000  00008328  2**0
+  6 .debug_abbrev 000013d2  00000000  00000000  00008333  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00003dc4  00000000  00000000  000096fa  2**0
+  7 .debug_line   00003dc4  00000000  00000000  00009705  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000800  00000000  00000000  0000d4c0  2**2
+  8 .debug_frame  00000800  00000000  00000000  0000d4cc  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000019d0  00000000  00000000  0000dcc0  2**0
+  9 .debug_str    000019d0  00000000  00000000  0000dccc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000023e2  00000000  00000000  0000f690  2**0
+ 10 .debug_loc    000023e2  00000000  00000000  0000f69c  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -683,7 +683,7 @@ void byteArrToBitArr( uint8_t *lpBit, const uint8_t *lpByte, uint16_t bit_count 
      5d6:	50 70       	andi	r21, 0x00	; 0
      5d8:	c6 01       	movw	r24, r12
      5da:	be 01       	movw	r22, r28
-     5dc:	0e 94 c5 18 	call	0x318a	; 0x318a <bitarr_write>
+     5dc:	0e 94 9a 18 	call	0x3134	; 0x3134 <bitarr_write>
 
 void byteArrToBitArr( uint8_t *lpBit, const uint8_t *lpByte, uint16_t bit_count )
 {
@@ -8957,157 +8957,164 @@ void rs485SendBuffer( uint8_t *buffer, uint8_t len )
     3130:	1f 91       	pop	r17
     3132:	08 95       	ret
 
-00003134 <bitarr_high>:
+00003134 <bitarr_write>:
+/* TODO: Use ARM bitband region */
+
+void bitarr_write( uint8_t *data, uint16_t index, bool value )
+{
+	uint16_t o = offset( index );
+	uint8_t m = mask( index );
+    3134:	fb 01       	movw	r30, r22
+    3136:	e7 70       	andi	r30, 0x07	; 7
+    3138:	f0 70       	andi	r31, 0x00	; 0
+    313a:	21 e0       	ldi	r18, 0x01	; 1
+    313c:	30 e0       	ldi	r19, 0x00	; 0
+    313e:	02 c0       	rjmp	.+4      	; 0x3144 <bitarr_write+0x10>
+    3140:	22 0f       	add	r18, r18
+    3142:	33 1f       	adc	r19, r19
+    3144:	ea 95       	dec	r30
+    3146:	e2 f7       	brpl	.-8      	; 0x3140 <bitarr_write+0xc>
 
 /* TODO: Use ARM bitband region */
 
-void bitarr_high(uint8_t *data, unsigned index)
+void bitarr_write( uint8_t *data, uint16_t index, bool value )
 {
-	data[offset(index)] |= mask(index);
-    3134:	fb 01       	movw	r30, r22
-    3136:	23 e0       	ldi	r18, 0x03	; 3
-    3138:	f6 95       	lsr	r31
-    313a:	e7 95       	ror	r30
-    313c:	2a 95       	dec	r18
-    313e:	e1 f7       	brne	.-8      	; 0x3138 <bitarr_high+0x4>
-    3140:	e8 0f       	add	r30, r24
-    3142:	f9 1f       	adc	r31, r25
-    3144:	67 70       	andi	r22, 0x07	; 7
-    3146:	70 70       	andi	r23, 0x00	; 0
-    3148:	81 e0       	ldi	r24, 0x01	; 1
-    314a:	90 e0       	ldi	r25, 0x00	; 0
-    314c:	02 c0       	rjmp	.+4      	; 0x3152 <bitarr_high+0x1e>
-    314e:	88 0f       	add	r24, r24
-    3150:	99 1f       	adc	r25, r25
-    3152:	6a 95       	dec	r22
-    3154:	e2 f7       	brpl	.-8      	; 0x314e <bitarr_high+0x1a>
-    3156:	20 81       	ld	r18, Z
-    3158:	28 2b       	or	r18, r24
-    315a:	20 83       	st	Z, r18
-}
-    315c:	08 95       	ret
+	uint16_t o = offset( index );
+    3148:	33 e0       	ldi	r19, 0x03	; 3
+    314a:	76 95       	lsr	r23
+    314c:	67 95       	ror	r22
+    314e:	3a 95       	dec	r19
+    3150:	e1 f7       	brne	.-8      	; 0x314a <bitarr_write+0x16>
+    3152:	fc 01       	movw	r30, r24
+    3154:	e6 0f       	add	r30, r22
+    3156:	f7 1f       	adc	r31, r23
+	uint8_t m = mask( index );
 
-0000315e <bitarr_low>:
-
-void bitarr_low(uint8_t *data, unsigned index)
-{
-	data[offset(index)] &= ~mask(index);
-    315e:	fb 01       	movw	r30, r22
-    3160:	33 e0       	ldi	r19, 0x03	; 3
-    3162:	f6 95       	lsr	r31
-    3164:	e7 95       	ror	r30
-    3166:	3a 95       	dec	r19
-    3168:	e1 f7       	brne	.-8      	; 0x3162 <bitarr_low+0x4>
-    316a:	e8 0f       	add	r30, r24
-    316c:	f9 1f       	adc	r31, r25
-    316e:	67 70       	andi	r22, 0x07	; 7
-    3170:	70 70       	andi	r23, 0x00	; 0
-    3172:	81 e0       	ldi	r24, 0x01	; 1
-    3174:	90 e0       	ldi	r25, 0x00	; 0
-    3176:	02 c0       	rjmp	.+4      	; 0x317c <bitarr_low+0x1e>
-    3178:	88 0f       	add	r24, r24
-    317a:	99 1f       	adc	r25, r25
-    317c:	6a 95       	dec	r22
-    317e:	e2 f7       	brpl	.-8      	; 0x3178 <bitarr_low+0x1a>
-    3180:	80 95       	com	r24
-    3182:	20 81       	ld	r18, Z
-    3184:	28 23       	and	r18, r24
-    3186:	20 83       	st	Z, r18
-}
-    3188:	08 95       	ret
-
-0000318a <bitarr_write>:
-
-void bitarr_write(uint8_t *data, unsigned index, bool value)
-{
-	uint8_t m = mask(index);
-    318a:	fb 01       	movw	r30, r22
-    318c:	e7 70       	andi	r30, 0x07	; 7
-    318e:	f0 70       	andi	r31, 0x00	; 0
-    3190:	21 e0       	ldi	r18, 0x01	; 1
-    3192:	30 e0       	ldi	r19, 0x00	; 0
-    3194:	02 c0       	rjmp	.+4      	; 0x319a <bitarr_write+0x10>
-    3196:	22 0f       	add	r18, r18
-    3198:	33 1f       	adc	r19, r19
-    319a:	ea 95       	dec	r30
-    319c:	e2 f7       	brpl	.-8      	; 0x3196 <bitarr_write+0xc>
-	unsigned o = offset(index);
-    319e:	fb 01       	movw	r30, r22
-    31a0:	53 e0       	ldi	r21, 0x03	; 3
-    31a2:	f6 95       	lsr	r31
-    31a4:	e7 95       	ror	r30
-    31a6:	5a 95       	dec	r21
-    31a8:	e1 f7       	brne	.-8      	; 0x31a2 <bitarr_write+0x18>
-    31aa:	e8 0f       	add	r30, r24
-    31ac:	f9 1f       	adc	r31, r25
-
-	if (value) {
-    31ae:	44 23       	and	r20, r20
-    31b0:	19 f0       	breq	.+6      	; 0x31b8 <bitarr_write+0x2e>
+	if( value )
+    3158:	44 23       	and	r20, r20
+    315a:	19 f0       	breq	.+6      	; 0x3162 <bitarr_write+0x2e>
+	{
 		data[o] |= m;
-    31b2:	80 81       	ld	r24, Z
-    31b4:	82 2b       	or	r24, r18
-    31b6:	03 c0       	rjmp	.+6      	; 0x31be <bitarr_write+0x34>
+    315c:	80 81       	ld	r24, Z
+    315e:	82 2b       	or	r24, r18
+    3160:	03 c0       	rjmp	.+6      	; 0x3168 <bitarr_write+0x34>
 	} else {
 		data[o] &= ~m;
-    31b8:	20 95       	com	r18
-    31ba:	80 81       	ld	r24, Z
-    31bc:	82 23       	and	r24, r18
-    31be:	80 83       	st	Z, r24
-    31c0:	08 95       	ret
+    3162:	20 95       	com	r18
+    3164:	80 81       	ld	r24, Z
+    3166:	82 23       	and	r24, r18
+    3168:	80 83       	st	Z, r24
+    316a:	08 95       	ret
 
-000031c2 <bitarr_read>:
+0000316c <bitarr_read>:
 	}
 }
 
-bool bitarr_read(const uint8_t *data, unsigned index)
+bool bitarr_read( const uint8_t *data, uint16_t index )
 {
-    31c2:	fb 01       	movw	r30, r22
-    31c4:	a3 e0       	ldi	r26, 0x03	; 3
-    31c6:	f6 95       	lsr	r31
-    31c8:	e7 95       	ror	r30
-    31ca:	aa 95       	dec	r26
-    31cc:	e1 f7       	brne	.-8      	; 0x31c6 <bitarr_read+0x4>
-    31ce:	e8 0f       	add	r30, r24
-    31d0:	f9 1f       	adc	r31, r25
-    31d2:	80 81       	ld	r24, Z
-    31d4:	90 e0       	ldi	r25, 0x00	; 0
-    31d6:	67 70       	andi	r22, 0x07	; 7
-    31d8:	70 70       	andi	r23, 0x00	; 0
-    31da:	02 c0       	rjmp	.+4      	; 0x31e0 <bitarr_read+0x1e>
-    31dc:	95 95       	asr	r25
-    31de:	87 95       	ror	r24
-    31e0:	6a 95       	dec	r22
-    31e2:	e2 f7       	brpl	.-8      	; 0x31dc <bitarr_read+0x1a>
-	return !!(data[offset(index)] & mask(index));
+    316c:	fb 01       	movw	r30, r22
+    316e:	43 e0       	ldi	r20, 0x03	; 3
+    3170:	f6 95       	lsr	r31
+    3172:	e7 95       	ror	r30
+    3174:	4a 95       	dec	r20
+    3176:	e1 f7       	brne	.-8      	; 0x3170 <bitarr_read+0x4>
+    3178:	e8 0f       	add	r30, r24
+    317a:	f9 1f       	adc	r31, r25
+    317c:	80 81       	ld	r24, Z
+    317e:	90 e0       	ldi	r25, 0x00	; 0
+    3180:	67 70       	andi	r22, 0x07	; 7
+    3182:	70 70       	andi	r23, 0x00	; 0
+    3184:	02 c0       	rjmp	.+4      	; 0x318a <bitarr_read+0x1e>
+    3186:	95 95       	asr	r25
+    3188:	87 95       	ror	r24
+    318a:	6a 95       	dec	r22
+    318c:	e2 f7       	brpl	.-8      	; 0x3186 <bitarr_read+0x1a>
+	return !!( data[ offset( index ) ] & mask( index ) );
 }
-    31e4:	81 70       	andi	r24, 0x01	; 1
-    31e6:	08 95       	ret
+    318e:	81 70       	andi	r24, 0x01	; 1
+    3190:	08 95       	ret
 
-000031e8 <bitarr_flip>:
+00003192 <bitarr_flip>:
 
-void bitarr_flip(uint8_t *data, unsigned index)
+void bitarr_flip( uint8_t *data, uint16_t index )
 {
-	data[offset(index)] ^= mask(index);
-    31e8:	fb 01       	movw	r30, r22
-    31ea:	b3 e0       	ldi	r27, 0x03	; 3
-    31ec:	f6 95       	lsr	r31
-    31ee:	e7 95       	ror	r30
-    31f0:	ba 95       	dec	r27
-    31f2:	e1 f7       	brne	.-8      	; 0x31ec <bitarr_flip+0x4>
-    31f4:	e8 0f       	add	r30, r24
-    31f6:	f9 1f       	adc	r31, r25
-    31f8:	67 70       	andi	r22, 0x07	; 7
-    31fa:	70 70       	andi	r23, 0x00	; 0
-    31fc:	81 e0       	ldi	r24, 0x01	; 1
-    31fe:	90 e0       	ldi	r25, 0x00	; 0
-    3200:	02 c0       	rjmp	.+4      	; 0x3206 <bitarr_flip+0x1e>
-    3202:	88 0f       	add	r24, r24
-    3204:	99 1f       	adc	r25, r25
-    3206:	6a 95       	dec	r22
-    3208:	e2 f7       	brpl	.-8      	; 0x3202 <bitarr_flip+0x1a>
+	data[ offset( index ) ] ^= mask( index );
+    3192:	fb 01       	movw	r30, r22
+    3194:	53 e0       	ldi	r21, 0x03	; 3
+    3196:	f6 95       	lsr	r31
+    3198:	e7 95       	ror	r30
+    319a:	5a 95       	dec	r21
+    319c:	e1 f7       	brne	.-8      	; 0x3196 <bitarr_flip+0x4>
+    319e:	e8 0f       	add	r30, r24
+    31a0:	f9 1f       	adc	r31, r25
+    31a2:	67 70       	andi	r22, 0x07	; 7
+    31a4:	70 70       	andi	r23, 0x00	; 0
+    31a6:	81 e0       	ldi	r24, 0x01	; 1
+    31a8:	90 e0       	ldi	r25, 0x00	; 0
+    31aa:	02 c0       	rjmp	.+4      	; 0x31b0 <bitarr_flip+0x1e>
+    31ac:	88 0f       	add	r24, r24
+    31ae:	99 1f       	adc	r25, r25
+    31b0:	6a 95       	dec	r22
+    31b2:	e2 f7       	brpl	.-8      	; 0x31ac <bitarr_flip+0x1a>
+    31b4:	20 81       	ld	r18, Z
+    31b6:	28 27       	eor	r18, r24
+    31b8:	20 83       	st	Z, r18
+}
+    31ba:	08 95       	ret
+
+000031bc <bitarr_high>:
+
+void bitarr_high( uint8_t *data, uint16_t index )
+{
+	data[ offset( index ) ] |= mask( index );
+    31bc:	fb 01       	movw	r30, r22
+    31be:	a3 e0       	ldi	r26, 0x03	; 3
+    31c0:	f6 95       	lsr	r31
+    31c2:	e7 95       	ror	r30
+    31c4:	aa 95       	dec	r26
+    31c6:	e1 f7       	brne	.-8      	; 0x31c0 <bitarr_high+0x4>
+    31c8:	e8 0f       	add	r30, r24
+    31ca:	f9 1f       	adc	r31, r25
+    31cc:	67 70       	andi	r22, 0x07	; 7
+    31ce:	70 70       	andi	r23, 0x00	; 0
+    31d0:	81 e0       	ldi	r24, 0x01	; 1
+    31d2:	90 e0       	ldi	r25, 0x00	; 0
+    31d4:	02 c0       	rjmp	.+4      	; 0x31da <bitarr_high+0x1e>
+    31d6:	88 0f       	add	r24, r24
+    31d8:	99 1f       	adc	r25, r25
+    31da:	6a 95       	dec	r22
+    31dc:	e2 f7       	brpl	.-8      	; 0x31d6 <bitarr_high+0x1a>
+    31de:	20 81       	ld	r18, Z
+    31e0:	28 2b       	or	r18, r24
+    31e2:	20 83       	st	Z, r18
+}
+    31e4:	08 95       	ret
+
+000031e6 <bitarr_low>:
+
+void bitarr_low( uint8_t *data, uint16_t index )
+{
+	data[ offset( index ) ] &= ~mask( index );
+    31e6:	fb 01       	movw	r30, r22
+    31e8:	b3 e0       	ldi	r27, 0x03	; 3
+    31ea:	f6 95       	lsr	r31
+    31ec:	e7 95       	ror	r30
+    31ee:	ba 95       	dec	r27
+    31f0:	e1 f7       	brne	.-8      	; 0x31ea <bitarr_low+0x4>
+    31f2:	e8 0f       	add	r30, r24
+    31f4:	f9 1f       	adc	r31, r25
+    31f6:	67 70       	andi	r22, 0x07	; 7
+    31f8:	70 70       	andi	r23, 0x00	; 0
+    31fa:	81 e0       	ldi	r24, 0x01	; 1
+    31fc:	90 e0       	ldi	r25, 0x00	; 0
+    31fe:	02 c0       	rjmp	.+4      	; 0x3204 <bitarr_low+0x1e>
+    3200:	88 0f       	add	r24, r24
+    3202:	99 1f       	adc	r25, r25
+    3204:	6a 95       	dec	r22
+    3206:	e2 f7       	brpl	.-8      	; 0x3200 <bitarr_low+0x1a>
+    3208:	80 95       	com	r24
     320a:	20 81       	ld	r18, Z
-    320c:	28 27       	eor	r18, r24
+    320c:	28 23       	and	r18, r24
     320e:	20 83       	st	Z, r18
 }
     3210:	08 95       	ret

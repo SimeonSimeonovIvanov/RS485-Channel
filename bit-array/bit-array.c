@@ -22,34 +22,35 @@
 
 /* TODO: Use ARM bitband region */
 
-void bitarr_high(uint8_t *data, unsigned index)
+void bitarr_write( uint8_t *data, uint16_t index, bool value )
 {
-	data[offset(index)] |= mask(index);
-}
+	uint16_t o = offset( index );
+	uint8_t m = mask( index );
 
-void bitarr_low(uint8_t *data, unsigned index)
-{
-	data[offset(index)] &= ~mask(index);
-}
-
-void bitarr_write(uint8_t *data, unsigned index, bool value)
-{
-	uint8_t m = mask(index);
-	unsigned o = offset(index);
-
-	if (value) {
+	if( value )
+	{
 		data[o] |= m;
 	} else {
 		data[o] &= ~m;
 	}
 }
 
-bool bitarr_read(const uint8_t *data, unsigned index)
+bool bitarr_read( const uint8_t *data, uint16_t index )
 {
-	return !!(data[offset(index)] & mask(index));
+	return !!( data[ offset( index ) ] & mask( index ) );
 }
 
-void bitarr_flip(uint8_t *data, unsigned index)
+void bitarr_flip( uint8_t *data, uint16_t index )
 {
-	data[offset(index)] ^= mask(index);
+	data[ offset( index ) ] ^= mask( index );
+}
+
+void bitarr_high( uint8_t *data, uint16_t index )
+{
+	data[ offset( index ) ] |= mask( index );
+}
+
+void bitarr_low( uint8_t *data, uint16_t index )
+{
+	data[ offset( index ) ] &= ~mask( index );
 }

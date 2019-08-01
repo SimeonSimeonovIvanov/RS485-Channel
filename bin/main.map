@@ -385,11 +385,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr51\libgcc.a
                 0x00002d82                __vector_18
                 0x00002d0a                __vector_20
  .text          0x00003134       0xde bit-array.o
-                0x0000318a                bitarr_write
-                0x00003134                bitarr_high
-                0x0000315e                bitarr_low
-                0x000031e8                bitarr_flip
-                0x000031c2                bitarr_read
+                0x00003134                bitarr_write
+                0x000031bc                bitarr_high
+                0x000031e6                bitarr_low
+                0x00003192                bitarr_flip
+                0x0000316c                bitarr_read
  .text          0x00003212        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr51\libgcc.a(_mulsi3.o)
  .text          0x00003212        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr51\libgcc.a(_udivmodsi4.o)
  .text          0x00003212        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr51\libgcc.a(_exit.o)
@@ -678,7 +678,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr51\libgcc.a
  .debug_pubnames
                 0x00000cf3       0x62 bit-array.o
 
-.debug_info     0x00000000     0x3ffd
+.debug_info     0x00000000     0x4008
  *(.debug_info)
  .debug_info    0x00000000      0xa2d main.o
  .debug_info    0x00000a2d      0x42a mbrtu.o
@@ -700,7 +700,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr51\libgcc.a
  .debug_info    0x000030a1      0x19c spi.o
  .debug_info    0x0000323d      0x614 modbus-rtu.o
  .debug_info    0x00003851      0x5e6 rs485Channel.o
- .debug_info    0x00003e37      0x1c6 bit-array.o
+ .debug_info    0x00003e37      0x1d1 bit-array.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev   0x00000000     0x13d2
@@ -814,7 +814,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr51\libgcc.a
  .debug_str     0x00001687      0x2e2 rs485Channel.o
                                 0x516 (size before relaxing)
  .debug_str     0x00001969       0x67 bit-array.o
-                                0x14c (size before relaxing)
+                                0x155 (size before relaxing)
 
 .debug_loc      0x00000000     0x23e2
  *(.debug_loc)

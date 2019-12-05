@@ -3,6 +3,7 @@ Multi channel RS485 master communication and simple Modbus master aplication lay
 Work with Modbus IO Module:
 
 1) v.0.1.0: https://photos.google.com/album/AF1QipM23CAcfps0spa_aRupWOd6G4JNCPD2rO3FYJ4n
+ATmega128; 32 DI ( isolated ); RS485 ( isolated ); HMI: LED and SPI expander
 ![Screen Shot](https://lh3.googleusercontent.com/rRRtKuSOFFyAcwbLqQu1tW43fm27J0HdPK6J8_fkW1bdL4UqrpZQ5Rmqb1HO5EdiSKIKO7Ir66GgRrSe3kK8BgdTez4dqWluS1yB1q_rgQTUQGLLRAiLfmmfqPbDWHAa6EkEGHR0L6nx2Cinx2XWVaOj-Hsd3YG-qPqXOCmYXqSz9nJDhWXV9sLUneHzRyqRiYJ8k6VW8fDjvJVD8XvfajntM-k5brDozSCm9o7lAtblYR7TkrWQP2OqnhYygmJEPI3iwucLDZjaQr9V9drRqzfME-TKjuT9u2PDJuqOv80Qz1fnXr75SK_aDJIZY7SnMicZ0_C0G9E5WmmzErz2Pnc1oydmmTOoZ40UuWt5vie-NP6ZOH2ubKHZ7e4HIPgNWuQReDwtQ3MH9lqOPUT4QoPyqIcWOOibX0wE5uQLa_7-rkgH3S6kPPgUAxK7atO1W1z17I7TNuAgl2cMO-wspCy0lIc6N3WJ_hsgYrZau51qOlUMkr193SMLd8cWPjT9qAaYzaZGHAwv541BvV2smZSN7x3imIFSkkZw06MlPxuH32kTs4USW5K20J4zYhoPKJf47rHAf2u34Bq9EfR14Ht4Oh4zS751BSSihrRg0HAUJsLSRrrH_wH41O8W7Lzc2LFEomh18KLCrL_xLP1AmjJO1iJh4djDg0wD5EZ21w2qpCyjaaGHyg=w2105-h1184-no)<br>
 
 2) v.0.0.9: https://photos.app.goo.gl/yJJbBFp53oGfpSQh1

@@ -24,6 +24,9 @@ ATxmega128; 10 DI ( isolated ); 12 DO ( isolated ); 7 AI ( not isolated ); 2 AO 
 5) v.0.0.3: https://goo.gl/photos/ECHeer7ifiq2STHZ8 - Automatic Fish Feeder With PLC ( old PLC board )
 https://www.youtube.com/watch?v=zcFjG9XD-4E&list=PLE616v1yP136VSTElJPbgqLRKw9dhneZ0
 
+AVR-LPC:
+https://photos.app.goo.gl/eRe1mFbW4naB4bjX6
+
 ![Screen Shot](https://lh3.googleusercontent.com/i4vTtbMWcvufEfyPBXmEqtodp0uiaY80SN7nO53SizIuQGnKfskF3hOMWklSdp-E9tZwQFcahZGzqjpb_negQXEel_Ek9y2Q-xKqGe8nZFe8iSiKAYTuJJ7f9EiFlDz4nAfxZh-JwOHoanxEeHOk7S4ZBlITvbNXki2caGARQPg28cYvAEWLrhYlO4jIVNJ1u0FXz1XzlYSx5J1nXS0mtQefo2IzwadqRC1u_vziupT0Fe9qfGVQymvKK7zWInEjUshE4K-GbRTxpQTgDNWyImrhoL-DvrHVt9qu0Y4xG-VIqXxZ6ZS2KfvSQ15kddukfKs1x3Umb0xTVf33TF89o58FlunZHBvR9EITT13Ke3G6lsoOTQucqT8j5edNBI36gCUnRdn_JUaBjpc0gUciYcsNhvxmZmprITA2JZy_EWPfu068hc5PoFiTwgy0iZJXFJSkIwXAnYqA-47TTX1yOKnD8mORU91LtUfaS21BZ6cKBy90R5g3Xqo5Dhas0RXXaBC50P27vzN_nIzyAqwT7hCGoi_vgtFjF9wg21gcbyKm32ok7xzMjWMYUnwNmgpBeP_kCsKuX9ciPE-7k_tFMjQ3KHqqqXUdNO-jP6QrDGqhsa9yDcIrxGYuBZaT6ap04sALycBCSXbvSZi34mFChnCc2Mh-XZ1IBcmd_d-aqqKrzepfpWOf5bohYNa00gZUgcmnZ9ve4pHbMm3vKQ=w1024-h768-no)<br>
 
 ![Screen Shot](https://raw.githubusercontent.com/SimeonSimeonovIvanov/DOS-Window-Manager/master/LD_EDIT.jpg)<br><br>

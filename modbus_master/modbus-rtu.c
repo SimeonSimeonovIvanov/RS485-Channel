@@ -15,10 +15,10 @@ void mbSendRequestReadInputStatus( void *lpObject )
 
 	lpData->exception_code = 0;
 
-	lpData->rxtx_byte_count = lpData->data_count / 8;
-	if( 8 * lpData->rxtx_byte_count < lpData->data_count )
+	lpData->rxtx_byte_count = lpData->data_count>>3;
+	if( !lpData->rxtx_byte_count )
 	{
-		++lpData->rxtx_byte_count;
+		lpData->rxtx_byte_count = 1;
 	}
 
 	txBuffer[0] = lpData->address;

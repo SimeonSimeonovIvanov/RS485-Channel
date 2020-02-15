@@ -26,7 +26,8 @@ volatile static uint8_t usRS485PortAsMaster = 0;
 
 void rs485Task( void )
 {
-	if( !ucChannelCount || !usRS485PortAsMaster ) {
+	if( !ucChannelCount || !usRS485PortAsMaster )
+	{
 		return;
 	}
 

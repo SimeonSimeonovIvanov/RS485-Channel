@@ -1,47 +1,54 @@
 #include "modbus-rtu.h"
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Read Coil Status (FC=01)
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Read Input Status (FC=02)
 
 void mbSendRequestReadInputStatus( void *lpObject )
 {
-	LP_MB_MASTER_READ_INPUT_STATUS lpData = (LP_MB_MASTER_READ_INPUT_STATUS)lpObject;
+	LP_MB_MASTER_DATA lpData = (LP_MB_MASTER_DATA)lpObject;
 	uint8_t txBuffer[8] = { 0 };
 
 	lpData->exception_code = 0;
 
-	lpData->byte_number = lpData->inputs_number / 8;
-	if( 8 * lpData->byte_number < lpData->inputs_number ) {
-		++lpData->byte_number;
+	lpData->rxtx_byte_count = lpData->data_count / 8;
+	if( 8 * lpData->rxtx_byte_count < lpData->data_count )
+	{
+		++lpData->rxtx_byte_count;
 	}
 
 	txBuffer[0] = lpData->address;
 	txBuffer[1] = 2;
 
-	txBuffer[2] = lpData->inputs_address>>8;
-	txBuffer[3] = lpData->inputs_address;
+	txBuffer[2] = lpData->data_address>>8;
+	txBuffer[3] = lpData->data_address;
 
-	txBuffer[4] = lpData->inputs_number>>8;
-	txBuffer[5] = lpData->inputs_number;
+	txBuffer[4] = lpData->data_count>>8;
+	txBuffer[5] = lpData->data_count;
 
 	mbRtuAddCrcAndSendBuffer( txBuffer, 8 );
 }
 
 uint8_t mbReceiveRequestReadInputStatus( void *lpObject, uint8_t *rxBuffer, uint8_t len )
 {
-	LP_MB_MASTER_READ_INPUT_STATUS lpData = (LP_MB_MASTER_READ_INPUT_STATUS)lpObject;
+	LP_MB_MASTER_DATA lpData = (LP_MB_MASTER_DATA)lpObject;
 
 	if( rxBuffer[0] == lpData->address ) {
 
 		if( 2 == rxBuffer[1] ) {
-			if( len == 5 + lpData->byte_number &&
-				check_crc16( rxBuffer, 3 + lpData->byte_number )
+			if( len == 5 + lpData->rxtx_byte_count &&
+				check_crc16( rxBuffer, 3 + lpData->rxtx_byte_count )
 			) {
-				if( NULL != lpData->lpInputs ) {
+				if( NULL != lpData->lpReadData ) {
 					uint8_t i;
 
-					for( i = 0; i < lpData->byte_number; i++ ) {
-						lpData->lpInputs[ i ] = rxBuffer[ 3 + i ];
+					for( i = 0; i < lpData->rxtx_byte_count; i++ )
+					{
+						( (uint8_t*)lpData->lpReadData )[ i ] = rxBuffer[ 3 + i ];
 					}
 				}
 
@@ -57,6 +64,16 @@ uint8_t mbReceiveRequestReadInputStatus( void *lpObject, uint8_t *rxBuffer, uint
 
 	return 0;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Read Holding Registers (FC=03)
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Read Input Registers (FC=04)
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Force Single Coil (FC=05)
@@ -235,6 +252,11 @@ uint8_t mbReceiveRequestForceMultipleCoils( void *lpObject, uint8_t *rxBuffer, u
 
 	return 0;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Preset Multiple Registers (FC=16)
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

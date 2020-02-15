@@ -5,10 +5,8 @@
 
 #define MYBRR(BAUD, FOSC) (FOSC/16/BAUD-1)
 
-typedef struct rs485Channel OBJ_RS485_CHANNEL;
-typedef struct rs485Channel *LP_OBJ_RS485_CHANNEL;
-
-struct rs485Channel {
+typedef struct rs485Channel
+{
 	void *lpObject;
 
 	uint16_t msReadTimeOut;
@@ -23,8 +21,7 @@ struct rs485Channel {
 
 	void (*rs485SendRequestFunc)( void *lpObject );
 	uint8_t (*rs485GetResponseFunc)( void *lpObject, uint8_t *rxBuffer, uint8_t len );
-};
-
+} OBJ_RS485_CHANNEL, *LP_OBJ_RS485_CHANNEL;
 
 void rs485TaskEnable( void );
 void rs485TaskDisable( void );

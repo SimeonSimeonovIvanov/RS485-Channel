@@ -142,7 +142,7 @@ uint8_t mbReceiveRequestForceSingleCoil( void *lpObject, uint8_t *rxBuffer, uint
 
 void mbSendRequestPresetSingleRegister( void *lpObject )
 {
-	LP_MB_MASTER_PRESET_SINGLE_REGISTER lpData = (LP_MB_MASTER_PRESET_SINGLE_REGISTER)lpObject;
+	LP_MB_MASTER_DATA lpData = (LP_MB_MASTER_DATA)lpObject;
 	uint8_t txBuffer[8] = { 0 };
 
 	lpData->exception_code = 0;
@@ -150,30 +150,33 @@ void mbSendRequestPresetSingleRegister( void *lpObject )
 	txBuffer[0] = lpData->address;
 	txBuffer[1] = 6;
 
-	txBuffer[2] = lpData->register_address>>8;
-	txBuffer[3] = lpData->register_address;
+	txBuffer[2] = lpData->data_address>>8;
+	txBuffer[3] = lpData->data_address;
 
-	txBuffer[4] = *lpData->lpRegister>>8;
-	txBuffer[5] = *lpData->lpRegister;
+	txBuffer[4] = *(uint16_t*)lpData->lpWriteData>>8;
+	txBuffer[5] = *(uint16_t*)lpData->lpWriteData;
 
 	mbRtuAddCrcAndSendBuffer( txBuffer, 8 );
 }
 
 uint8_t mbReceiveRequestPresetSingleRegister( void *lpObject, uint8_t *rxBuffer, uint8_t len )
 {
-	LP_MB_MASTER_PRESET_SINGLE_REGISTER lpData = (LP_MB_MASTER_PRESET_SINGLE_REGISTER)lpObject;
+	LP_MB_MASTER_DATA lpData = (LP_MB_MASTER_DATA)lpObject;
 
 	if( rxBuffer[0] == lpData->address ) {
 
 		if( 6 == rxBuffer[1] ) {
-			if( 8 == len &&
-				check_crc16( rxBuffer, 6 )
-			) {
-				if( rxBuffer[2] == lpData->register_address>>8	&&
-					rxBuffer[3] == lpData->register_address
-				) {
-					if( NULL != lpData->lpRegisterNew ) {
-						*lpData->lpRegisterNew = ( rxBuffer[4]<<8 ) | rxBuffer[5];
+			if( 8 == len && check_crc16( rxBuffer, 6 ) )
+			{
+				if
+				(
+					rxBuffer[2] == lpData->data_address>>8 &&
+					rxBuffer[3] == lpData->data_address
+				)
+				{
+					if( NULL != lpData->lpReadData )
+					{
+						*(uint16_t*)lpData->lpReadData = ( rxBuffer[4]<<8 ) | rxBuffer[5];
 					}
 
 					lpData->exception_code = 0;

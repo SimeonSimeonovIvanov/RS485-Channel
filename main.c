@@ -128,8 +128,6 @@ OBJ_RS485_CHANNEL arrRS485Channel[10];
 
 volatile MB_MASTER_RW_COILS stSlaveChannelWriteCoilsA3, stSlaveChannelWriteCoilsA11;
 
-volatile MB_MASTER_PRESET_SINGLE_REGISTER stSlaveChannelPresetRegisterA10;
-
 //volatile VEZNA_ELICOM_EEP veznaEEP;
 
 volatile uint8_t ucRegDiscBufA3[2], ucRegCoilsBufA3[2];
@@ -138,7 +136,13 @@ volatile uint8_t ucRegDiscBufA11[2], ucRegCoilsBufA11[2];
 
 volatile uint8_t ucRegDiscBufA3Temp[2];
 
-volatile MB_MASTER_DATA stSlaveChannelReadInputsA3, stSlaveChannelReadInputsA10, stSlaveChannelReadInputsA11;
+volatile MB_MASTER_DATA stSlaveChannelPresetRegisterA10, stSlaveChannelReadInputsA3, stSlaveChannelReadInputsA10, stSlaveChannelReadInputsA11;
+
+void mbMasterSetBaudRate( void *lpObject );
+void mbMasterClrTimeOutError1( void *lpObject );
+void mbMasterSetTimeOutError1( void *lpObject );
+
+void mbMasterSetTimeOutError( void *lpObject );
 
 /* ----------------------- Start implementation -----------------------------*/
 
@@ -174,16 +178,42 @@ int main(void)
 	stSlaveChannelReadInputsA10.data_address = 1;
 	stSlaveChannelReadInputsA10.data_count = 40;
 	stSlaveChannelReadInputsA10.lpReadData = (uint8_t*)ucRegDiscBufA10;
+	stSlaveChannelReadInputsA10.baud_rate = 57600;
+	stSlaveChannelReadInputsA10.lpSocket = &arrRS485Channel[0];
 
 	arrRS485Channel[0].lpObject = (void*)&stSlaveChannelReadInputsA10;
 	arrRS485Channel[0].ucEnableRequest = 1;
-	arrRS485Channel[0].msReadTimeOut = 8;
+	arrRS485Channel[0].msReadTimeOut = 18;
 
+	arrRS485Channel[0].rs485SetUartSetings = mbMasterSetBaudRate;
 	arrRS485Channel[0].rs485SendRequestFunc = mbSendRequestReadInputStatus;
 	arrRS485Channel[0].rs485GetResponseFunc = mbReceiveRequestReadInputStatus;
-	arrRS485Channel[0].rs485ClrTimeOutError = mbMasterClrTimeOutError;
+	arrRS485Channel[0].rs485SetTimeOutError = mbMasterSetTimeOutError1;
+	arrRS485Channel[0].rs485ClrTimeOutError = mbMasterClrTimeOutError1;
 
 	rs485AddChannel( &arrRS485Channel[0] );
+
+
+	uint16_t baud = 192;
+	rs485ChannelDefInit( &arrRS485Channel[1] );
+
+	stSlaveChannelPresetRegisterA10.address = 10;
+	stSlaveChannelPresetRegisterA10.data_address = 19;
+	stSlaveChannelPresetRegisterA10.lpWriteData = &baud;
+	stSlaveChannelPresetRegisterA10.lpReadData = NULL;
+	stSlaveChannelPresetRegisterA10.baud_rate = 9600;
+	stSlaveChannelPresetRegisterA10.lpSocket = &arrRS485Channel[1];
+
+	arrRS485Channel[1].lpObject = (void*)&stSlaveChannelPresetRegisterA10;
+	arrRS485Channel[1].ucEnableRequest = 1;
+	arrRS485Channel[1].msReadTimeOut = 40;
+
+	arrRS485Channel[1].rs485SetUartSetings = mbMasterSetBaudRate;
+	arrRS485Channel[1].rs485SendRequestFunc = mbSendRequestPresetSingleRegister;
+	arrRS485Channel[1].rs485GetResponseFunc = mbReceiveRequestPresetSingleRegister;
+	//arrRS485Channel[1].rs485ClrTimeOutError = mbMasterClrTimeOutError1;
+
+	rs485AddChannel( &arrRS485Channel[1] );
 
 	///////////////////////////////////////////////////////////////////////////
 
@@ -206,7 +236,7 @@ int main(void)
 
 	///////////////////////////////////////////////////////////////////////////
 
-	rs485ChannelDefInit( &arrRS485Channel[1] );
+	/*rs485ChannelDefInit( &arrRS485Channel[1] );
 
 	stSlaveChannelReadInputsA3.address = 3;
 	stSlaveChannelReadInputsA3.data_address = 0;
@@ -221,7 +251,7 @@ int main(void)
 	arrRS485Channel[1].rs485GetResponseFunc = mbReceiveRequestReadInputStatus;
 	arrRS485Channel[1].rs485ClrTimeOutError = mbMasterClrTimeOutError;
 
-	//rs485AddChannel( &arrRS485Channel[1] );
+	rs485AddChannel( &arrRS485Channel[1] );*/
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -284,7 +314,7 @@ int main(void)
 
 	//rs485ChannelDefInit( &arrRS485Channel[5] );
 
-	stSlaveChannelPresetRegisterA10.address = 11;
+	/*stSlaveChannelPresetRegisterA10.address = 11;
 	stSlaveChannelPresetRegisterA10.register_address = 15;
 	stSlaveChannelPresetRegisterA10.lpRegister = &remote_run;
 	stSlaveChannelPresetRegisterA10.lpRegisterNew = NULL;
@@ -295,7 +325,7 @@ int main(void)
 
 	arrRS485Channel[5].rs485SendRequestFunc = mbSendRequestPresetSingleRegister;
 	arrRS485Channel[5].rs485GetResponseFunc = mbReceiveRequestPresetSingleRegister;
-	arrRS485Channel[5].rs485ClrTimeOutError = mbMasterClrTimeOutError;
+	arrRS485Channel[5].rs485ClrTimeOutError = mbMasterClrTimeOutError;*/
 
 	//rs485AddChannel( &arrRS485Channel[5] );
 
@@ -362,13 +392,14 @@ int main(void)
 
 			if( !rs485TaskIsEnable() )
 			{
-				eStatus = eMBInit( MB_RTU, ucRS485_address, 0, 115200/2, MB_PAR_EVEN );
+				//eStatus = eMBInit( MB_RTU, ucRS485_address, 0, 115200/2, MB_PAR_EVEN );
+				eStatus = eMBInit( MB_RTU, ucRS485_address, 0, 9600, MB_PAR_EVEN );
 				eStatus = eMBSetSlaveID( 0x34, TRUE, ucSlaveID, 3 );
 				eStatus = eMBEnable();
 				
 				CLR_QOIL_REMOTE_RUN;
 			} else {
-				initRS485( 115200/2, 8, 1, 1 );
+				initRS485( 9600, 8, 1, 1 );
 
 				SET_QOIL_REMOTE_RUN;
 			}
@@ -504,6 +535,25 @@ int main(void)
 	return 0;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+void mbMasterSetBaudRate( void *lpObject )
+{
+	LP_MB_MASTER_DATA lpData= (LP_MB_MASTER_DATA)lpObject;
+
+	initRS485( lpData->baud_rate, 8, 1, 1 );
+}
+
+void mbMasterSetTimeOutError1( void *lpObject )
+{
+	arrRS485Channel[1].ucEnableRequest = 1;
+}
+
+void mbMasterClrTimeOutError1( void *lpObject )
+{
+	arrRS485Channel[1].ucEnableRequest = 0;
+}
+///////////////////////////////////////////////////////////////////////////////
+
 void mbMasterClrTimeOutError( void *lpObject )
 {
 	uiModbusTimeOutCounter = uiRegHolding[18];
@@ -511,7 +561,7 @@ void mbMasterClrTimeOutError( void *lpObject )
 
 void veznaEepSetUartSetings( void *lpObject )
 {
-	initRS485( 9600, 8, 1, 0 );
+	initRS485( 9600, 8, 1, 1 );
 }
 
 void veznaEepRestoreUartSetings( void *lpObject )

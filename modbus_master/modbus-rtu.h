@@ -18,6 +18,8 @@ typedef struct
 
 	void *lpSocket;
 
+	uint32_t baud_rate;
+
 	//void *lpUserData;
 	//void *(lpUserCallback( void *lpObject ));
 } MB_MASTER_DATA, *LP_MB_MASTER_DATA;

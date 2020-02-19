@@ -43,9 +43,9 @@ void rs485Task( void )
 			return;
 		}
 
-		/*if( !lpArrRS485Channel[ ucRS485ChannelIndex ]->ucEnableRequest ) {
+		if( !lpArrRS485Channel[ ucRS485ChannelIndex ]->ucEnableRequest ) {
 			return;
-		}*/
+		}
 
 		/*
 			На всеки xx мс. се изпраща запитване към следващото устройство
@@ -199,6 +199,7 @@ void rs485SendBuffer( uint8_t *buffer, uint8_t len )
 }
 
 ISR( SIG_UART_TX )
+
 {
 	if( !usRS485PortAsMaster ) {
 		disable_rs485_transmit();

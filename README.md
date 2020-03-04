@@ -24,6 +24,9 @@ ATxmega128; 10 DI ( isolated ); 12 DO ( isolated ); 7 AI ( not isolated ); 2 AO 
 5) v.0.0.3: https://goo.gl/photos/ECHeer7ifiq2STHZ8 - Automatic Fish Feeder With PLC ( old PLC board )
 https://www.youtube.com/watch?v=zcFjG9XD-4E&list=PLE616v1yP136VSTElJPbgqLRKw9dhneZ0
 
+HMI with RT1052:
+https://photos.app.goo.gl/7XBgT8anR3BwW6eA8
+
 AVR-LPC:
 https://photos.app.goo.gl/eRe1mFbW4naB4bjX6
 

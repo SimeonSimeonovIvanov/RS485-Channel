@@ -4,7 +4,7 @@ Work with Modbus IO Module:
 
 1) AVR-LPC: https://github.com/SimeonSimeonovIvanov/AVR-LPC
 
-2) HMI with RT1052:
+2) HMI with RT1052:<br>
 https://photos.app.goo.gl/7XBgT8anR3BwW6eA8<br>
 https://youtu.be/byI_Xd7OLUo
 

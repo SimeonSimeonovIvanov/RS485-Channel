@@ -4,7 +4,9 @@ Work with Modbus IO Module:
 
 1) AVR-LPC: https://github.com/SimeonSimeonovIvanov/AVR-LPC
 
-2) HMI with RT1052: https://photos.app.goo.gl/7XBgT8anR3BwW6eA8
+2) HMI with RT1052:
+https://photos.app.goo.gl/7XBgT8anR3BwW6eA8
+https://youtu.be/byI_Xd7OLUo
 
 3) ARM-PLC v.0.0.0: https://photos.app.goo.gl/mvdGAAyFvAadtSrAA
 

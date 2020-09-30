@@ -392,8 +392,7 @@ int main(void)
 
 			if( !rs485TaskIsEnable() )
 			{
-				//eStatus = eMBInit( MB_RTU, ucRS485_address, 0, 115200/2, MB_PAR_EVEN );
-				eStatus = eMBInit( MB_RTU, ucRS485_address, 0, 9600, MB_PAR_EVEN );
+				eStatus = eMBInit( MB_RTU, ucRS485_address, 0, 115200/2, MB_PAR_EVEN );
 				eStatus = eMBSetSlaveID( 0x34, TRUE, ucSlaveID, 3 );
 				eStatus = eMBEnable();
 				

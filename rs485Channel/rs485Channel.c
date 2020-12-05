@@ -199,7 +199,6 @@ void rs485SendBuffer( uint8_t *buffer, uint8_t len )
 }
 
 ISR( SIG_UART_TX )
-
 {
 	if( !usRS485PortAsMaster ) {
 		disable_rs485_transmit();

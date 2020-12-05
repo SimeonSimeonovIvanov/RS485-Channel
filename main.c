@@ -374,10 +374,10 @@ int main(void)
 		inPort[17] = ucTrigTimeOutError;
 		inPort[18] = ucTrigOutError;
 		inPort[19] = MCU_RUN_SWITCH;
-		inPort[20] = MCU_VCC_FB0;
+		/*inPort[20] = MCU_VCC_FB0;
 		inPort[21] = MCU_VCC_FB1;
 		inPort[22] = MCU_DO_DIAG0;
-		inPort[23] = MCU_DO_DIAG1;
+		inPort[23] = MCU_DO_DIAG1;*/
 
 		//inPort[24] <> MCU_RUN_SWITCH
 		inPort[25] = isRun;
@@ -409,7 +409,7 @@ int main(void)
 				eStatus = eMBInit( MB_RTU, ucRS485_address, 0, 115200, MB_PAR_NONE );
 				eStatus = eMBSetSlaveID( 0x34, TRUE, ucSlaveID, 3 );
 				eStatus = eMBEnable();
-				
+
 				CLR_QOIL_REMOTE_RUN;
 			} else {
 				initRS485( 9600, 8, 1, 1 );

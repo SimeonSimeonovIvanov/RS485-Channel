@@ -200,7 +200,8 @@ void rs485SendBuffer( uint8_t *buffer, uint8_t len )
 
 ISR( SIG_UART_TX )
 {
-	if( !usRS485PortAsMaster ) {
+	if( !usRS485PortAsMaster )
+	{
 		disable_rs485_transmit();
 	} else {
 		if( ++ucRS485txState != ucRS485txBufferLenght ) {
@@ -216,7 +217,8 @@ ISR( SIG_UART_TX )
 
 ISR( SIG_UART_RX )
 {
-	if( !usRS485PortAsMaster ) {
+	if( !usRS485PortAsMaster )
+	{
 		pxMBFrameCBByteReceived();
 	} else {
 		volatile char c = UDR0;
@@ -233,7 +235,8 @@ ISR( SIG_UART_RX )
 
 ISR( SIG_UART_UDRE )
 {
-	if( !usRS485PortAsMaster ) {
+	if( !usRS485PortAsMaster )
+	{
 		pxMBFrameCBTransmitterEmpty();
 	}
 }

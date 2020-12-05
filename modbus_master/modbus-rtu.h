@@ -3,7 +3,9 @@
 
 #include <stdio.h>
 
+#include "mb.h"
 #include "mbcrc.h"
+#include "..//rs485Channel//rs485Channel.h"
 
 typedef struct 
 {

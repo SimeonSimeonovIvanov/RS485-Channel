@@ -15,8 +15,10 @@
 //#include "veznaEEP.h"
 #include "arch/spi.h"
 #include "bit-array/bit-array.h"
-#include "modbus_master/modbus-rtu.h"
 #include "digital_in_out_func/digital_in_out_func.h"
+#include "modbus/port/port.h"
+#include "modbus_master/modbus-rtu.h"
+#include "rs485Channel/rs485Channel.h"
 
 // ============================================================================
 // PORTA

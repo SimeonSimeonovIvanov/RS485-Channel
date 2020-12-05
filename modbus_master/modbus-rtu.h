@@ -3,9 +3,7 @@
 
 #include <stdio.h>
 
-#include "mb.h"
 #include "mbcrc.h"
-#include "..//rs485Channel//rs485Channel.h"
 
 typedef struct 
 {
@@ -66,13 +64,6 @@ uint8_t mbReceiveRequestPresetSingleRegister( void *lpObject, uint8_t *rxBuffer,
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Force Multiple Coils (FC=15)
-
-typedef struct
-{
-	uint8_t exception_code;
-	uint8_t address, *lpCoils, coils_address;
-	uint16_t coils_number;
-} MB_MASTER_RW_COILS, *LP_MB_MASTER_RW_COILS;
 
 void mbSendRequestForceMultipleCoils( void *lpObject );
 uint8_t mbReceiveRequestForceMultipleCoils( void *lpObject, uint8_t *rxBuffer, uint8_t len );

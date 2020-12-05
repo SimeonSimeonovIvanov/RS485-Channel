@@ -40,19 +40,23 @@
 	BYTE0:					inPort[0..7]				X0 - X7
 	BYTE1:					inPort[8..15]				X8 - X15
 	BYTE2:
-		BIT[0..3]			inPort[16..19]				I16 - I19 ( Spare )
+		BIT0				inPort[16]					I16			/ New: Run status /
+		BIT1				inPort[17]					I17			/ New: Trig Timeout Error /
+		BIT2				inPort[18]					I18			/ New  Trig Out Error /
+		BIT3				inPort[19]					I17			/ New: Run switch /
 		BIT4				inPort[20]					VCC_FB0
-		BIT5 				inPort[21]					VCC_FB0
+		BIT5 				inPort[21]					VCC_FB1
 		BIT6 				inPort[22]					OUT_DIAG0
 		BIT7 				inPort[23]					OUT_DIAG1
 	BYTE3:
-		BIT[0]				inPort[24]					Run switch
-		BIT[1]				inPort[25]					Run status
+		BIT[0]				inPort[24]					Run switch *
+		BIT[1]				inPort[25]					Run status *
 		BIT[2]				inPort[26]					Trig OUT0 Error
 		BIT[3]				inPort[27]					Trig OUT1 Error
-		BIT[4]				inPort[28]					Trig Timeout Error
-		BIT[5]				inPort[29]					Trig Out Error
-		BIT[5]				inPort[30]					Timeout ERROR is Enable
+		BIT[4]				inPort[28]					Trig Timeout Error *
+		BIT[5]				inPort[29]					Trig Out Error *
+		BIT[6]				inPort[30]					Timeout ERROR is Enable
+		BIT[7]				inPort[31]					Spare
 */
 
 // MB_FUNC_READ_DISCRETE_INPUTS					( 2 )
@@ -126,8 +130,6 @@ volatile uint16_t uiModbusTimeOutCounter = 0;
 
 OBJ_RS485_CHANNEL arrRS485Channel[10];
 
-volatile MB_MASTER_RW_COILS stSlaveChannelWriteCoilsA3, stSlaveChannelWriteCoilsA11;
-
 //volatile VEZNA_ELICOM_EEP veznaEEP;
 
 volatile uint8_t ucRegDiscBufA3[2], ucRegCoilsBufA3[2];
@@ -136,6 +138,7 @@ volatile uint8_t ucRegDiscBufA11[2], ucRegCoilsBufA11[2];
 
 volatile uint8_t ucRegDiscBufA3Temp[2];
 
+volatile MB_MASTER_DATA stSlaveChannelWriteCoilsA3, stSlaveChannelWriteCoilsA11;
 volatile MB_MASTER_DATA stSlaveChannelPresetRegisterA10, stSlaveChannelReadInputsA3, stSlaveChannelReadInputsA10, stSlaveChannelReadInputsA11;
 
 void mbMasterSetBaudRate( void *lpObject );
@@ -277,9 +280,9 @@ int main(void)
 	rs485ChannelDefInit( &arrRS485Channel[3] );
 
 	stSlaveChannelWriteCoilsA3.address = 3;
-	stSlaveChannelWriteCoilsA3.coils_address = 0;
-	stSlaveChannelWriteCoilsA3.coils_number = 12;
-	stSlaveChannelWriteCoilsA3.lpCoils = (uint8_t*)ucRegDiscBufA11;
+	stSlaveChannelWriteCoilsA3.data_address = 0;
+	stSlaveChannelWriteCoilsA3.data_count = 12;
+	stSlaveChannelWriteCoilsA3.lpWriteData = (uint8_t*)ucRegDiscBufA11;
 
 	arrRS485Channel[3].lpObject = (void*)&stSlaveChannelWriteCoilsA3;
 	arrRS485Channel[3].ucEnableRequest = 1;
@@ -296,9 +299,9 @@ int main(void)
 	//rs485ChannelDefInit( &arrRS485Channel[4] );
 
 	stSlaveChannelWriteCoilsA11.address = 11;
-	stSlaveChannelWriteCoilsA11.coils_address = 0;
-	stSlaveChannelWriteCoilsA11.coils_number = 12;
-	stSlaveChannelWriteCoilsA11.lpCoils = (uint8_t*)ucRegDiscBufA3Temp;
+	stSlaveChannelWriteCoilsA11.data_address = 0;
+	stSlaveChannelWriteCoilsA11.data_count = 12;
+	stSlaveChannelWriteCoilsA11.lpWriteData = (uint8_t*)ucRegDiscBufA3Temp;
 
 	arrRS485Channel[4].lpObject = (void*)&stSlaveChannelWriteCoilsA11;
 	arrRS485Channel[4].ucEnableRequest = 1;
@@ -367,12 +370,23 @@ int main(void)
 
 		ucTrigTimeOutError |= ucFlagTimeOutOutError;
 
+		inPort[16] = isRun;
+		inPort[17] = ucTrigTimeOutError;
+		inPort[18] = ucTrigOutError;
+		inPort[19] = MCU_RUN_SWITCH;
+		inPort[20] = MCU_VCC_FB0;
+		inPort[21] = MCU_VCC_FB1;
+		inPort[22] = MCU_DO_DIAG0;
+		inPort[23] = MCU_DO_DIAG1;
+
+		//inPort[24] <> MCU_RUN_SWITCH
 		inPort[25] = isRun;
 		inPort[26] = ucTrigOut0Error;
 		inPort[27] = ucTrigOut1Error;
 		inPort[28] = ucTrigTimeOutError;
 		inPort[29] = ucTrigOutError;
 		inPort[30] = uiRegHolding[18] ? 1 : 0;
+		inPort[31] = 0;
 
 		//=====================================================================
 

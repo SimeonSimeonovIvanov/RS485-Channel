@@ -7,7 +7,7 @@
 /* ----------------------- Modbus includes ----------------------------------*/
 #include "mb.h"
 #include "mbport.h"
-
+#include "mbutils.h"
 /* ----------------------- Defines ------------------------------------------*/
 
 // MB_FUNC_READ_DISCRETE_INPUTS					( 2 )
@@ -94,13 +94,13 @@ volatile static uint8_t ucRegCoilsBuf[REG_COILS_SIZE / 8] = { 0 };
 #define SET_REMOTE_RUN							\
 {												\
 	SET_QOIL_REMOTE_RUN;						\
-	OUT_REMOTE_RUN = 0;							\
+	 = 1;							\
 }
 
 #define CLR_REMOTE_RUN							\
 {												\
 	CLR_QOIL_REMOTE_RUN;						\
-	OUT_REMOTE_RUN = 0;							\
+	 = 0;							\
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -116,6 +116,14 @@ volatile static uint16_t uiRegHolding[REG_HOLDING_NREGS] = { 0 };
 
 /* ----------------------- Variables ---------------------------------*/
 
+UCHAR ucSlaveID[7] =
+{
+	0x00,		// Len
+	0x01, 0x00, // HW
+	0x01, 0x00, // FW
+	0x00, 0x00  // CRC16
+};
+uint16_t check_sum;
 volatile uint8_t isRun = 0;
 volatile uint8_t inPort[32] = { 0 };
 volatile uint8_t outPort[32] = { 0 };
@@ -154,7 +162,6 @@ volatile char lpBit[4];
 int main(void)
 {
 	uint8_t fFirstRun = 1, ucRS485_address, ucRS485_address_old = 0;
-	UCHAR ucSlaveID[] = { 0xAA, 0xBB, 0xCC };
 	eMBErrorCode eStatus;
 	uint16_t remote_run = 0, flashTimer = 0;
 
@@ -162,15 +169,19 @@ int main(void)
 	volatile uint8_t ucTrigTimeOutError = 0;
 
 	uint8_t ucAutoStopIfOutError = 1;
-	uint8_t i, n;
+	uint8_t i;
 
 	while( 0 )
 	{
 		byteArrToBitArr( (uint8_t*)lpBit, (uint8_t*)inPort, 32 );
 	}
 
+	ucSlaveID[ 0 ] = len_of_array( ucSlaveID );
+	check_sum = usMBCRC16( ucSlaveID, len_of_array( ucSlaveID ) - 2 );
+	ucSlaveID[ len_of_array( ucSlaveID ) - 2 ] = check_sum;
+	ucSlaveID[ len_of_array( ucSlaveID ) - 1 ] = check_sum>>8;
+
 	initBoard();
-	
 	rs485TaskInit();
 
 	///////////////////////////////////////////////////////////////////////////
@@ -179,9 +190,9 @@ int main(void)
 
 	stSlaveChannelReadInputsA10.address = 10;
 	stSlaveChannelReadInputsA10.data_address = 1;
-	stSlaveChannelReadInputsA10.data_count = 40;
+	stSlaveChannelReadInputsA10.rx_count = 40;
 	stSlaveChannelReadInputsA10.lpReadData = (uint8_t*)ucRegDiscBufA10;
-	stSlaveChannelReadInputsA10.baud_rate = 57600;
+	//stSlaveChannelReadInputsA10.baud_rate = 57600;
 	stSlaveChannelReadInputsA10.lpSocket = &arrRS485Channel[0];
 
 	arrRS485Channel[0].lpObject = (void*)&stSlaveChannelReadInputsA10;
@@ -189,8 +200,8 @@ int main(void)
 	arrRS485Channel[0].msReadTimeOut = 18;
 
 	arrRS485Channel[0].rs485SetUartSetings = mbMasterSetBaudRate;
-	arrRS485Channel[0].rs485SendRequestFunc = mbSendRequestReadInputStatus;
-	arrRS485Channel[0].rs485GetResponseFunc = mbReceiveRequestReadInputStatus;
+	arrRS485Channel[0].rs485SendRequestFunc = mbSendRequestReadDiscreteInputs;
+	arrRS485Channel[0].rs485GetResponseFunc = mbReceiveRequestReadDiscreteInputs;
 	arrRS485Channel[0].rs485SetTimeOutError = mbMasterSetTimeOutError1;
 	arrRS485Channel[0].rs485ClrTimeOutError = mbMasterClrTimeOutError1;
 
@@ -204,7 +215,7 @@ int main(void)
 	stSlaveChannelPresetRegisterA10.data_address = 19;
 	stSlaveChannelPresetRegisterA10.lpWriteData = &baud;
 	stSlaveChannelPresetRegisterA10.lpReadData = NULL;
-	stSlaveChannelPresetRegisterA10.baud_rate = 9600;
+	//stSlaveChannelPresetRegisterA10.baud_rate = 9600;
 	stSlaveChannelPresetRegisterA10.lpSocket = &arrRS485Channel[1];
 
 	arrRS485Channel[1].lpObject = (void*)&stSlaveChannelPresetRegisterA10;
@@ -262,15 +273,15 @@ int main(void)
 
 	stSlaveChannelReadInputsA11.address = 11;
 	stSlaveChannelReadInputsA11.data_address = 0;
-	stSlaveChannelReadInputsA11.data_count = 10;
+	stSlaveChannelReadInputsA11.rx_count = 10;
 	stSlaveChannelReadInputsA11.lpReadData = (uint8_t*)ucRegDiscBufA11;
 
 	arrRS485Channel[2].lpObject = (void*)&stSlaveChannelReadInputsA11;
 	arrRS485Channel[2].ucEnableRequest = 1;
 	arrRS485Channel[2].msReadTimeOut = 10;
 
-	arrRS485Channel[2].rs485SendRequestFunc = mbSendRequestReadInputStatus;
-	arrRS485Channel[2].rs485GetResponseFunc = mbReceiveRequestReadInputStatus;
+	arrRS485Channel[2].rs485SendRequestFunc = mbSendRequestReadDiscreteInputs;
+	arrRS485Channel[2].rs485GetResponseFunc = mbReceiveRequestReadDiscreteInputs;
 	arrRS485Channel[2].rs485ClrTimeOutError = mbMasterClrTimeOutError;
 
 	//rs485AddChannel( &arrRS485Channel[2] );
@@ -281,7 +292,7 @@ int main(void)
 
 	stSlaveChannelWriteCoilsA3.address = 3;
 	stSlaveChannelWriteCoilsA3.data_address = 0;
-	stSlaveChannelWriteCoilsA3.data_count = 12;
+	stSlaveChannelWriteCoilsA3.tx_count = 12;
 	stSlaveChannelWriteCoilsA3.lpWriteData = (uint8_t*)ucRegDiscBufA11;
 
 	arrRS485Channel[3].lpObject = (void*)&stSlaveChannelWriteCoilsA3;
@@ -300,7 +311,7 @@ int main(void)
 
 	stSlaveChannelWriteCoilsA11.address = 11;
 	stSlaveChannelWriteCoilsA11.data_address = 0;
-	stSlaveChannelWriteCoilsA11.data_count = 12;
+	stSlaveChannelWriteCoilsA11.tx_count = 12;
 	stSlaveChannelWriteCoilsA11.lpWriteData = (uint8_t*)ucRegDiscBufA3Temp;
 
 	arrRS485Channel[4].lpObject = (void*)&stSlaveChannelWriteCoilsA11;
@@ -389,7 +400,29 @@ int main(void)
 		inPort[31] = 0;
 
 		//=====================================================================
+		if( uc10msTimerEvent )
+		{
+			uc10msTimerEvent = 0;
+		}
 
+		if( uc100msTimerEvent )
+		{
+			uc100msTimerEvent = 0;
+		}
+
+		if( uc500msTimerEvent )
+		{
+			uc500msTimerEvent = 0;
+
+			flashTimer = !flashTimer;
+			ucRegDiscBufA3Temp[0] ^= 1;
+		}
+
+		if( uc1000msTimerEvent )
+		{
+			uc1000msTimerEvent = 0;
+		}
+		//=====================================================================
 		ucRS485_address = readAddressSwitch();
 
 		if( fFirstRun || ( ucRS485_address != ucRS485_address_old ) )
@@ -407,7 +440,6 @@ int main(void)
 			if( !rs485TaskIsEnable() )
 			{
 				eStatus = eMBInit( MB_RTU, ucRS485_address, 0, 115200, MB_PAR_NONE );
-				eStatus = eMBSetSlaveID( 0x34, TRUE, ucSlaveID, 3 );
 				eStatus = eMBEnable();
 
 				CLR_QOIL_REMOTE_RUN;
@@ -417,45 +449,18 @@ int main(void)
 				SET_QOIL_REMOTE_RUN;
 			}
 		}
-
+		eMBSetSlaveID( ucRS485_address, isRun, ucSlaveID, len_of_array( ucSlaveID ) );
 		//=====================================================================
-
-		if( uc10msTimerEvent ) {
-			static uint8_t n = 0;
-
-			uc10msTimerEvent = 0;
-
-			if( ++n == 50 ) {
-				ucRegDiscBufA3Temp[0] ^= 1;
-				n = 0;
-			}
-		}
-
-		if( uc100msTimerEvent )
-		{
-			uc100msTimerEvent = 0;
-		}
-
-		if( uc500msTimerEvent )
-		{
-			uc500msTimerEvent = 0;
-
-			flashTimer = !flashTimer;
-		}
-
-		if( uc1000msTimerEvent )
-		{
-			uc1000msTimerEvent = 0;
-		}
-
-		//=====================================================================
-
 		byteArrToBitArr( (uint8_t*)ucRegDiscBuf, (uint8_t*)inPort, 42 );
-
 		//=====================================================================
 
 		if( !rs485TaskIsEnable() )
 		{
+			uiRegHolding[45]  = ucRegDiscBuf[0]<<8;
+			uiRegHolding[45] |= ucRegDiscBuf[1];
+			uiRegHolding[46]  = ucRegDiscBuf[2]<<8;
+			uiRegHolding[46] |= ucRegDiscBuf[3];
+
 			eMBPoll();
 		} else {
 			uint8_t temp;
@@ -477,7 +482,13 @@ int main(void)
 		}
 
 		//=====================================================================
+		for( i = 0; i < 19; i++ )
+		{
+			outPort[i] = bitarr_read((uint8_t*)ucRegCoilsBuf, i);
+		}
 
+		isRun = OUT_REMOTE_RUN;
+		//=====================================================================
 		if( !MCU_RUN_SWITCH || ucTrigTimeOutError || ( ucAutoStopIfOutError && ucTrigOutError ) )
 		{
 			CLR_QOIL_REMOTE_RUN;
@@ -495,23 +506,8 @@ int main(void)
 		} else {
 			PORTE |= MCU_DO_DIS_bm;
 		}
-
 		//=====================================================================
-
-		n = 0;
-		for( i = 0; i < 19; i++ )
-		{
-			n = i / 8;
-			outPort[ i ] = 0;
-			if( ucRegCoilsBuf[ n ] & ( 1<<(i - 8 * n) ) ) {
-				outPort[i] = 1;
-			}
-		}
-
-		isRun = OUT_REMOTE_RUN;
-
 		writeDigitalOutput( (uint8_t*)outPort );
-
 		//=====================================================================
 		// HMI:
 		memcpy( (char*)hmiLed, (char*)inPort, 16 );
@@ -551,9 +547,8 @@ int main(void)
 ///////////////////////////////////////////////////////////////////////////////
 void mbMasterSetBaudRate( void *lpObject )
 {
-	LP_MB_MASTER_DATA lpData= (LP_MB_MASTER_DATA)lpObject;
-
-	initRS485( lpData->baud_rate, 8, 1, 1 );
+	//LP_MB_MASTER_DATA lpData= (LP_MB_MASTER_DATA)lpObject;
+	//initRS485( lpData->baud_rate, 8, 1, 1 );
 }
 
 void mbMasterSetTimeOutError1( void *lpObject )
@@ -582,7 +577,7 @@ void veznaEepRestoreUartSetings( void *lpObject )
 	initRS485( 115200, 8, 1, 1 );
 }
 
-eMBErrorCode eMBRegDiscreteCB(UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNDiscrete)
+eMBErrorCode eMBRegDiscreteCB(UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNDiscrete)
 {
 	short iNDiscrete = ( short )usNDiscrete;
 	unsigned short usBitOffset;
@@ -597,7 +592,7 @@ eMBErrorCode eMBRegDiscreteCB(UCHAR * pucRegBuffer, USHORT usAddress, USHORT usN
 			*pucRegBuffer++ =
 			xMBUtilGetBits
 			(
-				ucRegDiscBuf, usBitOffset,
+				(uint8_t*)ucRegDiscBuf, usBitOffset,
 				(unsigned char)(iNDiscrete>8? 8:iNDiscrete)
 			);
 			iNDiscrete -= 8;
@@ -611,7 +606,7 @@ eMBErrorCode eMBRegDiscreteCB(UCHAR * pucRegBuffer, USHORT usAddress, USHORT usN
 	return MB_ENOREG;
 }
 
-eMBErrorCode eMBRegCoilsCB( UCHAR * pucRegBuffer, USHORT usAddress,
+eMBErrorCode eMBRegCoilsCB( UCHAR *pucRegBuffer, USHORT usAddress,
 							USHORT usNCoils, eMBRegisterMode eMode
 						  )
 {
@@ -631,7 +626,7 @@ eMBErrorCode eMBRegCoilsCB( UCHAR * pucRegBuffer, USHORT usAddress,
 		case MB_REG_READ:
 			while( iNCoils > 0 ) {
 				*pucRegBuffer++ =
-				xMBUtilGetBits( ucRegCoilsBuf, usBitOffset,
+				xMBUtilGetBits( (uint8_t*)ucRegCoilsBuf, usBitOffset,
 								(unsigned char)((iNCoils > 8) ? 8 : iNCoils)
 				);
 				usBitOffset += 8;
@@ -648,7 +643,7 @@ eMBErrorCode eMBRegCoilsCB( UCHAR * pucRegBuffer, USHORT usAddress,
 		 */
 		 case MB_REG_WRITE:
 		 	while( iNCoils > 0 ) {
-				xMBUtilSetBits( ucRegCoilsBuf, usBitOffset,
+				xMBUtilSetBits( (uint8_t*)ucRegCoilsBuf, usBitOffset,
 								(unsigned char)((iNCoils > 8) ? 8 : iNCoils),
 								*pucRegBuffer++
 				);
@@ -664,7 +659,7 @@ eMBErrorCode eMBRegCoilsCB( UCHAR * pucRegBuffer, USHORT usAddress,
 	return MB_ENOREG;
 }
 
-eMBErrorCode eMBRegInputCB(UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs)
+eMBErrorCode eMBRegInputCB(UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNRegs)
 {
 	unsigned int iRegIndex;
  
@@ -686,7 +681,7 @@ eMBErrorCode eMBRegInputCB(UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNReg
 	return MB_ENOREG;
 }
 
-eMBErrorCode eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress,
+eMBErrorCode eMBRegHoldingCB( UCHAR *pucRegBuffer, USHORT usAddress,
 							  USHORT usNRegs, eMBRegisterMode eMode
 )
 {
@@ -718,6 +713,18 @@ eMBErrorCode eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress,
 			while( usNRegs > 0 ) {
 				uiRegHolding[iRegIndex]  = (*pucRegBuffer++)<<8;
 				uiRegHolding[iRegIndex] |= *pucRegBuffer++;
+
+				if( 50 == iRegIndex )
+				{
+					ucRegCoilsBuf[0] = uiRegHolding[iRegIndex]>>8;
+					ucRegCoilsBuf[1] = uiRegHolding[iRegIndex];
+				}
+				if( 51 == iRegIndex )
+				{
+					ucRegCoilsBuf[2] = uiRegHolding[iRegIndex]>>8;
+					ucRegCoilsBuf[3] = uiRegHolding[iRegIndex];
+				}
+
 				++iRegIndex;
 				--usNRegs;
 			}

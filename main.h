@@ -161,7 +161,7 @@
 #define strobe_hmi_led()				( PORTB |= MCU_CS2_bm )
 #define unstrobe_hmi_led()				( PORTB &= ~MCU_CS2_bm )
 
-#define size_of_array( arr )			( sizeof( arr ) / sizeof( *arr ) )
+#define len_of_array( arr )				( sizeof( arr ) / sizeof( *arr ) )
 
 void initBoard(void);
 void byteArrToBitArr( uint8_t *lpBit, const uint8_t *lpByte, uint16_t bit_count );

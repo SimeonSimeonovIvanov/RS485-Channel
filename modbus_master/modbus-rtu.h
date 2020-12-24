@@ -9,9 +9,10 @@
 
 typedef struct stMbMaster
 {
+	uint8_t *txBuffer;
+
 	uint8_t address, exception_code;
 	uint16_t data_address;
-	uint8_t rxtx_byte_count;
 	void *lpSocket, *lpReadData, *lpWriteData;
 
 	uint8_t rx_byte_count, tx_byte_count;

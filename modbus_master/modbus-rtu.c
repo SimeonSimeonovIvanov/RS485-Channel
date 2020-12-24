@@ -1,13 +1,10 @@
 #include "modbus-rtu.h"
 
-static uint8_t txBuffer[260] = { 0 };
-
 void mbMasterDefInit( LP_MB_MASTER_DATA lpMbMaster )
 {
 	lpMbMaster->address = 0;
 	lpMbMaster->exception_code = 0;
 	lpMbMaster->data_address = 0;
-	lpMbMaster->rxtx_byte_count = 0;
 	lpMbMaster->lpSocket = NULL;
 	lpMbMaster->lpReadData = NULL;
 	lpMbMaster->lpWriteData = NULL;
@@ -32,22 +29,22 @@ void mbSendRequestReadCoils( void *lpObject )
 
 	lpData->exception_code = 0;
 
-	lpData->rxtx_byte_count = lpData->rx_count>>3;
-	if( !lpData->rxtx_byte_count )
+	lpData->rx_byte_count = lpData->rx_count>>3;
+	if( !lpData->rx_byte_count )
 	{
-		lpData->rxtx_byte_count = 1;
+		lpData->rx_byte_count = 1;
 	}
 
-	txBuffer[0] = lpData->address;
-	txBuffer[1] = 0x01;
+	lpData->txBuffer[0] = lpData->address;
+	lpData->txBuffer[1] = 0x01;
 
-	txBuffer[2] = lpData->rx_address>>8;
-	txBuffer[3] = lpData->rx_address;
+	lpData->txBuffer[2] = lpData->rx_address>>8;
+	lpData->txBuffer[3] = lpData->rx_address;
 
-	txBuffer[4] = lpData->rx_count>>8;
-	txBuffer[5] = lpData->rx_count;
+	lpData->txBuffer[4] = lpData->rx_count>>8;
+	lpData->txBuffer[5] = lpData->rx_count;
 
-	mbRtuAddCrcAndSendBuffer( txBuffer, 8 );
+	mbRtuAddCrcAndSendBuffer( lpData->txBuffer, 8 );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,22 +56,22 @@ void mbSendRequestReadDiscreteInputs( void *lpObject )
 
 	lpData->exception_code = 0;
 
-	lpData->rxtx_byte_count = lpData->rx_count>>3;
-	if( !lpData->rxtx_byte_count )
+	lpData->rx_byte_count = lpData->rx_count>>3;
+	if( !lpData->rx_byte_count )
 	{
-		lpData->rxtx_byte_count = 1;
+		lpData->rx_byte_count = 1;
 	}
 
-	txBuffer[0] = lpData->address;
-	txBuffer[1] = 2;
+	lpData->txBuffer[0] = lpData->address;
+	lpData->txBuffer[1] = 2;
 
-	txBuffer[2] = lpData->rx_address>>8;
-	txBuffer[3] = lpData->rx_address;
+	lpData->txBuffer[2] = lpData->rx_address>>8;
+	lpData->txBuffer[3] = lpData->rx_address;
 
-	txBuffer[4] = lpData->rx_count>>8;
-	txBuffer[5] = lpData->rx_count;
+	lpData->txBuffer[4] = lpData->rx_count>>8;
+	lpData->txBuffer[5] = lpData->rx_count;
 
-	mbRtuAddCrcAndSendBuffer( txBuffer, 8 );
+	mbRtuAddCrcAndSendBuffer( lpData->txBuffer, 8 );
 }
 
 uint8_t mbReceiveRequestReadDiscreteInputs( void *lpObject, uint8_t *rxBuffer, uint8_t len )
@@ -85,13 +82,13 @@ uint8_t mbReceiveRequestReadDiscreteInputs( void *lpObject, uint8_t *rxBuffer, u
 	{
 		if( 2 == rxBuffer[1] )
 		{
-			if( len == 5 + lpData->rxtx_byte_count && check_crc16( rxBuffer, 3 + lpData->rxtx_byte_count ) )
+			if( len == 5 + lpData->rx_byte_count && check_crc16( rxBuffer, 3 + lpData->rx_byte_count ) )
 			{
 				lpData->exception_code = 0;
 
 				if( NULL != lpData->lpReadData )
 				{
-					for( uint8_t i = 0; i < lpData->rxtx_byte_count; i++ )
+					for( uint8_t i = 0; i < lpData->rx_byte_count; i++ )
 					{
 						( (uint8_t*)lpData->lpReadData )[ i ] = rxBuffer[ 3 + i ];
 					}
@@ -99,7 +96,7 @@ uint8_t mbReceiveRequestReadDiscreteInputs( void *lpObject, uint8_t *rxBuffer, u
 
 				if( NULL != lpData->lpRxCallback )
 				{
-					lpData->lpRxCallback( lpData , rxBuffer, lpData->rxtx_byte_count );
+					lpData->lpRxCallback( lpData , rxBuffer, lpData->rx_byte_count );
 				}
 
 				return 1;
@@ -133,18 +130,18 @@ void mbSendRequestForceSingleCoil( void *lpObject )
 
 	lpData->exception_code = 0;
 
-	txBuffer[0] = lpData->address;
-	txBuffer[1] = 5;
+	lpData->txBuffer[0] = lpData->address;
+	lpData->txBuffer[1] = 5;
 
-	txBuffer[2] = lpData->data_address>>8;
-	txBuffer[3] = lpData->data_address;
+	lpData->txBuffer[2] = lpData->data_address>>8;
+	lpData->txBuffer[3] = lpData->data_address;
 
 	if( *(uint8_t*)lpData->lpWriteData )
 	{
-		txBuffer[4] = 0xff;
+		lpData->txBuffer[4] = 0xff;
 	}
 
-	mbRtuAddCrcAndSendBuffer( txBuffer, 8 );
+	mbRtuAddCrcAndSendBuffer( lpData->txBuffer, 8 );
 }
 
 uint8_t mbReceiveRequestForceSingleCoil( void *lpObject, uint8_t *rxBuffer, uint8_t len )
@@ -176,7 +173,7 @@ uint8_t mbReceiveRequestForceSingleCoil( void *lpObject, uint8_t *rxBuffer, uint
 
 					if( NULL != lpData->lpRxCallback )
 					{
-						lpData->lpRxCallback( lpData , rxBuffer, lpData->rxtx_byte_count );
+						lpData->lpRxCallback( lpData , rxBuffer, lpData->rx_byte_count );
 					}
 
 					return 1;
@@ -201,16 +198,16 @@ void mbSendRequestPresetSingleRegister( void *lpObject )
 
 	lpData->exception_code = 0;
 
-	txBuffer[0] = lpData->address;
-	txBuffer[1] = 6;
+	lpData->txBuffer[0] = lpData->address;
+	lpData->txBuffer[1] = 6;
 
-	txBuffer[2] = lpData->data_address>>8;
-	txBuffer[3] = lpData->data_address;
+	lpData->txBuffer[2] = lpData->data_address>>8;
+	lpData->txBuffer[3] = lpData->data_address;
 
-	txBuffer[4] = *(uint16_t*)lpData->lpWriteData>>8;
-	txBuffer[5] = *(uint16_t*)lpData->lpWriteData;
+	lpData->txBuffer[4] = *(uint16_t*)lpData->lpWriteData>>8;
+	lpData->txBuffer[5] = *(uint16_t*)lpData->lpWriteData;
 
-	mbRtuAddCrcAndSendBuffer( txBuffer, 8 );
+	mbRtuAddCrcAndSendBuffer( lpData->txBuffer, 8 );
 }
 
 uint8_t mbReceiveRequestPresetSingleRegister( void *lpObject, uint8_t *rxBuffer, uint8_t len )
@@ -235,7 +232,7 @@ uint8_t mbReceiveRequestPresetSingleRegister( void *lpObject, uint8_t *rxBuffer,
 
 					if( NULL != lpData->lpRxCallback )
 					{
-						lpData->lpRxCallback( lpData , rxBuffer, lpData->rxtx_byte_count );
+						lpData->lpRxCallback( lpData , rxBuffer, lpData->rx_byte_count );
 					}
 
 					return 1;
@@ -260,29 +257,29 @@ void mbSendRequestForceMultipleCoils( void *lpObject )
 
 	lpData->exception_code = 0;
 
-	lpData->rxtx_byte_count = lpData->tx_count>>3;
-	if( !lpData->rxtx_byte_count )
+	lpData->tx_byte_count = lpData->tx_count>>3;
+	if( !lpData->tx_byte_count )
 	{
-		lpData->rxtx_byte_count = 1;
+		lpData->tx_byte_count = 1;
 	}
 
-	txBuffer[0] = lpData->address;
-	txBuffer[1] = 15;
+	lpData->txBuffer[0] = lpData->address;
+	lpData->txBuffer[1] = 15;
 
-	txBuffer[2] = lpData->data_address>>8;
-	txBuffer[3] = lpData->data_address;
+	lpData->txBuffer[2] = lpData->data_address>>8;
+	lpData->txBuffer[3] = lpData->data_address;
 
-	txBuffer[4] = lpData->tx_count>>8;
-	txBuffer[5] = lpData->tx_count;
+	lpData->txBuffer[4] = lpData->tx_count>>8;
+	lpData->txBuffer[5] = lpData->tx_count;
 
-	txBuffer[6] = lpData->rxtx_byte_count;
+	lpData->txBuffer[6] = lpData->tx_byte_count;
 
-	for( uint8_t i = 0; i < lpData->rxtx_byte_count; i++ )
+	for( uint8_t i = 0; i < lpData->tx_byte_count; i++ )
 	{
-		txBuffer[ i + 7 ] = ( (uint8_t*)lpData->lpWriteData )[i];
+		lpData->txBuffer[ i + 7 ] = ( (uint8_t*)lpData->lpWriteData )[i];
 	}
 
-	mbRtuAddCrcAndSendBuffer( txBuffer, 9 + lpData->rxtx_byte_count );
+	mbRtuAddCrcAndSendBuffer( lpData->txBuffer, 9 + lpData->tx_byte_count );
 }
 
 uint8_t mbReceiveRequestForceMultipleCoils( void *lpObject, uint8_t *rxBuffer, uint8_t len )
@@ -307,7 +304,7 @@ uint8_t mbReceiveRequestForceMultipleCoils( void *lpObject, uint8_t *rxBuffer, u
 
 				if( NULL != lpData->lpRxCallback )
 				{
-					lpData->lpRxCallback( lpData , rxBuffer, lpData->rxtx_byte_count );
+					lpData->lpRxCallback( lpData , rxBuffer, lpData->tx_byte_count );
 				}
 
 				return 1;
@@ -335,12 +332,12 @@ void mbSendRequestReportSlaveID( void *lpObject )
 	LP_MB_MASTER_DATA lpData = (LP_MB_MASTER_DATA)lpObject;
 
 	lpData->exception_code = 0;
-	lpData->rxtx_byte_count = 0;
+	lpData->rx_byte_count = 0;
 
-	txBuffer[0] = lpData->address;
-	txBuffer[1] = 0x11;
+	lpData->txBuffer[0] = lpData->address;
+	lpData->txBuffer[1] = 0x11;
 
-	mbRtuAddCrcAndSendBuffer( txBuffer, 4 );
+	mbRtuAddCrcAndSendBuffer( lpData->txBuffer, 4 );
 }
 
 uint8_t mbReceiveRequestReportSlaveID( void *lpObject, uint8_t *rxBuffer, uint8_t len )
@@ -353,9 +350,9 @@ uint8_t mbReceiveRequestReportSlaveID( void *lpObject, uint8_t *rxBuffer, uint8_
 		{
 			if( len >= 5 )
 			{
-				lpData->rxtx_byte_count = rxBuffer[4] + 4;
+				lpData->rx_byte_count = rxBuffer[4] + 4;
 
-				if( len >= lpData->rxtx_byte_count && check_crc16( rxBuffer, lpData->rxtx_byte_count ) )
+				if( len >= lpData->rx_byte_count && check_crc16( rxBuffer, lpData->rx_byte_count ) )
 				{
 					lpData->exception_code = 0;
 
@@ -369,7 +366,7 @@ uint8_t mbReceiveRequestReportSlaveID( void *lpObject, uint8_t *rxBuffer, uint8_
 
 					if( NULL != lpData->lpRxCallback )
 					{
-						lpData->lpRxCallback( lpData, rxBuffer, lpData->rxtx_byte_count );
+						lpData->lpRxCallback( lpData, rxBuffer, lpData->rx_byte_count );
 					}
 
 					return 1;
@@ -391,6 +388,7 @@ uint8_t mbReceiveRequestReportSlaveID( void *lpObject, uint8_t *rxBuffer, uint8_
 void mbSendRequestReadWriteMultipleRegisters( void *lpObject )
 {
 	LP_MB_MASTER_DATA lpData = (LP_MB_MASTER_DATA)lpObject;
+	uint8_t i;
 
 	lpData->exception_code = 0;
 
@@ -408,30 +406,30 @@ void mbSendRequestReadWriteMultipleRegisters( void *lpObject )
 	}
 	lpData->tx_byte_count *= 2;
 
-	txBuffer[0] = lpData->address;
-	txBuffer[1] = 23;
+	lpData->txBuffer[0] = lpData->address;
+	lpData->txBuffer[1] = 23;
 
-	txBuffer[2] = lpData->rx_address>>8;
-	txBuffer[3] = lpData->rx_address;
+	lpData->txBuffer[2] = lpData->rx_address>>8;
+	lpData->txBuffer[3] = lpData->rx_address;
 
-	txBuffer[4] = lpData->rx_count>>8;
-	txBuffer[5] = lpData->rx_count;
+	lpData->txBuffer[4] = lpData->rx_count>>8;
+	lpData->txBuffer[5] = lpData->rx_count;
 
-	txBuffer[6] = lpData->tx_address>>8;
-	txBuffer[7] = lpData->tx_address;
+	lpData->txBuffer[6] = lpData->tx_address>>8;
+	lpData->txBuffer[7] = lpData->tx_address;
 
-	txBuffer[8] = lpData->tx_count>>8;
-	txBuffer[9] = lpData->tx_count;
+	lpData->txBuffer[8] = lpData->tx_count>>8;
+	lpData->txBuffer[9] = lpData->tx_count;
 
-	txBuffer[10] = lpData->tx_byte_count;
+	lpData->txBuffer[10] = lpData->tx_byte_count;
 
-	for( uint8_t i = 0; i <= lpData->tx_count; i += 2 )
+	for( i = 0; i < lpData->tx_byte_count; i += 2 )
 	{
-		txBuffer[ i + 11 ] = *((uint8_t*)(lpData->lpWriteData) + i);
-		txBuffer[ i + 12 ] = *((uint8_t*)(lpData->lpWriteData) + i+1);
+		lpData->txBuffer[ 11 + i ] = *((uint16_t*)(lpData->lpWriteData) + (i>>1))>>8;
+		lpData->txBuffer[ 12 + i ] = *((uint16_t*)(lpData->lpWriteData) + (i>>1));
 	}
 
-	mbRtuAddCrcAndSendBuffer( txBuffer, 11 + lpData->tx_byte_count + 2);
+	mbRtuAddCrcAndSendBuffer( lpData->txBuffer, 11 + lpData->tx_byte_count + 2);
 }
 
 uint8_t mbReceiveRequestReadWriteMultipleRegisters( void *lpObject, uint8_t *rxBuffer, uint8_t len )
@@ -454,15 +452,16 @@ uint8_t mbReceiveRequestReadWriteMultipleRegisters( void *lpObject, uint8_t *rxB
 
 					if( NULL != lpData->lpReadData )
 					{
-						for( uint8_t i = 0; i < rx_cnt; i++ )
+						for( uint8_t i = 0; i < rx_cnt; i+=2 )
 						{
-							( (uint8_t*)lpData->lpReadData )[ i ] = rxBuffer[ 3 + i ];
+							( (uint16_t*)lpData->lpReadData )[ i ]  = rxBuffer[ 3 + i ]<<8;
+							( (uint16_t*)lpData->lpReadData )[ i ] |= rxBuffer[ 4 + i ];
 						}
 					}
 
 					if( NULL != lpData->lpRxCallback )
 					{
-						lpData->lpRxCallback( lpData , rxBuffer, lpData->rxtx_byte_count );
+						lpData->lpRxCallback( lpData , rxBuffer, lpData->rx_byte_count );
 					}
 
 					return 1;

@@ -48,13 +48,24 @@
 		BIT5 				inPort[21]					VCC_FB1
 		BIT6 				inPort[22]					OUT_DIAG0
 		BIT7 				inPort[23]					OUT_DIAG1
+
+		BIT0				inPort[16]					VCC_FB0
+		BIT1 				inPort[17]					VCC_FB1
+		BIT2 				inPort[18]					OUT_DIAG0
+		BIT3 				inPort[19]					OUT_DIAG1
+		BIT4 				inPort[20]					Run switch
+		BIT5 				inPort[21]					Run status
+		BIT6 				inPort[22]					Error/Fault
+		BIT7 				inPort[23]					Power Up
+
+
 	BYTE3:
-		BIT[0]				inPort[24]					Run switch *
-		BIT[1]				inPort[25]					Run status *
+		BIT[0]				inPort[24]					Trig VCC_FB0
+		BIT[1]				inPort[25]					Trig VCC_FB1
 		BIT[2]				inPort[26]					Trig OUT0 Error
 		BIT[3]				inPort[27]					Trig OUT1 Error
-		BIT[4]				inPort[28]					Trig Timeout Error *
-		BIT[5]				inPort[29]					Trig Out Error *
+		BIT[4]				inPort[28]					Trig Out Error *
+		BIT[5]				inPort[29]					Trig Timeout Error *
 		BIT[6]				inPort[30]					Timeout ERROR is Enable
 		BIT[7]				inPort[31]					Spare
 */
@@ -86,6 +97,8 @@ volatile static uint8_t ucRegCoilsBuf[REG_COILS_SIZE / 8] = { 0 };
 
 #define SET_QOIL_REMOTE_RUN						( ucRegCoilsBuf[2] |=  1 )
 #define CLR_QOIL_REMOTE_RUN						( ucRegCoilsBuf[2] &= ~1 )
+#define SET_QOIL_REMOTE_RESET					( ucRegCoilsBuf[2] |=  2 )
+#define CLR_QOIL_REMOTE_RESET					( ucRegCoilsBuf[2] &= ~2 )
 
 #define OUT_REMOTE_RUN							( outPort[16] ) // ( ( ucRegCoilsBuf[2] & 1 ) ? 1 : 0 )
 #define OUT_REMOTE_RESET						( outPort[17] ) // ( ( ucRegCoilsBuf[2] & 2 ) ? 1 : 0 )
@@ -94,13 +107,11 @@ volatile static uint8_t ucRegCoilsBuf[REG_COILS_SIZE / 8] = { 0 };
 #define SET_REMOTE_RUN							\
 {												\
 	SET_QOIL_REMOTE_RUN;						\
-	 = 1;							\
 }
 
 #define CLR_REMOTE_RUN							\
 {												\
 	CLR_QOIL_REMOTE_RUN;						\
-	 = 0;							\
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -484,7 +495,7 @@ int main(void)
 		//=====================================================================
 		for( i = 0; i < 19; i++ )
 		{
-			outPort[i] = bitarr_read((uint8_t*)ucRegCoilsBuf, i);
+			outPort[i] = bitarr_read((uint8_t*)&ucRegCoilsBuf, i);
 		}
 
 		isRun = OUT_REMOTE_RUN;
@@ -534,6 +545,8 @@ int main(void)
 
 			ucFlagTimeOutOutError = 0;
 			ucTrigOutError = 0;
+
+			CLR_QOIL_REMOTE_RESET;
 		}
 
 		//=====================================================================
@@ -716,13 +729,22 @@ eMBErrorCode eMBRegHoldingCB( UCHAR *pucRegBuffer, USHORT usAddress,
 
 				if( 50 == iRegIndex )
 				{
-					ucRegCoilsBuf[0] = uiRegHolding[iRegIndex]>>8;
-					ucRegCoilsBuf[1] = uiRegHolding[iRegIndex];
+					ucRegCoilsBuf[0] = uiRegHolding[iRegIndex];
+					ucRegCoilsBuf[1] = uiRegHolding[iRegIndex]>>8;
 				}
 				if( 51 == iRegIndex )
 				{
-					ucRegCoilsBuf[2] = uiRegHolding[iRegIndex]>>8;
-					ucRegCoilsBuf[3] = uiRegHolding[iRegIndex];
+					ucRegCoilsBuf[2] = uiRegHolding[iRegIndex];
+					ucRegCoilsBuf[3] = uiRegHolding[iRegIndex]>>8;
+				}
+				if( 52 == iRegIndex )
+				{
+					switch( 0xff & (uiRegHolding[iRegIndex]>>8) )
+					{
+					case 1:
+						uiRegHolding[18] = (0xff & uiRegHolding[iRegIndex])<<2;
+					break;
+					}
 				}
 
 				++iRegIndex;

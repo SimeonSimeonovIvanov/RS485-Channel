@@ -93,11 +93,11 @@ eMBRTUInit( UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity ePar
     else
     {
         /* If baudrate > 19200 then we should use the fixed timer values
-         * t35 = 1750us. Otherwise t35 must be 3.5 times the character time.
+         * t35 = ~200us. Otherwise t35 must be 3.5 times the character time.
          */
         if( ulBaudRate > 19200 )
         {
-            usTimerT35_50us = 35;       /* 1800us. */
+            usTimerT35_50us = 4;       /* 200us. */
         }
         else
         {

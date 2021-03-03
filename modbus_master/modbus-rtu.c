@@ -22,7 +22,6 @@ void mbMasterDefInit( LP_MB_MASTER_DATA lpMbMaster )
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Read Coil Status (FC=01) / Read Coils (0x01)
-
 void mbSendRequestReadCoils( void *lpObject )
 {
 	LP_MB_MASTER_DATA lpData = (LP_MB_MASTER_DATA)lpObject;
@@ -49,7 +48,6 @@ void mbSendRequestReadCoils( void *lpObject )
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Read Input Status (FC=02) / Read Discrete Inputs (0x02)
-
 void mbSendRequestReadDiscreteInputs( void *lpObject )
 {
 	LP_MB_MASTER_DATA lpData = (LP_MB_MASTER_DATA)lpObject;
@@ -110,20 +108,14 @@ uint8_t mbReceiveRequestReadDiscreteInputs( void *lpObject, uint8_t *rxBuffer, u
 
 	return 0;
 }
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Read Holding Registers (FC=03) / Read Holding Registers (0x03)
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Read Input Registers (FC=04) / Read Input Register (0x04)
 
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Force Single Coil (FC=05) / Write Single Coil (0x05)
-
 void mbSendRequestForceSingleCoil( void *lpObject )
 {
 	LP_MB_MASTER_DATA lpData = (LP_MB_MASTER_DATA)lpObject;
@@ -188,10 +180,8 @@ uint8_t mbReceiveRequestForceSingleCoil( void *lpObject, uint8_t *rxBuffer, uint
 
 	return 0;
 }
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Preset Single Register (FC=06) / Write Single Register (0x06)
-
 void mbSendRequestPresetSingleRegister( void *lpObject )
 {
 	LP_MB_MASTER_DATA lpData = (LP_MB_MASTER_DATA)lpObject;
@@ -216,7 +206,6 @@ uint8_t mbReceiveRequestPresetSingleRegister( void *lpObject, uint8_t *rxBuffer,
 
 	if( rxBuffer[0] == lpData->address )
 	{
-
 		if( 6 == rxBuffer[1] )
 		{
 			if( 8 == len && check_crc16( rxBuffer, 6 ) )
@@ -247,10 +236,8 @@ uint8_t mbReceiveRequestPresetSingleRegister( void *lpObject, uint8_t *rxBuffer,
 
 	return 0;
 }
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Force Multiple Coils (FC=15) / Write Multiple Coils (0x0F)
-
 void mbSendRequestForceMultipleCoils( void *lpObject )
 {
 	LP_MB_MASTER_DATA lpData = (LP_MB_MASTER_DATA)lpObject;
@@ -318,15 +305,11 @@ uint8_t mbReceiveRequestForceMultipleCoils( void *lpObject, uint8_t *rxBuffer, u
 
 	return 0;
 }
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Preset Multiple Registers (FC=16) / Write Multiple Registers (0x10)
 
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Report Slave ID (FC=17) / Report Slave ID (0x11)
-
 void mbSendRequestReportSlaveID( void *lpObject )
 {
 	LP_MB_MASTER_DATA lpData = (LP_MB_MASTER_DATA)lpObject;
@@ -381,10 +364,8 @@ uint8_t mbReceiveRequestReportSlaveID( void *lpObject, uint8_t *rxBuffer, uint8_
 
 	return 0;
 }
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Read/Write Multiple Registers (FC=23) / Read/Write Multiple Registers (0x17)
-
 void mbSendRequestReadWriteMultipleRegisters( void *lpObject )
 {
 	LP_MB_MASTER_DATA lpData = (LP_MB_MASTER_DATA)lpObject;
@@ -448,14 +429,14 @@ uint8_t mbReceiveRequestReadWriteMultipleRegisters( void *lpObject, uint8_t *rxB
 
 					lpData->exception_code = 0;
 
-					rx_cnt = rxBuffer[2];
+					rx_cnt = rxBuffer[2]>>1;
 
 					if( NULL != lpData->lpReadData )
 					{
-						for( uint8_t i = 0; i < rx_cnt; i+=2 )
+						for( uint8_t i = 0; i < rx_cnt; i++ )
 						{
-							( (uint16_t*)lpData->lpReadData )[ i ]  = rxBuffer[ 3 + i ]<<8;
-							( (uint16_t*)lpData->lpReadData )[ i ] |= rxBuffer[ 4 + i ];
+							((uint16_t*)lpData->lpReadData)[ i ]  = rxBuffer[ 3 + (i<<1) ]<<8;
+							((uint16_t*)lpData->lpReadData)[ i ] |= rxBuffer[ 4 + (i<<1) ];
 						}
 					}
 
@@ -476,9 +457,7 @@ uint8_t mbReceiveRequestReadWriteMultipleRegisters( void *lpObject, uint8_t *rxB
 
 	return 0;
 }
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 uint8_t mbCheckExceptionForResponse( LP_MB_MASTER_DATA lpData, uint8_t txFunctionCode, uint8_t *rxBuffer, uint8_t len )
 {
 	if( ( 0x80 + txFunctionCode ) == rxBuffer[1] )
@@ -498,9 +477,7 @@ uint8_t mbCheckExceptionForResponse( LP_MB_MASTER_DATA lpData, uint8_t txFunctio
 
 	return 0;
 }
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 void mbRtuAddCrcAndSendBuffer( uint8_t *txBuffer, uint16_t len )
 {
 	uint16_t check_sum = usMBCRC16( txBuffer, len - 2 );
@@ -510,9 +487,7 @@ void mbRtuAddCrcAndSendBuffer( uint8_t *txBuffer, uint16_t len )
 
 	rs485SendBuffer( txBuffer, len );
 }
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 uint8_t check_crc16( uint8_t *buffer, uint8_t len )
 {
 	uint16_t check_sum;
@@ -526,5 +501,4 @@ uint8_t check_crc16( uint8_t *buffer, uint8_t len )
 
 	return 0;
 }
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

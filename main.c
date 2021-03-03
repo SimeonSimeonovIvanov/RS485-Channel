@@ -381,7 +381,8 @@ int main(void)
 	//rs485AddChannel( &arrRS485Channel[6] );
 
 	///////////////////////////////////////////////////////////////////////////
-
+	uiModbusTimeOutCounter = uiRegHolding[18] = 1000;
+	
 	sei();
 	while( 1 ) {
 		readDigitalInput( (uint8_t*)inPort );
@@ -467,10 +468,10 @@ int main(void)
 
 		if( !rs485TaskIsEnable() )
 		{
-			uiRegHolding[45]  = ucRegDiscBuf[0]<<8;
-			uiRegHolding[45] |= ucRegDiscBuf[1];
-			uiRegHolding[46]  = ucRegDiscBuf[2]<<8;
-			uiRegHolding[46] |= ucRegDiscBuf[3];
+			uiRegHolding[45]  = ucRegDiscBuf[0];
+			uiRegHolding[45] |= ucRegDiscBuf[1]<<8;
+			uiRegHolding[46]  = ucRegDiscBuf[2];
+			uiRegHolding[46] |= ucRegDiscBuf[3]<<8;
 
 			eMBPoll();
 		} else {

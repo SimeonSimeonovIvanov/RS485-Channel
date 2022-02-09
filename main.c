@@ -451,7 +451,7 @@ int main(void)
 
 			if( !rs485TaskIsEnable() )
 			{
-				eStatus = eMBInit( MB_RTU, ucRS485_address, 0, 115200, MB_PAR_NONE );
+				eStatus = eMBInit( MB_RTU, ucRS485_address, 0, /*115200*/2*250000, MB_PAR_NONE );
 				eStatus = eMBEnable();
 
 				CLR_QOIL_REMOTE_RUN;

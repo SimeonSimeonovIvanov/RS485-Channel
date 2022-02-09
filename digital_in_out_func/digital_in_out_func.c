@@ -90,37 +90,48 @@ void initDigitalOutput(void)
 
 void writeHmiLed( uint8_t in[40] )
 {
+	static uint8_t state = 0, data[5] = { 0 };
 	uint8_t i, j, n, bit_mask0, bit_mask1;
-	uint8_t data[5] = { 0 };
 
-	n = 0;
-	for( i = 0; i < 20; ) {
-		n = i>>2;
+	if( !state )
+	{
+		n = 0;
+		memset(data, 0, sizeof(data));
+		for( i = 0; i < 20; ) {
+			n = i>>2;
 
-		bit_mask0 = 16;
-		bit_mask1 = 1;
+			bit_mask0 = 16;
+			bit_mask1 = 1;
 		
-		for( j = 0; j < 4; j++ ) {
-			if( 1 & in[ i +  0 ] ) {
-				data[n] |= bit_mask0;
+			for( j = 0; j < 4; j++ ) {
+				if( 1 & in[ i +  0 ] ) {
+					data[n] |= bit_mask0;
+				}
+
+				if( 1 & in[ i + 20 ] ) {
+					data[n] |= bit_mask1;
+				}
+
+				bit_mask0 <<= 1;
+				bit_mask1 <<= 1;
+
+				++i;
 			}
+		}
 
-			if( 1 & in[ i + 20 ] ) {
-				data[n] |= bit_mask1;
-			}
-
-			bit_mask0 <<= 1;
-			bit_mask1 <<= 1;
-
-			++i;
+		spi_send_byte( data[state] );
+		state = 1;
+	}
+	else
+	{
+		spi_send_byte( data[state] );
+		if( ++state > 4 )
+		{
+			state = 0;
+			strobe_hmi_led();
+			unstrobe_hmi_led();
 		}
 	}
-
-	spi_send_byte( data[0] );
-	spi_send_data( &data[1], 4 );
-
-	strobe_hmi_led();
-	unstrobe_hmi_led();
 }
 
 void initHmiLed( void )
